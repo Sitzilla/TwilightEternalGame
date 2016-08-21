@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<map version="1.0" orientation="orthogonal" renderorder="right-down" width="32" height="32" tilewidth="32" tileheight="32" nextobjectid="1">
+ <tileset firstgid="1" name="basic_environment" tilewidth="32" tileheight="32" tilecount="256" columns="16">
+  <image source="../workspace/games/core/assets/environment/image.png" trans="000000" width="512" height="512"/>
+ </tileset>
+ <layer name="Tile Layer 1" width="32" height="32">
+  <data encoding="base64" compression="zlib">
+   eJzt1bEJACAMBdFs6pr+DcxWplAQsYqCzRUPUkSvsLCYWUmoQcmzL7Tg9OnTp0+fftL8xzTmE217Wvq6NO/xMZ/4tvfSr/cDAAD/dM6OoAk=
+  </data>
+ </layer>
+ <layer name="Tile Layer 2" width="32" height="32">
+  <data encoding="base64" compression="zlib">
+   eJzt0cENABAQRFH994UKUAEqwNU04CKSjeS/5B83c1jnAAAveRVUNNpPKqtitF9VU91of6ip1uU9//v7fwAA4GwDzeYU0Q==
+  </data>
+ </layer>
+</map>

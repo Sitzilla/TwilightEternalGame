@@ -1,0 +1,12 @@
+final_fantasy_characters.png
+size: 386, 385
+format: RGBA8888
+filter: Linear,Linear
+repeat: none
+final_fantasy_characters
+  rotate: false
+  xy: 1, 1
+  size: 384, 383
+  orig: 384, 384
+  offset: 0, 0
+  index: -1

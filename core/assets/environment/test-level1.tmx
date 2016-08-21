@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<map version="1.0" orientation="orthogonal" renderorder="right-down" width="32" height="32" tilewidth="32" tileheight="32" nextobjectid="21">
+ <tileset firstgid="1" name="basic-level2" tilewidth="32" tileheight="32" tilecount="256" columns="16">
+  <image source="image.png" trans="000000" width="512" height="512"/>
+ </tileset>
+ <tileset firstgid="257" name="enemies2" tilewidth="32" tileheight="32" tilecount="352" columns="22">
+  <image source="../sprites/enemies2.png" trans="000000" width="729" height="526"/>
+ </tileset>
+ <tileset firstgid="609" name="hyptosis_sprites-and-tiles-for-you" tilewidth="32" tileheight="32" tilecount="900" columns="30">
+  <image source="../sprites/hyptosis_sprites-and-tiles-for-you.png" trans="000000" width="960" height="960"/>
+ </tileset>
+ <layer name="tiles" width="32" height="32">
+  <data encoding="base64" compression="zlib">
+   eJzt1LEJACAMBdFs6ppxA93KNIKFTUT4oFe8Mh4hYDGzktRCP5i7xUMV9tX706dPn/4L/fmXe8LsZ2Z26vJWE1DeEAAA/GsANS6fDA==
+  </data>
+ </layer>
+ <layer name="Tile Layer 2" width="32" height="32">
+  <data encoding="base64" compression="zlib">
+   eJxjYBgFo2AUjILhAY4C8TEgPj5A9l8F4mtAfH2A7H8KxM+A+PkA2f8ViL8B8XcKzBiMcZjCQj/7scVhEx3tp0YcjoJRMApGwSgYBaNg8AIAqasVvw==
+  </data>
+ </layer>
+ <objectgroup name="objects">
+  <object id="9" name="GoblinWarrior" type="enemy" x="334" y="416"/>
+ </objectgroup>
+</map>

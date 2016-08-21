@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<map version="1.0" orientation="orthogonal" renderorder="right-down" width="41" height="27" tilewidth="32" tileheight="32" nextobjectid="28">
+ <tileset firstgid="1" name="snowWIP" tilewidth="32" tileheight="32" tilecount="256" columns="16">
+  <image source="snowWIP.png" trans="000000" width="512" height="512"/>
+ </tileset>
+ <tileset firstgid="257" name="south_figaro" tilewidth="32" tileheight="32" tilecount="2304" columns="72">
+  <image source="south_figaro.png" trans="000000" width="2331" height="1024"/>
+ </tileset>
+ <tileset firstgid="2561" name="town" tilewidth="32" tileheight="32" tilecount="256" columns="16">
+  <image source="town.png" trans="000000" width="512" height="512"/>
+ </tileset>
+ <tileset firstgid="2817" name="Castle" tilewidth="32" tileheight="32" tilecount="256" columns="16">
+  <image source="Castle.png" trans="000000" width="512" height="512"/>
+ </tileset>
+ <tileset firstgid="3073" name="Castle2" tilewidth="32" tileheight="32" tilecount="256" columns="16">
+  <image source="Castle2.png" trans="000000" width="512" height="512"/>
+ </tileset>
+ <layer name="base" width="41" height="27">
+  <data encoding="base64" compression="zlib">
+   eJzt1rENACAIBEB63X8WBkDnEh3BAh7yBcl3fxELbIosn+1joDm7v6tRB4ar+jsi5uz+LyP/I4000kijKJClsrHCrmmMM94b4w2N7XeNkLP7aYzLBzfQh6k=
+  </data>
+ </layer>
+ <layer name="tiles" width="41" height="27">
+  <data encoding="base64" compression="zlib">
+   eJztlEsKwjAQQLtz0VzErSvXPYIrj9CVegL1BOotrCewLl0U9SAFRXApfkCcUINDaL7GUjGBxwRmOnkMabIwCDLPX9Jw2KtJCnRq6dLt2zZwaKnymn6mRAa1XbTvgU8fGCCvqGaOQ/AZAeMKHDsGtTHaT8BnCsyQV/wlR1tSUrCqgYt3tEfnXO8oZknPflHqhSFvktAtKkfmYuLoGpnjBthKYH62eV0+vQuy+6fKV3VfvaM+N2APHBw4zsPyf3ehcDhxkfej6wLx6sARv2cY1bwfXMSw+R0FDqlgLongbFvHsvkx2PzuaK4sp3qbKDuun+gbvg6Tk2J+NNaV8w+w9jjhCTNCf6Q=
+  </data>
+ </layer>
+ <objectgroup name="objects">
+  <object id="1" name="wall" type="wall" x="3" y="6" width="19" height="846"/>
+  <object id="2" name="Guard" type="npc" x="560" y="322.667"/>
+  <object id="3" name="Guard" type="npc" x="660" y="324"/>
+  <object id="4" name="Villager" type="npc" x="257.333" y="485.333"/>
+  <object id="5" name="Villager" type="npc" x="900" y="365.333"/>
+  <object id="6" name="Villager" type="npc" x="1017.33" y="672"/>
+  <object id="7" name="Villager" type="npc" x="569.333" y="717.333"/>
+  <object id="8" name="Villager" type="npc" x="612" y="717.333"/>
+  <object id="9" name="Villager" type="npc" x="472" y="450.667"/>
+  <object id="10" name="Villager" type="npc" x="285.333" y="597.333"/>
+  <object id="14" name="wall" type="wall" x="149.333" y="230.667" width="1168" height="22.6667"/>
+  <object id="15" name="wall" type="wall" x="1157.33" y="365.333" width="53.3333" height="48"/>
+  <object id="17" name="wall" type="wall" x="836" y="356" width="149.333" height="61.3333"/>
+  <object id="18" name="wall" type="wall" x="202.667" y="349.333" width="109.333" height="86.6667"/>
+  <object id="19" name="wall" type="wall" x="133.333" y="245.333" width="24" height="517.333"/>
+  <object id="20" name="wall" type="wall" x="148" y="764" width="1162.67" height="30.6667"/>
+  <object id="22" name="wall" type="wall" x="164" y="600" width="276" height="152"/>
+  <object id="23" name="wall" type="wall" x="613.333" y="498.667" width="53.3333" height="109.333"/>
+  <object id="25" name="wall" type="wall" x="1305.33" y="262.667" width="4" height="497.333"/>
+ </objectgroup>
+ <layer name="Tile Layer 2" width="41" height="27">
+  <data encoding="base64" compression="zlib">
+   eJyT5GZgkKQQS/DgwNyU4whcdlKAUdxMBf/TAlM7HLHZAQKa3CRgoFs0eLDTMECSeVgwuhulgNiISGwOdIcFEFtCsQUabcVDvFmGeOSwuTGCSOwOdEMEFNsBsT0QOyCJefFA7HaiEFPixnAk9/gBsT8QByCJRQGxEw9t3BhEJE5Hck8cEMcDcQKSWBYQB1EBY3MjOWA7mfqIAUPZjS+A9EtuBD0Y3fgDSP/kRtDUdmMTCepxubEdyYxXVHBjKzcETwfiFhL9g8uN09HMWcGNH9MSEMozO7hxY3oB9LpRiwy7D0D1rAXS67hRxagBLLlRsRUZZl+A6tkLpPdxo4pRA4DqNA+k+s2LgnA8C6TPEQjHOySa/44bsw6OgprxHkh/INI8WJjdBdL3CITjGxLd+A+oPgMNZ0HN+A+iefBqh4MHWOzFJgYCf4h04zs65klyAMh9/wbYjY0E7Ed230CH5xSg/VNJcO8oGAWDAQAAkBOSJA==
+  </data>
+ </layer>
+ <layer name="Tile Layer 3" width="41" height="27">
+  <data encoding="base64" compression="zlib">
+   eJyL4GZgiABiLyAeTCAc6i4QiICyowaZG9OB7slAw1mDzI0jFZTyoNL0AOXchNkgUIHDTejixJiHzx5cwIMIdR1At5Sju4cHIj5YwAwcbsElPgpGAblgIjDPTKJz2X4KaN9pEuxcCFS7iM5uvAW07/ZonTcKRsGIAO+4ETSMvX+Q5f9/3Agaxj6Px43kuJ9UPdjUv0MTu4/HTHzuJ1dPG5o8NvX/kOKbEMDnfnL0vMIih0/9v0GWDkfByAIA5Qsrcg==
+  </data>
+ </layer>
+ <layer name="Tile Layer 5" width="41" height="27">
+  <data encoding="base64" compression="zlib">
+   eJzt0jEKADAIQ1F3b97eoL1scRSyCA5C/1sCATNpNtvynBMdz4m/bfEHquvaqG6HK25U17VR3QYAAACAyR7f+Aih
+  </data>
+ </layer>
+</map>
