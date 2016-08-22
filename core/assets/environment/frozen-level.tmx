@@ -41,7 +41,7 @@
   <object id="23" name="wall" type="wall" x="1097" y="343" width="50" height="65"/>
   <object id="24" name="wall" type="wall" x="1009" y="437"/>
   <object id="25" name="wall" type="wall" x="1171" y="406" width="20" height="227"/>
-  <object id="27" name="wall" type="wall" x="1196" y="200" width="73" height="121"/>
+  <object id="27" name="wall" type="wall" x="1196" y="200" width="57" height="121"/>
   <object id="29" name="wall" type="wall" x="1063" y="102" width="87" height="89"/>
   <object id="31" name="wall" type="wall" x="1131" y="7" width="105" height="88"/>
   <object id="32" name="wall" type="wall" x="1266" y="139" width="38" height="51"/>
@@ -58,9 +58,9 @@
   <object id="44" name="wall" type="wall" x="1182" y="762" width="139" height="6"/>
   <object id="45" name="wall" type="wall" x="378" y="735" height="65"/>
   <object id="46" name="wall" type="wall" x="269" y="779" width="116" height="17"/>
-  <object id="47" name="wall" type="wall" x="29" y="713" width="245" height="12"/>
+  <object id="47" name="wall" type="wall" x="11" y="713" width="263" height="12"/>
   <object id="49" name="wall" type="wall" x="254" y="713" width="30" height="77"/>
-  <object id="50" name="wall" type="wall" x="25" y="551" width="246" height="27"/>
+  <object id="50" name="wall" type="wall" x="6" y="551" width="265" height="27"/>
   <object id="52" name="wall" type="wall" x="198" y="514" width="84" height="34"/>
   <object id="53" name="wall" type="wall" x="111" y="3" width="26" height="117"/>
   <object id="57" name="wall" type="wall" x="424" y="391" width="49" height="114"/>
@@ -70,11 +70,6 @@
   <object id="62" name="GoblinWarrior" type="enemy" x="138" y="435"/>
   <object id="63" name="GoblinWarrior" type="enemy" x="821" y="600"/>
   <object id="64" name="GoblinWarrior" type="enemy" x="877" y="562"/>
-  <object id="66" name="wall" type="wall" x="1299" y="632" width="10" height="122"/>
-  <object id="68" name="wall" type="wall" x="9" y="845" width="850" height="15"/>
-  <object id="69" name="wall" type="wall" x="8" y="722" width="14" height="123"/>
-  <object id="70" name="wall" type="wall" x="6" y="5" width="108" height="16"/>
-  <object id="71" name="wall" type="wall" x="4" y="16" width="24" height="554"/>
   <object id="75" name="portal" type="portal" x="11" y="236" width="73" height="105"/>
  </objectgroup>
 </map>

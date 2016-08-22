@@ -26,7 +26,6 @@
   </data>
  </layer>
  <objectgroup name="objects">
-  <object id="1" name="wall" type="wall" x="3" y="6" width="19" height="846"/>
   <object id="2" name="Guard" type="npc" x="560" y="322.667"/>
   <object id="3" name="Guard" type="npc" x="660" y="324"/>
   <object id="4" name="Villager" type="npc" x="257.333" y="485.333"/>
@@ -44,7 +43,6 @@
   <object id="20" name="wall" type="wall" x="148" y="764" width="1162.67" height="30.6667"/>
   <object id="22" name="wall" type="wall" x="164" y="600" width="276" height="152"/>
   <object id="23" name="wall" type="wall" x="613.333" y="498.667" width="53.3333" height="109.333"/>
-  <object id="25" name="wall" type="wall" x="1305.33" y="262.667" width="4" height="497.333"/>
  </objectgroup>
  <layer name="Tile Layer 2" width="41" height="27">
   <data encoding="base64" compression="zlib">

@@ -20,6 +20,10 @@ public class Level {
     public int length;
     public int tileSize = 16;
     public int offsetX;
+    public int mapHeight;
+    public int mapWidth;
+    public int tileHeight;
+    public int tileWidth;
 
     public TiledMap map;
 

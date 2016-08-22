@@ -35,6 +35,12 @@ public class TmxLevelLoader {
 //        final Array<MapObject> objects = allObjects.getByType(MapObject.class);
 
         level.map = map;
+        level.mapHeight = map.getProperties().get("height", Integer.class);
+        level.mapWidth = map.getProperties().get("width", Integer.class);
+        level.tileHeight = map.getProperties().get("tileheight", Integer.class);
+        level.tileWidth = map.getProperties().get("tilewidth", Integer.class);
+
+
         level.length =  tiledMapTileLayer.getHeight() * level.tileSize;
         level.velocity.set(0, 32);
 

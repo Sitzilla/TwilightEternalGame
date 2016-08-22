@@ -54,8 +54,8 @@ public class TitleScreen implements Screen {
 
             if (TimeUtils.timeSinceMillis(startTime) > 500) {
                 if (Gdx.input.isKeyPressed(Input.Keys.ANY_KEY)) {
-//                    game.setScreen(new GameScreen(game));
-//                    dispose();
+                    game.setScreen(new GameScreen(game));
+                    dispose();
                     buttonPressed = true;
                 }
             }
@@ -81,7 +81,6 @@ public class TitleScreen implements Screen {
             game.batch.end();
 
             if (openingCamera.position.y < -600) {
-//                Gdx.graphics.setWindowedMode(new Configuration().width, new Configuration().height);
                 dispose();
                 game.setScreen(new GameScreen(game));
 

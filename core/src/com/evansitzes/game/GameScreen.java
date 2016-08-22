@@ -27,7 +27,7 @@ import static com.evansitzes.game.entity.Player.Facing.*;
 public class GameScreen implements Screen {
     public final Configuration configuration;
     public final OrthographicCamera camera; // player Camera
-    public final OrthographicCamera mapCamera;
+//    public final OrthographicCamera mapCamera;
 //    public final OrthographicCamera battleCamera;
 
     public TiledMapRenderer tiledMapRenderer;
@@ -46,33 +46,29 @@ public class GameScreen implements Screen {
 
     private boolean canMove;
 
+    private final float mapMinX = 0;
+    private final float mapMaxX;
+    private final float mapMinY = 0;
+    private final float mapMaxY;
+
     public GameScreen(final TwilightEternal game) {
         this.game = game;
         configuration = new Configuration();
         float w = Gdx.graphics.getWidth();
         float h = Gdx.graphics.getHeight();
 
-        camera = new OrthographicCamera(30, 30 * (h / w));
-//        camera = new OrthographicCamera();
-        camera.setToOrtho(false, w, h);
+        camera = new OrthographicCamera();
+        camera.setToOrtho(false, 864, 576); // 1.5 of w and h
+        camera.position.set(configuration.startingPositionX, configuration.startingPositionY, 0);
         camera.update();
-
-        mapCamera = new OrthographicCamera();
-        mapCamera.setToOrtho(false, configuration.width, configuration.height);
-//        mapCamera.translate(120, 210);
-        mapCamera.update();
-
-//        battleCamera = new OrthographicCamera();
-//        battleCamera.setToOrtho(false, 800, 400);
-//        battleCamera.update();
 
         player = new Player(game, this);
         battleMode = false;
-//        tiledMap = new TmxMapLoader().load("environment/test-level1.tmx");
-//        tiledMapRenderer = new OrthogonalTiledMapRenderer(tiledMap);
         level = TmxLevelLoader.load(Vector2.Zero, game, this, "frozen-level");
+        mapMaxX = level.mapWidth * level.tileWidth;
+        mapMaxY = level.mapHeight * level.tileHeight;
         tiledMapRenderer = new OrthogonalTiledMapRenderer(level.map);
-
+        tiledMapRenderer.setView(camera);
     }
 
     @Override
@@ -87,58 +83,73 @@ public class GameScreen implements Screen {
             tiledMapRenderer = new OrthogonalTiledMapRenderer(level.map);
         }
 
-         camera.update();
+        camera.position.set(calculateCameraPositionX(), calculateCameraPositionY(), 0);
+        camera.update();
+        tiledMapRenderer.setView(camera);
+        tiledMapRenderer.render();
+        game.batch.setProjectionMatrix(camera.combined);
 
-//        mapCamera.translate(0, 1 * delta);
-            mapCamera.update();
-            tiledMapRenderer.setView(mapCamera);
-            tiledMapRenderer.render();
-//        game.batch.setProjectionMatrix(camera.combined);
-
-            game.batch.begin();
+        game.batch.begin();
 
 
-            if (Gdx.input.isKeyPressed(Input.Keys.RIGHT)) {
-                if (!areCollisions(Player.Facing.RIGHT)) {
-                    player.state = Player.State.WALKING;
-                    player.direction = Player.Facing.RIGHT;
-                }
-            } else if (Gdx.input.isKeyPressed(Input.Keys.LEFT)) {
-                if (!areCollisions(Player.Facing.LEFT)) {
-                    player.state = Player.State.WALKING;
-                    player.direction = Player.Facing.LEFT;
-                }
-            } else if (Gdx.input.isKeyPressed(Input.Keys.UP)) {
-                if (!areCollisions(Player.Facing.UP)) {
-                    player.state = Player.State.WALKING;
-                    player.direction = Player.Facing.UP;
-                }
-            } else if (Gdx.input.isKeyPressed(Input.Keys.DOWN)) {
-                if (!areCollisions(Player.Facing.DOWN)) {
-                    player.state = Player.State.WALKING;
-                    player.direction = Player.Facing.DOWN;
-                }
+        if (Gdx.input.isKeyPressed(Input.Keys.RIGHT)) {
+            if (!areCollisions(Player.Facing.RIGHT)) {
+                player.state = Player.State.WALKING;
+                player.direction = Player.Facing.RIGHT;
             }
-
-            player.handle(delta);
-
-            for (Enemy enemy : enemies) {
-                enemy.draw();
+        } else if (Gdx.input.isKeyPressed(Input.Keys.LEFT)) {
+            if (!areCollisions(Player.Facing.LEFT)) {
+                player.state = Player.State.WALKING;
+                player.direction = Player.Facing.LEFT;
             }
-
-            for (Npc npc : npcs) {
-                npc.draw();
+        } else if (Gdx.input.isKeyPressed(Input.Keys.UP)) {
+            if (!areCollisions(Player.Facing.UP)) {
+                player.state = Player.State.WALKING;
+                player.direction = Player.Facing.UP;
             }
+        } else if (Gdx.input.isKeyPressed(Input.Keys.DOWN)) {
+            if (!areCollisions(Player.Facing.DOWN)) {
+                player.state = Player.State.WALKING;
+                player.direction = Player.Facing.DOWN;
+            }
+        }
 
-            game.batch.end();
+        player.handle(delta);
 
-//            mapCamera.position.set(player.x, player.y, 0);
-//            camera.position.set(player.position.x, player.position.y, 0);
-            camera.update();
+        for (Enemy enemy : enemies) {
+            enemy.draw();
+        }
 
-            handleEnemies(delta);
+        for (Npc npc : npcs) {
+            npc.draw();
+        }
 
+        game.batch.end();
 
+        handleEnemies(delta);
+    }
+
+    private float calculateCameraPositionX() {
+        if (player.position.x - camera.viewportWidth / 2 < mapMinX) {
+            return camera.viewportWidth / 2;
+        }
+
+        if (player.position.x > (mapMaxX - (camera.viewportWidth / 2))) {
+            return mapMaxX - (camera.viewportWidth / 2);
+        }
+
+        return player.position.x;
+    }
+
+    private float calculateCameraPositionY() {
+        if (player.position.y - camera.viewportHeight / 2 < mapMinY) {
+            return camera.viewportHeight / 2;
+        }
+
+        if (player.position.y > (mapMaxY - (camera.viewportHeight / 2))) {
+            return mapMaxY - (camera.viewportHeight / 2);
+        }
+        return player.position.y;
     }
 
     private boolean isPortal() {
@@ -160,6 +171,24 @@ public class GameScreen implements Screen {
     private boolean areCollisions(final Player.Facing direction) {
         int movementSpeed = 5;
 
+        // Check for edge of map
+        if (direction == LEFT && player.position.x < mapMinX + 1) {
+            return true;
+        }
+        // TODO figure out this collision
+        if (direction == RIGHT && player.position.x > mapMaxX - 30) {
+            return true;
+        }
+
+        if (direction == DOWN && player.position.y < mapMinY + 1) {
+            return true;
+        }
+        // TODO figure out this collision
+        if (direction == UP && player.position.y > mapMaxY - 30) {
+            return true;
+        }
+
+        // Check for Wall
         final Iterator<Wall> wallIterator = walls.iterator();
 
         while (wallIterator.hasNext()) {
@@ -216,9 +245,7 @@ public class GameScreen implements Screen {
 
             if (enemy.overlaps(player)) {
                 enemy.kill();
-
             }
-
         }
     }
 
