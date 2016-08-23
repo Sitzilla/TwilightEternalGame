@@ -1,5 +1,6 @@
 package com.evansitzes.game.entity.npc;
 
+import com.badlogic.gdx.math.Rectangle;
 import com.evansitzes.game.TwilightEternal;
 import com.evansitzes.game.entity.Entity;
 
@@ -19,11 +20,19 @@ public abstract class Npc extends Entity {
     public int hitDamage = 5;
     public long lastFired;
     public boolean dead = false;
+    public String conversationText;
+
+    private Rectangle conversationRectangle;
 
     public Npc(final TwilightEternal game) {
         super(game);
+        conversationText = "What brings you to this land traveler?";
 //        this.movement = movement;
     }
+    public boolean overlapsConversationZone(final Entity entity) {
+        return false;
+    }
+
 
     public abstract void draw();
     public abstract void kill();

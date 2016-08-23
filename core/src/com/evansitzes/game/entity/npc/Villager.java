@@ -1,7 +1,9 @@
 package com.evansitzes.game.entity.npc;
 
 import com.badlogic.gdx.graphics.g2d.Sprite;
+import com.badlogic.gdx.math.Rectangle;
 import com.evansitzes.game.TwilightEternal;
+import com.evansitzes.game.entity.Entity;
 import com.evansitzes.game.resources.Textures;
 
 /**
@@ -9,6 +11,8 @@ import com.evansitzes.game.resources.Textures;
  */
 public class Villager extends Npc {
     public Sprite sprite;
+
+    private Rectangle conversationRectangle;
 
     public Villager(TwilightEternal game) {
         super(game);
@@ -28,6 +32,18 @@ public class Villager extends Npc {
         this.rectangle.set(this.x + 20, this.y + 20, 10, 10);
         sprite.draw(game.batch);
 //        }
+
+        conversationRectangle = rectangle;
+        conversationRectangle.setWidth(conversationRectangle.getWidth() * 5);
+        conversationRectangle.setHeight(conversationRectangle.getHeight() * 5);
+
+    }
+
+    @Override
+    public boolean overlapsConversationZone(final Entity entity) {
+        if (conversationRectangle == null) { return false; }
+
+        return conversationRectangle.overlaps(entity.rectangle);
     }
 
     @Override

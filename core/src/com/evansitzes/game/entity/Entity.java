@@ -39,4 +39,6 @@ public abstract class Entity extends Rectangle {
 
     public abstract void handle(final float delta);
 
+    public void setConversationRectangle() {}
+
 }
