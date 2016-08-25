@@ -30,6 +30,7 @@ public class EntityCreationEvent extends Event {
         if (entity instanceof Enemy) {
             gameScreen.enemies.add((Enemy) entity);
         } else if (entity instanceof Npc) {
+            gameScreen.obstructables.add(entity);
             gameScreen.npcs.add((Npc) entity);
         }
     }

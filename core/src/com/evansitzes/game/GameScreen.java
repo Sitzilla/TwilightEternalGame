@@ -10,6 +10,7 @@ import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.Dialog;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.badlogic.gdx.utils.Array;
+import com.evansitzes.game.entity.Entity;
 import com.evansitzes.game.entity.Player;
 import com.evansitzes.game.entity.Portal;
 import com.evansitzes.game.entity.Wall;
@@ -36,6 +37,7 @@ public class GameScreen implements Screen, InputProcessor {
     public Level level;
     public boolean battleMode;
 
+    public final Array<Entity> obstructables = new Array();
     public final Array<Enemy> enemies = new Array();
     public final Array<Npc> npcs = new Array();
     public final Array<Wall> walls = new Array();
@@ -218,10 +220,11 @@ public class GameScreen implements Screen, InputProcessor {
         }
 
         // Check for Wall
-        final Iterator<Wall> wallIterator = walls.iterator();
+//        final Iterator<Wall> wallIterator = walls.iterator();
+            final Iterator<Entity> obstructablesIterator = obstructables.iterator();
 
-        while (wallIterator.hasNext()) {
-            final Wall wall = wallIterator.next();
+        while (obstructablesIterator.hasNext()) {
+            final Entity entity = obstructablesIterator.next();
 
             if (direction == RIGHT) {
                 player.rectangle.x += movementSpeed;
@@ -234,7 +237,7 @@ public class GameScreen implements Screen, InputProcessor {
                 player.rectangle.y -= movementSpeed;
             }
 
-            if (wall.overlaps(player)) {
+            if (entity.overlaps(player)) {
                 if (direction == RIGHT) {
                     player.rectangle.x -= movementSpeed;
                 } else if (direction == LEFT) {
@@ -302,6 +305,7 @@ public class GameScreen implements Screen, InputProcessor {
         enemies.clear();
         walls.clear();
         portals.clear();
+        obstructables.clear();
     }
 
     public void setGameState(final State s){

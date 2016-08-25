@@ -20,6 +20,7 @@ public class Villager extends Npc {
         score = 25;
         dead = false;
         Textures texture = new Textures();
+        conversationRectangle = new Rectangle();
 
         sprite = new Sprite(texture.getRandomNpc());
 //        sprite.setSize((float) (sprite.getWidth() * 0.4), (float) (sprite.getHeight() * 0.4));
@@ -27,16 +28,10 @@ public class Villager extends Npc {
 
     @Override
     public void draw() {
-//        if (!dead) {
         sprite.setPosition(this.x, this.y);
-        this.rectangle.set(this.x + 20, this.y + 20, 10, 10);
+        this.rectangle.set(this.x, this.y, 10, 10);
         sprite.draw(game.batch);
-//        }
-
-        conversationRectangle = rectangle;
-        conversationRectangle.setWidth(conversationRectangle.getWidth() * 5);
-        conversationRectangle.setHeight(conversationRectangle.getHeight() * 5);
-
+        conversationRectangle.set(this.x, this.y, 50, 50);
     }
 
     @Override
