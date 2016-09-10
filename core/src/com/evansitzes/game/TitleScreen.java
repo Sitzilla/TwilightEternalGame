@@ -54,7 +54,7 @@ public class TitleScreen implements Screen {
 
             if (TimeUtils.timeSinceMillis(startTime) > 500) {
                 if (Gdx.input.isKeyPressed(Input.Keys.ANY_KEY)) {
-//                    game.setScreen(new GameScreen(game));
+                    game.setScreen(new GameScreen(game));
                     dispose();
                     buttonPressed = true;
                 }

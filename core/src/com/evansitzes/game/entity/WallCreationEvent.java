@@ -22,7 +22,7 @@ public class WallCreationEvent extends Event {
 
     @Override
     public void happen() {
-        gameScreen.obstructables.add(wall);
-        gameScreen.walls.add(wall);
+        gameScreen.getObstructables().add(wall);
+        gameScreen.getWalls().add(wall);
     }
 }

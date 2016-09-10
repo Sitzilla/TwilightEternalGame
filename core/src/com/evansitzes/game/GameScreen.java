@@ -26,22 +26,22 @@ import static com.evansitzes.game.entity.Player.Facing.*;
  * Created by evan on 6/8/16.
  */
 public class GameScreen implements Screen, InputProcessor {
-    public final Configuration configuration;
-    public final OrthographicCamera camera; // player Camera
+    private final Configuration configuration;
+    private final OrthographicCamera camera; // player Camera
 
-    public TiledMapRenderer tiledMapRenderer;
+    private TiledMapRenderer tiledMapRenderer;
 
-    public final TwilightEternal game;
-    public final Player player;
+    private final TwilightEternal game;
+    private final Player player;
 
-    public Level level;
-    public boolean battleMode;
+    private Level level;
+    private boolean battleMode;
 
-    public final Array<Entity> obstructables = new Array();
-    public final Array<Enemy> enemies = new Array();
-    public final Array<Npc> npcs = new Array();
-    public final Array<Wall> walls = new Array();
-    public final Array<Portal> portals = new Array();
+    private final Array<Entity> obstructables = new Array();
+    private final Array<Enemy> enemies = new Array();
+    private final Array<Npc> npcs = new Array();
+    private final Array<Wall> walls = new Array();
+    private final Array<Portal> portals = new Array();
 
     private State state = State.RUN;
 
@@ -51,13 +51,13 @@ public class GameScreen implements Screen, InputProcessor {
     private final float mapMaxY;
 
     private Skin skin;
-    private Stage stage;
+    private final Stage stage;
 
     public GameScreen(final TwilightEternal game) {
         this.game = game;
         configuration = new Configuration();
-        float w = Gdx.graphics.getWidth();
-        float h = Gdx.graphics.getHeight();
+        float w = (float) Gdx.graphics.getWidth();
+        float h = (float) Gdx.graphics.getHeight();
 
         camera = new OrthographicCamera();
         camera.setToOrtho(false, 864, 576); // 1.5 of w and h
@@ -70,11 +70,11 @@ public class GameScreen implements Screen, InputProcessor {
         Gdx.input.setInputProcessor(stage);
 
         player = new Player(game, this);
-        battleMode = false;
-        level = TmxLevelLoader.load(Vector2.Zero, game, this, "frozen-level");
+        this.battleMode = false;
+        this.level = TmxLevelLoader.load(Vector2.Zero, game, this, "frozen-level");
         mapMaxX = level.mapWidth * level.tileWidth;
         mapMaxY = level.mapHeight * level.tileHeight;
-        tiledMapRenderer = new OrthogonalTiledMapRenderer(level.map);
+        this.tiledMapRenderer = new OrthogonalTiledMapRenderer(level.map);
         tiledMapRenderer.setView(camera);
 
         InputMultiplexer multiplexer = new InputMultiplexer();
@@ -94,8 +94,8 @@ public class GameScreen implements Screen, InputProcessor {
                 if (isPortal()) {
                     resetObjects();
                     player.reversePosition();
-                    level = TmxLevelLoader.load(Vector2.Zero, game, this, "town");
-                    tiledMapRenderer = new OrthogonalTiledMapRenderer(level.map);
+                    this.level = TmxLevelLoader.load(Vector2.Zero, game, this, "town");
+                    this.tiledMapRenderer = new OrthogonalTiledMapRenderer(level.map);
                 }
 
                 camera.position.set(calculateCameraPositionX(), calculateCameraPositionY(), 0);
@@ -221,7 +221,7 @@ public class GameScreen implements Screen, InputProcessor {
 
         // Check for Wall
 //        final Iterator<Wall> wallIterator = walls.iterator();
-            final Iterator<Entity> obstructablesIterator = obstructables.iterator();
+        final Iterator<Entity> obstructablesIterator = obstructables.iterator();
 
         while (obstructablesIterator.hasNext()) {
             final Entity entity = obstructablesIterator.next();
@@ -386,6 +386,66 @@ public class GameScreen implements Screen, InputProcessor {
     @Override
     public boolean scrolled(int amount) {
         return false;
+    }
+
+    public Configuration getConfiguration() {
+        return configuration;
+    }
+
+    public OrthographicCamera getCamera() {
+        return camera;
+    }
+
+    public TiledMapRenderer getTiledMapRenderer() {
+        return tiledMapRenderer;
+    }
+
+    public void setTiledMapRenderer(TiledMapRenderer tiledMapRenderer) {
+        this.tiledMapRenderer = tiledMapRenderer;
+    }
+
+    public TwilightEternal getGame() {
+        return game;
+    }
+
+    public Player getPlayer() {
+        return player;
+    }
+
+    public Level getLevel() {
+        return level;
+    }
+
+    public void setLevel(Level level) {
+        this.level = level;
+    }
+
+    public boolean isBattleMode() {
+        return battleMode;
+    }
+
+    public void setBattleMode(boolean battleMode) {
+        this.battleMode = battleMode;
+    }
+
+    public Array<Entity> getObstructables() {
+        return obstructables;
+    }
+
+    public Array<Enemy> getEnemies() {
+        return enemies;
+    }
+
+    public Array<Npc> getNpcs() {
+        return npcs;
+    }
+
+    public Array<Wall> getWalls() {
+        return walls;
+    }
+
+    public Array<Portal> getPortals() {
+        return portals;
     }
 
     public class Conversation extends Dialog {

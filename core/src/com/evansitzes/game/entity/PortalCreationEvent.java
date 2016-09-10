@@ -22,6 +22,6 @@ public class PortalCreationEvent extends Event {
 
     @Override
     public void happen() {
-        gameScreen.portals.add(portal);
+        gameScreen.getPortals().add(portal);
     }
 }

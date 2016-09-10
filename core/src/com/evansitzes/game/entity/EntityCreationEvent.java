@@ -28,10 +28,10 @@ public class EntityCreationEvent extends Event {
 
         // TODO update instanceof to name check
         if (entity instanceof Enemy) {
-            gameScreen.enemies.add((Enemy) entity);
+            gameScreen.getEnemies().add((Enemy) entity);
         } else if (entity instanceof Npc) {
-            gameScreen.obstructables.add(entity);
-            gameScreen.npcs.add((Npc) entity);
+            gameScreen.getObstructables().add(entity);
+            gameScreen.getNpcs().add((Npc) entity);
         }
     }
 }
