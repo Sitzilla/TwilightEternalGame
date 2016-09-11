@@ -16,6 +16,7 @@ import com.evansitzes.game.entity.Portal;
 import com.evansitzes.game.entity.Wall;
 import com.evansitzes.game.entity.enemy.Enemy;
 import com.evansitzes.game.entity.npc.Npc;
+import com.evansitzes.game.loaders.TmxLevelLoader;
 import com.evansitzes.game.resources.Sounds;
 
 import java.util.Iterator;
@@ -56,8 +57,8 @@ public class GameScreen implements Screen, InputProcessor {
     public GameScreen(final TwilightEternal game) {
         this.game = game;
         configuration = new Configuration();
-        float w = (float) Gdx.graphics.getWidth();
-        float h = (float) Gdx.graphics.getHeight();
+        final float w = (float) Gdx.graphics.getWidth();
+        final float h = (float) Gdx.graphics.getHeight();
 
         camera = new OrthographicCamera();
         camera.setToOrtho(false, 864, 576); // 1.5 of w and h
@@ -77,14 +78,14 @@ public class GameScreen implements Screen, InputProcessor {
         this.tiledMapRenderer = new OrthogonalTiledMapRenderer(level.map);
         tiledMapRenderer.setView(camera);
 
-        InputMultiplexer multiplexer = new InputMultiplexer();
+        final InputMultiplexer multiplexer = new InputMultiplexer();
         multiplexer.addProcessor(stage);
         multiplexer.addProcessor(this);
         Gdx.input.setInputProcessor(multiplexer);
     }
 
     @Override
-    public void render(float delta) {
+    public void render(final float delta) {
         Gdx.gl.glClearColor(0, 0, 0.0f, 1);
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
 
@@ -105,7 +106,6 @@ public class GameScreen implements Screen, InputProcessor {
                 game.batch.setProjectionMatrix(camera.combined);
 
                 game.batch.begin();
-
 
                 if (Gdx.input.isKeyPressed(Input.Keys.RIGHT)) {
                     if (!areCollisions(Player.Facing.RIGHT)) {
@@ -131,15 +131,15 @@ public class GameScreen implements Screen, InputProcessor {
 
                 player.handle(delta);
 
-                for (Enemy enemy : enemies) {
+                for (final Enemy enemy : enemies) {
                     enemy.draw();
                 }
 
-                for (Npc npc : npcs) {
+                for (final Npc npc : npcs) {
                     npc.draw();
                 }
 
-                game.batch.end();
+                    game.batch.end();
                 handleEnemies(delta);
                 break;
 
@@ -200,7 +200,7 @@ public class GameScreen implements Screen, InputProcessor {
     }
 
     private boolean areCollisions(final Player.Facing direction) {
-        int movementSpeed = 5;
+        final int movementSpeed = 5;
 
         // Check for edge of map
         if (direction == LEFT && player.position.x < mapMinX + 1) {
@@ -275,8 +275,9 @@ public class GameScreen implements Screen, InputProcessor {
         while(enemyIterator.hasNext()) {
             final Enemy enemy = enemyIterator.next();
 
-            if (enemy.overlaps(player)) {
+            if (enemy.overlaps(player) && !enemy.dead) {
                 enemy.kill();
+                game.setScreen(new BattleScreen(game, this));
             }
         }
     }
@@ -318,7 +319,7 @@ public class GameScreen implements Screen, InputProcessor {
     }
 
     @Override
-    public void resize(int width, int height) {
+    public void resize(final int width, final int height) {
 
     }
 
@@ -340,13 +341,13 @@ public class GameScreen implements Screen, InputProcessor {
 
     @Override
     public void dispose() {
-        stage.dispose();
-        skin.dispose();
+//        stage.dispose();
+//        skin.dispose();
     }
 
     // Key Strokes
     @Override
-    public boolean keyDown(int keycode) {
+    public boolean keyDown(final int keycode) {
         if (keycode == Input.Keys.SPACE) {
             handleNpc();
         }
@@ -354,37 +355,37 @@ public class GameScreen implements Screen, InputProcessor {
     }
 
     @Override
-    public boolean keyUp(int keycode) {
+    public boolean keyUp(final int keycode) {
         return false;
     }
 
     @Override
-    public boolean keyTyped(char character) {
+    public boolean keyTyped(final char character) {
         return false;
     }
 
     @Override
-    public boolean touchDown(int screenX, int screenY, int pointer, int button) {
+    public boolean touchDown(final int screenX, final int screenY, final int pointer, final int button) {
         return false;
     }
 
     @Override
-    public boolean touchUp(int screenX, int screenY, int pointer, int button) {
+    public boolean touchUp(final int screenX, final int screenY, final int pointer, final int button) {
         return false;
     }
 
     @Override
-    public boolean touchDragged(int screenX, int screenY, int pointer) {
+    public boolean touchDragged(final int screenX, final int screenY, final int pointer) {
         return false;
     }
 
     @Override
-    public boolean mouseMoved(int screenX, int screenY) {
+    public boolean mouseMoved(final int screenX, final int screenY) {
         return false;
     }
 
     @Override
-    public boolean scrolled(int amount) {
+    public boolean scrolled(final int amount) {
         return false;
     }
 
@@ -400,7 +401,7 @@ public class GameScreen implements Screen, InputProcessor {
         return tiledMapRenderer;
     }
 
-    public void setTiledMapRenderer(TiledMapRenderer tiledMapRenderer) {
+    public void setTiledMapRenderer(final TiledMapRenderer tiledMapRenderer) {
         this.tiledMapRenderer = tiledMapRenderer;
     }
 
@@ -416,7 +417,7 @@ public class GameScreen implements Screen, InputProcessor {
         return level;
     }
 
-    public void setLevel(Level level) {
+    public void setLevel(final Level level) {
         this.level = level;
     }
 
@@ -424,7 +425,7 @@ public class GameScreen implements Screen, InputProcessor {
         return battleMode;
     }
 
-    public void setBattleMode(boolean battleMode) {
+    public void setBattleMode(final boolean battleMode) {
         this.battleMode = battleMode;
     }
 
@@ -450,11 +451,11 @@ public class GameScreen implements Screen, InputProcessor {
 
     public class Conversation extends Dialog {
 
-        public Conversation(String title, Skin skin) {
+        public Conversation(final String title, final Skin skin) {
             super(title, skin);
         }
 
-        public Conversation(String title, Skin skin, String windowStyleName) {
+        public Conversation(final String title, final Skin skin, final String windowStyleName) {
             super(title, skin, windowStyleName);
         }
 

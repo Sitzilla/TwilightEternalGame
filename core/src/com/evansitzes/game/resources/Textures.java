@@ -119,8 +119,10 @@ public class Textures {
 
     public static class Enemies {
         public static final TextureRegion GOBLIN_WARRIOR = loadEnemy()[0][1];
+        public static final TextureRegion GOBLIN_WARRIOR_BATTLE = loadBattleEnemy()[0][0];
         public static final TextureRegion EXPLOSION = loadExplosion()[1][3];
 
+        // TODO should be able to combine these
         private static TextureRegion[][] loadEnemy() {
             final int frameColumns = 6;
             final int frameRows = 8;
@@ -133,6 +135,13 @@ public class Textures {
             final int frameRows = 3;
 
             return splitTextureRegion(frameColumns, frameRows, new Texture(Gdx.files.internal("enemy/explosion.png")));
+        }
+
+        private static TextureRegion[][] loadBattleEnemy() {
+            final int frameColumns = 1;
+            final int frameRows = 1;
+
+            return splitTextureRegion(frameColumns, frameRows, new Texture(Gdx.files.internal("enemy/battle_goblin.png")));
         }
     }
 
