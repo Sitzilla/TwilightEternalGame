@@ -1,4 +1,4 @@
-package com.evansitzes.game;
+package com.evansitzes.game.loaders;
 
 import com.badlogic.gdx.assets.loaders.resolvers.InternalFileHandleResolver;
 import com.badlogic.gdx.maps.MapLayer;
@@ -10,6 +10,10 @@ import com.badlogic.gdx.maps.tiled.TiledMapTileLayer;
 import com.badlogic.gdx.maps.tiled.TmxMapLoader;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.utils.Array;
+import com.evansitzes.game.Event;
+import com.evansitzes.game.GameScreen;
+import com.evansitzes.game.Level;
+import com.evansitzes.game.TwilightEternal;
 import com.evansitzes.game.entity.*;
 import com.evansitzes.game.entity.enemy.Enemy;
 import com.evansitzes.game.entity.npc.Npc;
@@ -18,6 +22,9 @@ import com.evansitzes.game.entity.npc.Npc;
  * Created by evan on 6/9/16.
  */
 public class TmxLevelLoader {
+
+    private static final EnemyReader ENEMY_READER = new EnemyReader();
+    private static final PositionReader POSITION_READER = new PositionReader();
 
     public static Level load(final Vector2 gridPosition, final TwilightEternal game, final GameScreen gameScreen, final String zone) {
         final TiledMap map = loadMap(zone);
@@ -48,7 +55,7 @@ public class TmxLevelLoader {
             final MapProperties properties = object.getProperties();
             final String type = (String) properties.get("type");
             if (type.equals("enemy")) {
-                final Enemy enemy = readEnemy(object, game);
+                final Enemy enemy = ENEMY_READER.readEnemy(object, game);
                     final Event enemyEvent = readEntityEvent(enemy, gameScreen, game, object);
                     level.events.add(enemyEvent);
 
@@ -113,23 +120,11 @@ public class TmxLevelLoader {
         return new WallCreationEvent(wall, gameScreen);
     }
 
-    private static Enemy readEnemy(final RectangleMapObject object, final TwilightEternal game) {
-        final String clazz = "com.evansitzes.game.entity.enemy." + object.getName();
-        try {
-            final Enemy enemy = (Enemy) Class.forName(clazz).getConstructor(TwilightEternal.class).newInstance(game);
-            readEntityPosition(enemy, object);
-            return enemy;
-        }
-        catch (Exception e) {
-            throw new RuntimeException(e);
-        }
-    }
-
     private static Npc readNpc(final RectangleMapObject object, final TwilightEternal game) {
         final String clazz = "com.evansitzes.game.entity.npc." + object.getName();
         try {
             final Npc npc = (Npc) Class.forName(clazz).getConstructor(TwilightEternal.class).newInstance(game);
-            readEntityPosition(npc, object);
+            POSITION_READER.readEntityPosition(npc, object);
             return npc;
         }
         catch (Exception e) {
@@ -147,11 +142,6 @@ public class TmxLevelLoader {
         entity.rectangle.width = (Float) object.getProperties().get("width");
         entity.rectangle.height = (Float) object.getProperties().get("height");
     }
-
-    private static void readEntityPosition(final Entity entity, final RectangleMapObject object) {
-        entity.locate((Float) object.getProperties().get("x"), (Float) object.getProperties().get("y"));
-    }
-
 
     private static void setDefaults(final Level level) {
         level.position.set(0, 0);
