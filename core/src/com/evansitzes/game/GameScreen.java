@@ -156,8 +156,8 @@ public class GameScreen implements Screen, InputProcessor {
                 break;
         }
 
-        stage.act(delta);
-        stage.draw();
+            stage.act(delta);
+            stage.draw();
     }
 
     private float calculateCameraPositionX() {

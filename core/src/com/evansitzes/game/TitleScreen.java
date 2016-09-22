@@ -10,9 +10,10 @@ import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
+import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.utils.TimeUtils;
+import com.evansitzes.game.conversation.ConversationUI;
 import com.evansitzes.game.resources.Sounds;
-import com.evansitzes.game.resources.Textures;
 
 public class TitleScreen implements Screen {
 
@@ -47,10 +48,18 @@ public class TitleScreen implements Screen {
             game.batch.begin();
 //            game.batch.draw(Textures.TitleScreen.LOGO, (float) (game.config.width * 0.75 / 2 - Textures.TitleScreen.LOGO.getWidth() / 2), (float) (game.config.height * 0.75 - 200));
 //            game.batch.draw(Textures.TitleScreen.PRESS_ANY_BUTTON, (float) (game.config.width * 0.75 / 2 - Textures.TitleScreen.PRESS_ANY_BUTTON.getWidth() * 0.75 / 1.5), 250);
-            game.batch.draw(Textures.TitleScreen.LOGO, (float) (game.config.width / 1.95 - Textures.TitleScreen.LOGO.getWidth() / 2), (float) (game.config.height - 300));
-            game.batch.draw(Textures.TitleScreen.PRESS_ANY_BUTTON, (float) (game.config.width / 1.7 - Textures.TitleScreen.PRESS_ANY_BUTTON.getWidth() / 1.5), 300);
+//            game.batch.draw(Textures.TitleScreen.LOGO, (float) (game.config.width / 1.95 - Textures.TitleScreen.LOGO.getWidth() / 2), (float) (game.config.height - 300));
+//            game.batch.draw(Textures.TitleScreen.PRESS_ANY_BUTTON, (float) (game.config.width / 1.7 - Textures.TitleScreen.PRESS_ANY_BUTTON.getWidth() / 1.5), 300);
 
             game.batch.end();
+
+
+            Stage stage = new Stage();
+
+            Gdx.input.setInputProcessor(stage);
+            ConversationUI ui = new ConversationUI(stage);
+            stage.act(delta);
+            stage.draw();
 
             if (TimeUtils.timeSinceMillis(startTime) > 500) {
                 if (Gdx.input.isKeyPressed(Input.Keys.ANY_KEY)) {
