@@ -12,7 +12,6 @@ import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.utils.TimeUtils;
-import com.evansitzes.game.conversation.ConversationUI;
 import com.evansitzes.game.resources.Sounds;
 
 public class TitleScreen implements Screen {
@@ -57,13 +56,17 @@ public class TitleScreen implements Screen {
             Stage stage = new Stage();
 
             Gdx.input.setInputProcessor(stage);
-            ConversationUI ui = new ConversationUI(stage);
-            stage.act(delta);
-            stage.draw();
+//            ConversationUI ui = new ConversationUI(stage);
+//            stage.act(delta);
+//            stage.draw();
+//            Skin skin = new Skin(Gdx.files.internal("skins/golden-ui-skin.json"));
+//            final Conversation conversation = new Conversation("", skin);
+//            conversation.setText("Hello screen! ");
+//            conversation.show(stage);
 
             if (TimeUtils.timeSinceMillis(startTime) > 500) {
                 if (Gdx.input.isKeyPressed(Input.Keys.ANY_KEY)) {
-//                    game.setScreen(new GameScreen(game));
+                    game.setScreen(new GameScreen(game));
                     dispose();
                     buttonPressed = true;
                 }
