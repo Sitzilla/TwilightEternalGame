@@ -1,24 +1,26 @@
 package com.evansitzes.game.entity;
 
+import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.evansitzes.game.Configuration;
-import com.evansitzes.game.GameScreen;
 import com.evansitzes.game.TwilightEternal;
 import com.evansitzes.game.resources.Textures;
+import com.evansitzes.game.screens.GameScreen;
 
-import static com.evansitzes.game.entity.Player.Facing.*;
-import static com.evansitzes.game.entity.Player.State.IDLE;
-import static com.evansitzes.game.entity.Player.State.WALKING;
+import static com.evansitzes.game.entity.PlayerSprite.Facing.*;
+import static com.evansitzes.game.entity.PlayerSprite.State.IDLE;
+import static com.evansitzes.game.entity.PlayerSprite.State.WALKING;
 
 /**
  * Created by evan on 6/8/16.
  */
-public class Player extends Entity {
+public class PlayerSprite extends Entity {
 
     public static final int MOMENT_SPEED = 3;
 
     private final GameScreen screen;
     public SimpleSprite currentSprite;
     public AnimatedSprite animatedSprite;
+    public Sprite battleSprite;
     Configuration configuration;
 
     public State state;
@@ -34,7 +36,7 @@ public class Player extends Entity {
     public Facing direction;
 
 
-    public Player(TwilightEternal game, final GameScreen screen) {
+    public PlayerSprite(TwilightEternal game, final GameScreen screen) {
         super(game);
         this.screen = screen;
         this.state = IDLE;

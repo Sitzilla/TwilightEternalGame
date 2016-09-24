@@ -1,7 +1,7 @@
 package com.evansitzes.game.entity;
 
 import com.evansitzes.game.Event;
-import com.evansitzes.game.GameScreen;
+import com.evansitzes.game.screens.GameScreen;
 
 /**
  * Created by evan on 6/10/16.

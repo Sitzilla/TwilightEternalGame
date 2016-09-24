@@ -26,7 +26,7 @@ public abstract class Entity extends Rectangle {
         return rectangle.overlaps(entity.rectangle);
     }
 
-    public boolean wouldOverlap(final Entity entity, Player.Facing direction) {
+    public boolean wouldOverlap(final Entity entity, PlayerSprite.Facing direction) {
         if (rectangle == null) { return false; }
 
         return rectangle.overlaps(entity.rectangle);
