@@ -11,7 +11,7 @@ import com.badlogic.gdx.maps.tiled.TmxMapLoader;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.utils.Array;
 import com.evansitzes.game.Event;
-import com.evansitzes.game.GameScreen;
+import com.evansitzes.game.screens.GameScreen;
 import com.evansitzes.game.Level;
 import com.evansitzes.game.TwilightEternal;
 import com.evansitzes.game.entity.*;

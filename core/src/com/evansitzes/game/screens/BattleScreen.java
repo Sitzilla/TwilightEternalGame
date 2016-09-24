@@ -1,4 +1,4 @@
-package com.evansitzes.game;
+package com.evansitzes.game.screens;
 
 import com.badlogic.gdx.*;
 import com.badlogic.gdx.graphics.GL20;
@@ -6,14 +6,13 @@ import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.maps.tiled.TiledMapRenderer;
 import com.badlogic.gdx.maps.tiled.renderers.OrthogonalTiledMapRenderer;
 import com.badlogic.gdx.math.Vector2;
-import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.Stage;
-import com.badlogic.gdx.scenes.scene2d.ui.List;
-import com.badlogic.gdx.scenes.scene2d.ui.ScrollPane;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
-import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import com.badlogic.gdx.utils.Array;
-import com.evansitzes.game.conversation.Conversation;
+import com.evansitzes.game.Configuration;
+import com.evansitzes.game.Level;
+import com.evansitzes.game.TwilightEternal;
+import com.evansitzes.game.conversation.BattleInterface;
 import com.evansitzes.game.entity.enemy.Enemy;
 import com.evansitzes.game.loaders.BattleLevelLoader;
 
@@ -35,8 +34,7 @@ public class BattleScreen implements Screen, InputProcessor {
 
     private Skin skin;
     private Stage stage;
-    private Conversation conversation;
-    private List<String> choices;
+    private BattleInterface battleInterface;
 
     public BattleScreen(final TwilightEternal game, final GameScreen gameScreen) {
         this.game = game;
@@ -52,7 +50,8 @@ public class BattleScreen implements Screen, InputProcessor {
 
         stage = new Stage();
         skin = new Skin(Gdx.files.internal("skins/golden-ui-skin.json"));
-        conversation = new Conversation("", skin);
+        battleInterface = new BattleInterface();
+        stage.addActor(battleInterface);
 
         Gdx.input.setInputProcessor(stage);
         final InputMultiplexer multiplexer = new InputMultiplexer();
@@ -62,36 +61,6 @@ public class BattleScreen implements Screen, InputProcessor {
 
         this.tiledMapRenderer = new OrthogonalTiledMapRenderer(level.map);
         tiledMapRenderer.setView(camera);
-
-        choices = new List<String>(new Skin(Gdx.files.internal("skins/golden-ui-skin.json")));
-
-        Array choiceItems = new Array();
-        choiceItems.add("Attack");
-        choiceItems.add("Run");
-        choiceItems.add("Pee Pants");
-        choices.setItems(choiceItems);
-
-        ScrollPane scrollPane = new ScrollPane(choices);
-        scrollPane.setOverscroll(false, false);
-        scrollPane.setFadeScrollBars(false);
-        scrollPane.setScrollingDisabled(true, false);
-        scrollPane.setForceScroll(true, false);
-        scrollPane.setScrollBarPositions(false, true);
-
-        conversation.defaults().expand().fill();
-        conversation.row();
-        conversation.add(scrollPane).pad(10, 10, 10, 10);
-
-        conversation.pack();
-
-        choices.addListener(new ClickListener() {
-            @Override
-            public void clicked(InputEvent event, float x, float y) {
-                final String choice = choices.getSelected();
-
-                System.out.println("You are: " + choice);
-            }
-        });
     }
 
     @Override
@@ -110,23 +79,16 @@ public class BattleScreen implements Screen, InputProcessor {
 
         game.batch.begin();
 
-//        if (Gdx.input.isKeyPressed(Input.Keys.SPACE)) {
-//            System.out.println(gameTime);
-//            conversation.setText("Hello screen! ");
-//            conversation.show(stage);
-//
-//        }
-
-
         for (final Enemy enemy : enemies) {
             enemy.draw();
         }
+        game.player.draw();
 
         game.batch.end();
 
         gameTime += delta;
 
-        if (gameTime > 30) {
+        if (gameTime > 300) {
             game.setScreen(gameScreen);
         }
 
@@ -165,11 +127,6 @@ public class BattleScreen implements Screen, InputProcessor {
 
     @Override
     public boolean keyDown(int keycode) {
-        if (keycode == Input.Keys.SPACE) {
-            System.out.println("Time:" + gameTime);
-//            conversation.setText(conversations.toString());
-            conversation.show(stage);
-        }
         return false;
     }
 

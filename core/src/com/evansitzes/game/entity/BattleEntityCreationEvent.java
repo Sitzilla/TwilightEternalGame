@@ -1,6 +1,6 @@
 package com.evansitzes.game.entity;
 
-import com.evansitzes.game.BattleScreen;
+import com.evansitzes.game.screens.BattleScreen;
 import com.evansitzes.game.Event;
 import com.evansitzes.game.entity.enemy.Enemy;
 

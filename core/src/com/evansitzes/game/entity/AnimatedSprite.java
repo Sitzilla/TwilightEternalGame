@@ -45,14 +45,14 @@ public class AnimatedSprite extends Entity {
         game.batch.draw(currentFrame, position.x, position.y);
     }
 
-    public void setCurrentDirection(Player.Facing direction) {
-        if (direction == Player.Facing.LEFT) {
+    public void setCurrentDirection(PlayerSprite.Facing direction) {
+        if (direction == PlayerSprite.Facing.LEFT) {
             currentWalking = leftWalking;
-        } else if (direction == Player.Facing.RIGHT) {
+        } else if (direction == PlayerSprite.Facing.RIGHT) {
             currentWalking = rightWalking;
-        } else if (direction == Player.Facing.UP) {
+        } else if (direction == PlayerSprite.Facing.UP) {
             currentWalking = upWalking;
-        } else if (direction == Player.Facing.DOWN) {
+        } else if (direction == PlayerSprite.Facing.DOWN) {
             currentWalking = downWalking;
         }
     }

@@ -10,13 +10,13 @@ import com.badlogic.gdx.maps.tiled.TiledMapTileLayer;
 import com.badlogic.gdx.maps.tiled.TmxMapLoader;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.utils.Array;
-import com.evansitzes.game.BattleScreen;
 import com.evansitzes.game.Event;
 import com.evansitzes.game.Level;
 import com.evansitzes.game.TwilightEternal;
 import com.evansitzes.game.entity.BattleEntityCreationEvent;
 import com.evansitzes.game.entity.Entity;
 import com.evansitzes.game.entity.enemy.Enemy;
+import com.evansitzes.game.screens.BattleScreen;
 
 /**
  * Created by evan on 9/10/16.
@@ -55,14 +55,10 @@ public class BattleLevelLoader {
                 level.events.add(enemyEvent);
 
             }
-//            else if (type.equals("player")) {
-//                final Npc npc = readPlayer(object, game);
-//                final Event portalEvent = readEntityEvent(npc, battleScreen, game, object);
-//                level.events.add(portalEvent);
-//            }
-//            else if(data.containsKey("events")) {
-//                readEvents(level, data, game, gameScreen);
-//            }
+            else if (type.equals("player")) {
+                final Event playerEvent = readEntityEvent(game.player, battleScreen, game, object);
+                level.events.add(playerEvent);
+            }
         }
 
         return level;

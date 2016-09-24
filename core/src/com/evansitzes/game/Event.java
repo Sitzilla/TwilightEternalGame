@@ -1,5 +1,8 @@
 package com.evansitzes.game;
 
+import com.evansitzes.game.screens.BattleScreen;
+import com.evansitzes.game.screens.GameScreen;
+
 /**
  * Created by evan on 6/9/16.
  */

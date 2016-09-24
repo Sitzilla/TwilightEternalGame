@@ -1,4 +1,4 @@
-package com.evansitzes.game;
+package com.evansitzes.game.screens;
 
 /**
  * Created by evan on 6/9/16.
@@ -12,6 +12,7 @@ import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.utils.TimeUtils;
+import com.evansitzes.game.TwilightEternal;
 import com.evansitzes.game.resources.Sounds;
 
 public class TitleScreen implements Screen {

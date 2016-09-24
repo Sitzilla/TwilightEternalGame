@@ -1,4 +1,4 @@
-package com.evansitzes.game;
+package com.evansitzes.game.screens;
 
 import com.badlogic.gdx.*;
 import com.badlogic.gdx.graphics.GL20;
@@ -9,9 +9,13 @@ import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.badlogic.gdx.utils.Array;
+import com.evansitzes.game.Configuration;
+import com.evansitzes.game.Level;
+import com.evansitzes.game.State;
+import com.evansitzes.game.TwilightEternal;
 import com.evansitzes.game.conversation.Conversation;
 import com.evansitzes.game.entity.Entity;
-import com.evansitzes.game.entity.Player;
+import com.evansitzes.game.entity.PlayerSprite;
 import com.evansitzes.game.entity.Portal;
 import com.evansitzes.game.entity.Wall;
 import com.evansitzes.game.entity.enemy.Enemy;
@@ -21,19 +25,19 @@ import com.evansitzes.game.resources.Sounds;
 
 import java.util.Iterator;
 
-import static com.evansitzes.game.entity.Player.Facing.*;
+import static com.evansitzes.game.entity.PlayerSprite.Facing.*;
 
 /**
  * Created by evan on 6/8/16.
  */
 public class GameScreen implements Screen, InputProcessor {
     private final Configuration configuration;
-    private final OrthographicCamera camera; // player Camera
+    private final OrthographicCamera camera; // playerSprite Camera
 
     private TiledMapRenderer tiledMapRenderer;
 
     private final TwilightEternal game;
-    private final Player player;
+    private final PlayerSprite playerSprite;
 
     private Level level;
     private boolean battleMode;
@@ -70,7 +74,7 @@ public class GameScreen implements Screen, InputProcessor {
 
         Gdx.input.setInputProcessor(stage);
 
-        player = new Player(game, this);
+        playerSprite = new PlayerSprite(game, this);
         this.battleMode = false;
         this.level = TmxLevelLoader.load(Vector2.Zero, game, this, "frozen-level");
         mapMaxX = level.mapWidth * level.tileWidth;
@@ -94,7 +98,7 @@ public class GameScreen implements Screen, InputProcessor {
             case RUN:
                 if (isPortal()) {
                     resetObjects();
-                    player.reversePosition();
+                    playerSprite.reversePosition();
                     this.level = TmxLevelLoader.load(Vector2.Zero, game, this, "town");
                     this.tiledMapRenderer = new OrthogonalTiledMapRenderer(level.map);
                 }
@@ -108,28 +112,28 @@ public class GameScreen implements Screen, InputProcessor {
                 game.batch.begin();
 
                 if (Gdx.input.isKeyPressed(Input.Keys.RIGHT)) {
-                    if (!areCollisions(Player.Facing.RIGHT)) {
-                        player.state = Player.State.WALKING;
-                        player.direction = Player.Facing.RIGHT;
+                    if (!areCollisions(PlayerSprite.Facing.RIGHT)) {
+                        playerSprite.state = PlayerSprite.State.WALKING;
+                        playerSprite.direction = PlayerSprite.Facing.RIGHT;
                     }
                 } else if (Gdx.input.isKeyPressed(Input.Keys.LEFT)) {
-                    if (!areCollisions(Player.Facing.LEFT)) {
-                        player.state = Player.State.WALKING;
-                        player.direction = Player.Facing.LEFT;
+                    if (!areCollisions(PlayerSprite.Facing.LEFT)) {
+                        playerSprite.state = PlayerSprite.State.WALKING;
+                        playerSprite.direction = PlayerSprite.Facing.LEFT;
                     }
                 } else if (Gdx.input.isKeyPressed(Input.Keys.UP)) {
-                    if (!areCollisions(Player.Facing.UP)) {
-                        player.state = Player.State.WALKING;
-                        player.direction = Player.Facing.UP;
+                    if (!areCollisions(PlayerSprite.Facing.UP)) {
+                        playerSprite.state = PlayerSprite.State.WALKING;
+                        playerSprite.direction = PlayerSprite.Facing.UP;
                     }
                 } else if (Gdx.input.isKeyPressed(Input.Keys.DOWN)) {
-                    if (!areCollisions(Player.Facing.DOWN)) {
-                        player.state = Player.State.WALKING;
-                        player.direction = Player.Facing.DOWN;
+                    if (!areCollisions(PlayerSprite.Facing.DOWN)) {
+                        playerSprite.state = PlayerSprite.State.WALKING;
+                        playerSprite.direction = PlayerSprite.Facing.DOWN;
                     }
                 }
 
-                player.handle(delta);
+                playerSprite.handle(delta);
 
                 for (final Enemy enemy : enemies) {
                     enemy.draw();
@@ -161,26 +165,26 @@ public class GameScreen implements Screen, InputProcessor {
     }
 
     private float calculateCameraPositionX() {
-        if (player.position.x - camera.viewportWidth / 2 < mapMinX) {
+        if (playerSprite.position.x - camera.viewportWidth / 2 < mapMinX) {
             return camera.viewportWidth / 2;
         }
 
-        if (player.position.x > (mapMaxX - (camera.viewportWidth / 2))) {
+        if (playerSprite.position.x > (mapMaxX - (camera.viewportWidth / 2))) {
             return mapMaxX - (camera.viewportWidth / 2);
         }
 
-        return player.position.x;
+        return playerSprite.position.x;
     }
 
     private float calculateCameraPositionY() {
-        if (player.position.y - camera.viewportHeight / 2 < mapMinY) {
+        if (playerSprite.position.y - camera.viewportHeight / 2 < mapMinY) {
             return camera.viewportHeight / 2;
         }
 
-        if (player.position.y > (mapMaxY - (camera.viewportHeight / 2))) {
+        if (playerSprite.position.y > (mapMaxY - (camera.viewportHeight / 2))) {
             return mapMaxY - (camera.viewportHeight / 2);
         }
-        return player.position.y;
+        return playerSprite.position.y;
     }
 
     private boolean isPortal() {
@@ -191,7 +195,7 @@ public class GameScreen implements Screen, InputProcessor {
         while(portalIterator.hasNext()) {
             final Portal portal = portalIterator.next();
 
-            if (portal.overlaps(player)) {
+            if (portal.overlaps(playerSprite)) {
                 return true;
             }
 
@@ -199,23 +203,23 @@ public class GameScreen implements Screen, InputProcessor {
         return false;
     }
 
-    private boolean areCollisions(final Player.Facing direction) {
+    private boolean areCollisions(final PlayerSprite.Facing direction) {
         final int movementSpeed = 5;
 
         // Check for edge of map
-        if (direction == LEFT && player.position.x < mapMinX + 1) {
+        if (direction == LEFT && playerSprite.position.x < mapMinX + 1) {
             return true;
         }
         // TODO figure out this collision
-        if (direction == RIGHT && player.position.x > mapMaxX - 30) {
+        if (direction == RIGHT && playerSprite.position.x > mapMaxX - 30) {
             return true;
         }
 
-        if (direction == DOWN && player.position.y < mapMinY + 1) {
+        if (direction == DOWN && playerSprite.position.y < mapMinY + 1) {
             return true;
         }
         // TODO figure out this collision
-        if (direction == UP && player.position.y > mapMaxY - 30) {
+        if (direction == UP && playerSprite.position.y > mapMaxY - 30) {
             return true;
         }
 
@@ -227,39 +231,39 @@ public class GameScreen implements Screen, InputProcessor {
             final Entity entity = obstructablesIterator.next();
 
             if (direction == RIGHT) {
-                player.rectangle.x += movementSpeed;
+                playerSprite.rectangle.x += movementSpeed;
             } else if (direction == LEFT) {
-                player.rectangle.x -= movementSpeed;
+                playerSprite.rectangle.x -= movementSpeed;
             }
             if (direction == UP) {
-                player.rectangle.y += movementSpeed;
+                playerSprite.rectangle.y += movementSpeed;
             } else if (direction == DOWN) {
-                player.rectangle.y -= movementSpeed;
+                playerSprite.rectangle.y -= movementSpeed;
             }
 
-            if (entity.overlaps(player)) {
+            if (entity.overlaps(playerSprite)) {
                 if (direction == RIGHT) {
-                    player.rectangle.x -= movementSpeed;
+                    playerSprite.rectangle.x -= movementSpeed;
                 } else if (direction == LEFT) {
-                    player.rectangle.x += movementSpeed;
+                    playerSprite.rectangle.x += movementSpeed;
                 }
                 if (direction == UP) {
-                    player.rectangle.y -= movementSpeed;
+                    playerSprite.rectangle.y -= movementSpeed;
                 } else if (direction == DOWN) {
-                    player.rectangle.y += movementSpeed;
+                    playerSprite.rectangle.y += movementSpeed;
                 }
                 return true;
             }
 
             if (direction == RIGHT) {
-                player.rectangle.x -= movementSpeed;
+                playerSprite.rectangle.x -= movementSpeed;
             } else if (direction == LEFT) {
-                player.rectangle.x += movementSpeed;
+                playerSprite.rectangle.x += movementSpeed;
             }
             if (direction == UP) {
-                player.rectangle.y -= movementSpeed;
+                playerSprite.rectangle.y -= movementSpeed;
             } else if (direction == DOWN) {
-                player.rectangle.y += movementSpeed;
+                playerSprite.rectangle.y += movementSpeed;
             }
 
         }
@@ -275,7 +279,7 @@ public class GameScreen implements Screen, InputProcessor {
         while(enemyIterator.hasNext()) {
             final Enemy enemy = enemyIterator.next();
 
-            if (enemy.overlaps(player) && !enemy.dead) {
+            if (enemy.overlaps(playerSprite) && !enemy.dead) {
                 enemy.kill();
                 game.setScreen(new BattleScreen(game, this));
             }
@@ -290,7 +294,7 @@ public class GameScreen implements Screen, InputProcessor {
         while(npcIterator.hasNext()) {
             final Npc npc = npcIterator.next();
 
-            if (npc.overlapsConversationZone(player)) {
+            if (npc.overlapsConversationZone(playerSprite)) {
                 System.out.println("Overlap npc: " + npc);
                 final Conversation conversation = new Conversation("", skin);
                 conversation.setText(npc.conversationText);
@@ -409,8 +413,8 @@ public class GameScreen implements Screen, InputProcessor {
         return game;
     }
 
-    public Player getPlayer() {
-        return player;
+    public PlayerSprite getPlayerSprite() {
+        return playerSprite;
     }
 
     public Level getLevel() {
