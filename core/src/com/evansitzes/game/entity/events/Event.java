@@ -1,4 +1,4 @@
-package com.evansitzes.game;
+package com.evansitzes.game.entity.events;
 
 import com.evansitzes.game.screens.BattleScreen;
 import com.evansitzes.game.screens.GameScreen;

@@ -1,6 +1,6 @@
-package com.evansitzes.game.entity;
+package com.evansitzes.game.entity.events;
 
-import com.evansitzes.game.Event;
+import com.evansitzes.game.entity.environment.Portal;
 import com.evansitzes.game.screens.GameScreen;
 
 /**

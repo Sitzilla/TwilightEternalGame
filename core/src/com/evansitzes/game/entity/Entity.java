@@ -3,6 +3,7 @@ package com.evansitzes.game.entity;
 import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.math.Vector3;
 import com.evansitzes.game.TwilightEternal;
+import com.evansitzes.game.entity.sprites.PlayerSprite;
 
 /**
  * Created by evan on 6/8/16.

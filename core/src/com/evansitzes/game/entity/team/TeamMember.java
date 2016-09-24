@@ -8,6 +8,10 @@ import com.evansitzes.game.entity.Entity;
  */
 public abstract class TeamMember extends Entity {
 
+    public int life;
+    public int score;
+    public int damage;
+    public boolean dead;
 
     public TeamMember(final TwilightEternal game) {
         super(game);

@@ -1,6 +1,7 @@
-package com.evansitzes.game.entity;
+package com.evansitzes.game.entity.environment;
 
 import com.evansitzes.game.TwilightEternal;
+import com.evansitzes.game.entity.Entity;
 
 /**
  * Created by evan on 6/10/16.

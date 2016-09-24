@@ -1,8 +1,9 @@
-package com.evansitzes.game.entity;
+package com.evansitzes.game.entity.sprites;
 
 import com.badlogic.gdx.graphics.g2d.Animation;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.evansitzes.game.TwilightEternal;
+import com.evansitzes.game.entity.Entity;
 import com.evansitzes.game.resources.Textures;
 
 /**

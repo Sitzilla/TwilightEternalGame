@@ -2,6 +2,7 @@ package com.evansitzes.game;
 
 import com.badlogic.gdx.maps.tiled.TiledMap;
 import com.badlogic.gdx.math.Vector2;
+import com.evansitzes.game.entity.events.Event;
 
 import java.util.ArrayList;
 import java.util.List;

@@ -15,9 +15,9 @@ import com.evansitzes.game.State;
 import com.evansitzes.game.TwilightEternal;
 import com.evansitzes.game.conversation.Conversation;
 import com.evansitzes.game.entity.Entity;
-import com.evansitzes.game.entity.PlayerSprite;
-import com.evansitzes.game.entity.Portal;
-import com.evansitzes.game.entity.Wall;
+import com.evansitzes.game.entity.sprites.PlayerSprite;
+import com.evansitzes.game.entity.environment.Portal;
+import com.evansitzes.game.entity.environment.Wall;
 import com.evansitzes.game.entity.enemy.Enemy;
 import com.evansitzes.game.entity.npc.Npc;
 import com.evansitzes.game.loaders.TmxLevelLoader;
@@ -25,7 +25,7 @@ import com.evansitzes.game.resources.Sounds;
 
 import java.util.Iterator;
 
-import static com.evansitzes.game.entity.PlayerSprite.Facing.*;
+import static com.evansitzes.game.entity.sprites.PlayerSprite.Facing.*;
 
 /**
  * Created by evan on 6/8/16.

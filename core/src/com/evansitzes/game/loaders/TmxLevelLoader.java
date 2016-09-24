@@ -10,7 +10,12 @@ import com.badlogic.gdx.maps.tiled.TiledMapTileLayer;
 import com.badlogic.gdx.maps.tiled.TmxMapLoader;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.utils.Array;
-import com.evansitzes.game.Event;
+import com.evansitzes.game.entity.environment.Portal;
+import com.evansitzes.game.entity.environment.Wall;
+import com.evansitzes.game.entity.events.Event;
+import com.evansitzes.game.entity.events.EntityCreationEvent;
+import com.evansitzes.game.entity.events.PortalCreationEvent;
+import com.evansitzes.game.entity.events.WallCreationEvent;
 import com.evansitzes.game.screens.GameScreen;
 import com.evansitzes.game.Level;
 import com.evansitzes.game.TwilightEternal;
@@ -89,7 +94,7 @@ public class TmxLevelLoader {
     }
 
     private static Portal readPortal(final RectangleMapObject object, final TwilightEternal game) {
-        final String clazz = "com.evansitzes.game.entity.Portal";
+        final String clazz = "com.evansitzes.game.entity.environment.Portal";
         try {
             final Portal portal = (Portal) Class.forName(clazz).getConstructor(TwilightEternal.class).newInstance(game);
             readRectanglePosition(portal, object);
@@ -105,7 +110,7 @@ public class TmxLevelLoader {
     }
 
     private static Wall readWall(final RectangleMapObject object, final TwilightEternal game) {
-        final String clazz = "com.evansitzes.game.entity.Wall";
+        final String clazz = "com.evansitzes.game.entity.environment.Wall";
         try {
             final Wall wall = (Wall) Class.forName(clazz).getConstructor(TwilightEternal.class).newInstance(game);
             readRectanglePosition(wall, object);
