@@ -1,6 +1,9 @@
 package com.evansitzes.game.screens;
 
-import com.badlogic.gdx.*;
+import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.InputMultiplexer;
+import com.badlogic.gdx.InputProcessor;
+import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.maps.tiled.TiledMapRenderer;
@@ -13,8 +16,10 @@ import com.evansitzes.game.Configuration;
 import com.evansitzes.game.Level;
 import com.evansitzes.game.TwilightEternal;
 import com.evansitzes.game.conversation.BattleInterface;
+import com.evansitzes.game.conversation.BattleStatus;
 import com.evansitzes.game.entity.enemy.Enemy;
 import com.evansitzes.game.loaders.BattleLevelLoader;
+import com.evansitzes.game.resources.BattleStatusEnum;
 
 /**
  * Created by evan on 9/10/16.
@@ -35,6 +40,8 @@ public class BattleScreen implements Screen, InputProcessor {
     private Skin skin;
     private Stage stage;
     private BattleInterface battleInterface;
+    private BattleStatus battleStatus;
+    private BattleStatusEnum status;
 
     public BattleScreen(final TwilightEternal game, final GameScreen gameScreen) {
         this.game = game;
@@ -50,7 +57,9 @@ public class BattleScreen implements Screen, InputProcessor {
 
         stage = new Stage();
         skin = new Skin(Gdx.files.internal("skins/golden-ui-skin.json"));
-        battleInterface = new BattleInterface();
+        battleStatus = new BattleStatus();
+        battleInterface = new BattleInterface(battleStatus, enemies, game.player);
+        stage.addActor(battleStatus);
         stage.addActor(battleInterface);
 
         Gdx.input.setInputProcessor(stage);
@@ -94,6 +103,17 @@ public class BattleScreen implements Screen, InputProcessor {
 
         stage.act(delta);
         stage.draw();
+
+        status = battleInterface.pollStatus();
+
+        if (status == BattleStatusEnum.FINISHED) {
+            try {
+                Thread.sleep(3000);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+            game.setScreen(gameScreen);
+        }
     }
 
     @Override
