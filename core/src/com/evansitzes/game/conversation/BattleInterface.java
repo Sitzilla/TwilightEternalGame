@@ -8,6 +8,9 @@ import com.badlogic.gdx.scenes.scene2d.ui.ScrollPane;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import com.badlogic.gdx.utils.Array;
+import com.evansitzes.game.entity.enemy.Enemy;
+import com.evansitzes.game.entity.team.Player;
+import com.evansitzes.game.resources.BattleStatusEnum;
 
 /**
  * Created by evan on 9/23/16.
@@ -15,8 +18,10 @@ import com.badlogic.gdx.utils.Array;
 public class BattleInterface extends Dialog {
 
     private List<String> choices;
+    private String currentChoice;
+    private BattleStatusEnum status;
 
-    public BattleInterface() {
+    public BattleInterface(final BattleStatus battleStatus, final Array<Enemy> enemies, final Player player) {
         super("", new Skin(Gdx.files.internal("skins/golden-ui-skin.json")));
 
         final Skin skin = new Skin(Gdx.files.internal("skins/golden-ui-skin.json"));
@@ -36,7 +41,7 @@ public class BattleInterface extends Dialog {
 //        stage.addActor(this);
 
 //            TextButton dbutton = new TextButton("Yes", skin);
-        button("yes", true);
+//        button("yes", true);
 
 //        key(Input.Keys.ENTER, true);
 //            invalidateHierarchy();
@@ -44,6 +49,8 @@ public class BattleInterface extends Dialog {
 //            layout();
 
         choices = new List<String>(new Skin(Gdx.files.internal("skins/golden-ui-skin.json")));
+        currentChoice = "Attack";
+        status = BattleStatusEnum.ONGOING;
 
         Array choiceItems = new Array();
         choiceItems.add("Attack");
@@ -66,9 +73,18 @@ public class BattleInterface extends Dialog {
         choices.addListener(new ClickListener() {
             @Override
             public void clicked(InputEvent event, float x, float y) {
-                final String choice = choices.getSelected();
+                currentChoice = choices.getSelected();
 
-                System.out.println("You are: " + choice);
+                battleStatus.text("You have: " + currentChoice);
+                System.out.println("You are: " + currentChoice);
+
+                if (currentChoice.equals("Attack")) {
+                    enemies.get(0).takeDamage(player.damage);
+                    if (enemies.get(0).dead == true) {
+                        battleStatus.text("You have killed the monster!");
+                        status = BattleStatusEnum.FINISHED;
+                    }
+                }
             }
         });
     }
@@ -88,11 +104,14 @@ public class BattleInterface extends Dialog {
     @Override
     public void result(final Object object) {
 //            setGameState(State.RUN);
-        System.out.println(object);
+        System.out.println(currentChoice);
     }
 
     public void setText(final String text) {
         this.text(text);
     }
 
+    public BattleStatusEnum pollStatus() {
+        return status;
+    }
 }

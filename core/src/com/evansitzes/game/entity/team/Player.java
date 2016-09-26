@@ -13,6 +13,10 @@ public class Player extends TeamMember {
 
     public Player(TwilightEternal game) {
         super(game);
+        life = 30;
+        score = 25;
+        dead = false;
+        damage = 25;
         battleSprite = new Sprite(Textures.People.BATTLE_PLAYER);
         battleSprite.setPosition(450, 140);
     }

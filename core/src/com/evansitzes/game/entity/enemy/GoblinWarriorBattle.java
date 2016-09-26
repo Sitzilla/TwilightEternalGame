@@ -20,6 +20,15 @@ public class GoblinWarriorBattle extends Enemy {
     }
 
     @Override
+    public void takeDamage(final int rawDamage) {
+        life -= rawDamage;
+
+        if (life < 0) {
+            kill();
+        }
+    }
+
+    @Override
     public void draw() {
 //        if (!dead) {
         sprite.setPosition(this.x, this.y);

@@ -1,14 +1,14 @@
-package com.evansitzes.game.entity;
+package com.evansitzes.game.entity.sprites;
 
-import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.evansitzes.game.Configuration;
 import com.evansitzes.game.TwilightEternal;
+import com.evansitzes.game.entity.Entity;
 import com.evansitzes.game.resources.Textures;
 import com.evansitzes.game.screens.GameScreen;
 
-import static com.evansitzes.game.entity.PlayerSprite.Facing.*;
-import static com.evansitzes.game.entity.PlayerSprite.State.IDLE;
-import static com.evansitzes.game.entity.PlayerSprite.State.WALKING;
+import static com.evansitzes.game.entity.sprites.PlayerSprite.Facing.*;
+import static com.evansitzes.game.entity.sprites.PlayerSprite.State.IDLE;
+import static com.evansitzes.game.entity.sprites.PlayerSprite.State.WALKING;
 
 /**
  * Created by evan on 6/8/16.
@@ -20,7 +20,6 @@ public class PlayerSprite extends Entity {
     private final GameScreen screen;
     public SimpleSprite currentSprite;
     public AnimatedSprite animatedSprite;
-    public Sprite battleSprite;
     Configuration configuration;
 
     public State state;
