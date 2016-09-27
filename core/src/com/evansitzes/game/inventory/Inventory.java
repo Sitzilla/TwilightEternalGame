@@ -17,21 +17,21 @@ public class Inventory {
         }
 
         // create some random items
-        for (Slot slot : slots) {
+        for (final Slot slot : slots) {
             slot.add(Item.values()[MathUtils.random(0, Item.values().length - 1)], 1);
         }
 
         // create a few random empty slots
         for (int i = 0; i < 3; i++) {
-            Slot randomSlot = slots.get(MathUtils.random(0, slots.size - 1));
+            final Slot randomSlot = slots.get(MathUtils.random(0, slots.size - 1));
             randomSlot.take(randomSlot.getAmount());
         }
     }
 
-    public int checkInventory(Item item) {
+    public int checkInventory(final Item item) {
         int amount = 0;
 
-        for (Slot slot : slots) {
+        for (final Slot slot : slots) {
             if (slot.getItem() == item) {
                 amount += slot.getAmount();
             }
@@ -40,15 +40,15 @@ public class Inventory {
         return amount;
     }
 
-    public boolean store(Item item, int amount) {
+    public boolean store(final Item item, final int amount) {
         // first check for a slot with the same item type
-        Slot itemSlot = firstSlotWithItem(item);
+        final Slot itemSlot = firstSlotWithItem(item);
         if (itemSlot != null) {
             itemSlot.add(item, amount);
             return true;
         } else {
             // now check for an available empty slot
-            Slot emptySlot = firstSlotWithItem(null);
+            final Slot emptySlot = firstSlotWithItem(null);
             if (emptySlot != null) {
                 emptySlot.add(item, amount);
                 return true;
@@ -63,8 +63,8 @@ public class Inventory {
         return slots;
     }
 
-    private Slot firstSlotWithItem(Item item) {
-        for (Slot slot : slots) {
+    private Slot firstSlotWithItem(final Item item) {
+        for (final Slot slot : slots) {
             if (slot.getItem() == item) {
                 return slot;
             }

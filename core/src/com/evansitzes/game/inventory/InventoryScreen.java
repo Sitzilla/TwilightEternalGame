@@ -1,7 +1,7 @@
 package com.evansitzes.game.inventory;
 
 import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.Input;
+import com.badlogic.gdx.Input.Keys;
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.scenes.scene2d.Stage;
@@ -20,7 +20,7 @@ public class InventoryScreen implements Screen {
     private TwilightEternal game;
     public static Stage stage;
 
-    public InventoryScreen(TwilightEternal game, GameScreen gameScreen) {
+    public InventoryScreen(final TwilightEternal game, final GameScreen gameScreen) {
         this.game = game;
         this.gameScreen = gameScreen;
     }
@@ -31,22 +31,22 @@ public class InventoryScreen implements Screen {
         stage = new Stage();
         Gdx.input.setInputProcessor(stage);
 
-        Skin skin = new Skin(Gdx.files.internal("skins/uiskin.json"));
+        final Skin skin = new Skin(Gdx.files.internal("skins/uiskin.json"));
 
-        DragAndDrop dragAndDrop = new DragAndDrop();
+        final DragAndDrop dragAndDrop = new DragAndDrop();
         inventoryActor = new InventoryActor(new Inventory(), dragAndDrop, skin);
         stage.addActor(inventoryActor);
         inventoryActor.setVisible(true);
     }
 
     @Override
-    public void render(float delta) {
+    public void render(final float delta) {
         // the screen will have a dark grey background colour
         Gdx.gl.glClearColor(0.2f, 0.2f, 0.2f, 0f);
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT | GL20.GL_DEPTH_BUFFER_BIT);
 
-        // show the inventory when any key is pressed
-        if (Gdx.input.isKeyPressed(Input.Keys.SPACE)) {
+        // exit the inventory when spacebar key is pressed
+        if (Gdx.input.isKeyPressed(Keys.SPACE)) {
             game.setScreen(gameScreen);
         }
 
@@ -56,7 +56,7 @@ public class InventoryScreen implements Screen {
     }
 
     @Override
-    public void resize(int width, int height) {
+    public void resize(final int width, final int height) {
         stage.getViewport().update(width, height, true);
     }
 

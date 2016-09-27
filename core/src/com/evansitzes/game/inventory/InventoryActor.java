@@ -12,7 +12,7 @@ public class InventoryActor extends Window {
 
     private Quaternion buttonTable;
 
-    public InventoryActor(Inventory inventory, DragAndDrop dragAndDrop, Skin skin) {
+    public InventoryActor(final Inventory inventory, final DragAndDrop dragAndDrop, final Skin skin) {
         super("Inventory", skin);
 
         // add an "X" button to the top right of the window, and make it hide the inventory
@@ -27,11 +27,10 @@ public class InventoryActor extends Window {
 
         // run through all slots and create SlotActors for each
         int i = 0;
-        for (Slot slot : inventory.getSlots()) {
-            SlotActor slotActor = new SlotActor(skin, slot);
+        for (final Slot slot : inventory.getSlots()) {
+            final SlotActor slotActor = new SlotActor(skin, slot);
             add(slotActor);
 
-            // this can be ignored for now and will be explained in part III
             dragAndDrop.addSource(new SlotSource(slotActor));
             dragAndDrop.addTarget(new SlotTarget(slotActor));
 
@@ -48,7 +47,4 @@ public class InventoryActor extends Window {
         setVisible(false);
     }
 
-    public Quaternion getButtonTable() {
-        return buttonTable;
-    }
 }

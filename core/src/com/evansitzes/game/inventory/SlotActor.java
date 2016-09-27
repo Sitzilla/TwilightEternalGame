@@ -24,7 +24,6 @@ public class SlotActor extends ImageButton implements SlotListener {
         // this actor has to be notified when the slot itself changes
         slot.addListener(this);
 
-        // ignore this for now, it will be explained in part IV
         SlotTooltip tooltip = new SlotTooltip(slot, skin);
         InventoryScreen.stage.addActor(tooltip);
         addListener(new TooltipListener(tooltip, true));
@@ -35,7 +34,6 @@ public class SlotActor extends ImageButton implements SlotListener {
      */
     private static ImageButtonStyle createStyle(Skin skin, Slot slot) {
         TextureAtlas icons = new TextureAtlas(Gdx.files.internal("icons/icons.atlas"));
-//        TextureAtlas icons = TwilightEternal.assets.get("icons/icons.atlas", TextureAtlas.class);
         TextureRegion image;
         if (slot.getItem() != null) {
             image = icons.findRegion(slot.getItem().getTextureRegion());
