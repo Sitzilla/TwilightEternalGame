@@ -20,6 +20,7 @@ import com.evansitzes.game.entity.environment.Portal;
 import com.evansitzes.game.entity.environment.Wall;
 import com.evansitzes.game.entity.enemy.Enemy;
 import com.evansitzes.game.entity.npc.Npc;
+import com.evansitzes.game.inventory.InventoryScreen;
 import com.evansitzes.game.loaders.TmxLevelLoader;
 import com.evansitzes.game.resources.Sounds;
 
@@ -37,6 +38,7 @@ public class GameScreen implements Screen, InputProcessor {
     private TiledMapRenderer tiledMapRenderer;
 
     private final TwilightEternal game;
+    private final InventoryScreen inventoryScreen;
     private final PlayerSprite playerSprite;
 
     private Level level;
@@ -60,6 +62,7 @@ public class GameScreen implements Screen, InputProcessor {
 
     public GameScreen(final TwilightEternal game) {
         this.game = game;
+        this.inventoryScreen = new InventoryScreen(game, this);
         configuration = new Configuration();
         final float w = (float) Gdx.graphics.getWidth();
         final float h = (float) Gdx.graphics.getHeight();
@@ -319,7 +322,14 @@ public class GameScreen implements Screen, InputProcessor {
 
     @Override
     public void show() {
-            Sounds.MAIN_THEME.play();
+        Sounds.MAIN_THEME.play();
+
+        // TODO use game state to control this
+        System.out.println("Finishing screen!!");
+        final InputMultiplexer multiplexer = new InputMultiplexer();
+        multiplexer.addProcessor(stage);
+        multiplexer.addProcessor(this);
+        Gdx.input.setInputProcessor(multiplexer);
     }
 
     @Override
@@ -352,8 +362,16 @@ public class GameScreen implements Screen, InputProcessor {
     // Key Strokes
     @Override
     public boolean keyDown(final int keycode) {
+        System.out.println(keycode);
         if (keycode == Input.Keys.SPACE) {
             handleNpc();
+        }
+
+        if (keycode == Input.Keys.I) {
+            System.out.println("Showing screen~");
+            game.setScreen(inventoryScreen);
+
+
         }
         return false;
     }

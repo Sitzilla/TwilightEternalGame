@@ -1,6 +1,7 @@
 package com.evansitzes.game;
 
 import com.badlogic.gdx.Game;
+import com.badlogic.gdx.assets.AssetManager;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.evansitzes.game.entity.team.Player;
@@ -14,6 +15,8 @@ public class TwilightEternal extends Game {
     public SpriteBatch batch;
     public BitmapFont font;
     public Player player;
+
+    public static final AssetManager assets = new AssetManager();
 
     public TwilightEternal(final Configuration config) {
         this.config = config;
