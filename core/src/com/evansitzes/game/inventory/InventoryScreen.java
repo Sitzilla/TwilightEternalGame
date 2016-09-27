@@ -61,7 +61,7 @@ public class InventoryScreen implements Screen {
     public void dispose() {
         stage.dispose();
     }
-    
+
     @Override
     public void pause() {
 
