@@ -1,13 +1,15 @@
 package com.evansitzes.game.inventory;
 
+import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.ui.Image;
-import com.badlogic.gdx.scenes.scene2d.utils.DragAndDrop.Target;
 import com.badlogic.gdx.scenes.scene2d.utils.DragAndDrop.Payload;
 import com.badlogic.gdx.scenes.scene2d.utils.DragAndDrop.Source;
+import com.badlogic.gdx.scenes.scene2d.utils.DragAndDrop.Target;
+
 /**
  * Created by evan on 9/27/16.
  */
@@ -31,7 +33,7 @@ public class SlotSource extends Source {
         sourceSlot.take(sourceSlot.getAmount());
         payload.setObject(payloadSlot);
 
-        TextureAtlas icons = LibgdxUtils.assets.get("icons/icons.atlas", TextureAtlas.class);
+        TextureAtlas icons = new TextureAtlas(Gdx.files.internal("icons/icons.atlas"));
         TextureRegion icon = icons.findRegion(payloadSlot.getItem().getTextureRegion());
 
         Actor dragActor = new Image(icon);

@@ -1,5 +1,6 @@
 package com.evansitzes.game.inventory;
 
+import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.scenes.scene2d.ui.ImageButton;
@@ -33,7 +34,8 @@ public class SlotActor extends ImageButton implements SlotListener {
      * This will create a new style for our image button, with the correct image for the item type.
      */
     private static ImageButtonStyle createStyle(Skin skin, Slot slot) {
-        TextureAtlas icons = LibgdxUtils.assets.get("icons/icons.atlas", TextureAtlas.class);
+        TextureAtlas icons = new TextureAtlas(Gdx.files.internal("icons/icons.atlas"));
+//        TextureAtlas icons = TwilightEternal.assets.get("icons/icons.atlas", TextureAtlas.class);
         TextureRegion image;
         if (slot.getItem() != null) {
             image = icons.findRegion(slot.getItem().getTextureRegion());

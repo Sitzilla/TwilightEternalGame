@@ -1,7 +1,7 @@
 package com.evansitzes.game.inventory;
 
+import com.badlogic.gdx.math.Quaternion;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
-import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
 import com.badlogic.gdx.scenes.scene2d.ui.Window;
 import com.badlogic.gdx.scenes.scene2d.utils.DragAndDrop;
 
@@ -10,13 +10,15 @@ import com.badlogic.gdx.scenes.scene2d.utils.DragAndDrop;
  */
 public class InventoryActor extends Window {
 
+    private Quaternion buttonTable;
+
     public InventoryActor(Inventory inventory, DragAndDrop dragAndDrop, Skin skin) {
         super("Inventory", skin);
 
         // add an "X" button to the top right of the window, and make it hide the inventory
-        TextButton closeButton = new TextButton("X", skin);
-        closeButton.addListener(new HidingClickListener(this));
-        getButtonTable().add(closeButton).height(getPadTop());
+//        TextButton closeButton = new TextButton("X", skin);
+//        closeButton.addListener(new HidingClickListener(this));
+//        getButtonTable().add(closeButton).height(getPadTop());
 
         // basic layout
         setPosition(400, 100);
@@ -44,5 +46,9 @@ public class InventoryActor extends Window {
 
         // it is hidden by default
         setVisible(false);
+    }
+
+    public Quaternion getButtonTable() {
+        return buttonTable;
     }
 }

@@ -7,6 +7,8 @@ import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.badlogic.gdx.scenes.scene2d.utils.DragAndDrop;
+import com.evansitzes.game.TwilightEternal;
+import com.evansitzes.game.screens.GameScreen;
 
 /**
  * Created by evan on 9/27/16.
@@ -14,8 +16,14 @@ import com.badlogic.gdx.scenes.scene2d.utils.DragAndDrop;
 public class InventoryScreen implements Screen {
 
     private InventoryActor inventoryActor;
-
+    private GameScreen gameScreen;
+    private TwilightEternal game;
     public static Stage stage;
+
+    public InventoryScreen(TwilightEternal game, GameScreen gameScreen) {
+        this.game = game;
+        this.gameScreen = gameScreen;
+    }
 
     @Override
     public void show() {
@@ -28,6 +36,7 @@ public class InventoryScreen implements Screen {
         DragAndDrop dragAndDrop = new DragAndDrop();
         inventoryActor = new InventoryActor(new Inventory(), dragAndDrop, skin);
         stage.addActor(inventoryActor);
+        inventoryActor.setVisible(true);
     }
 
     @Override
@@ -37,8 +46,8 @@ public class InventoryScreen implements Screen {
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT | GL20.GL_DEPTH_BUFFER_BIT);
 
         // show the inventory when any key is pressed
-        if (Gdx.input.isKeyPressed(Input.Keys.ANY_KEY)) {
-            inventoryActor.setVisible(true);
+        if (Gdx.input.isKeyPressed(Input.Keys.SPACE)) {
+            game.setScreen(gameScreen);
         }
 
         // handle all inputs and draw the whole UI
