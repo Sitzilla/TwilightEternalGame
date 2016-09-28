@@ -21,7 +21,7 @@ public class InventoryActor extends Window {
 //        getButtonTable().add(closeButton).height(getPadTop());
 
         // basic layout
-        setPosition(400, 100);
+        setPosition(100, 100);
         defaults().space(8);
         row().fill().expandX();
 

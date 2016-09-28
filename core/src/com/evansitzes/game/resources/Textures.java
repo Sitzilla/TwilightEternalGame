@@ -27,6 +27,7 @@ public class Textures {
     public static class People {
         public static final TextureRegion PLAYER = loadSimplePlayer();
         public static final TextureRegion BATTLE_PLAYER = loadBattlePlayer();
+        public static final TextureRegion INVENTORY_PLAYER = loadInventoryPlayer();
 
         public static final TextureRegion[] WALKING_RIGHT = loadWalkingRight();
         public static final TextureRegion[] WALKING_LEFT = loadWalkingLeft();
@@ -65,6 +66,9 @@ public class Textures {
         private static TextureRegion loadBattlePlayer() {
             return loadBattleSprite()[0][0];
         }
+        private static TextureRegion loadInventoryPlayer() {
+            return loadInventorySprite()[0][0];
+        }
 
         private static TextureRegion[][] loadSprite() {
             final int frameColumns = 12;
@@ -78,6 +82,13 @@ public class Textures {
             final int frameRows = 1;
 
             return splitTextureRegion(frameColumns, frameRows, new Texture(Gdx.files.internal("enemy/main_character.png")));
+        }
+
+        private static TextureRegion[][] loadInventorySprite() {
+            final int frameColumns = 1;
+            final int frameRows = 1;
+
+            return splitTextureRegion(frameColumns, frameRows, new Texture(Gdx.files.internal("sprites/inventory_player.png")));
         }
     }
 

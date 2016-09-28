@@ -4,10 +4,12 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input.Keys;
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.GL20;
+import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.badlogic.gdx.scenes.scene2d.utils.DragAndDrop;
 import com.evansitzes.game.TwilightEternal;
+import com.evansitzes.game.entity.sprites.InventorySprite;
 import com.evansitzes.game.screens.GameScreen;
 
 /**
@@ -19,10 +21,19 @@ public class InventoryScreen implements Screen {
     private GameScreen gameScreen;
     private TwilightEternal game;
     public static Stage stage;
+    public InventorySprite inventorySprite;
+    private final OrthographicCamera camera;
+
 
     public InventoryScreen(final TwilightEternal game, final GameScreen gameScreen) {
         this.game = game;
         this.gameScreen = gameScreen;
+        this.inventorySprite = new InventorySprite(game);
+
+        camera = new OrthographicCamera();
+        camera.setToOrtho(false, 600, 600); // 1.5 of w and h
+        camera.position.set(320, 240, 0);
+        camera.update();
     }
 
     @Override
@@ -49,6 +60,12 @@ public class InventoryScreen implements Screen {
         if (Gdx.input.isKeyPressed(Keys.SPACE)) {
             game.setScreen(gameScreen);
         }
+
+        game.batch.setProjectionMatrix(camera.combined);
+
+        game.batch.begin();
+        inventorySprite.draw();
+        game.batch.end();
 
         // handle all inputs and draw the whole UI
         stage.act(delta);

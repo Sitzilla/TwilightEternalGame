@@ -146,7 +146,7 @@ public class GameScreen implements Screen, InputProcessor {
                     npc.draw();
                 }
 
-                    game.batch.end();
+                game.batch.end();
                 handleEnemies(delta);
                 break;
 
