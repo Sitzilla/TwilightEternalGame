@@ -12,6 +12,7 @@ import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.badlogic.gdx.utils.Array;
+import com.badlogic.gdx.utils.Timer;
 import com.evansitzes.game.Configuration;
 import com.evansitzes.game.Level;
 import com.evansitzes.game.TwilightEternal;
@@ -19,7 +20,7 @@ import com.evansitzes.game.conversation.BattleInterface;
 import com.evansitzes.game.conversation.BattleStatus;
 import com.evansitzes.game.entity.enemy.Enemy;
 import com.evansitzes.game.loaders.BattleLevelLoader;
-import com.evansitzes.game.resources.BattleStatusEnum;
+import com.evansitzes.game.resources.BattleChoiceEnum;
 
 /**
  * Created by evan on 9/10/16.
@@ -32,6 +33,9 @@ public class BattleScreen implements Screen, InputProcessor {
     private float gameTime = 0;
     private final Configuration configuration;
     private Level level;
+    private float delay;
+    private boolean playersTurn;
+    private boolean endBattle;
 
     private TiledMapRenderer tiledMapRenderer;
 
@@ -41,7 +45,7 @@ public class BattleScreen implements Screen, InputProcessor {
     private Stage stage;
     private BattleInterface battleInterface;
     private BattleStatus battleStatus;
-    private BattleStatusEnum status;
+    private BattleChoiceEnum currentChoice;
 
     public BattleScreen(final TwilightEternal game, final GameScreen gameScreen) {
         this.game = game;
@@ -49,6 +53,9 @@ public class BattleScreen implements Screen, InputProcessor {
         configuration = new Configuration();
 
         this.level = BattleLevelLoader.load(Vector2.Zero, game, this, "forest-battle-map");
+        playersTurn = true;
+        delay = 2;
+        endBattle = false;
 
         camera = new OrthographicCamera();
         camera.setToOrtho(false, level.mapWidth * level.tileWidth, level.mapHeight * level.tileHeight); // 1.5 of w and h
@@ -58,7 +65,7 @@ public class BattleScreen implements Screen, InputProcessor {
         stage = new Stage();
         skin = new Skin(Gdx.files.internal("skins/golden-ui-skin.json"));
         battleStatus = new BattleStatus();
-        battleInterface = new BattleInterface(battleStatus, enemies, game.player);
+        battleInterface = new BattleInterface(enemies, game.player);
         stage.addActor(battleStatus);
         stage.addActor(battleInterface);
 
@@ -104,16 +111,68 @@ public class BattleScreen implements Screen, InputProcessor {
         stage.act(delta);
         stage.draw();
 
-        status = battleInterface.pollStatus();
+        currentChoice = battleInterface.pollChoice();
 
-        if (status == BattleStatusEnum.FINISHED) {
-            try {
-                Thread.sleep(3000);
-            } catch (InterruptedException e) {
-                e.printStackTrace();
-            }
-            game.setScreen(gameScreen);
+        if (playersTurn) {
+            doPlayerAction();
+        } else {
+            doEnemyAction();
         }
+
+    }
+
+    private void doEnemyAction() {
+        
+    }
+
+    private void doPlayerAction() {
+        switch (currentChoice) {
+            case ATTACK:
+                battleStatus.text("You have attacked! \n Enemy takes " + game.player.damage + " damage.\n ");
+                // TODO allow selection of enemy
+                delay = 2;
+                enemies.get(0).takeDamage(game.player.damage);
+
+                if (enemies.get(0).dead) {
+                    battleStatus.text("You have killed the enemy!");
+                }
+
+                Timer.schedule(new Timer.Task() {
+                    @Override
+                    public void run() {
+                        if (enemies.get(0).dead) {
+                            endBattle();
+                        }
+                    }
+                }, delay);
+
+                battleInterface.resetChoice();
+                break;
+            case PEE_PANTS:
+                battleStatus.text("Haha you have have peed your pants!\n");
+                battleInterface.resetChoice();
+                break;
+            case RUN:
+                battleStatus.text("You have run away!\n");
+                battleInterface.resetChoice();
+                delay = 2;
+
+                Timer.schedule(new Timer.Task() {
+
+                    @Override
+                    public void run() {
+                        endBattle();
+                    }
+                }, delay);
+
+                break;
+        }
+    }
+
+    private void endBattle() {
+
+
+        game.setScreen(gameScreen);
     }
 
     @Override
