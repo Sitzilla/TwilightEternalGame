@@ -10,7 +10,7 @@ import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import com.badlogic.gdx.utils.Array;
 import com.evansitzes.game.entity.enemy.Enemy;
 import com.evansitzes.game.entity.team.Player;
-import com.evansitzes.game.resources.BattleStatusEnum;
+import com.evansitzes.game.resources.BattleChoiceEnum;
 
 /**
  * Created by evan on 9/23/16.
@@ -18,10 +18,10 @@ import com.evansitzes.game.resources.BattleStatusEnum;
 public class BattleInterface extends Dialog {
 
     private List<String> choices;
-    private String currentChoice;
-    private BattleStatusEnum status;
+    private BattleChoiceEnum currentChoice;
+//    private BattleStatusEnum status;
 
-    public BattleInterface(final BattleStatus battleStatus, final Array<Enemy> enemies, final Player player) {
+    public BattleInterface(final Array<Enemy> enemies, final Player player) {
         super("", new Skin(Gdx.files.internal("skins/golden-ui-skin.json")));
 
         final Skin skin = new Skin(Gdx.files.internal("skins/golden-ui-skin.json"));
@@ -49,16 +49,16 @@ public class BattleInterface extends Dialog {
 //            layout();
 
         choices = new List<String>(new Skin(Gdx.files.internal("skins/golden-ui-skin.json")));
-        currentChoice = "Attack";
-        status = BattleStatusEnum.ONGOING;
+        currentChoice = BattleChoiceEnum.WAITING;
+//        status = BattleStatusEnum.ONGOING;
 
-        Array choiceItems = new Array();
+        final Array choiceItems = new Array();
         choiceItems.add("Attack");
         choiceItems.add("Run");
         choiceItems.add("Pee Pants");
         choices.setItems(choiceItems);
 
-        ScrollPane scrollPane = new ScrollPane(choices);
+        final ScrollPane scrollPane = new ScrollPane(choices);
         scrollPane.setOverscroll(false, false);
         scrollPane.setFadeScrollBars(false);
         scrollPane.setScrollingDisabled(true, false);
@@ -72,19 +72,28 @@ public class BattleInterface extends Dialog {
 
         choices.addListener(new ClickListener() {
             @Override
-            public void clicked(InputEvent event, float x, float y) {
-                currentChoice = choices.getSelected();
+            public void clicked(final InputEvent event, final float x, final float y) {
+                final String choice = choices.getSelected();
 
-                battleStatus.text("You have: " + currentChoice);
+                if (choice.equals("Attack")) {
+                    currentChoice = BattleChoiceEnum.ATTACK;
+                } else if (choice.equals("Run")) {
+                    currentChoice = BattleChoiceEnum.RUN;
+
+                } else if (choice.equals("Pee Pants")) {
+                    currentChoice = BattleChoiceEnum.PEE_PANTS;
+                }
+
+//                battleStatus.text("You have: " + currentChoice);
                 System.out.println("You are: " + currentChoice);
 
-                if (currentChoice.equals("Attack")) {
-                    enemies.get(0).takeDamage(player.damage);
-                    if (enemies.get(0).dead == true) {
-                        battleStatus.text("You have killed the monster!");
-                        status = BattleStatusEnum.FINISHED;
-                    }
-                }
+//                if (currentChoice.equals("Attack")) {
+//                    enemies.get(0).takeDamage(player.damage);
+//                    if (enemies.get(0).dead == true) {
+////                        battleStatus.text("You have killed the monster!");
+//                        status = BattleStatusEnum.FINISHED;
+//                    }
+//                }
             }
         });
     }
@@ -111,7 +120,15 @@ public class BattleInterface extends Dialog {
         this.text(text);
     }
 
-    public BattleStatusEnum pollStatus() {
-        return status;
+//    public BattleStatusEnum pollStatus() {
+//        return status;
+//    }
+
+    public BattleChoiceEnum pollChoice() {
+        return currentChoice;
+    }
+
+    public void resetChoice() {
+        currentChoice = BattleChoiceEnum.WAITING;
     }
 }

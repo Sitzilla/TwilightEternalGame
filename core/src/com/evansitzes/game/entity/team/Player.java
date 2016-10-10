@@ -22,6 +22,15 @@ public class Player extends TeamMember {
     }
 
     @Override
+    public void takeDamage(final int rawDamage) {
+        life -= rawDamage;
+
+        if (life < 0) {
+            kill();
+        }
+    }
+
+    @Override
     public void draw() {
         battleSprite.draw(game.batch);
     }
@@ -29,5 +38,12 @@ public class Player extends TeamMember {
     @Override
     public void handle(float delta) {
 
+    }
+
+    @Override
+    public void kill() {
+        life = 0;
+        dead = true;
+        battleSprite.setRegion(Textures.Enemies.EXPLOSION);
     }
 }
