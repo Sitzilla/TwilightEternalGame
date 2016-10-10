@@ -18,6 +18,8 @@ public abstract class TeamMember extends Entity {
         name = "teammember";
     }
 
+    public abstract void takeDamage(final int rawDamage);
     public abstract void draw();
+    public abstract void kill();
 
 }

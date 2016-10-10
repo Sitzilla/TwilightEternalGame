@@ -122,7 +122,19 @@ public class BattleScreen implements Screen, InputProcessor {
     }
 
     private void doEnemyAction() {
+        delay = 3;
+
+        if (enemies.get(0).dead) {
+            return;
+        }
         
+        Timer.schedule(new Timer.Task() {
+            @Override
+            public void run() {
+                battleStatus.text("Enemy has attacked! \n You take " + enemies.get(0).hitDamage + " damage.\n ");
+                game.player.takeDamage(enemies.get(0).hitDamage);
+            }
+        }, delay);
     }
 
     private void doPlayerAction() {

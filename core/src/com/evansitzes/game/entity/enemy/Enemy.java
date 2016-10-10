@@ -20,6 +20,7 @@ public abstract class Enemy extends Entity {
     public int hitDamage = 5;
     public long lastFired;
     public boolean dead = false;
+    public int damage;
     public String name;
 
     public Enemy(final TwilightEternal game) {
