@@ -104,10 +104,6 @@ public class BattleScreen implements Screen, InputProcessor {
 
         gameTime += delta;
 
-        if (gameTime > 300) {
-            game.setScreen(gameScreen);
-        }
-
         stage.act(delta);
         stage.draw();
 
@@ -135,6 +131,8 @@ public class BattleScreen implements Screen, InputProcessor {
                 game.player.takeDamage(enemies.get(0).hitDamage);
             }
         }, delay);
+
+        playersTurn = true;
     }
 
     private void doPlayerAction() {
@@ -159,10 +157,12 @@ public class BattleScreen implements Screen, InputProcessor {
                 }, delay);
 
                 battleInterface.resetChoice();
+                playersTurn = false;
                 break;
             case PEE_PANTS:
                 battleStatus.text("Haha you have have peed your pants!\n");
                 battleInterface.resetChoice();
+                playersTurn = false;
                 break;
             case RUN:
                 battleStatus.text("You have run away!\n");
@@ -176,7 +176,7 @@ public class BattleScreen implements Screen, InputProcessor {
                         endBattle();
                     }
                 }, delay);
-
+                playersTurn = false;
                 break;
         }
     }

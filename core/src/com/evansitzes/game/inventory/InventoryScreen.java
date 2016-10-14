@@ -17,7 +17,11 @@ import com.evansitzes.game.screens.GameScreen;
  */
 public class InventoryScreen implements Screen {
 
+    private static final int SIZE_OF_INVENTORY = 25;
+    private static final int SIZE_OF_EQUIPMENT = 5;
+
     private InventoryActor inventoryActor;
+    private EquipmentActor equipmentActor;
     private GameScreen gameScreen;
     private TwilightEternal game;
     public static Stage stage;
@@ -45,9 +49,12 @@ public class InventoryScreen implements Screen {
         final Skin skin = new Skin(Gdx.files.internal("skins/uiskin.json"));
 
         final DragAndDrop dragAndDrop = new DragAndDrop();
-        inventoryActor = new InventoryActor(new Inventory(), dragAndDrop, skin);
+        inventoryActor = new InventoryActor(new Inventory(SIZE_OF_INVENTORY), dragAndDrop, skin);
+        equipmentActor = new EquipmentActor(new Inventory(SIZE_OF_EQUIPMENT), dragAndDrop, skin);
         stage.addActor(inventoryActor);
+        stage.addActor(equipmentActor);
         inventoryActor.setVisible(true);
+        equipmentActor.setVisible(true);
     }
 
     @Override

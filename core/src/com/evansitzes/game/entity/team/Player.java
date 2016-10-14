@@ -13,7 +13,7 @@ public class Player extends TeamMember {
 
     public Player(TwilightEternal game) {
         super(game);
-        life = 30;
+        life = 10;
         score = 25;
         dead = false;
         damage = 25;

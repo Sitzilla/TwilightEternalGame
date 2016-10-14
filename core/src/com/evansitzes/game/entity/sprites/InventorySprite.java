@@ -22,11 +22,21 @@ public class InventorySprite extends TeamMember {
     }
 
     @Override
+    public void takeDamage(int rawDamage) {
+        
+    }
+
+    @Override
     public void handle(float delta) {
     }
 
     @Override
     public void draw() {
         sprite.draw(game.batch);
+    }
+
+    @Override
+    public void kill() {
+
     }
 }
