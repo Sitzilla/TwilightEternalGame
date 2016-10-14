@@ -5,6 +5,7 @@ import com.badlogic.gdx.Input.Keys;
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.OrthographicCamera;
+import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.NinePatch;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.scenes.scene2d.Stage;
@@ -36,6 +37,7 @@ public class InventoryScreen implements Screen {
     private int totalBarWidth;
     private TextureRegion gradient;
     private TextureRegion containerRegion;
+    private BitmapFont font;
 
     public InventoryScreen(final TwilightEternal game, final GameScreen gameScreen) {
         this.game = game;
@@ -48,6 +50,8 @@ public class InventoryScreen implements Screen {
         health = new NinePatch(gradient, 0, 0, 0, 0);
         container = new NinePatch(containerRegion, 5, 5, 2, 2);
         totalBarWidth = 100;
+
+        font = new BitmapFont();
 
         camera = new OrthographicCamera();
         camera.setToOrtho(false, 600, 600); // 1.5 of w and h
@@ -89,13 +93,12 @@ public class InventoryScreen implements Screen {
 
         game.batch.begin();
         inventorySprite.draw();
-        health.draw(game.batch, 400, 200, width, 10);
 
-
-        //Offset it by the dynamic bar, let's say the gradient is 4 high.
+        font.draw(game.batch, "Current life:", 400, 230);
         container.draw(game.batch, 395, 195, totalBarWidth + 10, 20);
         health.draw(game.batch, 400, 200, width, 10);
 
+        font.draw(game.batch, "Press spacebar to exit", 250, 0);
         game.batch.end();
 
         // handle all inputs and draw the whole UI

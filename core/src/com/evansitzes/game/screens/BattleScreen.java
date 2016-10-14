@@ -176,7 +176,6 @@ public class BattleScreen implements Screen, InputProcessor {
                         endBattle();
                     }
                 }, delay);
-                playersTurn = false;
                 break;
         }
     }
