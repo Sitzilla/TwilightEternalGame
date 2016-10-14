@@ -13,7 +13,8 @@ public class Player extends TeamMember {
 
     public Player(TwilightEternal game) {
         super(game);
-        life = 10;
+        maxHealth = 100;
+        currentHealth = 80;
         score = 25;
         dead = false;
         damage = 25;
@@ -23,9 +24,9 @@ public class Player extends TeamMember {
 
     @Override
     public void takeDamage(final int rawDamage) {
-        life -= rawDamage;
+        currentHealth -= rawDamage;
 
-        if (life < 0) {
+        if (currentHealth <= 0) {
             kill();
         }
     }
@@ -42,7 +43,7 @@ public class Player extends TeamMember {
 
     @Override
     public void kill() {
-        life = 0;
+        currentHealth = 0;
         dead = true;
         battleSprite.setRegion(Textures.Enemies.EXPLOSION);
     }
