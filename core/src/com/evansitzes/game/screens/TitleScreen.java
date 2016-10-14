@@ -12,6 +12,7 @@ import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.utils.TimeUtils;
+import com.evansitzes.game.GameflowController;
 import com.evansitzes.game.TwilightEternal;
 import com.evansitzes.game.resources.Sounds;
 import com.evansitzes.game.resources.Textures;
@@ -25,9 +26,11 @@ public class TitleScreen implements Screen {
     private long startTime = 0;
     private boolean buttonPressed;
     private BitmapFont font;
+    private GameflowController gameflowController;
 
-    public TitleScreen(final TwilightEternal game) {
+    public TitleScreen(final TwilightEternal game, final GameflowController gameflowController) {
         this.game = game;
+        this.gameflowController = gameflowController;
         openingCamera = new OrthographicCamera();
         openingCamera.setToOrtho(false, (float) (game.config.width * 0.75), (float) (game.config.height * 0.75));
         startTime = TimeUtils.millis();
@@ -67,7 +70,7 @@ public class TitleScreen implements Screen {
 
             if (TimeUtils.timeSinceMillis(startTime) > 500) {
                 if (Gdx.input.isKeyPressed(Input.Keys.ANY_KEY)) {
-                    game.setScreen(new GameScreen(game));
+                    gameflowController.setGameScreen();
                     dispose();
                     buttonPressed = true;
                 }
@@ -95,7 +98,7 @@ public class TitleScreen implements Screen {
 
             if (openingCamera.position.y < -600) {
                 dispose();
-                game.setScreen(new GameScreen(game));
+                gameflowController.setGameScreen();
 
             }
         }

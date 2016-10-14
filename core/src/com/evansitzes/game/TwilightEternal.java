@@ -5,7 +5,6 @@ import com.badlogic.gdx.assets.AssetManager;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.evansitzes.game.entity.team.Player;
-import com.evansitzes.game.screens.TitleScreen;
 
 /**
  * Created by evan on 6/8/16.
@@ -15,6 +14,7 @@ public class TwilightEternal extends Game {
     public SpriteBatch batch;
     public BitmapFont font;
     public Player player;
+    private GameflowController gameflowController;
 
     public static final AssetManager assets = new AssetManager();
 
@@ -28,8 +28,10 @@ public class TwilightEternal extends Game {
         player = new Player(this);
         //Use LibGDX's default Arial font.
         font = new BitmapFont();
-//        this.setScreen(new GameScreen(this));
-        this.setScreen(new TitleScreen(this));
+
+        gameflowController = new GameflowController(this);
+        gameflowController.setTitleScreen();
+//        this.setScreen(new TitleScreen(this));
     }
 
     @Override
