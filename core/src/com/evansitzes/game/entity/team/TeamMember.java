@@ -8,7 +8,8 @@ import com.evansitzes.game.entity.Entity;
  */
 public abstract class TeamMember extends Entity {
 
-    public int life;
+    public float maxHealth;
+    public float currentHealth;
     public int score;
     public int damage;
     public boolean dead;

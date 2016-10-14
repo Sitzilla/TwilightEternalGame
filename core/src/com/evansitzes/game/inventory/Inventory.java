@@ -10,9 +10,9 @@ public class Inventory {
 
     private Array<Slot> slots;
 
-    public Inventory() {
-        slots = new Array<Slot>(25);
-        for (int i = 0; i < 25; i++) {
+    public Inventory(final int size) {
+        slots = new Array<Slot>(size);
+        for (int i = 0; i < size; i++) {
             slots.add(new Slot(null, 0));
         }
 

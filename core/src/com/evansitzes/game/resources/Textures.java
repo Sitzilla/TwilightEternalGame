@@ -166,7 +166,27 @@ public class Textures {
         }
     }
 
-    private static TextureRegion[][] splitTextureRegion(final int columns, final int rows, final Texture sheet) {
+    public static class Life {
+        public static final TextureRegion LIFE_BAR = loadLife()[0][0];
+        public static final TextureRegion LIFE_BAR_CONTAINER = loadLifeContainer()[0][0];
+
+        private static TextureRegion[][] loadLife() {
+            final int frameColumns = 1;
+            final int frameRows = 1;
+
+            return splitTextureRegion(frameColumns, frameRows, new Texture(Gdx.files.internal("colors/red.png")));
+        }
+
+        private static TextureRegion[][] loadLifeContainer() {
+            final int frameColumns = 1;
+            final int frameRows = 1;
+
+            return splitTextureRegion(frameColumns, frameRows, new Texture(Gdx.files.internal("colors/black.png")));
+        }
+
+    }
+
+        private static TextureRegion[][] splitTextureRegion(final int columns, final int rows, final Texture sheet) {
         TextureRegion[] walkFrames;
 
         TextureRegion[][] tmp = TextureRegion.split(sheet, sheet.getWidth() /
