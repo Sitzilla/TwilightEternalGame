@@ -186,7 +186,24 @@ public class Textures {
 
     }
 
-        private static TextureRegion[][] splitTextureRegion(final int columns, final int rows, final Texture sheet) {
+    public static class Items {
+        public static final TextureRegion BRONZE_SWORD = loadItems()[0][4];
+        public static final TextureRegion BRONZE_BOOTS = loadItems()[0][3];
+        public static final TextureRegion BRONZE_PANTS = loadItems()[0][2];
+        public static final TextureRegion BRONZE_ARMOR = loadItems()[0][1];
+        public static final TextureRegion BRONZE_HELMET = loadItems()[0][0];
+
+
+        private static TextureRegion[][] loadItems() {
+            final int frameColumns = 16;
+            final int frameRows = 16;
+
+            return splitTextureRegion(frameColumns, frameRows, new Texture(Gdx.files.internal("icons/items.jpg")));
+        }
+
+    }
+
+    private static TextureRegion[][] splitTextureRegion(final int columns, final int rows, final Texture sheet) {
         TextureRegion[] walkFrames;
 
         TextureRegion[][] tmp = TextureRegion.split(sheet, sheet.getWidth() /

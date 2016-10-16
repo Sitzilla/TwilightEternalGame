@@ -28,6 +28,8 @@ public class InventoryScreen implements Screen {
     private static final int SIZE_OF_EQUIPMENT = 5;
 
     private InventoryActor inventoryActor;
+//    private Inventory inventory;
+    private Inventory equipment;
     private EquipmentActor equipmentActor;
     private GameflowController gameflowController;
     private TwilightEternal game;
@@ -54,6 +56,12 @@ public class InventoryScreen implements Screen {
         container = new NinePatch(containerRegion, 5, 5, 2, 2);
         totalBarWidth = 100;
 
+//        inventory = new Inventory(SIZE_OF_INVENTORY);
+        equipment = new Inventory(SIZE_OF_EQUIPMENT);
+//        inventory.createRandomItems();
+//        inventory.createEquipment();
+        equipment.createEquipment();
+
         font = new BitmapFont();
 
         camera = new OrthographicCamera();
@@ -71,11 +79,11 @@ public class InventoryScreen implements Screen {
         final Skin skin = new Skin(Gdx.files.internal("skins/uiskin.json"));
 
         final DragAndDrop dragAndDrop = new DragAndDrop();
-        inventoryActor = new InventoryActor(new Inventory(SIZE_OF_INVENTORY), dragAndDrop, skin);
-        equipmentActor = new EquipmentActor(new Inventory(SIZE_OF_EQUIPMENT), dragAndDrop, skin);
-        stage.addActor(inventoryActor);
+//        inventoryActor = new InventoryActor(inventory, dragAndDrop, skin);
+        equipmentActor = new EquipmentActor(equipment, dragAndDrop, skin);
+//        stage.addActor(inventoryActor);
         stage.addActor(equipmentActor);
-        inventoryActor.setVisible(true);
+//        inventoryActor.setVisible(true);
         equipmentActor.setVisible(true);
     }
 

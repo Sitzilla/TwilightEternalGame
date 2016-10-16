@@ -1,7 +1,5 @@
 package com.evansitzes.game.inventory;
 
-import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
@@ -33,8 +31,9 @@ public class SlotSource extends Source {
         sourceSlot.take(sourceSlot.getAmount());
         payload.setObject(payloadSlot);
 
-        TextureAtlas icons = new TextureAtlas(Gdx.files.internal("icons/icons.atlas"));
-        TextureRegion icon = icons.findRegion(payloadSlot.getItem().getTextureRegion());
+//        TextureAtlas icons = new TextureAtlas(Gdx.files.internal("icons/icons.atlas"));
+//        TextureRegion icon = icons.findRegion(payloadSlot.getItem().getTextureRegion());
+        TextureRegion icon = payloadSlot.getItem().getTextureRegion();
 
         Actor dragActor = new Image(icon);
         payload.setDragActor(dragActor);
