@@ -14,6 +14,7 @@ import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.badlogic.gdx.utils.Array;
 import com.badlogic.gdx.utils.Timer;
 import com.evansitzes.game.Configuration;
+import com.evansitzes.game.GameflowController;
 import com.evansitzes.game.Level;
 import com.evansitzes.game.TwilightEternal;
 import com.evansitzes.game.conversation.BattleInterface;
@@ -28,7 +29,6 @@ import com.evansitzes.game.resources.BattleChoiceEnum;
 public class BattleScreen implements Screen, InputProcessor {
 
     private final TwilightEternal game;
-    private final GameScreen gameScreen;
     private final OrthographicCamera camera;
     private float gameTime = 0;
     private final Configuration configuration;
@@ -46,10 +46,11 @@ public class BattleScreen implements Screen, InputProcessor {
     private BattleInterface battleInterface;
     private BattleStatus battleStatus;
     private BattleChoiceEnum currentChoice;
+    private GameflowController gameflowController;
 
-    public BattleScreen(final TwilightEternal game, final GameScreen gameScreen) {
+    public BattleScreen(final TwilightEternal game, final GameflowController gameflowController) {
         this.game = game;
-        this.gameScreen = gameScreen;
+        this.gameflowController = gameflowController;
         configuration = new Configuration();
 
         this.level = BattleLevelLoader.load(Vector2.Zero, game, this, "forest-battle-map");
@@ -181,9 +182,7 @@ public class BattleScreen implements Screen, InputProcessor {
     }
 
     private void endBattle() {
-
-
-        game.setScreen(gameScreen);
+        gameflowController.setGameScreen();
     }
 
     @Override

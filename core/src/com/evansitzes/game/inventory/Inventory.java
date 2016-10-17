@@ -1,6 +1,5 @@
 package com.evansitzes.game.inventory;
 
-import com.badlogic.gdx.math.MathUtils;
 import com.badlogic.gdx.utils.Array;
 
 /**
@@ -16,16 +15,24 @@ public class Inventory {
             slots.add(new Slot(null, 0));
         }
 
-        // create some random items
-        for (final Slot slot : slots) {
-            slot.add(Item.values()[MathUtils.random(0, Item.values().length - 1)], 1);
-        }
+    }
 
-        // create a few random empty slots
-        for (int i = 0; i < 3; i++) {
-            final Slot randomSlot = slots.get(MathUtils.random(0, slots.size - 1));
-            randomSlot.take(randomSlot.getAmount());
-        }
+    public void createRandomItems() {
+//        // create some random items
+//        for (final Slot slot : slots) {
+//            slot.add(Item.values()[MathUtils.random(0, Item.values().length - 1)], 1);
+//        }
+//
+//        // create a few random empty slots
+//        for (int i = 0; i < 3; i++) {
+//            final Slot randomSlot = slots.get(MathUtils.random(0, slots.size - 1));
+//            randomSlot.take(randomSlot.getAmount());
+//        }
+    }
+
+    public void createEquipment() {
+        slots.get(0).add(new Item("bronze_sword"), 1);
+
     }
 
     public int checkInventory(final Item item) {

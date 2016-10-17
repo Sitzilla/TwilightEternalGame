@@ -1,4 +1,4 @@
-package com.evansitzes.game.inventory;
+package com.evansitzes.game.screens;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input.Keys;
@@ -11,10 +11,13 @@ import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.badlogic.gdx.scenes.scene2d.utils.DragAndDrop;
+import com.evansitzes.game.GameflowController;
 import com.evansitzes.game.TwilightEternal;
 import com.evansitzes.game.entity.sprites.InventorySprite;
+import com.evansitzes.game.inventory.EquipmentActor;
+import com.evansitzes.game.inventory.Inventory;
+import com.evansitzes.game.inventory.InventoryActor;
 import com.evansitzes.game.resources.Textures.Life;
-import com.evansitzes.game.screens.GameScreen;
 
 /**
  * Created by evan on 9/27/16.
@@ -25,8 +28,10 @@ public class InventoryScreen implements Screen {
     private static final int SIZE_OF_EQUIPMENT = 5;
 
     private InventoryActor inventoryActor;
+//    private Inventory inventory;
+    private Inventory equipment;
     private EquipmentActor equipmentActor;
-    private GameScreen gameScreen;
+    private GameflowController gameflowController;
     private TwilightEternal game;
     public static Stage stage;
     public InventorySprite inventorySprite;
@@ -39,9 +44,9 @@ public class InventoryScreen implements Screen {
     private TextureRegion containerRegion;
     private BitmapFont font;
 
-    public InventoryScreen(final TwilightEternal game, final GameScreen gameScreen) {
+    public InventoryScreen(final TwilightEternal game, final GameflowController gameflowController) {
         this.game = game;
-        this.gameScreen = gameScreen;
+        this.gameflowController = gameflowController;
         this.inventorySprite = new InventorySprite(game);
 
         gradient = Life.LIFE_BAR;
@@ -50,6 +55,12 @@ public class InventoryScreen implements Screen {
         health = new NinePatch(gradient, 0, 0, 0, 0);
         container = new NinePatch(containerRegion, 5, 5, 2, 2);
         totalBarWidth = 100;
+
+//        inventory = new Inventory(SIZE_OF_INVENTORY);
+        equipment = new Inventory(SIZE_OF_EQUIPMENT);
+//        inventory.createRandomItems();
+//        inventory.createEquipment();
+        equipment.createEquipment();
 
         font = new BitmapFont();
 
@@ -68,11 +79,11 @@ public class InventoryScreen implements Screen {
         final Skin skin = new Skin(Gdx.files.internal("skins/uiskin.json"));
 
         final DragAndDrop dragAndDrop = new DragAndDrop();
-        inventoryActor = new InventoryActor(new Inventory(SIZE_OF_INVENTORY), dragAndDrop, skin);
-        equipmentActor = new EquipmentActor(new Inventory(SIZE_OF_EQUIPMENT), dragAndDrop, skin);
-        stage.addActor(inventoryActor);
+//        inventoryActor = new InventoryActor(inventory, dragAndDrop, skin);
+        equipmentActor = new EquipmentActor(equipment, dragAndDrop, skin);
+//        stage.addActor(inventoryActor);
         stage.addActor(equipmentActor);
-        inventoryActor.setVisible(true);
+//        inventoryActor.setVisible(true);
         equipmentActor.setVisible(true);
     }
 
@@ -86,7 +97,7 @@ public class InventoryScreen implements Screen {
 
         // exit the inventory when spacebar key is pressed
         if (Gdx.input.isKeyPressed(Keys.SPACE)) {
-            game.setScreen(gameScreen);
+            gameflowController.setGameScreen();
         }
 
         game.batch.setProjectionMatrix(camera.combined);

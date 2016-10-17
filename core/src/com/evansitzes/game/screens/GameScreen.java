@@ -9,20 +9,15 @@ import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.badlogic.gdx.utils.Array;
-import com.evansitzes.game.Configuration;
-import com.evansitzes.game.Level;
-import com.evansitzes.game.State;
-import com.evansitzes.game.TwilightEternal;
+import com.evansitzes.game.*;
 import com.evansitzes.game.conversation.Conversation;
 import com.evansitzes.game.entity.Entity;
-import com.evansitzes.game.entity.sprites.PlayerSprite;
+import com.evansitzes.game.entity.enemy.Enemy;
 import com.evansitzes.game.entity.environment.Portal;
 import com.evansitzes.game.entity.environment.Wall;
-import com.evansitzes.game.entity.enemy.Enemy;
 import com.evansitzes.game.entity.npc.Npc;
-import com.evansitzes.game.inventory.InventoryScreen;
+import com.evansitzes.game.entity.sprites.PlayerSprite;
 import com.evansitzes.game.loaders.TmxLevelLoader;
-import com.evansitzes.game.resources.Sounds;
 
 import java.util.Iterator;
 
@@ -38,7 +33,7 @@ public class GameScreen implements Screen, InputProcessor {
     private TiledMapRenderer tiledMapRenderer;
 
     private final TwilightEternal game;
-    private final InventoryScreen inventoryScreen;
+    private GameflowController gameflowController;
     private final PlayerSprite playerSprite;
 
     private Level level;
@@ -60,9 +55,9 @@ public class GameScreen implements Screen, InputProcessor {
     private Skin skin;
     private final Stage stage;
 
-    public GameScreen(final TwilightEternal game) {
+    public GameScreen(final TwilightEternal game, final GameflowController gameflowController) {
         this.game = game;
-        this.inventoryScreen = new InventoryScreen(game, this);
+        this.gameflowController = gameflowController;
         configuration = new Configuration();
         final float w = (float) Gdx.graphics.getWidth();
         final float h = (float) Gdx.graphics.getHeight();
@@ -151,7 +146,7 @@ public class GameScreen implements Screen, InputProcessor {
                 break;
 
             case PAUSE:
-                System.out.println("Currently Paused....");
+//                System.out.println("Currently Paused....");
                 break;
 
             case RESUME:
@@ -284,7 +279,7 @@ public class GameScreen implements Screen, InputProcessor {
 
             if (enemy.overlaps(playerSprite) && !enemy.dead) {
                 enemy.kill();
-                game.setScreen(new BattleScreen(game, this));
+                gameflowController.setBattleScreen();
             }
         }
     }
@@ -322,10 +317,9 @@ public class GameScreen implements Screen, InputProcessor {
 
     @Override
     public void show() {
-        Sounds.MAIN_THEME.play();
+//        Sounds.MAIN_THEME.play();
 
         // TODO use game state to control this
-        System.out.println("Finishing screen!!");
         final InputMultiplexer multiplexer = new InputMultiplexer();
         multiplexer.addProcessor(stage);
         multiplexer.addProcessor(this);
@@ -349,7 +343,7 @@ public class GameScreen implements Screen, InputProcessor {
 
     @Override
     public void hide() {
-        Sounds.MAIN_THEME.stop();
+//        Sounds.MAIN_THEME.stop();
         dispose();
     }
 
@@ -369,7 +363,7 @@ public class GameScreen implements Screen, InputProcessor {
 
         if (keycode == Input.Keys.I) {
             System.out.println("Showing screen~");
-            game.setScreen(inventoryScreen);
+            gameflowController.setInventoryScreen();
 
 
         }
