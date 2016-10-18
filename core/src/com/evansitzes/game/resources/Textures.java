@@ -187,10 +187,13 @@ public class Textures {
     }
 
     public static class Items {
-        public static final TextureRegion BRONZE_SWORD = loadItems()[0][4];
-        public static final TextureRegion BRONZE_BOOTS = loadItems()[0][3];
-        public static final TextureRegion BRONZE_PANTS = loadItems()[0][2];
-        public static final TextureRegion BRONZE_ARMOR = loadItems()[0][1];
+
+        public static final TextureRegion BLANK = loadItems()[15][0];
+
+        public static final TextureRegion BRONZE_SWORD = loadItems()[4][0];
+        public static final TextureRegion BRONZE_BOOTS = loadItems()[3][0];
+        public static final TextureRegion BRONZE_PANTS = loadItems()[2][0];
+        public static final TextureRegion BRONZE_ARMOR = loadItems()[1][0];
         public static final TextureRegion BRONZE_HELMET = loadItems()[0][0];
 
 

@@ -4,6 +4,7 @@ import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.scenes.scene2d.ui.ImageButton;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable;
+import com.evansitzes.game.resources.Textures;
 import com.evansitzes.game.screens.InventoryScreen;
 
 /**
@@ -34,13 +35,13 @@ public class SlotActor extends ImageButton implements SlotListener {
     private static ImageButtonStyle createStyle(Skin skin, Slot slot) {
 //        TextureAtlas icons = new TextureAtlas(Gdx.files.internal("icons/icons.atlas"));
         TextureRegion image;
-//        if (slot.getItem() != null) {
+        if (slot.getItem() != null) {
 //            image = icons.findRegion(slot.getItem().getTextureRegion());
             image = slot.getItem().getTextureRegion();
-//        } else {
-//            // we have a special "empty" region in our atlas file, which is just black
-////            image = icons.findRegion("nothing");
-//        }
+        } else {
+            // we have a special "empty" region in our atlas file, which is just black
+            image = Textures.Items.BLANK;
+        }
         ImageButtonStyle style = new ImageButtonStyle(skin.get(ButtonStyle.class));
         style.imageUp = new TextureRegionDrawable(image);
         style.imageDown = new TextureRegionDrawable(image);

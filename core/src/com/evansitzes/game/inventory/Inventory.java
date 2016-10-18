@@ -31,8 +31,11 @@ public class Inventory {
     }
 
     public void createEquipment() {
-        slots.get(0).add(new Item("bronze_sword"), 1);
-
+        slots.get(0).add(new Item("bronze_sword"), 5);
+        slots.get(1).add(new Item("bronze_sword"), 5);
+        slots.get(2).add(new Item("bronze_sword"), 5);
+        slots.get(3).add(new Item("bronze_sword"), 5);
+        slots.get(4).add(new Item("bronze_sword"), 5);
     }
 
     public int checkInventory(final Item item) {

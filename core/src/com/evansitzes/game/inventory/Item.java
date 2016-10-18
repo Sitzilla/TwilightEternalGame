@@ -9,7 +9,7 @@ import com.evansitzes.game.resources.Textures;
  */
 public class Item {
     private TextureRegion texture;
-    public final String name;
+    private final String name;
     public final Sprite sprite;
 
 
@@ -22,5 +22,9 @@ public class Item {
 
     public TextureRegion getTextureRegion() {
         return texture;
+    }
+
+    public String getName() {
+        return name;
     }
 }
