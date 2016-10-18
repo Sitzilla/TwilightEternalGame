@@ -13,8 +13,8 @@ public class SlotTooltip extends Window implements SlotListener {
 
     private Slot slot;
 
-    public SlotTooltip(Slot slot, Skin skin) {
-        super("Tooltip...", skin);
+    public SlotTooltip(final Slot slot, final Skin skin) {
+        super("Item", skin);
         this.slot = slot;
         this.skin = skin;
         hasChanged(slot);
@@ -23,22 +23,20 @@ public class SlotTooltip extends Window implements SlotListener {
     }
 
     @Override
-    public void hasChanged(Slot slot) {
+    public void hasChanged(final Slot slot) {
         if (slot.isEmpty()) {
             setVisible(false);
             return;
         }
 
-        // title displays the amount
-//        setTitle(slot.getAmount() + "x " + slot.getItem());
         clear();
-        Label label = new Label("Super awesome description of " + slot.getItem(), skin);
+        final Label label = new Label(slot.getItem().getName(), skin);
         add(label);
         pack();
     }
 
     @Override
-    public void setVisible(boolean visible) {
+    public void setVisible(final boolean visible) {
         super.setVisible(visible);
         // the listener sets this to true in case the slot is hovered
         // however, we don't want that in case the slot is empty

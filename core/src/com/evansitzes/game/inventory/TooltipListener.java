@@ -19,13 +19,13 @@ public class TooltipListener extends InputListener {
     private Vector2 tmp = new Vector2();
     private Vector2 offset = new Vector2(10, 10);
 
-    public TooltipListener(Actor tooltip, boolean followCursor) {
+    public TooltipListener(final Actor tooltip, final boolean followCursor) {
         this.tooltip = tooltip;
         this.followCursor = followCursor;
     }
 
     @Override
-    public boolean mouseMoved(InputEvent event, float x, float y) {
+    public boolean mouseMoved(final InputEvent event, final float x, final float y) {
         if (inside && followCursor) {
             event.getListenerActor().localToStageCoordinates(tmp.set(x, y));
             tooltip.setPosition(tmp.x + position.x + offset.x, tmp.y + position.y + offset.y);
@@ -34,7 +34,7 @@ public class TooltipListener extends InputListener {
     }
 
     @Override
-    public void enter(InputEvent event, float x, float y, int pointer, Actor fromActor) {
+    public void enter(final InputEvent event, final float x, final float y, final int pointer, final Actor fromActor) {
         inside = true;
         tooltip.setVisible(true);
         tmp.set(x, y);
@@ -44,17 +44,9 @@ public class TooltipListener extends InputListener {
     }
 
     @Override
-    public void exit(InputEvent event, float x, float y, int pointer, Actor toActor) {
+    public void exit(final InputEvent event, final float x, final float y, final int pointer, final Actor toActor) {
         inside = false;
         tooltip.setVisible(false);
-    }
-
-    /**
-     * The offset of the tooltip from the touch position. It should not be
-     * positive as the tooltip will flicker otherwise.
-     */
-    public void setOffset(float offsetX, float offsetY) {
-        offset.set(offsetX, offsetY);
     }
 
 }

@@ -28,7 +28,7 @@ public class InventoryScreen implements Screen {
     private static final int SIZE_OF_EQUIPMENT = 5;
 
     private InventoryActor inventoryActor;
-//    private Inventory inventory;
+    private Inventory inventory;
     private Inventory equipment;
     private EquipmentActor equipmentActor;
     private GameflowController gameflowController;
@@ -56,10 +56,9 @@ public class InventoryScreen implements Screen {
         container = new NinePatch(containerRegion, 5, 5, 2, 2);
         totalBarWidth = 100;
 
-//        inventory = new Inventory(SIZE_OF_INVENTORY);
+        inventory = new Inventory(SIZE_OF_INVENTORY);
         equipment = new Inventory(SIZE_OF_EQUIPMENT);
-//        inventory.createRandomItems();
-//        inventory.createEquipment();
+        inventory.createRandomItems();
         equipment.createEquipment();
 
         font = new BitmapFont();
@@ -79,11 +78,11 @@ public class InventoryScreen implements Screen {
         final Skin skin = new Skin(Gdx.files.internal("skins/uiskin.json"));
 
         final DragAndDrop dragAndDrop = new DragAndDrop();
-//        inventoryActor = new InventoryActor(inventory, dragAndDrop, skin);
+        inventoryActor = new InventoryActor(inventory, dragAndDrop, skin);
         equipmentActor = new EquipmentActor(equipment, dragAndDrop, skin);
-//        stage.addActor(inventoryActor);
+        stage.addActor(inventoryActor);
         stage.addActor(equipmentActor);
-//        inventoryActor.setVisible(true);
+        inventoryActor.setVisible(true);
         equipmentActor.setVisible(true);
     }
 
@@ -109,7 +108,7 @@ public class InventoryScreen implements Screen {
         container.draw(game.batch, 395, 195, totalBarWidth + 10, 20);
         health.draw(game.batch, 400, 200, width, 10);
 
-        font.draw(game.batch, "Press spacebar to exit", 250, 0);
+        font.draw(game.batch, "Press spacebar to exit", 300, 0);
         game.batch.end();
 
         // handle all inputs and draw the whole UI
