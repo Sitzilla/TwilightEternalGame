@@ -9,18 +9,11 @@ import com.badlogic.gdx.scenes.scene2d.ui.Skin;
  * Created by evan on 9/22/16.
  */
 public class Conversation extends Dialog {
-    private Skin skin;
 
-    public Conversation(final String title, final Skin skin) {
-        super(title, skin);
-    }
+    public Conversation() {
+//        super("", new Skin(Gdx.files.internal("skins/golden-ui-skin.json")));
+        super("", new Skin(Gdx.files.internal("skins/james/plain-james-ui.json")));
 
-    public Conversation(final String title, final Skin skin, final String windowStyleName) {
-        super(title, skin, windowStyleName);
-    }
-
-    {
-        skin = new Skin(Gdx.files.internal("skins/golden-ui-skin.json"));
         setMovable(false);
         setResizable(false);
 
@@ -38,7 +31,12 @@ public class Conversation extends Dialog {
 //            TextButton dbutton = new TextButton("Yes", skin);
         button("yes", true);
 
+        key(Input.Keys.SPACE, true);
         key(Input.Keys.ENTER, true);
+        key(Input.Keys.RIGHT, true);
+        key(Input.Keys.UP, true);
+        key(Input.Keys.DOWN, true);
+        key(Input.Keys.LEFT, true);
 //            invalidateHierarchy();
 //            invalidate();
 //            layout();
