@@ -11,8 +11,9 @@ import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 public class Conversation extends Dialog {
 
     public Conversation() {
-        super("", new Skin(Gdx.files.internal("skins/golden-ui-skin.json")));
-//        skin = new Skin(Gdx.files.internal("skins/golden-ui-skin.json"));
+//        super("", new Skin(Gdx.files.internal("skins/golden-ui-skin.json")));
+        super("", new Skin(Gdx.files.internal("skins/james/plain-james-ui.json")));
+
         setMovable(false);
         setResizable(false);
 
