@@ -7,15 +7,17 @@ import com.badlogic.gdx.maps.tiled.TiledMapRenderer;
 import com.badlogic.gdx.maps.tiled.renderers.OrthogonalTiledMapRenderer;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.scenes.scene2d.Stage;
-import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.badlogic.gdx.utils.Array;
 import com.evansitzes.game.*;
 import com.evansitzes.game.conversation.Conversation;
+import com.evansitzes.game.conversation.ConversationChoice;
 import com.evansitzes.game.entity.Entity;
 import com.evansitzes.game.entity.enemy.Enemy;
 import com.evansitzes.game.entity.environment.Portal;
 import com.evansitzes.game.entity.environment.Wall;
+import com.evansitzes.game.entity.npc.Guard;
 import com.evansitzes.game.entity.npc.Npc;
+import com.evansitzes.game.entity.npc.Villager;
 import com.evansitzes.game.entity.sprites.PlayerSprite;
 import com.evansitzes.game.loaders.TmxLevelLoader;
 
@@ -52,7 +54,6 @@ public class GameScreen implements Screen, InputProcessor {
     private final float mapMinY = 0;
     private final float mapMaxY;
 
-    private Skin skin;
     private final Stage stage;
 
     public GameScreen(final TwilightEternal game, final GameflowController gameflowController) {
@@ -67,7 +68,6 @@ public class GameScreen implements Screen, InputProcessor {
         camera.position.set(configuration.startingPositionX, configuration.startingPositionY, 0);
         camera.update();
 
-        skin = new Skin(Gdx.files.internal("skins/golden-ui-skin.json"));
         stage = new Stage();
 
         Gdx.input.setInputProcessor(stage);
@@ -294,8 +294,15 @@ public class GameScreen implements Screen, InputProcessor {
 
             if (npc.overlapsConversationZone(playerSprite)) {
                 System.out.println("Overlap npc: " + npc);
-                final Conversation conversation = new Conversation("", skin);
-                conversation.setText(npc.conversationText);
+                final Conversation conversation = new Conversation();
+
+                if (npc instanceof Villager) {
+                    conversation.setText(new ConversationChoice().getRandomConversation());
+                }
+
+                if (npc instanceof Guard) {
+                    conversation.setText(npc.conversationText);
+                }
                 conversation.show(stage);
 //                setGameState(State.PAUSE);
 

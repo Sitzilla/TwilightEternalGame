@@ -26,8 +26,7 @@ public abstract class Npc extends Entity {
 
     public Npc(final TwilightEternal game) {
         super(game);
-        conversationText = "What brings you to this land traveler?";
-//        this.movement = movement;
+        conversationRectangle = new Rectangle();
     }
     public boolean overlapsConversationZone(final Entity entity) {
         return false;

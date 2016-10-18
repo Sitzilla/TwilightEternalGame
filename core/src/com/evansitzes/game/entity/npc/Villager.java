@@ -28,10 +28,10 @@ public class Villager extends Npc {
 
     @Override
     public void draw() {
-        sprite.setPosition(this.x, this.y);
-        this.rectangle.set(this.x, this.y, 10, 10);
+        sprite.setPosition(this.x - 10, this.y - 10);
+        this.rectangle.set(this.x - 5 , this.y - 5 , 10, 10);
         sprite.draw(game.batch);
-        conversationRectangle.set(this.x, this.y, 50, 50);
+        conversationRectangle.set(this.x - 25, this.y - 25, 50, 50);
     }
 
     @Override
