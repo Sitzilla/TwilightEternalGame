@@ -11,12 +11,12 @@ public class HidingClickListener extends ClickListener {
 
     private Actor actor;
 
-    public HidingClickListener(Actor actor) {
+    public HidingClickListener(final Actor actor) {
         this.actor = actor;
     }
 
     @Override
-    public void clicked(InputEvent event, float x, float y) {
+    public void clicked(final InputEvent event, final float x, final float y) {
         actor.setVisible(false);
     }
 

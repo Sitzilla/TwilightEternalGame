@@ -18,11 +18,11 @@ public class Inventory {
     }
 
     public void createRandomItems() {
-//        // create some random items
-//        for (final Slot slot : slots) {
-//            slot.add(Item.values()[MathUtils.random(0, Item.values().length - 1)], 1);
-//        }
-//
+        // create some random items
+        for (final Slot slot : slots) {
+            slot.add(new Item("blank"), 1);
+        }
+
 //        // create a few random empty slots
 //        for (int i = 0; i < 3; i++) {
 //            final Slot randomSlot = slots.get(MathUtils.random(0, slots.size - 1));
@@ -31,11 +31,11 @@ public class Inventory {
     }
 
     public void createEquipment() {
-        slots.get(0).add(new Item("bronze_sword"), 5);
-        slots.get(1).add(new Item("bronze_sword"), 5);
-        slots.get(2).add(new Item("bronze_sword"), 5);
-        slots.get(3).add(new Item("bronze_sword"), 5);
-        slots.get(4).add(new Item("bronze_sword"), 5);
+        slots.get(0).add(new Item("bronze_helmet"), 1);
+        slots.get(1).add(new Item("bronze_armor"), 1);
+        slots.get(2).add(new Item("bronze_pants"), 1);
+        slots.get(3).add(new Item("bronze_boots"), 1);
+        slots.get(4).add(new Item("bronze_sword"), 1);
     }
 
     public int checkInventory(final Item item) {

@@ -10,17 +10,14 @@ import com.badlogic.gdx.scenes.scene2d.utils.DragAndDrop.Target;
  */
 public class SlotTarget extends Target {
 
-    private Slot targetSlot;
-
-    public SlotTarget(SlotActor actor) {
+    public SlotTarget(final SlotActor actor) {
         super(actor);
-        targetSlot = actor.getSlot();
         getActor().setColor(Color.LIGHT_GRAY);
     }
 
     @Override
-    public boolean drag(Source source, Payload payload, float x, float y, int pointer) {
-        Slot payloadSlot = (Slot) payload.getObject();
+    public boolean drag(final Source source, final Payload payload, final float x, final float y, final int pointer) {
+        final Slot payloadSlot = (Slot) payload.getObject();
 
         // in case we drag something over this target, we highlight it a bit
         getActor().setColor(Color.WHITE);
@@ -30,12 +27,12 @@ public class SlotTarget extends Target {
     }
 
     @Override
-    public void drop(Source source, Payload payload, float x, float y, int pointer) {
+    public void drop(final Source source, final Payload payload, final float x, final float y, final int pointer) {
         // we already handle all of this in dragStop in the Source
     }
 
     @Override
-    public void reset(Source source, Payload payload) {
+    public void reset(final Source source, final Payload payload) {
         getActor().setColor(Color.LIGHT_GRAY);
     }
 

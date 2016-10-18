@@ -188,7 +188,7 @@ public class Textures {
 
     public static class Items {
 
-        public static final TextureRegion BLANK = loadItems()[15][0];
+        public static final TextureRegion BLANK = loadItems()[0][15];
 
         public static final TextureRegion BRONZE_SWORD = loadItems()[4][0];
         public static final TextureRegion BRONZE_BOOTS = loadItems()[3][0];

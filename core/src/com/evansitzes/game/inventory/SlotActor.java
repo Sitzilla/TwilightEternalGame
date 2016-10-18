@@ -33,13 +33,10 @@ public class SlotActor extends ImageButton implements SlotListener {
      * This will create a new style for our image button, with the correct image for the item type.
      */
     private static ImageButtonStyle createStyle(Skin skin, Slot slot) {
-//        TextureAtlas icons = new TextureAtlas(Gdx.files.internal("icons/icons.atlas"));
         TextureRegion image;
         if (slot.getItem() != null) {
-//            image = icons.findRegion(slot.getItem().getTextureRegion());
             image = slot.getItem().getTextureRegion();
         } else {
-            // we have a special "empty" region in our atlas file, which is just black
             image = Textures.Items.BLANK;
         }
         ImageButtonStyle style = new ImageButtonStyle(skin.get(ButtonStyle.class));
