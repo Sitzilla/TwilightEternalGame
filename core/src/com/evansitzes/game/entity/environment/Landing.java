@@ -4,13 +4,13 @@ import com.evansitzes.game.TwilightEternal;
 import com.evansitzes.game.entity.Entity;
 
 /**
- * Created by evan on 6/10/16.
+ * Created by evan on 10/18/16.
  */
-public class Portal extends Entity {
+public class Landing extends Entity {
 
     private final String destination;
 
-    public Portal(final TwilightEternal game, final String destination) {
+    public Landing(final TwilightEternal game, final String destination) {
         super(game);
         this.destination = destination;
         this.rectangle.set(this.x, this.y, 20, 20);

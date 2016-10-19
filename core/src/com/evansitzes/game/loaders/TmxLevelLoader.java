@@ -10,18 +10,16 @@ import com.badlogic.gdx.maps.tiled.TiledMapTileLayer;
 import com.badlogic.gdx.maps.tiled.TmxMapLoader;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.utils.Array;
-import com.evansitzes.game.entity.environment.Portal;
-import com.evansitzes.game.entity.environment.Wall;
-import com.evansitzes.game.entity.events.Event;
-import com.evansitzes.game.entity.events.EntityCreationEvent;
-import com.evansitzes.game.entity.events.PortalCreationEvent;
-import com.evansitzes.game.entity.events.WallCreationEvent;
-import com.evansitzes.game.screens.GameScreen;
 import com.evansitzes.game.Level;
 import com.evansitzes.game.TwilightEternal;
-import com.evansitzes.game.entity.*;
+import com.evansitzes.game.entity.Entity;
 import com.evansitzes.game.entity.enemy.Enemy;
+import com.evansitzes.game.entity.environment.Landing;
+import com.evansitzes.game.entity.environment.Portal;
+import com.evansitzes.game.entity.environment.Wall;
+import com.evansitzes.game.entity.events.*;
 import com.evansitzes.game.entity.npc.Npc;
+import com.evansitzes.game.screens.GameScreen;
 
 /**
  * Created by evan on 6/9/16.
@@ -61,34 +59,27 @@ public class TmxLevelLoader {
             final String type = (String) properties.get("type");
             if (type.equals("enemy")) {
                 final Enemy enemy = ENEMY_READER.readEnemy(object, game);
-                    final Event enemyEvent = readEntityEvent(enemy, gameScreen, game, object);
+                    final Event enemyEvent = readEntityEvent(enemy, gameScreen);
                     level.events.add(enemyEvent);
 
             } else if (type.equals("wall")) {
                 final Wall wall = readWall(object, game);
-                final Event wallEvent = readWallEvent(wall, gameScreen, game, object);
+                final Event wallEvent = readWallEvent(wall, gameScreen);
                 level.events.add(wallEvent);
             } else if (type.equals("portal")) {
                 final Portal portal = readPortal(object, game);
-                final Event portalEvent = readPortalEvent(portal, gameScreen, game, object);
+                final Event portalEvent = readPortalEvent(portal, gameScreen);
                 level.events.add(portalEvent);
             } else if (type.equals("npc")) {
                 final Npc npc = readNpc(object, game);
-                final Event portalEvent = readEntityEvent(npc, gameScreen, game, object);
+                final Event portalEvent = readEntityEvent(npc, gameScreen);
                 level.events.add(portalEvent);
+            } else if (type.equals("landing")) {
+                final Landing landing = readLanding(object, game);
+                final Event landingEvent = readLandingEvent(landing, gameScreen);
+                level.events.add(landingEvent);
             }
-//            else if(data.containsKey("events")) {
-//                readEvents(level, data, game, gameScreen);
-//            }
         }
-
-//        final String clazz = "com.kennycason.starlight.level.events." + map.getProperties().get("final");
-//        try {
-//            level.finalEvent = (Event) Class.forName(clazz).getConstructor(TwilightEternal.class, GameScreen.class).newInstance(game, gameScreen);
-//        }
-//        catch (Exception e) {
-//            throw new RuntimeException(e);
-//        }
 
         return level;
     }
@@ -96,7 +87,8 @@ public class TmxLevelLoader {
     private static Portal readPortal(final RectangleMapObject object, final TwilightEternal game) {
         final String clazz = "com.evansitzes.game.entity.environment.Portal";
         try {
-            final Portal portal = (Portal) Class.forName(clazz).getConstructor(TwilightEternal.class).newInstance(game);
+//            final Portal portal = (Portal) Class.forName(clazz).getConstructor(TwilightEternal.class).newInstance(game);
+            final Portal portal = new Portal(game, (String) object.getProperties().get("destination"));
             readRectanglePosition(portal, object);
             return portal;
         }
@@ -105,8 +97,24 @@ public class TmxLevelLoader {
         }
     }
 
-    private static Event readPortalEvent(final Portal portal, final GameScreen gameScreen, final TwilightEternal game, final RectangleMapObject object) {
+    private static Event readPortalEvent(final Portal portal, final GameScreen gameScreen) {
         return new PortalCreationEvent(portal, gameScreen);
+    }
+
+    private static Landing readLanding(final RectangleMapObject object, final TwilightEternal game) {
+        final String clazz = "com.evansitzes.game.entity.environment.Landing";
+        try {
+            final Landing landing = new Landing(game, (String) object.getProperties().get("destination"));
+            readRectanglePosition(landing, object);
+            return landing;
+        }
+        catch (Exception e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    private static Event readLandingEvent(final Landing landing, final GameScreen gameScreen) {
+        return new LandingCreationEvent(landing, gameScreen);
     }
 
     private static Wall readWall(final RectangleMapObject object, final TwilightEternal game) {
@@ -121,7 +129,7 @@ public class TmxLevelLoader {
         }
     }
 
-    private static Event readWallEvent(final Wall wall, final GameScreen gameScreen, final TwilightEternal game, final RectangleMapObject object) {
+    private static Event readWallEvent(final Wall wall, final GameScreen gameScreen) {
         return new WallCreationEvent(wall, gameScreen);
     }
 
@@ -137,7 +145,7 @@ public class TmxLevelLoader {
         }
     }
 
-    private static Event readEntityEvent(final Entity entity, final GameScreen gameScreen, final TwilightEternal game, final RectangleMapObject object) {
+    private static Event readEntityEvent(final Entity entity, final GameScreen gameScreen) {
         return new EntityCreationEvent(entity, gameScreen);
     }
 

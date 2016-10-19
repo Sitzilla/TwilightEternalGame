@@ -13,6 +13,7 @@ import com.evansitzes.game.conversation.Conversation;
 import com.evansitzes.game.conversation.ConversationChoice;
 import com.evansitzes.game.entity.Entity;
 import com.evansitzes.game.entity.enemy.Enemy;
+import com.evansitzes.game.entity.environment.Landing;
 import com.evansitzes.game.entity.environment.Portal;
 import com.evansitzes.game.entity.environment.Wall;
 import com.evansitzes.game.entity.npc.Guard;
@@ -46,6 +47,7 @@ public class GameScreen implements Screen, InputProcessor {
     private final Array<Npc> npcs = new Array();
     private final Array<Wall> walls = new Array();
     private final Array<Portal> portals = new Array();
+    private final Array<Landing> landings = new Array();
 
     private State state = State.RUN;
 
@@ -95,10 +97,14 @@ public class GameScreen implements Screen, InputProcessor {
 
             case RUN:
                 if (isPortal()) {
-                    resetObjects();
-                    playerSprite.reversePosition();
-                    this.level = TmxLevelLoader.load(Vector2.Zero, game, this, "town");
-                    this.tiledMapRenderer = new OrthogonalTiledMapRenderer(level.map);
+                    final Portal currentPortal = getCurrentPortal();
+
+                    if (currentPortal.getDestination().equals("town")) {
+                        resetObjects();
+                        this.level = TmxLevelLoader.load(Vector2.Zero, game, this, "town");
+                        //                        playerSprite.setToLandingPage();
+                        this.tiledMapRenderer = new OrthogonalTiledMapRenderer(level.map);
+                    }
                 }
 
                 camera.position.set(calculateCameraPositionX(), calculateCameraPositionY(), 0);
@@ -185,6 +191,7 @@ public class GameScreen implements Screen, InputProcessor {
         return playerSprite.position.y;
     }
 
+    //TODO combine portal methods
     private boolean isPortal() {
         if(portals.size == 0) { return false; }
 
@@ -199,6 +206,20 @@ public class GameScreen implements Screen, InputProcessor {
 
         }
         return false;
+    }
+
+    private Portal getCurrentPortal() {
+        final Iterator<Portal> portalIterator = portals.iterator();
+
+        while(portalIterator.hasNext()) {
+            final Portal portal = portalIterator.next();
+
+            if (portal.overlaps(playerSprite)) {
+                return portal;
+            }
+
+        }
+        return null;
     }
 
     private boolean areCollisions(final PlayerSprite.Facing direction) {
@@ -472,4 +493,7 @@ public class GameScreen implements Screen, InputProcessor {
         return portals;
     }
 
+    public Array<Landing> getLandings() {
+        return landings;
+    }
 }
