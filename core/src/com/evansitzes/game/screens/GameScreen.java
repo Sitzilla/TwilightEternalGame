@@ -76,7 +76,7 @@ public class GameScreen implements Screen, InputProcessor {
 
         playerSprite = new PlayerSprite(game, this);
         this.battleMode = false;
-        this.level = TmxLevelLoader.load(Vector2.Zero, game, this, "frozen-level");
+        this.level = TmxLevelLoader.load(Vector2.Zero, game, this, "woods");
         mapMaxX = level.mapWidth * level.tileWidth;
         mapMaxY = level.mapHeight * level.tileHeight;
         this.tiledMapRenderer = new OrthogonalTiledMapRenderer(level.map);
@@ -99,9 +99,17 @@ public class GameScreen implements Screen, InputProcessor {
                 if (isPortal()) {
                     final Portal currentPortal = getCurrentPortal();
 
+                    //TODO scale this
                     if (currentPortal.getDestination().equals("town")) {
                         resetObjects();
                         this.level = TmxLevelLoader.load(Vector2.Zero, game, this, "town");
+                        playerSprite.setToLandingPage(landings.get(0).rectangle.getX(), landings.get(0).rectangle.getY());
+                        this.tiledMapRenderer = new OrthogonalTiledMapRenderer(level.map);
+                    }
+
+                    if (currentPortal.getDestination().equals("woods")) {
+                        resetObjects();
+                        this.level = TmxLevelLoader.load(Vector2.Zero, game, this, "woods");
                         playerSprite.setToLandingPage(landings.get(0).rectangle.getX(), landings.get(0).rectangle.getY());
                         this.tiledMapRenderer = new OrthogonalTiledMapRenderer(level.map);
                     }
@@ -334,9 +342,11 @@ public class GameScreen implements Screen, InputProcessor {
 
     private void resetObjects() {
         enemies.clear();
+        npcs.clear();
         walls.clear();
         portals.clear();
         obstructables.clear();
+        landings.clear();
     }
 
     public void setGameState(final State s){
