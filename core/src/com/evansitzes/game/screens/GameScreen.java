@@ -17,6 +17,7 @@ import com.evansitzes.game.entity.environment.Landing;
 import com.evansitzes.game.entity.environment.Portal;
 import com.evansitzes.game.entity.environment.Wall;
 import com.evansitzes.game.entity.npc.Guard;
+import com.evansitzes.game.entity.npc.Merchant;
 import com.evansitzes.game.entity.npc.Npc;
 import com.evansitzes.game.entity.npc.Villager;
 import com.evansitzes.game.entity.sprites.PlayerSprite;
@@ -323,16 +324,30 @@ public class GameScreen implements Screen, InputProcessor {
 
             if (npc.overlapsConversationZone(playerSprite)) {
                 System.out.println("Overlap npc: " + npc);
-                final Conversation conversation = new Conversation();
 
                 if (npc instanceof Villager) {
+                    final Conversation conversation = new Conversation(false);
                     conversation.setText(new ConversationChoice().getRandomConversation());
+                    conversation.show(stage);
                 }
 
                 if (npc instanceof Guard) {
+                    final Conversation conversation = new Conversation(false);
                     conversation.setText(npc.conversationText);
+                    conversation.show(stage);
                 }
-                conversation.show(stage);
+
+                if (npc instanceof Merchant) {
+                    final Conversation conversation = new Conversation(true);
+                    conversation.setText(npc.conversationText);
+                    conversation.show(stage);
+//                    System.out.print("Result is: " + conversation.isSeeWares());
+
+                    if (conversation.isSeeWares()) {
+                        System.out.println("askjfahsdlkfjhlksjdhf");
+                    }
+                }
+
 //                setGameState(State.PAUSE);
 
                 return;

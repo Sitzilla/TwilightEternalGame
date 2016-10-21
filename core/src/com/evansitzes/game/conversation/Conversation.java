@@ -10,7 +10,9 @@ import com.badlogic.gdx.scenes.scene2d.ui.Skin;
  */
 public class Conversation extends Dialog {
 
-    public Conversation() {
+    private boolean seeWares = false;
+
+    public Conversation(final boolean isInteractive) {
 //        super("", new Skin(Gdx.files.internal("skins/golden-ui-skin.json")));
         super("", new Skin(Gdx.files.internal("skins/james/plain-james-ui.json")));
 
@@ -29,14 +31,17 @@ public class Conversation extends Dialog {
         setWidth(150);
 
 //            TextButton dbutton = new TextButton("Yes", skin);
-        button("yes", true);
+        if (isInteractive) {
+            button("yes", true);
+            button("no", false);
+        }
 
-        key(Input.Keys.SPACE, true);
-        key(Input.Keys.ENTER, true);
-        key(Input.Keys.RIGHT, true);
-        key(Input.Keys.UP, true);
-        key(Input.Keys.DOWN, true);
-        key(Input.Keys.LEFT, true);
+        key(Input.Keys.SPACE, false);
+        key(Input.Keys.ENTER, false);
+        key(Input.Keys.RIGHT, false);
+        key(Input.Keys.UP, false);
+        key(Input.Keys.DOWN, false);
+        key(Input.Keys.LEFT, false);
 //            invalidateHierarchy();
 //            invalidate();
 //            layout();
@@ -56,12 +61,15 @@ public class Conversation extends Dialog {
 
     @Override
     public void result(final Object object) {
-//            setGameState(State.RUN);
-        System.out.println(object);
+        seeWares = Boolean.parseBoolean(object.toString());
+        System.out.println(seeWares);
     }
 
     public void setText(final String text) {
         this.text(text);
     }
 
+    public boolean isSeeWares() {
+        return seeWares;
+    }
 }
