@@ -102,7 +102,7 @@ public class GameScreen implements Screen, InputProcessor {
                     if (currentPortal.getDestination().equals("town")) {
                         resetObjects();
                         this.level = TmxLevelLoader.load(Vector2.Zero, game, this, "town");
-                        //                        playerSprite.setToLandingPage();
+                        playerSprite.setToLandingPage(landings.get(0).rectangle.getX(), landings.get(0).rectangle.getY());
                         this.tiledMapRenderer = new OrthogonalTiledMapRenderer(level.map);
                     }
                 }

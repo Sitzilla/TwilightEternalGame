@@ -9,7 +9,7 @@ import com.evansitzes.game.screens.GameScreen;
 public class LandingCreationEvent extends Event {
     public Landing landing;
 
-    public LandingCreationEvent(Landing portal, GameScreen gameScreen) {
+    public LandingCreationEvent(final Landing landing, final GameScreen gameScreen) {
         super(gameScreen);
         this.landing = landing;
         happen();
