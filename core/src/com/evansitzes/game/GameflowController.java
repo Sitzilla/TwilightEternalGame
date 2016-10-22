@@ -4,10 +4,7 @@ import com.badlogic.gdx.ApplicationListener;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.GL20;
 import com.evansitzes.game.resources.Sounds;
-import com.evansitzes.game.screens.BattleScreen;
-import com.evansitzes.game.screens.GameScreen;
-import com.evansitzes.game.screens.InventoryScreen;
-import com.evansitzes.game.screens.TitleScreen;
+import com.evansitzes.game.screens.*;
 
 /**
  * Created by evan on 10/14/16.
@@ -18,6 +15,7 @@ public class GameflowController implements ApplicationListener {
     private GameScreen gameScreen;
     private BattleScreen battleScreen;
     private InventoryScreen inventoryScreen;
+    private ShopScreen shopScreen;
     private final TwilightEternal game;
 
 
@@ -52,7 +50,10 @@ public class GameflowController implements ApplicationListener {
         game.setScreen(inventoryScreen);
     }
 
-
+    public void setShopScreen() {
+        shopScreen = new ShopScreen(game, this);
+        game.setScreen(shopScreen);
+    }
 
     @Override
     public void dispose() {

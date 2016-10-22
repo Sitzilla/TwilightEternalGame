@@ -1,5 +1,6 @@
 package com.evansitzes.game.inventory;
 
+import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.scenes.scene2d.ui.ImageButton;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
@@ -16,7 +17,7 @@ public class SlotActor extends ImageButton implements SlotListener {
 
     private Skin skin;
 
-    public SlotActor(Skin skin, Slot slot) {
+    public SlotActor(Screen currentScreen, Skin skin, Slot slot) {
         super(createStyle(skin, slot));
         this.slot = slot;
         this.skin = skin;
@@ -25,7 +26,7 @@ public class SlotActor extends ImageButton implements SlotListener {
         slot.addListener(this);
 
         SlotTooltip tooltip = new SlotTooltip(slot, skin);
-        InventoryScreen.stage.addActor(tooltip);
+        currentScreen.stage.addActor(tooltip);
         addListener(new TooltipListener(tooltip, true));
     }
 

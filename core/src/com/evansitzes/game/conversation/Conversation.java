@@ -4,21 +4,24 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
 import com.badlogic.gdx.scenes.scene2d.ui.Dialog;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
+import com.evansitzes.game.GameflowController;
 
 /**
  * Created by evan on 9/22/16.
  */
 public class Conversation extends Dialog {
 
-    private boolean seeWares = false;
+    private boolean seeWares;
+    private GameflowController gameflowController;
 
-    public Conversation(final boolean isInteractive) {
+    //TODO move gameflow logic out of conversation
+    public Conversation(final boolean isInteractive, GameflowController gameflowController) {
 //        super("", new Skin(Gdx.files.internal("skins/golden-ui-skin.json")));
         super("", new Skin(Gdx.files.internal("skins/james/plain-james-ui.json")));
 
         setMovable(false);
         setResizable(false);
-
+        this.gameflowController = gameflowController;
 //            Label label = new Label("", skin);
 //            label.setWrap(true);
 //            label.setFontScale(.8f);
@@ -62,7 +65,11 @@ public class Conversation extends Dialog {
     @Override
     public void result(final Object object) {
         seeWares = Boolean.parseBoolean(object.toString());
-        System.out.println(seeWares);
+
+        if (seeWares) {
+            gameflowController.setShopScreen();
+        }
+
     }
 
     public void setText(final String text) {

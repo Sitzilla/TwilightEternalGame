@@ -326,19 +326,19 @@ public class GameScreen implements Screen, InputProcessor {
                 System.out.println("Overlap npc: " + npc);
 
                 if (npc instanceof Villager) {
-                    final Conversation conversation = new Conversation(false);
+                    final Conversation conversation = new Conversation(false, gameflowController);
                     conversation.setText(new ConversationChoice().getRandomConversation());
                     conversation.show(stage);
                 }
 
                 if (npc instanceof Guard) {
-                    final Conversation conversation = new Conversation(false);
+                    final Conversation conversation = new Conversation(false, gameflowController);
                     conversation.setText(npc.conversationText);
                     conversation.show(stage);
                 }
 
                 if (npc instanceof Merchant) {
-                    final Conversation conversation = new Conversation(true);
+                    final Conversation conversation = new Conversation(true, gameflowController);
                     conversation.setText(npc.conversationText);
                     conversation.show(stage);
 //                    System.out.print("Result is: " + conversation.isSeeWares());
