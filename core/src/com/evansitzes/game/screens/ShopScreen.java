@@ -14,7 +14,6 @@ import com.badlogic.gdx.scenes.scene2d.utils.DragAndDrop;
 import com.evansitzes.game.GameflowController;
 import com.evansitzes.game.TwilightEternal;
 import com.evansitzes.game.entity.sprites.InventorySprite;
-import com.evansitzes.game.inventory.EquipmentActor;
 import com.evansitzes.game.inventory.Inventory;
 import com.evansitzes.game.inventory.InventoryActor;
 import com.evansitzes.game.resources.Textures.Life;
@@ -22,29 +21,26 @@ import com.evansitzes.game.resources.Textures.Life;
 /**
  * Created by evan on 9/27/16.
  */
-public class InventoryScreen implements Screen {
+public class ShopScreen implements Screen {
 
     private static final int SIZE_OF_INVENTORY = 25;
-    private static final int SIZE_OF_EQUIPMENT = 5;
 
     private InventoryActor inventoryActor;
     private Inventory inventory;
-    private Inventory equipment;
-    private EquipmentActor equipmentActor;
     private GameflowController gameflowController;
     private TwilightEternal game;
     public static Stage stage;
     public InventorySprite inventorySprite;
     private final OrthographicCamera camera;
-    private NinePatch health;
-    private NinePatch container;
+    private NinePatch divider;
+//    private NinePatch container;
     private float width;
-    private int totalBarWidth;
+//    private int totalBarWidth;
     private TextureRegion gradient;
     private TextureRegion containerRegion;
     private BitmapFont font;
 
-    public InventoryScreen(final TwilightEternal game, final GameflowController gameflowController) {
+    public ShopScreen(final TwilightEternal game, final GameflowController gameflowController) {
         this.game = game;
         this.gameflowController = gameflowController;
         this.inventorySprite = new InventorySprite(game);
@@ -52,14 +48,12 @@ public class InventoryScreen implements Screen {
         gradient = Life.LIFE_BAR;
         containerRegion = Life.LIFE_BAR_CONTAINER;
 
-        health = new NinePatch(gradient, 0, 0, 0, 0);
-        container = new NinePatch(containerRegion, 5, 5, 2, 2);
-        totalBarWidth = 100;
+        divider = new NinePatch(gradient, 0, 0, 0, 0);
+//        container = new NinePatch(containerRegion, 5, 5, 2, 2);
+//        totalBarWidth = 100;
 
         inventory = new Inventory(SIZE_OF_INVENTORY);
-        equipment = new Inventory(SIZE_OF_EQUIPMENT);
         inventory.createRandomItems();
-        equipment.createEquipment();
 
         font = new BitmapFont();
 
@@ -79,11 +73,8 @@ public class InventoryScreen implements Screen {
 
         final DragAndDrop dragAndDrop = new DragAndDrop();
         inventoryActor = new InventoryActor(this, inventory, dragAndDrop, skin);
-        equipmentActor = new EquipmentActor(equipment, dragAndDrop, skin);
         stage.addActor(inventoryActor);
-        stage.addActor(equipmentActor);
         inventoryActor.setVisible(true);
-        equipmentActor.setVisible(true);
     }
 
     @Override
@@ -92,7 +83,8 @@ public class InventoryScreen implements Screen {
         Gdx.gl.glClearColor(0.2f, 0.2f, 0.2f, 0f);
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT | GL20.GL_DEPTH_BUFFER_BIT);
 
-        width = game.player.currentHealth / game.player.maxHealth * totalBarWidth;
+        //TODO replace with better drawings
+        width = game.player.currentHealth / game.player.maxHealth * 100;
 
         // exit the inventory when spacebar key is pressed
         if (Gdx.input.isKeyPressed(Keys.SPACE)) {
@@ -102,11 +94,10 @@ public class InventoryScreen implements Screen {
         game.batch.setProjectionMatrix(camera.combined);
 
         game.batch.begin();
-        inventorySprite.draw();
+//        inventorySprite.draw();
 
-        font.draw(game.batch, "Current life:", 400, 230);
-        container.draw(game.batch, 395, 195, totalBarWidth + 10, 20);
-        health.draw(game.batch, 400, 200, width, 10);
+//        container.draw(game.batch, 395, 195, totalBarWidth + 10, 20);
+        divider.draw(game.batch, 400, 200, 10, width);
 
         font.draw(game.batch, "Press spacebar to exit", 300, 0);
         game.batch.end();

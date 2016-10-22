@@ -19,7 +19,7 @@ public class EquipmentActor extends Window {
 
         // run through all slots and create SlotActors for each
         for (final Slot slot : inventory.getSlots()) {
-            final SlotActor slotActor = new SlotActor(skin, slot);
+            final SlotActor slotActor = new SlotActor(currentScreen, skin, slot);
             add(slotActor);
 
             dragAndDrop.addSource(new SlotSource(slotActor));

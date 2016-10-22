@@ -13,9 +13,11 @@ import com.evansitzes.game.conversation.Conversation;
 import com.evansitzes.game.conversation.ConversationChoice;
 import com.evansitzes.game.entity.Entity;
 import com.evansitzes.game.entity.enemy.Enemy;
+import com.evansitzes.game.entity.environment.Landing;
 import com.evansitzes.game.entity.environment.Portal;
 import com.evansitzes.game.entity.environment.Wall;
 import com.evansitzes.game.entity.npc.Guard;
+import com.evansitzes.game.entity.npc.Merchant;
 import com.evansitzes.game.entity.npc.Npc;
 import com.evansitzes.game.entity.npc.Villager;
 import com.evansitzes.game.entity.sprites.PlayerSprite;
@@ -46,6 +48,7 @@ public class GameScreen implements Screen, InputProcessor {
     private final Array<Npc> npcs = new Array();
     private final Array<Wall> walls = new Array();
     private final Array<Portal> portals = new Array();
+    private final Array<Landing> landings = new Array();
 
     private State state = State.RUN;
 
@@ -74,7 +77,7 @@ public class GameScreen implements Screen, InputProcessor {
 
         playerSprite = new PlayerSprite(game, this);
         this.battleMode = false;
-        this.level = TmxLevelLoader.load(Vector2.Zero, game, this, "frozen-level");
+        this.level = TmxLevelLoader.load(Vector2.Zero, game, this, "woods");
         mapMaxX = level.mapWidth * level.tileWidth;
         mapMaxY = level.mapHeight * level.tileHeight;
         this.tiledMapRenderer = new OrthogonalTiledMapRenderer(level.map);
@@ -95,10 +98,22 @@ public class GameScreen implements Screen, InputProcessor {
 
             case RUN:
                 if (isPortal()) {
-                    resetObjects();
-                    playerSprite.reversePosition();
-                    this.level = TmxLevelLoader.load(Vector2.Zero, game, this, "town");
-                    this.tiledMapRenderer = new OrthogonalTiledMapRenderer(level.map);
+                    final Portal currentPortal = getCurrentPortal();
+
+                    //TODO scale this
+                    if (currentPortal.getDestination().equals("town")) {
+                        resetObjects();
+                        this.level = TmxLevelLoader.load(Vector2.Zero, game, this, "town");
+                        playerSprite.setToLandingPage(landings.get(0).rectangle.getX(), landings.get(0).rectangle.getY());
+                        this.tiledMapRenderer = new OrthogonalTiledMapRenderer(level.map);
+                    }
+
+                    if (currentPortal.getDestination().equals("woods")) {
+                        resetObjects();
+                        this.level = TmxLevelLoader.load(Vector2.Zero, game, this, "woods");
+                        playerSprite.setToLandingPage(landings.get(0).rectangle.getX(), landings.get(0).rectangle.getY());
+                        this.tiledMapRenderer = new OrthogonalTiledMapRenderer(level.map);
+                    }
                 }
 
                 camera.position.set(calculateCameraPositionX(), calculateCameraPositionY(), 0);
@@ -185,6 +200,7 @@ public class GameScreen implements Screen, InputProcessor {
         return playerSprite.position.y;
     }
 
+    //TODO combine portal methods
     private boolean isPortal() {
         if(portals.size == 0) { return false; }
 
@@ -199,6 +215,20 @@ public class GameScreen implements Screen, InputProcessor {
 
         }
         return false;
+    }
+
+    private Portal getCurrentPortal() {
+        final Iterator<Portal> portalIterator = portals.iterator();
+
+        while(portalIterator.hasNext()) {
+            final Portal portal = portalIterator.next();
+
+            if (portal.overlaps(playerSprite)) {
+                return portal;
+            }
+
+        }
+        return null;
     }
 
     private boolean areCollisions(final PlayerSprite.Facing direction) {
@@ -294,16 +324,30 @@ public class GameScreen implements Screen, InputProcessor {
 
             if (npc.overlapsConversationZone(playerSprite)) {
                 System.out.println("Overlap npc: " + npc);
-                final Conversation conversation = new Conversation();
 
                 if (npc instanceof Villager) {
+                    final Conversation conversation = new Conversation(false, gameflowController);
                     conversation.setText(new ConversationChoice().getRandomConversation());
+                    conversation.show(stage);
                 }
 
                 if (npc instanceof Guard) {
+                    final Conversation conversation = new Conversation(false, gameflowController);
                     conversation.setText(npc.conversationText);
+                    conversation.show(stage);
                 }
-                conversation.show(stage);
+
+                if (npc instanceof Merchant) {
+                    final Conversation conversation = new Conversation(true, gameflowController);
+                    conversation.setText(npc.conversationText);
+                    conversation.show(stage);
+//                    System.out.print("Result is: " + conversation.isSeeWares());
+
+                    if (conversation.isSeeWares()) {
+                        System.out.println("askjfahsdlkfjhlksjdhf");
+                    }
+                }
+
 //                setGameState(State.PAUSE);
 
                 return;
@@ -313,9 +357,11 @@ public class GameScreen implements Screen, InputProcessor {
 
     private void resetObjects() {
         enemies.clear();
+        npcs.clear();
         walls.clear();
         portals.clear();
         obstructables.clear();
+        landings.clear();
     }
 
     public void setGameState(final State s){
@@ -472,4 +518,7 @@ public class GameScreen implements Screen, InputProcessor {
         return portals;
     }
 
+    public Array<Landing> getLandings() {
+        return landings;
+    }
 }

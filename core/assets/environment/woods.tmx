@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.0" orientation="orthogonal" renderorder="right-down" width="41" height="27" tilewidth="32" tileheight="32" nextobjectid="79">
+<map version="1.0" orientation="orthogonal" renderorder="right-down" width="41" height="27" tilewidth="32" tileheight="32" nextobjectid="81">
  <tileset firstgid="1" name="image" tilewidth="32" tileheight="32" tilecount="256" columns="16">
   <image source="image.png" trans="000000" width="512" height="512"/>
  </tileset>
@@ -16,7 +16,7 @@
  </layer>
  <layer name="Tile Layer 2" width="41" height="27">
   <data encoding="base64" compression="zlib">
-   eJzFmMmPTEEcx1/XxRauiOVMuDtwl+Bu+QcsCRJiTZAQa4KE2EZwHIztNma4WEcPmbm0rW0X69iOGLF8Kl7l/fqnql+97tF+ySf1qrqq3rd+Va/qV50kmfWUkuQOlKHXk3Ypyin2uTutE8LVvQJXS9k73/D8ET7BZ3gHA/Be1JH2kPJH8BiqsMokyWqT5cseXe65nj6p8y7cU+//Qf4n/IJvMAjfAxrtmN6KsWxF3zaT5efzvAAWmlpfxmq0+hbR9ql4/7WAFmvXPb99oeyrGMsB+jtosvxinpfAUlPry5i5tvPwJJ3DDwFdo0xYb8jGqDbryK+HDTDD1K7XPuj3pM7v1n9zYGOEDufbGM2TVZ2d5HfBbpgNz+jrObzwpGv4fa354z/r92UmvMZCNoE2EyN9GxqP/B51up02O4TfQ/6Tfd9QY5jGb9MbmH9p8nvU6SH6Piz8vifnXVaf1jiTNrPgVsnP7YLz4qxCu/seHuT0p/VZm4u+efCqlKH7baVGuQfV+1YqTeqz9jIw5tdN9Onrf6j6q0T6UNoR6h6FY9AGxxvUErvX5mkc7emnnbqn4QychY4h8lejGid5NHZS93IpO2u7/7NGn/WkGssFNDazNhrRKP3oztqQubU7jPkYDiNgJJwr8L5G/Shj2F7hI522pWt3LLrGwXjzd3z6LzTqGLYqvp9QateD0+iLT312Mz2rYvdvaTqGHUg15CE1xvhRnzVFNOoYdlD5VafVVOMU9E0N+HE55StgpdhHYjWeoPwknMoZg/SrTvX9QMf51jZRthm2FNDotJ2HC3ARLtXRKv2qU30/sHGqjvP3UrYP9guN8syWZ6tPm1v37kwpsm84k/eDmDg/ZO1Cm/wu5Z2oI0XvMXkm7wd5cWo960w1OV3y7ivv7r69pVXmzjh53+3yaHTaJa0yuzfr/0DKHo3yfHH8BhnqdsE=
+   eJzFmMmPDkEYxrvrghGuiOVMuDtwl+Bu+QcsCRJiTZAQa4LExDaC42BstzHDxTp6CJfP9tku1rHMESOWpzJV6ed7VXVV9/DNm/xSXdXVbz/1VnUtnSS59aRJcgdkoNeRdgkyg77uNnV82LpXwNU0f+c7XH8GX0A/+AD6wEeqw/YY5U/AU1AHq1WSrFF5PnPostdF+ljnXXBPvP8n8r/Ab/AdDIAfHo26Te+pLdugb7vK8wtwvRAsUo2xjNWo9S3Gs8/p/dc8WrRdd9z7irJv1JaD8Neq8vwSXC8Fy1RjLGP6WvfDM9OHnzy6Riu/Xp+NFc+sR34D2Ahmqsbxeh88cKQ27jp+c8GmCB02tjGap4g6u5DfDfaAOeAFfL0ErxzpWtxfpwbjp+O+XLnHWJGOibg3KTK2Pj/8Pcp0B57ZSXH3xY993xBtmI57Myr0Pxt/jzI9BN+HKe57A+/S+qTGWXhmNriVurld8L0VWQ3PPXTwKOBP6tM2D/rmgzdpjvTbLI26v3kOKhqjtSHq0/ba0+a3AZ+x8471H/IXa7XIfmbTWo+i/jHQBo5X1BLb5pDGMQ4/7ah7GpwBZ0HHP4pXVY2THRo7Ufdymq+13cOs0WU9RmNWQuNQxkYVjRxHu9b67Eg6qG8E+mMkGAVawLkS76saR97D9lKMZNpmxu446BoPJqi/96f/Q6Pcw9bp+/GlejxYja79qctumrUqdo1hk3vYPqMhBGuMiaNca8polHvYARFXmdaNxqnQN80TxxUoXwlW0TwSq/EEyk+CU4E2cFxlKs8Hcp+vbTPKtoCtJTRabefBBXARXCrQynGVqTwf6H2q3OfvQ9l+cIA08prNa6tLmx33dk0pM29Y4/NBzD7fZ+2kjb9LPhN1GOQcEzI+H4T2qUXWaTRZXXz25bO7a25pltk1js+7XQ6NVjvTLNNzs/wHkjk08vpi+QOdr3Zd
   </data>
  </layer>
  <layer name="Tile Layer 3" width="41" height="27">
@@ -75,5 +75,6 @@
     <property name="destination" value="town"/>
    </properties>
   </object>
+  <object id="79" name="west-landing" type="landing" x="55" y="242" width="14" height="98"/>
  </objectgroup>
 </map>

@@ -1,5 +1,6 @@
 package com.evansitzes.game.inventory;
 
+import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.badlogic.gdx.scenes.scene2d.ui.Window;
 import com.badlogic.gdx.scenes.scene2d.utils.DragAndDrop;
@@ -10,7 +11,7 @@ import com.badlogic.gdx.scenes.scene2d.utils.DragAndDrop;
 public class InventoryActor extends Window {
 
 
-    public InventoryActor(final Inventory inventory, final DragAndDrop dragAndDrop, final Skin skin) {
+    public InventoryActor(Screen currentScreen, final Inventory inventory, final DragAndDrop dragAndDrop, final Skin skin) {
         super("Inventory", skin);
 
         // basic layout
@@ -21,7 +22,7 @@ public class InventoryActor extends Window {
         // run through all slots and create SlotActors for each
         int i = 0;
         for (final Slot slot : inventory.getSlots()) {
-            final SlotActor slotActor = new SlotActor(skin, slot);
+            final SlotActor slotActor = new SlotActor(currentScreen, skin, slot);
             add(slotActor);
 
             dragAndDrop.addSource(new SlotSource(slotActor));

@@ -35,7 +35,7 @@ public class PlayerSprite extends Entity {
     public Facing direction;
 
 
-    public PlayerSprite(TwilightEternal game, final GameScreen screen) {
+    public PlayerSprite(final TwilightEternal game, final GameScreen screen) {
         super(game);
         this.screen = screen;
         this.state = IDLE;
@@ -54,6 +54,17 @@ public class PlayerSprite extends Entity {
 //        this.position.set(700, 700, 0);
 //        rectangle = currentSprite.rectangle;
 
+    }
+
+    public void setToLandingPage(final float x, final float y) {
+        this.rectangle.set(x, y, 30, 30);
+        this.position.x = x;
+        position.x = x;
+        this.position.y = y;
+        position.y = y;
+        locate(x, y);
+        animatedSprite.position.set(x, y, 0);
+        currentSprite.position.set(x, y, 0);
     }
 
     @Override
@@ -89,8 +100,8 @@ public class PlayerSprite extends Entity {
     }
 
     public void reversePosition() {
-        float newXPosition = configuration.width - position.x;
-        float newYPosition = position.y - 180;
+        final float newXPosition = configuration.width - position.x;
+        final float newYPosition = position.y - 180;
 
         this.rectangle.set(newXPosition, newYPosition, 30, 30);
         this.position.x = newXPosition;
