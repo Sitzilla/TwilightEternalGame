@@ -1,9 +1,9 @@
 package com.evansitzes.game.inventory;
 
-import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.badlogic.gdx.scenes.scene2d.ui.Window;
 import com.badlogic.gdx.scenes.scene2d.utils.DragAndDrop;
+import com.evansitzes.game.screens.TwilightEternalScreen;
 
 /**
  * Created by evan on 9/27/16.
@@ -11,7 +11,7 @@ import com.badlogic.gdx.scenes.scene2d.utils.DragAndDrop;
 public class InventoryActor extends Window {
 
 
-    public InventoryActor(Screen currentScreen, final Inventory inventory, final DragAndDrop dragAndDrop, final Skin skin) {
+    public InventoryActor(final TwilightEternalScreen currentScreen, final Inventory inventory, final DragAndDrop dragAndDrop, final Skin skin) {
         super("Inventory", skin);
 
         // basic layout

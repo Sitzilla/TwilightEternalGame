@@ -30,7 +30,7 @@ import static com.evansitzes.game.entity.sprites.PlayerSprite.Facing.*;
 /**
  * Created by evan on 6/8/16.
  */
-public class GameScreen implements Screen, InputProcessor {
+public class GameScreen extends TwilightEternalScreen implements Screen, InputProcessor {
     private final Configuration configuration;
     private final OrthographicCamera camera; // playerSprite Camera
 
@@ -57,7 +57,7 @@ public class GameScreen implements Screen, InputProcessor {
     private final float mapMinY = 0;
     private final float mapMaxY;
 
-    private final Stage stage;
+//    private final Stage stage;
 
     public GameScreen(final TwilightEternal game, final GameflowController gameflowController) {
         this.game = game;

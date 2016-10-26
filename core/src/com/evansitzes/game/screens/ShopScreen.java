@@ -21,7 +21,7 @@ import com.evansitzes.game.resources.Textures.Life;
 /**
  * Created by evan on 9/27/16.
  */
-public class ShopScreen implements Screen {
+public class ShopScreen extends TwilightEternalScreen implements Screen {
 
     private static final int SIZE_OF_INVENTORY = 25;
 
@@ -29,7 +29,7 @@ public class ShopScreen implements Screen {
     private Inventory inventory;
     private GameflowController gameflowController;
     private TwilightEternal game;
-    public static Stage stage;
+//    public static Stage stage;
     public InventorySprite inventorySprite;
     private final OrthographicCamera camera;
     private NinePatch divider;
