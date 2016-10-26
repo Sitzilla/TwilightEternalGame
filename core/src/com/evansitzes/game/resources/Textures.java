@@ -97,7 +97,7 @@ public class Textures {
     public class Npcs {
         public final TextureRegion VILLAGER = loadRandomVillager();
         public final TextureRegion GUARD = loadVillager()[4][1];
-        public final TextureRegion MERCHANT = loadVillager2()[0][7];
+        public final TextureRegion MERCHANT = loadMerchant()[0][1];
 
         // TODO this is pretty janky
         private TextureRegion loadRandomVillager() {
@@ -133,11 +133,11 @@ public class Textures {
             return splitTextureRegion(frameColumns, frameRows, new Texture(Gdx.files.internal("sprites/final_fantasy_characters.png")));
         }
 
-        private TextureRegion[][] loadVillager2() {
-            final int frameColumns = 12;
-            final int frameRows = 8;
+        private TextureRegion[][] loadMerchant() {
+            final int frameColumns = 3;
+            final int frameRows = 4;
 
-            return splitTextureRegion(frameColumns, frameRows, new Texture(Gdx.files.internal("sprites/knight.png")));
+            return splitTextureRegion(frameColumns, frameRows, new Texture(Gdx.files.internal("sprites/weird_purple_guy.png")));
         }
 //
 //        private static TextureRegion[][] loadGuard() {
