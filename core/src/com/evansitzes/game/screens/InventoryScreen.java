@@ -22,7 +22,7 @@ import com.evansitzes.game.resources.Textures.Life;
 /**
  * Created by evan on 9/27/16.
  */
-public class InventoryScreen implements Screen {
+public class InventoryScreen extends TwilightEternalScreen implements Screen {
 
     private static final int SIZE_OF_INVENTORY = 25;
     private static final int SIZE_OF_EQUIPMENT = 5;
@@ -33,7 +33,7 @@ public class InventoryScreen implements Screen {
     private EquipmentActor equipmentActor;
     private GameflowController gameflowController;
     private TwilightEternal game;
-    public static Stage stage;
+//    public static Stage stage;
     public InventorySprite inventorySprite;
     private final OrthographicCamera camera;
     private NinePatch health;
@@ -79,7 +79,7 @@ public class InventoryScreen implements Screen {
 
         final DragAndDrop dragAndDrop = new DragAndDrop();
         inventoryActor = new InventoryActor(this, inventory, dragAndDrop, skin);
-        equipmentActor = new EquipmentActor(equipment, dragAndDrop, skin);
+        equipmentActor = new EquipmentActor(this, equipment, dragAndDrop, skin);
         stage.addActor(inventoryActor);
         stage.addActor(equipmentActor);
         inventoryActor.setVisible(true);

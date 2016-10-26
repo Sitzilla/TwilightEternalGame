@@ -34,10 +34,6 @@ public class Conversation extends Dialog {
         setWidth(150);
 
 //            TextButton dbutton = new TextButton("Yes", skin);
-        if (isInteractive) {
-            button("yes", true);
-            button("no", false);
-        }
 
         key(Input.Keys.SPACE, false);
         key(Input.Keys.ENTER, false);
@@ -45,6 +41,12 @@ public class Conversation extends Dialog {
         key(Input.Keys.UP, false);
         key(Input.Keys.DOWN, false);
         key(Input.Keys.LEFT, false);
+
+        if (isInteractive) {
+            button("yes", true);
+            key(Input.Keys.ENTER, true);
+            button("no", false);
+        }
 //            invalidateHierarchy();
 //            invalidate();
 //            layout();

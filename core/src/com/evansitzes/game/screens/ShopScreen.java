@@ -21,23 +21,19 @@ import com.evansitzes.game.resources.Textures.Life;
 /**
  * Created by evan on 9/27/16.
  */
-public class ShopScreen implements Screen {
+public class ShopScreen extends TwilightEternalScreen implements Screen {
 
-    private static final int SIZE_OF_INVENTORY = 25;
+    private static final int SIZE_OF_INVENTORY = 50;
 
     private InventoryActor inventoryActor;
     private Inventory inventory;
     private GameflowController gameflowController;
     private TwilightEternal game;
-    public static Stage stage;
     public InventorySprite inventorySprite;
     private final OrthographicCamera camera;
     private NinePatch divider;
-//    private NinePatch container;
-    private float width;
-//    private int totalBarWidth;
+    private float height;
     private TextureRegion gradient;
-    private TextureRegion containerRegion;
     private BitmapFont font;
 
     public ShopScreen(final TwilightEternal game, final GameflowController gameflowController) {
@@ -45,8 +41,7 @@ public class ShopScreen implements Screen {
         this.gameflowController = gameflowController;
         this.inventorySprite = new InventorySprite(game);
 
-        gradient = Life.LIFE_BAR;
-        containerRegion = Life.LIFE_BAR_CONTAINER;
+        gradient = Life.LIFE_BAR_CONTAINER;
 
         divider = new NinePatch(gradient, 0, 0, 0, 0);
 //        container = new NinePatch(containerRegion, 5, 5, 2, 2);
@@ -84,7 +79,7 @@ public class ShopScreen implements Screen {
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT | GL20.GL_DEPTH_BUFFER_BIT);
 
         //TODO replace with better drawings
-        width = game.player.currentHealth / game.player.maxHealth * 100;
+        height = 500;
 
         // exit the inventory when spacebar key is pressed
         if (Gdx.input.isKeyPressed(Keys.SPACE)) {
@@ -97,7 +92,7 @@ public class ShopScreen implements Screen {
 //        inventorySprite.draw();
 
 //        container.draw(game.batch, 395, 195, totalBarWidth + 10, 20);
-        divider.draw(game.batch, 400, 200, 10, width);
+        divider.draw(game.batch, 200, 0, 10, height);
 
         font.draw(game.batch, "Press spacebar to exit", 300, 0);
         game.batch.end();

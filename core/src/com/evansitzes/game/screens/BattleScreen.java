@@ -26,7 +26,7 @@ import com.evansitzes.game.resources.BattleChoiceEnum;
 /**
  * Created by evan on 9/10/16.
  */
-public class BattleScreen implements Screen, InputProcessor {
+public class BattleScreen extends TwilightEternalScreen implements Screen, InputProcessor {
 
     private final TwilightEternal game;
     private final OrthographicCamera camera;
@@ -42,7 +42,7 @@ public class BattleScreen implements Screen, InputProcessor {
     private final Array<Enemy> enemies = new Array();
 
     private Skin skin;
-    private Stage stage;
+//    private Stage stage;
     private BattleInterface battleInterface;
     private BattleStatus battleStatus;
     private BattleChoiceEnum currentChoice;

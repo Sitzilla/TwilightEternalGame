@@ -17,7 +17,7 @@ import com.evansitzes.game.TwilightEternal;
 import com.evansitzes.game.resources.Sounds;
 import com.evansitzes.game.resources.Textures;
 
-public class TitleScreen implements Screen {
+public class TitleScreen extends TwilightEternalScreen implements Screen {
 
     private final TwilightEternal game;
 
