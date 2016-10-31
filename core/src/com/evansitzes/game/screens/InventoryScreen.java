@@ -78,6 +78,8 @@ public class InventoryScreen extends TwilightEternalScreen implements Screen {
         final Skin skin = new Skin(Gdx.files.internal("skins/uiskin.json"));
 
         final DragAndDrop dragAndDrop = new DragAndDrop();
+
+//        game.player.getEquipment();
         inventoryActor = new InventoryActor(this, inventory, dragAndDrop, skin);
         equipmentActor = new EquipmentActor(this, equipment, dragAndDrop, skin);
         stage.addActor(inventoryActor);
@@ -109,6 +111,7 @@ public class InventoryScreen extends TwilightEternalScreen implements Screen {
         health.draw(game.batch, 400, 200, width, 10);
 
         font.draw(game.batch, "Press spacebar to exit", 300, 0);
+        font.draw(game.batch, "Current player: " + game.player.name, 300, 500);
         game.batch.end();
 
         // handle all inputs and draw the whole UI
