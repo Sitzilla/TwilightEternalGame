@@ -2,6 +2,7 @@ package com.evansitzes.game.entity.team;
 
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.evansitzes.game.TwilightEternal;
+import com.evansitzes.game.http.HttpCall;
 import com.evansitzes.game.resources.Textures;
 
 /**
@@ -13,6 +14,8 @@ public class Player extends TeamMember {
 
     public Player(TwilightEternal game) {
         super(game);
+        name = new HttpCall().getPlayerName();
+        new HttpCall().getPlayerEquipment();
         maxHealth = 100;
         currentHealth = 80;
         score = 25;
