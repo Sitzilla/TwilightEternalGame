@@ -8,6 +8,8 @@ import com.evansitzes.game.entity.team.Player;
 import com.evansitzes.game.helpers.MyDataYamlFile;
 import com.evansitzes.game.model.CharactersEnvelope;
 
+import java.util.ArrayList;
+
 /**
  * Created by evan on 6/8/16.
  */
@@ -28,8 +30,7 @@ public class TwilightEternal extends Game {
     @Override
     public void create () {
         batch = new SpriteBatch();
-        players = new MyDataYamlFile().loadData();
-        player = new Player(this, players.getCharacters().get(0));
+        player = new Player(this, new MyDataYamlFile().loadData().getCharacters().get(0));
         //Use LibGDX's default Arial font.
         font = new BitmapFont();
 
@@ -46,6 +47,10 @@ public class TwilightEternal extends Game {
     public void dispose() {
         batch.dispose();
         font.dispose();
+    }
+
+    public void savePlayerState(final ArrayList<String> equipment) {
+        new MyDataYamlFile().saveEquipment(equipment);
     }
 
 }

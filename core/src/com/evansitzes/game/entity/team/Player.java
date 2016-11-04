@@ -5,6 +5,8 @@ import com.evansitzes.game.TwilightEternal;
 import com.evansitzes.game.helpers.Textures;
 import com.evansitzes.game.model.Character;
 
+import java.util.ArrayList;
+
 /**
  * Created by evan on 9/23/16.
  */
@@ -49,5 +51,11 @@ public class Player extends TeamMember {
         currentHealth = 0;
         dead = true;
         battleSprite.setRegion(Textures.Enemies.EXPLOSION);
+    }
+
+    public void saveEquipment(ArrayList<String> equipment) {
+        this.equipment = equipment;
+        game.savePlayerState(equipment);
+
     }
 }

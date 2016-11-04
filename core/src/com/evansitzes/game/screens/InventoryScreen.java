@@ -56,10 +56,10 @@ public class InventoryScreen extends TwilightEternalScreen implements Screen {
         container = new NinePatch(containerRegion, 5, 5, 2, 2);
         totalBarWidth = 100;
 
-        inventory = new Inventory(SIZE_OF_INVENTORY);
-        equipment = new Inventory(SIZE_OF_EQUIPMENT);
+        inventory = new Inventory(SIZE_OF_INVENTORY, game.player.equipment);
+        equipment = new Inventory(SIZE_OF_EQUIPMENT, game.player.equipment);
         inventory.createRandomItems();
-        equipment.createEquipment();
+        equipment.populateEquipment();
 
         font = new BitmapFont();
 
@@ -126,6 +126,9 @@ public class InventoryScreen extends TwilightEternalScreen implements Screen {
 
     @Override
     public void hide() {
+        // Save inventory to file
+        game.player.saveEquipment(equipment.getEquipment());
+
         Gdx.input.setInputProcessor(null);
         dispose();
     }

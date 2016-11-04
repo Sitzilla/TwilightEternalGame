@@ -2,19 +2,23 @@ package com.evansitzes.game.inventory;
 
 import com.badlogic.gdx.utils.Array;
 
+import java.util.ArrayList;
+
 /**
  * Created by evan on 9/27/16.
  */
 public class Inventory {
 
     private Array<Slot> slots;
+    private ArrayList<String> equipment;
 
-    public Inventory(final int size) {
+    public Inventory(final int size, final ArrayList<String> equipment) {
         slots = new Array<Slot>(size);
         for (int i = 0; i < size; i++) {
             slots.add(new Slot(null, 0));
         }
 
+        this.equipment = equipment;
     }
 
     public void createRandomItems() {
@@ -30,12 +34,30 @@ public class Inventory {
 //        }
     }
 
-    public void createEquipment() {
-        slots.get(0).add(new Item("bronze_helmet"), 1);
-        slots.get(1).add(new Item("bronze_armor"), 1);
-        slots.get(2).add(new Item("bronze_pants"), 1);
-        slots.get(3).add(new Item("bronze_boots"), 1);
-        slots.get(4).add(new Item("bronze_sword"), 1);
+    public void populateEquipment() {
+        for (int i = 0; i < slots.size; i++) {
+            if (equipment.get(i) != null) {
+                slots.get(i).add(new Item(equipment.get(i)), 1);
+                continue;
+            }
+
+            slots.get(i).add(new Item("blank"), 1);
+        }
+//        slots.get(0).add(new Item("bronze_helmet"), 1);
+//        slots.get(1).add(new Item("bronze_armor"), 1);
+//        slots.get(2).add(new Item("bronze_pants"), 1);
+//        slots.get(3).add(new Item("bronze_boots"), 1);
+//        slots.get(4).add(new Item("bronze_sword"), 1);
+    }
+
+    public ArrayList<String> getEquipment() {
+        final ArrayList<String> currentEquipment = new ArrayList<String>();
+
+        for (int i = 0; i < slots.size; i++) {
+            currentEquipment.add(slots.get(i).getItem().getName());
+        }
+
+        return currentEquipment;
     }
 
     public int checkInventory(final Item item) {

@@ -1,5 +1,9 @@
 ---
-  characters:
-    -
-      name: "Toshiro"
-      equipment: ["bronze_helmet", "bronze_armor", "bronze_pants", "bronze_boots", "bronze_sword"]
+characters:
+- name: "Toshiro"
+  equipment:
+  - "bronze_helmet"
+  - "bronze_armor"
+  - "bronze_pants"
+  - "bronze_boots"
+  - "bronze_sword"
