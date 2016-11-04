@@ -2,7 +2,7 @@ package com.evansitzes.game.inventory;
 
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
-import com.evansitzes.game.resources.Textures;
+import com.evansitzes.game.helpers.Textures;
 
 /**
  * Created by evan on 9/27/16.
@@ -47,6 +47,18 @@ public class Item {
 
         if (name.equals("bronze_sword")) {
             return Textures.Items.BRONZE_SWORD;
+        }
+
+        if (name.equals("apple")) {
+            return Textures.Items.APPLE;
+        }
+
+        if (name.equals("bone")) {
+            return Textures.Items.BONE;
+        }
+
+        if (name.equals("veggies")) {
+            return Textures.Items.VEGGIES;
         }
 
         return Textures.Items.BLANK;

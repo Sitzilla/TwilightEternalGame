@@ -2,6 +2,8 @@ package com.evansitzes.game.inventory;
 
 import com.badlogic.gdx.utils.Array;
 
+import java.util.ArrayList;
+
 /**
  * Created by evan on 9/27/16.
  */
@@ -14,28 +16,38 @@ public class Inventory {
         for (int i = 0; i < size; i++) {
             slots.add(new Slot(null, 0));
         }
-
     }
 
-    public void createRandomItems() {
-        // create some random items
-        for (final Slot slot : slots) {
-            slot.add(new Item("blank"), 1);
+    public void populateInventory(final ArrayList<String> equipment) {
+        for (int i = 0; i < slots.size; i++) {
+            if (equipment.get(i) != null) {
+                slots.get(i).add(new Item(equipment.get(i)), 1);
+                continue;
+            }
+
+            slots.get(i).add(new Item("blank"), 1);
+        }
+    }
+
+    public void populateEquipment(final ArrayList<String> equipment) {
+        for (int i = 0; i < slots.size; i++) {
+            if (equipment.get(i) != null) {
+                slots.get(i).add(new Item(equipment.get(i)), 1);
+                continue;
+            }
+
+            slots.get(i).add(new Item("blank"), 1);
+        }
+    }
+
+    public ArrayList<String> getItems() {
+        final ArrayList<String> currentItems = new ArrayList<String>();
+
+        for (int i = 0; i < slots.size; i++) {
+            currentItems.add(slots.get(i).getItem().getName());
         }
 
-//        // create a few random empty slots
-//        for (int i = 0; i < 3; i++) {
-//            final Slot randomSlot = slots.get(MathUtils.random(0, slots.size - 1));
-//            randomSlot.take(randomSlot.getAmount());
-//        }
-    }
-
-    public void createEquipment() {
-        slots.get(0).add(new Item("bronze_helmet"), 1);
-        slots.get(1).add(new Item("bronze_armor"), 1);
-        slots.get(2).add(new Item("bronze_pants"), 1);
-        slots.get(3).add(new Item("bronze_boots"), 1);
-        slots.get(4).add(new Item("bronze_sword"), 1);
+        return currentItems;
     }
 
     public int checkInventory(final Item item) {

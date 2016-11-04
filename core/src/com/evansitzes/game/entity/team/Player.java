@@ -2,8 +2,10 @@ package com.evansitzes.game.entity.team;
 
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.evansitzes.game.TwilightEternal;
-import com.evansitzes.game.http.HttpCall;
-import com.evansitzes.game.resources.Textures;
+import com.evansitzes.game.helpers.Textures;
+import com.evansitzes.game.model.Character;
+
+import java.util.ArrayList;
 
 /**
  * Created by evan on 9/23/16.
@@ -12,10 +14,11 @@ public class Player extends TeamMember {
 
     public Sprite battleSprite;
 
-    public Player(TwilightEternal game) {
+    public Player(final TwilightEternal game, final Character character) {
         super(game);
-        name = new HttpCall().getPlayerName();
-        new HttpCall().getPlayerEquipment();
+        name = character.getName();
+        equipment = character.getEquipment();
+        inventory = character.getInventory();
         maxHealth = 100;
         currentHealth = 80;
         score = 25;
@@ -40,7 +43,7 @@ public class Player extends TeamMember {
     }
 
     @Override
-    public void handle(float delta) {
+    public void handle(final float delta) {
 
     }
 
@@ -49,5 +52,12 @@ public class Player extends TeamMember {
         currentHealth = 0;
         dead = true;
         battleSprite.setRegion(Textures.Enemies.EXPLOSION);
+    }
+
+    public void saveEquipment(final ArrayList<String> equipment, final ArrayList<String> inventory) {
+        this.equipment = equipment;
+        this.inventory = inventory;
+        game.savePlayerState(equipment, inventory);
+
     }
 }

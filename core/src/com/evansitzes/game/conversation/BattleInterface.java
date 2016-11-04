@@ -10,7 +10,7 @@ import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import com.badlogic.gdx.utils.Array;
 import com.evansitzes.game.entity.enemy.Enemy;
 import com.evansitzes.game.entity.team.Player;
-import com.evansitzes.game.resources.BattleChoiceEnum;
+import com.evansitzes.game.helpers.BattleChoiceEnum;
 
 /**
  * Created by evan on 9/23/16.

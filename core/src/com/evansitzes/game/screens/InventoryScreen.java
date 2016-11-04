@@ -17,7 +17,7 @@ import com.evansitzes.game.entity.sprites.InventorySprite;
 import com.evansitzes.game.inventory.EquipmentActor;
 import com.evansitzes.game.inventory.Inventory;
 import com.evansitzes.game.inventory.InventoryActor;
-import com.evansitzes.game.resources.Textures.Life;
+import com.evansitzes.game.helpers.Textures.Life;
 
 /**
  * Created by evan on 9/27/16.
@@ -58,8 +58,8 @@ public class InventoryScreen extends TwilightEternalScreen implements Screen {
 
         inventory = new Inventory(SIZE_OF_INVENTORY);
         equipment = new Inventory(SIZE_OF_EQUIPMENT);
-        inventory.createRandomItems();
-        equipment.createEquipment();
+        inventory.populateInventory(game.player.inventory);
+        equipment.populateEquipment(game.player.equipment);
 
         font = new BitmapFont();
 
@@ -79,7 +79,7 @@ public class InventoryScreen extends TwilightEternalScreen implements Screen {
 
         final DragAndDrop dragAndDrop = new DragAndDrop();
 
-//        game.player.getEquipment();
+//        game.player.getItems();
         inventoryActor = new InventoryActor(this, inventory, dragAndDrop, skin);
         equipmentActor = new EquipmentActor(this, equipment, dragAndDrop, skin);
         stage.addActor(inventoryActor);
@@ -126,6 +126,9 @@ public class InventoryScreen extends TwilightEternalScreen implements Screen {
 
     @Override
     public void hide() {
+        // Save inventory to file
+        game.player.saveEquipment(equipment.getItems(), inventory.getItems());
+
         Gdx.input.setInputProcessor(null);
         dispose();
     }

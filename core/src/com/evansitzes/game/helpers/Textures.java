@@ -1,4 +1,4 @@
-package com.evansitzes.game.resources;
+package com.evansitzes.game.helpers;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Texture;
@@ -205,6 +205,9 @@ public class Textures {
         public static final TextureRegion BRONZE_PANTS = loadItems()[2][0];
         public static final TextureRegion BRONZE_ARMOR = loadItems()[1][0];
         public static final TextureRegion BRONZE_HELMET = loadItems()[0][0];
+        public static final TextureRegion APPLE = loadItems()[0][10];
+        public static final TextureRegion BONE = loadItems()[1][12];
+        public static final TextureRegion VEGGIES = loadItems()[0][9];
 
 
         private static TextureRegion[][] loadItems() {

@@ -4,7 +4,7 @@ import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.math.Rectangle;
 import com.evansitzes.game.TwilightEternal;
 import com.evansitzes.game.entity.Entity;
-import com.evansitzes.game.resources.Textures;
+import com.evansitzes.game.helpers.Textures;
 
 /**
  * Created by evan on 10/20/16.

@@ -16,7 +16,7 @@ import com.evansitzes.game.TwilightEternal;
 import com.evansitzes.game.entity.sprites.InventorySprite;
 import com.evansitzes.game.inventory.Inventory;
 import com.evansitzes.game.inventory.InventoryActor;
-import com.evansitzes.game.resources.Textures.Life;
+import com.evansitzes.game.helpers.Textures.Life;
 
 /**
  * Created by evan on 9/27/16.
@@ -48,7 +48,7 @@ public class ShopScreen extends TwilightEternalScreen implements Screen {
 //        totalBarWidth = 100;
 
         inventory = new Inventory(SIZE_OF_INVENTORY);
-        inventory.createRandomItems();
+//        inventory.createRandomItems();
 
         font = new BitmapFont();
 

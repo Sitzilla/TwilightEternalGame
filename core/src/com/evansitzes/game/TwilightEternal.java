@@ -5,6 +5,9 @@ import com.badlogic.gdx.assets.AssetManager;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.evansitzes.game.entity.team.Player;
+import com.evansitzes.game.helpers.MyDataYamlFile;
+
+import java.util.ArrayList;
 
 /**
  * Created by evan on 6/8/16.
@@ -25,7 +28,7 @@ public class TwilightEternal extends Game {
     @Override
     public void create () {
         batch = new SpriteBatch();
-        player = new Player(this);
+        player = new Player(this, new MyDataYamlFile().loadData().getCharacters().get(0));
         //Use LibGDX's default Arial font.
         font = new BitmapFont();
 
@@ -42,6 +45,10 @@ public class TwilightEternal extends Game {
     public void dispose() {
         batch.dispose();
         font.dispose();
+    }
+
+    public void savePlayerState(final ArrayList<String> equipment, final ArrayList<String> inventory) {
+        new MyDataYamlFile().saveEquipment(equipment, inventory);
     }
 
 }

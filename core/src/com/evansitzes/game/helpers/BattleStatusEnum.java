@@ -1,4 +1,4 @@
-package com.evansitzes.game.resources;
+package com.evansitzes.game.helpers;
 
 /**
  * Created by evan on 9/25/16.

@@ -66,7 +66,7 @@ public class GameScreen extends TwilightEternalScreen implements Screen, InputPr
         final float w = (float) Gdx.graphics.getWidth();
         final float h = (float) Gdx.graphics.getHeight();
 
-        camera = new OrthographicCamera();
+         camera = new OrthographicCamera();
         camera.setToOrtho(false, 864, 576); // 1.5 of w and h
         camera.position.set(configuration.startingPositionX, configuration.startingPositionY, 0);
         camera.update();

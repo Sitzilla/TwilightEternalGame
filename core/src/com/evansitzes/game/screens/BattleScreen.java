@@ -21,7 +21,7 @@ import com.evansitzes.game.conversation.BattleInterface;
 import com.evansitzes.game.conversation.BattleStatus;
 import com.evansitzes.game.entity.enemy.Enemy;
 import com.evansitzes.game.loaders.BattleLevelLoader;
-import com.evansitzes.game.resources.BattleChoiceEnum;
+import com.evansitzes.game.helpers.BattleChoiceEnum;
 
 /**
  * Created by evan on 9/10/16.
