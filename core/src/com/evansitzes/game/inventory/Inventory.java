@@ -20,12 +20,17 @@ public class Inventory {
 
     public void populateInventory(final ArrayList<String> equipment) {
         for (int i = 0; i < slots.size; i++) {
-            if (equipment.get(i) != null) {
-                slots.get(i).add(new Item(equipment.get(i)), 1);
-                continue;
-            }
 
-            slots.get(i).add(new Item("blank"), 1);
+           try {
+               if (equipment.get(i) != null) {
+                   slots.get(i).add(new Item(equipment.get(i)), 1);
+                   continue;
+               }
+
+               slots.get(i).add(new Item("blank"), 1);
+           } catch (IndexOutOfBoundsException e) {
+               slots.get(i).add(new Item("blank"), 1);
+           }
         }
     }
 

@@ -29,8 +29,8 @@ public class InventoryScreen extends TwilightEternalScreen implements Screen {
 
     private InventoryActor inventoryActor;
     private Inventory inventory;
-    private Inventory equipment;
     private EquipmentActor equipmentActor;
+    private Inventory equipment;
     private GameflowController gameflowController;
     private TwilightEternal game;
 //    public static Stage stage;
@@ -81,7 +81,10 @@ public class InventoryScreen extends TwilightEternalScreen implements Screen {
 
 //        game.player.getItems();
         inventoryActor = new InventoryActor(this, inventory, dragAndDrop, skin);
+        inventoryActor.setPosition(80, 50);
         equipmentActor = new EquipmentActor(this, equipment, dragAndDrop, skin);
+        equipmentActor.setPosition(100, 700);
+
         stage.addActor(inventoryActor);
         stage.addActor(equipmentActor);
         inventoryActor.setVisible(true);

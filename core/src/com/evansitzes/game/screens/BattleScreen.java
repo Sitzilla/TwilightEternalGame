@@ -20,13 +20,17 @@ import com.evansitzes.game.TwilightEternal;
 import com.evansitzes.game.conversation.BattleInterface;
 import com.evansitzes.game.conversation.BattleStatus;
 import com.evansitzes.game.entity.enemy.Enemy;
-import com.evansitzes.game.loaders.BattleLevelLoader;
 import com.evansitzes.game.helpers.BattleChoiceEnum;
+import com.evansitzes.game.loaders.BattleLevelLoader;
+
+import java.util.Random;
 
 /**
  * Created by evan on 9/10/16.
  */
 public class BattleScreen extends TwilightEternalScreen implements Screen, InputProcessor {
+
+    private static final int MAXIMUM_GOLD_PER_KILL = 5;
 
     private final TwilightEternal game;
     private final OrthographicCamera camera;
@@ -150,7 +154,9 @@ public class BattleScreen extends TwilightEternalScreen implements Screen, Input
                 enemies.get(0).takeDamage(game.player.damage);
 
                 if (enemies.get(0).dead) {
-                    updateBattleStatus("You have killed the enemy!");
+                    final int goldWon = getRandomGold();
+                    updateBattleStatus("You have killed the enemy! \n You have found " + goldWon + " gold!");
+                    game.player.saveGold(goldWon);
 //                    battleStatus.text("You have killed the enemy!");
                 }
 
@@ -201,6 +207,11 @@ public class BattleScreen extends TwilightEternalScreen implements Screen, Input
     }
 
 
+    private int getRandomGold() {
+        final Random rand = new Random();
+        return rand.nextInt(MAXIMUM_GOLD_PER_KILL) + 1;
+    }
+
     private void endBattle() {
         gameflowController.setGameScreen();
     }
@@ -235,42 +246,42 @@ public class BattleScreen extends TwilightEternalScreen implements Screen, Input
     }
 
     @Override
-    public boolean keyDown(int keycode) {
+    public boolean keyDown(final int keycode) {
         return false;
     }
 
     @Override
-    public boolean keyUp(int keycode) {
+    public boolean keyUp(final int keycode) {
         return false;
     }
 
     @Override
-    public boolean keyTyped(char character) {
+    public boolean keyTyped(final char character) {
         return false;
     }
 
     @Override
-    public boolean touchDown(int screenX, int screenY, int pointer, int button) {
+    public boolean touchDown(final int screenX, final int screenY, final int pointer, final int button) {
         return false;
     }
 
     @Override
-    public boolean touchUp(int screenX, int screenY, int pointer, int button) {
+    public boolean touchUp(final int screenX, final int screenY, final int pointer, final int button) {
         return false;
     }
 
     @Override
-    public boolean touchDragged(int screenX, int screenY, int pointer) {
+    public boolean touchDragged(final int screenX, final int screenY, final int pointer) {
         return false;
     }
 
     @Override
-    public boolean mouseMoved(int screenX, int screenY) {
+    public boolean mouseMoved(final int screenX, final int screenY) {
         return false;
     }
 
     @Override
-    public boolean scrolled(int amount) {
+    public boolean scrolled(final int amount) {
         return false;
     }
 }

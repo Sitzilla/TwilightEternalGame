@@ -6,18 +6,19 @@ import com.badlogic.gdx.scenes.scene2d.utils.DragAndDrop;
 import com.evansitzes.game.screens.TwilightEternalScreen;
 
 /**
- * Created by evan on 9/27/16.
+ * Created by evan on 11/4/16.
  */
-public class EquipmentActor extends Window {
+public class ShopInventory extends Window {
 
-    public EquipmentActor(final TwilightEternalScreen currentScreen, final Inventory inventory, final DragAndDrop dragAndDrop, final Skin skin) {
-        super("Equipment", skin);
+    public ShopInventory(final TwilightEternalScreen currentScreen, final Inventory inventory, final DragAndDrop dragAndDrop, final Skin skin) {
+        super("Shop Inventory", skin);
 
         // basic layout
         defaults().space(8);
         row().fill().expandX();
 
         // run through all slots and create SlotActors for each
+        int i = 0;
         for (final Slot slot : inventory.getSlots()) {
             final SlotActor slotActor = new SlotActor(currentScreen, skin, slot);
             add(slotActor);
@@ -25,8 +26,11 @@ public class EquipmentActor extends Window {
             dragAndDrop.addSource(new SlotSource(slotActor));
             dragAndDrop.addTarget(new SlotTarget(slotActor));
 
-            // every cell we are going to jump to a new row
-            row();
+            i++;
+            // every 5 cells, we are going to jump to a new row
+            if (i % 5 == 0) {
+                row();
+            }
         }
 
         pack();
@@ -34,5 +38,4 @@ public class EquipmentActor extends Window {
         // it is hidden by default
         setVisible(false);
     }
-
 }

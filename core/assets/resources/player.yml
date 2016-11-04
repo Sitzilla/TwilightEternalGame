@@ -1,7 +1,7 @@
 ---
 characters:
 - name: "Toshiro"
-  gold: 100
+  gold: 110
   equipment:
   - "bronze_helmet"
   - "bronze_armor"

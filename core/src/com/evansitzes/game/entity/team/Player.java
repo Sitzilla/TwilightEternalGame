@@ -62,7 +62,7 @@ public class Player extends TeamMember {
     }
 
     public void saveGold(final int gold) {
-        this.gold = gold;
-        game.savePlayerGold(gold);
+        this.gold += gold;
+        game.savePlayerGold(this.gold);
     }
 }

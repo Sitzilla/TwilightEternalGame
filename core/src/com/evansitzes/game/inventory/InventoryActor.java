@@ -15,7 +15,6 @@ public class InventoryActor extends Window {
         super("Inventory", skin);
 
         // basic layout
-        setPosition(80, 50);
         defaults().space(8);
         row().fill().expandX();
 
@@ -27,6 +26,8 @@ public class InventoryActor extends Window {
 
             dragAndDrop.addSource(new SlotSource(slotActor));
             dragAndDrop.addTarget(new SlotTarget(slotActor));
+
+//            slot.addListener(this);
 
             i++;
             // every 5 cells, we are going to jump to a new row
