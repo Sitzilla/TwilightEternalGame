@@ -30,11 +30,12 @@ public class BattleScreen extends TwilightEternalScreen implements Screen, Input
 
     private final TwilightEternal game;
     private final OrthographicCamera camera;
-    private float gameTime = 0;
+    private float gameTime;
     private final Configuration configuration;
     private Level level;
     private float delay;
     private boolean playersTurn;
+    private boolean enemysTurn;
     private boolean endBattle;
 
     private TiledMapRenderer tiledMapRenderer;
@@ -55,6 +56,7 @@ public class BattleScreen extends TwilightEternalScreen implements Screen, Input
 
         this.level = BattleLevelLoader.load(Vector2.Zero, game, this, "forest-battle-map");
         playersTurn = true;
+        enemysTurn = false;
         delay = 2;
         endBattle = false;
 
@@ -112,14 +114,15 @@ public class BattleScreen extends TwilightEternalScreen implements Screen, Input
 
         if (playersTurn) {
             doPlayerAction();
-        } else {
+        }
+        if (enemysTurn) {
             doEnemyAction();
         }
 
     }
 
     private void doEnemyAction() {
-        delay = 3;
+        delay = 1;
 
         if (enemies.get(0).dead) {
             return;
@@ -128,24 +131,27 @@ public class BattleScreen extends TwilightEternalScreen implements Screen, Input
         Timer.schedule(new Timer.Task() {
             @Override
             public void run() {
-                battleStatus.text("Enemy has attacked! \n You take " + enemies.get(0).hitDamage + " damage.\n ");
-                game.player.takeDamage(enemies.get(0).hitDamage);
+                updateBattleStatus("Enemy has attacked! \n You take " + enemies.get(0).damage + " damage.\n ");
+//                battleStatus.text("Enemy has attacked! \n You take " + enemies.get(0).hitDamage + " damage.\n ");
+                game.player.takeDamage(enemies.get(0).damage);
+                playersTurn = true;
             }
         }, delay);
-
-        playersTurn = true;
+        enemysTurn = false;
     }
 
     private void doPlayerAction() {
         switch (currentChoice) {
             case ATTACK:
-                battleStatus.text("You have attacked! \n Enemy takes " + game.player.damage + " damage.\n ");
+                updateBattleStatus("You have attacked! \n Enemy takes " + game.player.damage + " damage.\n ");
+//                battleStatus.text("You have attacked! \n Enemy takes " + game.player.damage + " damage.\n ");
                 // TODO allow selection of enemy
-                delay = 2;
+                delay = 1;
                 enemies.get(0).takeDamage(game.player.damage);
 
                 if (enemies.get(0).dead) {
-                    battleStatus.text("You have killed the enemy!");
+                    updateBattleStatus("You have killed the enemy!");
+//                    battleStatus.text("You have killed the enemy!");
                 }
 
                 Timer.schedule(new Timer.Task() {
@@ -159,14 +165,18 @@ public class BattleScreen extends TwilightEternalScreen implements Screen, Input
 
                 battleInterface.resetChoice();
                 playersTurn = false;
+                enemysTurn = true;
                 break;
             case PEE_PANTS:
-                battleStatus.text("Haha you have have peed your pants!\n");
+                updateBattleStatus("Haha you have have peed your pants!\n");
+//                battleStatus.text("Haha you have have peed your pants!\n");
                 battleInterface.resetChoice();
                 playersTurn = false;
+                enemysTurn = true;
                 break;
             case RUN:
-                battleStatus.text("You have run away!\n");
+                updateBattleStatus("You have run away!\n");
+//                battleStatus.text("You have run away!\n");
                 battleInterface.resetChoice();
                 delay = 2;
 
@@ -180,6 +190,16 @@ public class BattleScreen extends TwilightEternalScreen implements Screen, Input
                 break;
         }
     }
+
+    private void updateBattleStatus(final String text) {
+        battleStatus.remove();
+        battleInterface.remove();
+        battleStatus = new BattleStatus();
+        battleStatus.text(text);
+        stage.addActor(battleStatus);
+        stage.addActor(battleInterface);
+    }
+
 
     private void endBattle() {
         gameflowController.setGameScreen();

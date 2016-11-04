@@ -17,7 +17,6 @@ public abstract class Enemy extends Entity {
     public int score = 0;
     public boolean invincible;
     public long lastHitTime = -1;
-    public int hitDamage = 5;
     public long lastFired;
     public boolean dead = false;
     public int damage;

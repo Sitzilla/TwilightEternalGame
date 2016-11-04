@@ -16,7 +16,6 @@ public class Conversation extends Dialog {
 
     //TODO move gameflow logic out of conversation
     public Conversation(final boolean isInteractive, GameflowController gameflowController) {
-//        super("", new Skin(Gdx.files.internal("skins/golden-ui-skin.json")));
         super("", new Skin(Gdx.files.internal("skins/james/plain-james-ui.json")));
 
         setMovable(false);

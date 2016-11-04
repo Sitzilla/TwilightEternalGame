@@ -66,7 +66,7 @@ public class Textures {
             return loadSprite()[0][1];
         }
         private static TextureRegion loadBattlePlayer() {
-            return loadBattleSprite()[0][0];
+            return loadSprite()[1][1];
         }
         private static TextureRegion loadInventoryPlayer() {
             return loadInventorySprite()[0][0];
