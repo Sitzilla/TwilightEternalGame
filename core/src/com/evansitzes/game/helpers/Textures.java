@@ -1,4 +1,4 @@
-package com.evansitzes.game.resources;
+package com.evansitzes.game.helpers;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Texture;

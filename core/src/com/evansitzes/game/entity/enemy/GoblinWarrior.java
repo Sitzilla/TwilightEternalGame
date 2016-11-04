@@ -2,7 +2,7 @@ package com.evansitzes.game.entity.enemy;
 
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.evansitzes.game.TwilightEternal;
-import com.evansitzes.game.resources.Textures;
+import com.evansitzes.game.helpers.Textures;
 
 /**
  * Created by evan on 6/9/16.

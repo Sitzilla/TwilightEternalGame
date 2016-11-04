@@ -4,7 +4,6 @@ import com.evansitzes.game.TwilightEternal;
 import com.evansitzes.game.entity.Entity;
 
 import java.util.ArrayList;
-import java.util.List;
 
 /**
  * Created by evan on 9/23/16.
@@ -17,7 +16,7 @@ public abstract class TeamMember extends Entity {
     public int score;
     public int damage;
     public boolean dead;
-    private final List<String> equipment = new ArrayList<String>();
+    public ArrayList<String> equipment;
 
     public TeamMember(final TwilightEternal game) {
         super(game);

@@ -4,7 +4,7 @@ import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.evansitzes.game.TwilightEternal;
 import com.evansitzes.game.entity.team.TeamMember;
-import com.evansitzes.game.resources.Textures;
+import com.evansitzes.game.helpers.Textures;
 
 /**
  * Created by evan on 9/27/16.

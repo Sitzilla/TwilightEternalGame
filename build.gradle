@@ -4,8 +4,7 @@ buildscript {
         mavenCentral()
         maven { url "https://oss.sonatype.org/content/repositories/snapshots/" }
     }
-    dependencies {
-    }
+
 }
 
 allprojects {
@@ -50,6 +49,10 @@ project(":core") {
     dependencies {
         compile "com.badlogicgames.gdx:gdx:$gdxVersion"
         compile "com.badlogicgames.gdx:gdx-box2d:$gdxVersion"
+        compile 'org.codehaus.jackson:jackson-mapper-asl:1.9.13'
+        compile 'com.fasterxml.jackson.dataformat:jackson-dataformat-yaml:2.7.4'
+        compile 'com.fasterxml.jackson.core:jackson-databind:2.6.5'
+        compile 'com.fasterxml.jackson.datatype:jackson-datatype-joda:2.1.1'
     }
 }
 

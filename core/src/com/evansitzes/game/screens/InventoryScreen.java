@@ -17,7 +17,7 @@ import com.evansitzes.game.entity.sprites.InventorySprite;
 import com.evansitzes.game.inventory.EquipmentActor;
 import com.evansitzes.game.inventory.Inventory;
 import com.evansitzes.game.inventory.InventoryActor;
-import com.evansitzes.game.resources.Textures.Life;
+import com.evansitzes.game.helpers.Textures.Life;
 
 /**
  * Created by evan on 9/27/16.

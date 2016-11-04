@@ -3,7 +3,7 @@ package com.evansitzes.game.entity.sprites;
 import com.evansitzes.game.Configuration;
 import com.evansitzes.game.TwilightEternal;
 import com.evansitzes.game.entity.Entity;
-import com.evansitzes.game.resources.Textures;
+import com.evansitzes.game.helpers.Textures;
 import com.evansitzes.game.screens.GameScreen;
 
 import static com.evansitzes.game.entity.sprites.PlayerSprite.Facing.*;

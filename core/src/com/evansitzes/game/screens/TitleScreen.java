@@ -14,8 +14,8 @@ import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.utils.TimeUtils;
 import com.evansitzes.game.GameflowController;
 import com.evansitzes.game.TwilightEternal;
-import com.evansitzes.game.resources.Sounds;
-import com.evansitzes.game.resources.Textures;
+import com.evansitzes.game.helpers.Sounds;
+import com.evansitzes.game.helpers.Textures;
 
 public class TitleScreen extends TwilightEternalScreen implements Screen {
 
