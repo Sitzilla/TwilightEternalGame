@@ -22,9 +22,10 @@ public class BattleInterface extends Dialog {
 //    private BattleStatusEnum status;
 
     public BattleInterface(final Array<Enemy> enemies, final Player player) {
-        super("", new Skin(Gdx.files.internal("skins/golden-ui-skin.json")));
-
-        final Skin skin = new Skin(Gdx.files.internal("skins/golden-ui-skin.json"));
+//        super("", new Skin(Gdx.files.internal("skins/golden-ui-skin.json")));
+        super("", new Skin(Gdx.files.internal("skins/james/plain-james-ui.json")));
+//        final Skin skin = new Skin(Gdx.files.internal("skins/golden-ui-skin.json"));
+        final Skin skin = new Skin(Gdx.files.internal("skins/james/plain-james-ui.json"));
         this.setMovable(false);
         setResizable(false);
 //            Label label = new Label("", skin);
@@ -48,7 +49,7 @@ public class BattleInterface extends Dialog {
 //            invalidate();
 //            layout();
 
-        choices = new List<String>(new Skin(Gdx.files.internal("skins/golden-ui-skin.json")));
+        choices = new List<String>(skin);
         currentChoice = BattleChoiceEnum.WAITING;
 //        status = BattleStatusEnum.ONGOING;
 

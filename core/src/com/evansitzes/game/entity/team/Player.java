@@ -19,8 +19,8 @@ public class Player extends TeamMember {
         name = character.getName();
         equipment = character.getEquipment();
         inventory = character.getInventory();
-        maxHealth = 100;
-        currentHealth = 80;
+        maxHealth = 50;
+        currentHealth = 50;
         score = 25;
         dead = false;
         damage = 25;

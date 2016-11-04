@@ -10,8 +10,9 @@ import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 public class BattleStatus extends Dialog {
 
     public BattleStatus() {
-        super("Battle Status", new Skin(Gdx.files.internal("skins/golden-ui-skin.json")));
-        final Skin skin = new Skin(Gdx.files.internal("skins/golden-ui-skin.json"));
+//        super("Battle Status", new Skin(Gdx.files.internal("skins/golden-ui-skin.json")));
+        super("Battle Status", new Skin(Gdx.files.internal("skins/james/plain-james-ui.json")));
+//        final Skin skin = new Skin(Gdx.files.internal("skins/golden-ui-skin.json"));
         this.setMovable(false);
         setResizable(false);
         setPosition(50, 0);
