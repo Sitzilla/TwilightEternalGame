@@ -35,7 +35,8 @@ public class MyDataYamlFile {
         return null;
     }
 
-    public static void saveEquipment(final ArrayList<String> equipment) {
+    //TODO combine these
+    public static void saveEquipment(final ArrayList<String> equipment, final ArrayList<String> inventory) {
         final ObjectMapper mapper = new ObjectMapper(new YAMLFactory()); // jackson databind
         mapper.registerModule(new JodaModule());
 
@@ -43,6 +44,7 @@ public class MyDataYamlFile {
         final Character player = new Character();
         player.setName("Toshiro");
         player.setEquipment(equipment);
+        player.setInventory(inventory);
 
         final ArrayList<Character> characters = new ArrayList<Character>();
         characters.add(player);

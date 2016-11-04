@@ -10,31 +10,15 @@ import java.util.ArrayList;
 public class Inventory {
 
     private Array<Slot> slots;
-    private ArrayList<String> equipment;
 
-    public Inventory(final int size, final ArrayList<String> equipment) {
+    public Inventory(final int size) {
         slots = new Array<Slot>(size);
         for (int i = 0; i < size; i++) {
             slots.add(new Slot(null, 0));
         }
-
-        this.equipment = equipment;
     }
 
-    public void createRandomItems() {
-        // create some random items
-        for (final Slot slot : slots) {
-            slot.add(new Item("blank"), 1);
-        }
-
-//        // create a few random empty slots
-//        for (int i = 0; i < 3; i++) {
-//            final Slot randomSlot = slots.get(MathUtils.random(0, slots.size - 1));
-//            randomSlot.take(randomSlot.getAmount());
-//        }
-    }
-
-    public void populateEquipment() {
+    public void populateInventory(final ArrayList<String> equipment) {
         for (int i = 0; i < slots.size; i++) {
             if (equipment.get(i) != null) {
                 slots.get(i).add(new Item(equipment.get(i)), 1);
@@ -43,21 +27,27 @@ public class Inventory {
 
             slots.get(i).add(new Item("blank"), 1);
         }
-//        slots.get(0).add(new Item("bronze_helmet"), 1);
-//        slots.get(1).add(new Item("bronze_armor"), 1);
-//        slots.get(2).add(new Item("bronze_pants"), 1);
-//        slots.get(3).add(new Item("bronze_boots"), 1);
-//        slots.get(4).add(new Item("bronze_sword"), 1);
     }
 
-    public ArrayList<String> getEquipment() {
-        final ArrayList<String> currentEquipment = new ArrayList<String>();
+    public void populateEquipment(final ArrayList<String> equipment) {
+        for (int i = 0; i < slots.size; i++) {
+            if (equipment.get(i) != null) {
+                slots.get(i).add(new Item(equipment.get(i)), 1);
+                continue;
+            }
+
+            slots.get(i).add(new Item("blank"), 1);
+        }
+    }
+
+    public ArrayList<String> getItems() {
+        final ArrayList<String> currentItems = new ArrayList<String>();
 
         for (int i = 0; i < slots.size; i++) {
-            currentEquipment.add(slots.get(i).getItem().getName());
+            currentItems.add(slots.get(i).getItem().getName());
         }
 
-        return currentEquipment;
+        return currentItems;
     }
 
     public int checkInventory(final Item item) {

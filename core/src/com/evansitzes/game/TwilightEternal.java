@@ -6,7 +6,6 @@ import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.evansitzes.game.entity.team.Player;
 import com.evansitzes.game.helpers.MyDataYamlFile;
-import com.evansitzes.game.model.CharactersEnvelope;
 
 import java.util.ArrayList;
 
@@ -19,7 +18,6 @@ public class TwilightEternal extends Game {
     public BitmapFont font;
     public Player player;
     private GameflowController gameflowController;
-    private CharactersEnvelope players;
 
     public static final AssetManager assets = new AssetManager();
 
@@ -49,8 +47,8 @@ public class TwilightEternal extends Game {
         font.dispose();
     }
 
-    public void savePlayerState(final ArrayList<String> equipment) {
-        new MyDataYamlFile().saveEquipment(equipment);
+    public void savePlayerState(final ArrayList<String> equipment, final ArrayList<String> inventory) {
+        new MyDataYamlFile().saveEquipment(equipment, inventory);
     }
 
 }

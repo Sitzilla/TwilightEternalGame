@@ -17,6 +17,7 @@ public abstract class TeamMember extends Entity {
     public int damage;
     public boolean dead;
     public ArrayList<String> equipment;
+    public ArrayList<String> inventory;
 
     public TeamMember(final TwilightEternal game) {
         super(game);

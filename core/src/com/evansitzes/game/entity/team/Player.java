@@ -18,6 +18,7 @@ public class Player extends TeamMember {
         super(game);
         name = character.getName();
         equipment = character.getEquipment();
+        inventory = character.getInventory();
         maxHealth = 100;
         currentHealth = 80;
         score = 25;
@@ -53,9 +54,10 @@ public class Player extends TeamMember {
         battleSprite.setRegion(Textures.Enemies.EXPLOSION);
     }
 
-    public void saveEquipment(ArrayList<String> equipment) {
+    public void saveEquipment(final ArrayList<String> equipment, final ArrayList<String> inventory) {
         this.equipment = equipment;
-        game.savePlayerState(equipment);
+        this.inventory = inventory;
+        game.savePlayerState(equipment, inventory);
 
     }
 }

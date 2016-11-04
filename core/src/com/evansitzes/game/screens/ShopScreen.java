@@ -47,8 +47,8 @@ public class ShopScreen extends TwilightEternalScreen implements Screen {
 //        container = new NinePatch(containerRegion, 5, 5, 2, 2);
 //        totalBarWidth = 100;
 
-        inventory = new Inventory(SIZE_OF_INVENTORY, game.player.equipment);
-        inventory.createRandomItems();
+        inventory = new Inventory(SIZE_OF_INVENTORY);
+//        inventory.createRandomItems();
 
         font = new BitmapFont();
 

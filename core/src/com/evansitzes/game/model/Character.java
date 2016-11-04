@@ -16,6 +16,8 @@ public class Character {
 //    private DateTime deploymentDate;
     @JsonProperty
     private ArrayList<String> equipment;
+    @JsonProperty
+    private ArrayList<String> inventory;
 //    @JsonProperty("datasource_ids")
 //    private ArrayList<String> datasourceIds;
 
@@ -36,6 +38,14 @@ public class Character {
 
     public void setEquipment(final ArrayList<String> equipment) {
         this.equipment = equipment;
+    }
+
+    public ArrayList<String> getInventory() {
+        return inventory;
+    }
+
+    public void setInventory(ArrayList<String> inventory) {
+        this.inventory = inventory;
     }
 
     //    public String getId() {
@@ -76,6 +86,7 @@ public class Character {
         return "Character{" +
                 "name='" + name + '\'' +
                 ", equipment=" + equipment +
+                ", inventory=" + inventory +
                 '}';
     }
 }
