@@ -10,8 +10,8 @@ import java.util.ArrayList;
 public class Character {
     @JsonProperty
     private String name;
-//    @JsonProperty
-//    private String id;
+    @JsonProperty
+    private int gold;
 //    @JsonProperty("deployment_date")
 //    private DateTime deploymentDate;
     @JsonProperty
@@ -44,8 +44,16 @@ public class Character {
         return inventory;
     }
 
-    public void setInventory(ArrayList<String> inventory) {
+    public void setInventory(final ArrayList<String> inventory) {
         this.inventory = inventory;
+    }
+
+    public int getGold() {
+        return gold;
+    }
+
+    public void setGold(final int gold) {
+        this.gold = gold;
     }
 
     //    public String getId() {

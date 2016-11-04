@@ -15,6 +15,7 @@ public abstract class TeamMember extends Entity {
     public float currentHealth;
     public int score;
     public int damage;
+    public int gold;
     public boolean dead;
     public ArrayList<String> equipment;
     public ArrayList<String> inventory;

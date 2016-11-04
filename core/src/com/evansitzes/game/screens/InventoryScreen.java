@@ -112,6 +112,8 @@ public class InventoryScreen extends TwilightEternalScreen implements Screen {
 
         font.draw(game.batch, "Press spacebar to exit", 300, 0);
         font.draw(game.batch, "Current player: " + game.player.name, 300, 500);
+        font.draw(game.batch, "Current gold: " + game.player.gold, 300, 480);
+
         game.batch.end();
 
         // handle all inputs and draw the whole UI

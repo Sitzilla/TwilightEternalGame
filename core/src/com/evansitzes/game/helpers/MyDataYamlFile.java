@@ -1,7 +1,6 @@
 package com.evansitzes.game.helpers;
 
 import com.badlogic.gdx.Gdx;
-import com.evansitzes.game.model.Character;
 import com.evansitzes.game.model.CharactersEnvelope;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.dataformat.yaml.YAMLFactory;
@@ -40,18 +39,29 @@ public class MyDataYamlFile {
         final ObjectMapper mapper = new ObjectMapper(new YAMLFactory()); // jackson databind
         mapper.registerModule(new JodaModule());
 
-        final CharactersEnvelope charactersEnvelope = new CharactersEnvelope();
-        final Character player = new Character();
-        player.setName("Toshiro");
-        player.setEquipment(equipment);
-        player.setInventory(inventory);
-
-        final ArrayList<Character> characters = new ArrayList<Character>();
-        characters.add(player);
-
-        charactersEnvelope.setCharacters(characters);
         try {
             final File file = new File(String.valueOf(Gdx.files.local("resources/player.yml")));
+            final CharactersEnvelope charactersEnvelope = mapper.readValue(file, CharactersEnvelope.class);
+
+            charactersEnvelope.getCharacters().get(0).setEquipment(equipment);
+            charactersEnvelope.getCharacters().get(0).setInventory(inventory);
+
+
+            mapper.writeValue(new FileOutputStream(file), charactersEnvelope);
+        } catch (final IOException e) {
+            System.out.println(e);
+        }
+    }
+
+    public static void saveGold(final int gold) {
+        final ObjectMapper mapper = new ObjectMapper(new YAMLFactory()); // jackson databind
+        mapper.registerModule(new JodaModule());
+
+        try {
+            final File file = new File(String.valueOf(Gdx.files.local("resources/player.yml")));
+            final CharactersEnvelope charactersEnvelope = mapper.readValue(file, CharactersEnvelope.class);
+
+            charactersEnvelope.getCharacters().get(0).setGold(gold);
             mapper.writeValue(new FileOutputStream(file), charactersEnvelope);
         } catch (final IOException e) {
             System.out.println(e);

@@ -19,6 +19,7 @@ public class Player extends TeamMember {
         name = character.getName();
         equipment = character.getEquipment();
         inventory = character.getInventory();
+        gold = character.getGold();
         maxHealth = 50;
         currentHealth = 50;
         score = 25;
@@ -58,6 +59,10 @@ public class Player extends TeamMember {
         this.equipment = equipment;
         this.inventory = inventory;
         game.savePlayerState(equipment, inventory);
+    }
 
+    public void saveGold(final int gold) {
+        this.gold = gold;
+        game.savePlayerGold(gold);
     }
 }

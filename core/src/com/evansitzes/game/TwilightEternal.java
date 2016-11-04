@@ -51,4 +51,7 @@ public class TwilightEternal extends Game {
         new MyDataYamlFile().saveEquipment(equipment, inventory);
     }
 
+    public void savePlayerGold(final int gold) {
+        new MyDataYamlFile().saveGold(gold);
+    }
 }
