@@ -38,6 +38,14 @@ public class Player extends TeamMember {
         }
     }
 
+    public void restoreLife(final int life) {
+        currentHealth += life;
+
+        if (currentHealth > maxHealth) {
+            currentHealth = maxHealth;
+        }
+    }
+
     @Override
     public void draw() {
         battleSprite.draw(game.batch);
@@ -63,6 +71,11 @@ public class Player extends TeamMember {
 
     public void saveGold(final int gold) {
         this.gold += gold;
+        game.savePlayerGold(this.gold);
+    }
+
+    public void loseGold(int gold) {
+        this.gold -= gold;
         game.savePlayerGold(this.gold);
     }
 }

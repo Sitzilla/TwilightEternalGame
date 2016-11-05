@@ -18,6 +18,7 @@ import com.evansitzes.game.inventory.EquipmentActor;
 import com.evansitzes.game.inventory.Inventory;
 import com.evansitzes.game.inventory.InventoryActor;
 import com.evansitzes.game.helpers.Textures.Life;
+import com.evansitzes.game.inventory.SlotActor;
 
 /**
  * Created by evan on 9/27/16.
@@ -122,6 +123,16 @@ public class InventoryScreen extends TwilightEternalScreen implements Screen {
         // handle all inputs and draw the whole UI
         stage.act(delta);
         stage.draw();
+    }
+
+    @Override
+    public void consumeItem(SlotActor slotActor) {
+        System.out.println("DOUBLE CLICK");
+
+        if (slotActor.getSlot().getItem().getName().equals("apple")) {
+            game.player.restoreLife(20);
+            inventory.removeItem(slotActor.getSlot().getItem());
+        }
     }
 
     @Override

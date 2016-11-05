@@ -15,10 +15,7 @@ import com.evansitzes.game.GameflowController;
 import com.evansitzes.game.TwilightEternal;
 import com.evansitzes.game.entity.sprites.InventorySprite;
 import com.evansitzes.game.helpers.Textures.Life;
-import com.evansitzes.game.inventory.EquipmentActor;
-import com.evansitzes.game.inventory.Inventory;
-import com.evansitzes.game.inventory.InventoryActor;
-import com.evansitzes.game.inventory.ShopInventory;
+import com.evansitzes.game.inventory.*;
 
 import java.util.ArrayList;
 
@@ -31,7 +28,7 @@ public class ShopScreen extends TwilightEternalScreen implements Screen {
     private static final int SIZE_OF_INVENTORY = 25;
     private static final int SIZE_OF_EQUIPMENT = 5;
 
-    private ShopInventory shopInventoryActor;
+    private ShopInventoryActor shopInventoryActorActor;
     private Inventory shopInventory;
     private InventoryActor inventoryActor;
     private Inventory inventory;
@@ -82,9 +79,9 @@ public class ShopScreen extends TwilightEternalScreen implements Screen {
         final Skin skin = new Skin(Gdx.files.internal("skins/uiskin.json"));
 
         final DragAndDrop dragAndDrop = new DragAndDrop();
-        shopInventoryActor = new ShopInventory(this, shopInventory, dragAndDrop, skin);
-        shopInventoryActor.setPosition(80, 50);
-        shopInventoryActor.setName("Shop Inventory");
+        shopInventoryActorActor = new ShopInventoryActor(this, shopInventory, skin);
+        shopInventoryActorActor.setPosition(80, 50);
+        shopInventoryActorActor.setName("Shop Inventory");
         inventoryActor = new InventoryActor(this, inventory, dragAndDrop, skin);
         inventoryActor.setPosition(700, 150);
         equipmentActor = new EquipmentActor(this, equipment, dragAndDrop, skin);
@@ -93,10 +90,10 @@ public class ShopScreen extends TwilightEternalScreen implements Screen {
         System.out.println("Width: " + Gdx.graphics.getWidth());
         System.out.println("Height: " + Gdx.graphics.getHeight());
 
-        stage.addActor(shopInventoryActor);
+        stage.addActor(shopInventoryActorActor);
         stage.addActor(inventoryActor);
         stage.addActor(equipmentActor);
-        shopInventoryActor.setVisible(true);
+        shopInventoryActorActor.setVisible(true);
         inventoryActor.setVisible(true);
         equipmentActor.setVisible(true);
     }
@@ -130,6 +127,14 @@ public class ShopScreen extends TwilightEternalScreen implements Screen {
         // handle all inputs and draw the whole UI
         stage.act(delta);
         stage.draw();
+    }
+
+    @Override
+    public void wasClicked(SlotActor slotActor) {
+        // Add to Inventory
+        inventory.store(slotActor.getSlot().getItem(), 1);
+        game.player.loseGold(20);
+        game.player.saveEquipment(equipment.getItems(), inventory.getItems());
     }
 
     @Override

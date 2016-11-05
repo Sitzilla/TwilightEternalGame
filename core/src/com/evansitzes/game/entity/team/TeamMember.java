@@ -26,6 +26,7 @@ public abstract class TeamMember extends Entity {
     }
 
     public abstract void takeDamage(final int rawDamage);
+//    public abstract void restoreLife(final int life);
     public abstract void draw();
     public abstract void kill();
 

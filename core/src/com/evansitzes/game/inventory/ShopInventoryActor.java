@@ -1,16 +1,17 @@
 package com.evansitzes.game.inventory;
 
+import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.badlogic.gdx.scenes.scene2d.ui.Window;
-import com.badlogic.gdx.scenes.scene2d.utils.DragAndDrop;
+import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import com.evansitzes.game.screens.TwilightEternalScreen;
 
 /**
  * Created by evan on 11/4/16.
  */
-public class ShopInventory extends Window {
+public class ShopInventoryActor extends Window {
 
-    public ShopInventory(final TwilightEternalScreen currentScreen, final Inventory inventory, final DragAndDrop dragAndDrop, final Skin skin) {
+    public ShopInventoryActor(final TwilightEternalScreen currentScreen, final Inventory inventory, final Skin skin) {
         super("Shop Inventory", skin);
 
         // basic layout
@@ -21,10 +22,20 @@ public class ShopInventory extends Window {
         int i = 0;
         for (final Slot slot : inventory.getSlots()) {
             final SlotActor slotActor = new SlotActor(currentScreen, skin, slot);
+
+            slotActor.addListener(new ClickListener() {
+                @Override
+                public void clicked(final InputEvent event, final float x, final float y) {
+                    currentScreen.wasClicked(slotActor);
+                }
+
+
+            });
+
             add(slotActor);
 
-            dragAndDrop.addSource(new SlotSource(slotActor));
-            dragAndDrop.addTarget(new SlotTarget(slotActor));
+//            dragAndDrop.addSource(new SlotSource(slotActor));
+//            dragAndDrop.addTarget(new SlotTarget(slotActor));
 
             i++;
             // every 5 cells, we are going to jump to a new row

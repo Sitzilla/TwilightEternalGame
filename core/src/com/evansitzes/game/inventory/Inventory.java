@@ -24,12 +24,10 @@ public class Inventory {
            try {
                if (equipment.get(i) != null) {
                    slots.get(i).add(new Item(equipment.get(i)), 1);
-                   continue;
+//                   continue;
                }
 
-               slots.get(i).add(new Item("blank"), 1);
            } catch (IndexOutOfBoundsException e) {
-               slots.get(i).add(new Item("blank"), 1);
            }
         }
     }
@@ -41,7 +39,7 @@ public class Inventory {
                 continue;
             }
 
-            slots.get(i).add(new Item("blank"), 1);
+//            slots.get(i).add(new Item("blank"), 1);
         }
     }
 
@@ -49,6 +47,9 @@ public class Inventory {
         final ArrayList<String> currentItems = new ArrayList<String>();
 
         for (int i = 0; i < slots.size; i++) {
+            if (slots.get(i).getItem() == null) {
+                continue;
+            }
             currentItems.add(slots.get(i).getItem().getName());
         }
 
@@ -69,21 +70,30 @@ public class Inventory {
 
     public boolean store(final Item item, final int amount) {
         // first check for a slot with the same item type
-        final Slot itemSlot = firstSlotWithItem(item);
-        if (itemSlot != null) {
-            itemSlot.add(item, amount);
+        // TODO activate this when we have combination logic
+//        final Slot itemSlot = firstSlotWithItem(item);
+//        if (itemSlot != null) {
+//            itemSlot.add(item, amount);
+//            return true;
+//        }
+
+        // now check for an available empty slot
+        final Slot emptySlot = firstSlotWithItem(null);
+        if (emptySlot != null) {
+            emptySlot.add(item, amount);
             return true;
-        } else {
-            // now check for an available empty slot
-            final Slot emptySlot = firstSlotWithItem(null);
-            if (emptySlot != null) {
-                emptySlot.add(item, amount);
-                return true;
-            }
         }
 
         // no slot to add
         return false;
+    }
+
+    public void removeItem(final Item item) {
+        for (final Slot slot : slots) {
+            if (slot.getItem() == item) {
+                slot.setItem(null, 0);
+            }
+        }
     }
 
     public Array<Slot> getSlots() {
@@ -99,5 +109,4 @@ public class Inventory {
 
         return null;
     }
-
 }

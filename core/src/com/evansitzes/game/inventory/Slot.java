@@ -64,6 +64,12 @@ public class Slot {
         return item;
     }
 
+    public void setItem(Item item, int amount) {
+        this.item = item;
+        this.amount = amount;
+        notifyListeners();
+    }
+
     public int getAmount() {
         return amount;
     }
