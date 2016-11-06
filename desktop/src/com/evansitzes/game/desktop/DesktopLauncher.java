@@ -12,9 +12,9 @@ public class DesktopLauncher {
 	public static void main(String[] args) {
 		final Configuration configuration = new Configuration();
 		LwjglApplicationConfiguration cfg = new LwjglApplicationConfiguration();
-		cfg.title = configuration.title;
-		cfg.width = configuration.width;
-		cfg.height = configuration.height;
+		cfg.title = configuration.TITLE;
+		cfg.width = configuration.WIDTH;
+		cfg.height = configuration.HEIGHT;
 
 		new LwjglApplication(new TwilightEternal(configuration), cfg);
 	}

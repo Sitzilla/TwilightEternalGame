@@ -23,13 +23,13 @@ public class BattleStatus extends Dialog {
 
     @Override
     public float getPrefWidth() {
-        // force dialog width
+        // force dialog WIDTH
         return 500f;
     }
 
     @Override
     public float getPrefHeight() {
-        // force dialog height
+        // force dialog HEIGHT
         return 200f;
     }
 

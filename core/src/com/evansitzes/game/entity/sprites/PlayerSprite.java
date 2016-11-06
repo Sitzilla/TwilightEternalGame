@@ -45,11 +45,11 @@ public class PlayerSprite extends Entity {
         currentSprite = new SimpleSprite(game, Textures.People.PLAYER);
         animatedSprite = new AnimatedSprite(game);
 
-        position.x = new Configuration().startingPositionX;
-        position.y = new Configuration().startingPositionY;
-//        locate(Configuration.startingPositionX, Configuration.startingPositionY);
-        animatedSprite.position.set(configuration.startingPositionX, configuration.startingPositionY, 0);
-        currentSprite.position.set(configuration.startingPositionX, configuration.startingPositionY, 0);
+        position.x = new Configuration().STARTING_POSITION_X;
+        position.y = new Configuration().STARTING_POSITION_Y;
+//        locate(Configuration.STARTING_POSITION_X, Configuration.STARTING_POSITION_Y);
+        animatedSprite.position.set(configuration.STARTING_POSITION_X, configuration.STARTING_POSITION_Y, 0);
+        currentSprite.position.set(configuration.STARTING_POSITION_X, configuration.STARTING_POSITION_Y, 0);
 
 //        this.position.set(700, 700, 0);
 //        rectangle = currentSprite.rectangle;
@@ -100,7 +100,7 @@ public class PlayerSprite extends Entity {
     }
 
     public void reversePosition() {
-        final float newXPosition = configuration.width - position.x;
+        final float newXPosition = configuration.WIDTH - position.x;
         final float newYPosition = position.y - 180;
 
         this.rectangle.set(newXPosition, newYPosition, 30, 30);

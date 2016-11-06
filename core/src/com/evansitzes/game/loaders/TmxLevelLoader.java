@@ -138,6 +138,7 @@ public class TmxLevelLoader {
         try {
             final Npc npc = (Npc) Class.forName(clazz).getConstructor(TwilightEternal.class).newInstance(game);
             POSITION_READER.readEntityPosition(npc, object);
+            npc.setSpritesPositions();
             return npc;
         }
         catch (Exception e) {

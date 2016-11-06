@@ -32,7 +32,7 @@ public class TitleScreen extends TwilightEternalScreen implements Screen {
         this.game = game;
         this.gameflowController = gameflowController;
         openingCamera = new OrthographicCamera();
-        openingCamera.setToOrtho(false, (float) (game.config.width * 0.75), (float) (game.config.height * 0.75));
+        openingCamera.setToOrtho(false, (float) (game.config.WIDTH * 0.75), (float) (game.config.HEIGHT * 0.75));
         startTime = TimeUtils.millis();
         buttonPressed = false;
 
@@ -50,10 +50,10 @@ public class TitleScreen extends TwilightEternalScreen implements Screen {
 
         if (!buttonPressed) {
             game.batch.begin();
-//            game.batch.draw(Textures.TitleScreen.LOGO, (float) (game.config.width * 0.75 / 2 - Textures.TitleScreen.LOGO.getWidth() / 2), (float) (game.config.height * 0.75 - 200));
-//            game.batch.draw(Textures.TitleScreen.PRESS_ANY_BUTTON, (float) (game.config.width * 0.75 / 2 - Textures.TitleScreen.PRESS_ANY_BUTTON.getWidth() * 0.75 / 1.5), 250);
-            game.batch.draw(Textures.TitleScreen.LOGO, (float) (game.config.width / 1.95 - Textures.TitleScreen.LOGO.getWidth() / 2), (float) (game.config.height - 300));
-            game.batch.draw(Textures.TitleScreen.PRESS_ANY_BUTTON, (float) (game.config.width / 1.7 - Textures.TitleScreen.PRESS_ANY_BUTTON.getWidth() / 1.5), 300);
+//            game.batch.draw(Textures.TitleScreen.LOGO, (float) (game.config.WIDTH * 0.75 / 2 - Textures.TitleScreen.LOGO.getWidth() / 2), (float) (game.config.HEIGHT * 0.75 - 200));
+//            game.batch.draw(Textures.TitleScreen.PRESS_ANY_BUTTON, (float) (game.config.WIDTH * 0.75 / 2 - Textures.TitleScreen.PRESS_ANY_BUTTON.getWidth() * 0.75 / 1.5), 250);
+            game.batch.draw(Textures.TitleScreen.LOGO, (float) (game.config.WIDTH / 1.95 - Textures.TitleScreen.LOGO.getWidth() / 2), (float) (game.config.HEIGHT - 300));
+            game.batch.draw(Textures.TitleScreen.PRESS_ANY_BUTTON, (float) (game.config.WIDTH / 1.7 - Textures.TitleScreen.PRESS_ANY_BUTTON.getWidth() / 1.5), 300);
 
             game.batch.end();
 

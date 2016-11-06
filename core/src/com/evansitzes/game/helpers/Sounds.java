@@ -11,7 +11,7 @@ public class Sounds {
     public static final Music MAIN_THEME = Gdx.audio.newMusic(Gdx.files.internal("sound/song-of-healing.mp3"));
     static { MAIN_THEME.setLooping(true); }
 
-    public static final Music TITLE_THEME = Gdx.audio.newMusic(Gdx.files.internal("sound/title-theme.mp3"));
+    public static final Music TITLE_THEME = Gdx.audio.newMusic(Gdx.files.internal("sound/TITLE-theme.mp3"));
     static { TITLE_THEME.setLooping(true); }
 
     public void dispose() {

@@ -1,6 +1,8 @@
 package com.evansitzes.game.entity.npc;
 
+import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.math.Rectangle;
+import com.evansitzes.game.Configuration;
 import com.evansitzes.game.TwilightEternal;
 import com.evansitzes.game.entity.Entity;
 
@@ -11,7 +13,7 @@ public abstract class Npc extends Entity {
 
 //    public Movement movement;
 
-    public boolean expire = false;
+    public Sprite sprite;
 
     public int life = 1;
     public int score = 0;
@@ -28,12 +30,35 @@ public abstract class Npc extends Entity {
         super(game);
         conversationRectangle = new Rectangle();
     }
-    public boolean overlapsConversationZone(final Entity entity) {
-        return false;
+
+    @Override
+    public void handle(float delta) {
+
     }
 
+    public boolean overlapsConversationZone(final Entity entity) {
+        if (conversationRectangle == null) { return false; }
 
-    public abstract void draw();
-    public abstract void kill();
+        return conversationRectangle.overlaps(entity.rectangle);
+    }
+
+    public void draw() {
+        sprite.draw(game.batch);
+    }
+
+    public void setSpritesPositions() {
+        final Configuration configuration = new Configuration();
+        sprite.setPosition(this.x - configuration.NPC_STARTING_OFFSET_X, this.y - configuration.NPC_STARTING_OFFSET_Y);
+
+        this.rectangle.set(this.x - configuration.NPC_RECTANGLE_OFFSET_X,
+                this.y - configuration.NPC_RECTANGLE_OFFSET_Y,
+                configuration.NPC_RECTANGLE_WIDTH,
+                configuration.NPC_RECTANGLE_HEIGHT);
+
+        conversationRectangle.set(this.x - configuration.NPC_CONVERSATION_RECTANGLE_OFFSET_X,
+                this.y - configuration.NPC_CONVERSATION_RECTANGLE_OFFSET_Y,
+                configuration.NPC_CONVERSATION_RECTANGLE_WIDTH,
+                configuration.NPC_CONVERSATION_RECTANGLE_HEIGHT);
+    }
 
 }
