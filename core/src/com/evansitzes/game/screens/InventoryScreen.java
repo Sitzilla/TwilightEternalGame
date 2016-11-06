@@ -80,7 +80,7 @@ public class InventoryScreen extends TwilightEternalScreen implements Screen {
 
         final DragAndDrop dragAndDrop = new DragAndDrop();
 
-//        game.player.getItems();
+//        game.player.getArticles();
         inventoryActor = new InventoryActor(this, inventory, dragAndDrop, skin);
         inventoryActor.setPosition(80, 50);
         equipmentActor = new EquipmentActor(this, equipment, dragAndDrop, skin);

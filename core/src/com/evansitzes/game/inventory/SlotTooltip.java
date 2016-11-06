@@ -14,7 +14,7 @@ public class SlotTooltip extends Window implements SlotListener {
     private Slot slot;
 
     public SlotTooltip(final Slot slot, final Skin skin) {
-        super("Item", skin);
+        super("Article", skin);
         this.slot = slot;
         this.skin = skin;
         hasChanged(slot);
@@ -30,7 +30,7 @@ public class SlotTooltip extends Window implements SlotListener {
         }
 
         clear();
-        final Label label = new Label(slot.getItem().getName(), skin);
+        final Label label = new Label(slot.getItem().getName() + " \n" + slot.getItem().getDescription(), skin);
         add(label);
         pack();
     }

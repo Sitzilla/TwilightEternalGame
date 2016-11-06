@@ -1,6 +1,9 @@
 package com.evansitzes.game.inventory;
 
 import com.badlogic.gdx.utils.Array;
+import com.evansitzes.game.helpers.YamlParser;
+import com.evansitzes.game.model.Article;
+import com.evansitzes.game.model.ArticlesEnvelope;
 
 import java.util.ArrayList;
 
@@ -10,12 +13,16 @@ import java.util.ArrayList;
 public class Inventory {
 
     private Array<Slot> slots;
+    private ArticlesEnvelope articlesEnvelope;
 
     public Inventory(final int size) {
         slots = new Array<Slot>(size);
         for (int i = 0; i < size; i++) {
             slots.add(new Slot(null, 0));
         }
+
+        articlesEnvelope = new YamlParser().loadItemMap();
+        System.out.println(articlesEnvelope);
     }
 
     public void populateInventory(final ArrayList<String> equipment) {
@@ -23,8 +30,8 @@ public class Inventory {
 
            try {
                if (equipment.get(i) != null) {
-                   slots.get(i).add(new Item(equipment.get(i)), 1);
-//                   continue;
+                   final Article article = articlesEnvelope.getArticle(equipment.get(i));
+                   slots.get(i).add(new Item(article.getName(), article.getDescription()), 1);
                }
 
            } catch (IndexOutOfBoundsException e) {
@@ -35,11 +42,12 @@ public class Inventory {
     public void populateEquipment(final ArrayList<String> equipment) {
         for (int i = 0; i < slots.size; i++) {
             if (equipment.get(i) != null) {
-                slots.get(i).add(new Item(equipment.get(i)), 1);
+                final Article article = articlesEnvelope.getArticle(equipment.get(i));
+                slots.get(i).add(new Item(article.getName(), article.getDescription()), 1);
                 continue;
             }
 
-//            slots.get(i).add(new Item("blank"), 1);
+//            slots.get(i).add(new Article("blank"), 1);
         }
     }
 

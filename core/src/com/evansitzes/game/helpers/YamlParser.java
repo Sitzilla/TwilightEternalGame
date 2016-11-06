@@ -1,6 +1,7 @@
 package com.evansitzes.game.helpers;
 
 import com.badlogic.gdx.Gdx;
+import com.evansitzes.game.model.ArticlesEnvelope;
 import com.evansitzes.game.model.CharactersEnvelope;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.dataformat.yaml.YAMLFactory;
@@ -15,7 +16,7 @@ import java.util.ArrayList;
 /**
  * Created by evan on 10/31/16.
  */
-public class MyDataYamlFile {
+public class YamlParser {
 
     public static CharactersEnvelope loadData(){
         final ObjectMapper mapper = new ObjectMapper(new YAMLFactory()); // jackson databind
@@ -23,10 +24,21 @@ public class MyDataYamlFile {
 
         try {
             final File file = new File(String.valueOf(Gdx.files.local("resources/player.yml")));
-            final CharactersEnvelope envelope = mapper.readValue(file, CharactersEnvelope.class);
+            return mapper.readValue(file, CharactersEnvelope.class);
+        } catch (final IOException e) {
+            System.out.println(e);
+        }
 
-            System.out.println(envelope);
-            return envelope;
+        return null;
+    }
+
+    public static ArticlesEnvelope loadItemMap() {
+        final ObjectMapper mapper = new ObjectMapper(new YAMLFactory()); // jackson databind
+        mapper.registerModule(new JodaModule());
+
+        try {
+            final File file = new File(String.valueOf(Gdx.files.local("resources/article.yml")));
+            return mapper.readValue(file, ArticlesEnvelope.class);
         } catch (final IOException e) {
             System.out.println(e);
         }

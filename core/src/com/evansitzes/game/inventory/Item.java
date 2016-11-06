@@ -13,7 +13,7 @@ public class Item {
     private String description;
     public Sprite sprite;
 
-    Item(final String name, final String description) {
+    public Item(final String name, final String description) {
         this.name = name;
         this.description = description;
         this.texture = new TextureRegion(getTexture(name));
