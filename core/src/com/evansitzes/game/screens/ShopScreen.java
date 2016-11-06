@@ -14,19 +14,26 @@ import com.badlogic.gdx.scenes.scene2d.utils.DragAndDrop;
 import com.evansitzes.game.GameflowController;
 import com.evansitzes.game.TwilightEternal;
 import com.evansitzes.game.entity.sprites.InventorySprite;
-import com.evansitzes.game.inventory.Inventory;
-import com.evansitzes.game.inventory.InventoryActor;
 import com.evansitzes.game.helpers.Textures.Life;
+import com.evansitzes.game.inventory.*;
+
+import java.util.ArrayList;
 
 /**
  * Created by evan on 9/27/16.
  */
 public class ShopScreen extends TwilightEternalScreen implements Screen {
 
-    private static final int SIZE_OF_INVENTORY = 50;
+    private static final int SIZE_OF_SHOP_INVENTORY = 50;
+    private static final int SIZE_OF_INVENTORY = 25;
+    private static final int SIZE_OF_EQUIPMENT = 5;
 
+    private ShopInventoryActor shopInventoryActorActor;
+    private Inventory shopInventory;
     private InventoryActor inventoryActor;
     private Inventory inventory;
+    private EquipmentActor equipmentActor;
+    private Inventory equipment;
     private GameflowController gameflowController;
     private TwilightEternal game;
     public InventorySprite inventorySprite;
@@ -41,14 +48,19 @@ public class ShopScreen extends TwilightEternalScreen implements Screen {
         this.gameflowController = gameflowController;
         this.inventorySprite = new InventorySprite(game);
 
+        inventory = new Inventory(SIZE_OF_INVENTORY);
+        equipment = new Inventory(SIZE_OF_EQUIPMENT);
+        inventory.populateInventory(game.player.inventory);
+        equipment.populateEquipment(game.player.equipment);
+
         gradient = Life.LIFE_BAR_CONTAINER;
 
         divider = new NinePatch(gradient, 0, 0, 0, 0);
 //        container = new NinePatch(containerRegion, 5, 5, 2, 2);
 //        totalBarWidth = 100;
 
-        inventory = new Inventory(SIZE_OF_INVENTORY);
-//        inventory.createRandomItems();
+        shopInventory = new Inventory(SIZE_OF_SHOP_INVENTORY);
+        shopInventory.populateInventory(getApples());
 
         font = new BitmapFont();
 
@@ -67,9 +79,23 @@ public class ShopScreen extends TwilightEternalScreen implements Screen {
         final Skin skin = new Skin(Gdx.files.internal("skins/uiskin.json"));
 
         final DragAndDrop dragAndDrop = new DragAndDrop();
+        shopInventoryActorActor = new ShopInventoryActor(this, shopInventory, skin);
+        shopInventoryActorActor.setPosition(80, 50);
+        shopInventoryActorActor.setName("Shop Inventory");
         inventoryActor = new InventoryActor(this, inventory, dragAndDrop, skin);
+        inventoryActor.setPosition(700, 150);
+        equipmentActor = new EquipmentActor(this, equipment, dragAndDrop, skin);
+        equipmentActor.setPosition(1150, 400);
+
+        System.out.println("Width: " + Gdx.graphics.getWidth());
+        System.out.println("Height: " + Gdx.graphics.getHeight());
+
+        stage.addActor(shopInventoryActorActor);
         stage.addActor(inventoryActor);
+        stage.addActor(equipmentActor);
+        shopInventoryActorActor.setVisible(true);
         inventoryActor.setVisible(true);
+        equipmentActor.setVisible(true);
     }
 
     @Override
@@ -93,6 +119,7 @@ public class ShopScreen extends TwilightEternalScreen implements Screen {
 
 //        container.draw(game.batch, 395, 195, totalBarWidth + 10, 20);
         divider.draw(game.batch, 200, 0, 10, height);
+        font.draw(game.batch, "Current gold: " + game.player.gold, 300, 480);
 
         font.draw(game.batch, "Press spacebar to exit", 300, 0);
         game.batch.end();
@@ -100,6 +127,14 @@ public class ShopScreen extends TwilightEternalScreen implements Screen {
         // handle all inputs and draw the whole UI
         stage.act(delta);
         stage.draw();
+    }
+
+    @Override
+    public void wasClicked(SlotActor slotActor) {
+        // Add to Inventory
+        inventory.store(slotActor.getSlot().getItem(), 1);
+        game.player.loseGold(20);
+        game.player.saveEquipment(equipment.getItems(), inventory.getItems());
     }
 
     @Override
@@ -126,5 +161,19 @@ public class ShopScreen extends TwilightEternalScreen implements Screen {
     @Override
     public void resume() {
 
+    }
+
+    private ArrayList<String> getApples() {
+
+        final ArrayList<String> apples = new ArrayList<String>();
+        apples.add("apple");
+        apples.add("apple");
+        apples.add("apple");
+        apples.add("apple");
+        apples.add("apple");
+        apples.add("apple");
+        apples.add("apple");
+
+        return apples;
     }
 }

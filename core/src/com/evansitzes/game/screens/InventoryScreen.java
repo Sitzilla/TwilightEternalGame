@@ -18,6 +18,7 @@ import com.evansitzes.game.inventory.EquipmentActor;
 import com.evansitzes.game.inventory.Inventory;
 import com.evansitzes.game.inventory.InventoryActor;
 import com.evansitzes.game.helpers.Textures.Life;
+import com.evansitzes.game.inventory.SlotActor;
 
 /**
  * Created by evan on 9/27/16.
@@ -29,8 +30,8 @@ public class InventoryScreen extends TwilightEternalScreen implements Screen {
 
     private InventoryActor inventoryActor;
     private Inventory inventory;
-    private Inventory equipment;
     private EquipmentActor equipmentActor;
+    private Inventory equipment;
     private GameflowController gameflowController;
     private TwilightEternal game;
 //    public static Stage stage;
@@ -79,9 +80,12 @@ public class InventoryScreen extends TwilightEternalScreen implements Screen {
 
         final DragAndDrop dragAndDrop = new DragAndDrop();
 
-//        game.player.getItems();
+//        game.player.getArticles();
         inventoryActor = new InventoryActor(this, inventory, dragAndDrop, skin);
+        inventoryActor.setPosition(80, 50);
         equipmentActor = new EquipmentActor(this, equipment, dragAndDrop, skin);
+        equipmentActor.setPosition(100, 700);
+
         stage.addActor(inventoryActor);
         stage.addActor(equipmentActor);
         inventoryActor.setVisible(true);
@@ -112,11 +116,23 @@ public class InventoryScreen extends TwilightEternalScreen implements Screen {
 
         font.draw(game.batch, "Press spacebar to exit", 300, 0);
         font.draw(game.batch, "Current player: " + game.player.name, 300, 500);
+        font.draw(game.batch, "Current gold: " + game.player.gold, 300, 480);
+
         game.batch.end();
 
         // handle all inputs and draw the whole UI
         stage.act(delta);
         stage.draw();
+    }
+
+    @Override
+    public void consumeItem(SlotActor slotActor) {
+        System.out.println("DOUBLE CLICK");
+
+        if (slotActor.getSlot().getItem().getName().equals("apple")) {
+            game.player.restoreLife(20);
+            inventory.removeItem(slotActor.getSlot().getItem());
+        }
     }
 
     @Override

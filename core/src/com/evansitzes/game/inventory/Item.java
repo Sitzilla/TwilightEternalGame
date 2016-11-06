@@ -9,11 +9,13 @@ import com.evansitzes.game.helpers.Textures;
  */
 public class Item {
     private TextureRegion texture;
-    private final String name;
-    public final Sprite sprite;
+    private String name;
+    private String description;
+    public Sprite sprite;
 
-    Item(final String name) {
+    public Item(final String name, final String description) {
         this.name = name;
+        this.description = description;
         this.texture = new TextureRegion(getTexture(name));
         this.sprite = new Sprite(texture);
 
@@ -25,6 +27,14 @@ public class Item {
 
     public String getName() {
         return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public String getDescription() {
+        return description;
     }
 
     //TODO replace this with DB lookup

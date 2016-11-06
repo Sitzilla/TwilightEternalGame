@@ -14,7 +14,6 @@ public class EquipmentActor extends Window {
         super("Equipment", skin);
 
         // basic layout
-        setPosition(100, 700);
         defaults().space(8);
         row().fill().expandX();
 

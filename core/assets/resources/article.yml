@@ -1,0 +1,18 @@
+---
+articles:
+- name: "bronze_helmet"
+  description: "Basic headgear"
+- name: "bronze_armor"
+  description: "Basic armor"
+- name: "bronze_pants"
+  description: "Basic leg gear"
+- name: "bronze_boots"
+  description: "Basic boots"
+- name: "bronze_sword"
+  description: "Basic sword"
+- name: "apple"
+  description: "Tasty treat (restore 20 HP)"
+- name: "veggies"
+  description: "Cooking Ingredients"
+- name: "bone"
+  description: "Animal bone"
