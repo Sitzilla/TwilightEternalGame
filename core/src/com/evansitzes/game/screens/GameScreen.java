@@ -42,6 +42,8 @@ public class GameScreen extends TwilightEternalScreen implements Screen, InputPr
 
     private Level level;
     private boolean battleMode;
+    private int[] layerBackground = {0, 1, 2, 3, 4, 5}; // Ground and Wall layers (behind player)
+    private int[] layerAfterBackground = {6, 7, 8}; // Foreground Layers (in front of player)
 
     private final Array<Entity> obstructables = new Array();
     private final Array<Enemy> enemies = new Array();
@@ -117,7 +119,7 @@ public class GameScreen extends TwilightEternalScreen implements Screen, InputPr
                 camera.position.set(calculateCameraPositionX(), calculateCameraPositionY(), 0);
                 camera.update();
                 tiledMapRenderer.setView(camera);
-                tiledMapRenderer.render();
+                tiledMapRenderer.render(layerBackground);
                 game.batch.setProjectionMatrix(camera.combined);
 
                 game.batch.begin();
@@ -155,6 +157,8 @@ public class GameScreen extends TwilightEternalScreen implements Screen, InputPr
                 }
 
                 game.batch.end();
+
+                tiledMapRenderer.render(layerAfterBackground);
                 handleEnemies(delta);
                 break;
 
