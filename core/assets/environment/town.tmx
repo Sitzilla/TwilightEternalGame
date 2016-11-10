@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.0" orientation="orthogonal" renderorder="right-down" width="41" height="27" tilewidth="32" tileheight="32" nextobjectid="46">
+<map version="1.0" orientation="orthogonal" renderorder="right-down" width="41" height="27" tilewidth="32" tileheight="32" nextobjectid="73">
  <tileset firstgid="1" name="snowWIP" tilewidth="32" tileheight="32" tilecount="256" columns="16">
   <image source="snowWIP.png" trans="000000" width="512" height="512"/>
  </tileset>
@@ -15,67 +15,102 @@
  <tileset firstgid="3073" name="Castle2" tilewidth="32" tileheight="32" tilecount="256" columns="16">
   <image source="Castle2.png" trans="000000" width="512" height="512"/>
  </tileset>
- <layer name="base" width="41" height="27">
+ <layer name="GroundBottomLayer" width="41" height="27">
   <data encoding="base64" compression="zlib">
-   eJzt1rENACAIBEB63X8WBkDnEh3BAh7yBcl3fxELbIosn+1joDm7v6tRB4ar+jsi5uz+LyP/I4000kijKJClsrHCrmmMM94b4w2N7XeNkLP7aYzLBzfQh6k=
+   eJzt1E0OQDAQgNHu2/tfASdoLS0EB3EEXTORhoh26qeMmMWLRCs+TdVIIQz7rZoY6n13Nab+Tm6k0wg0PK+EKLnx040x7+VGf6Ne3c8R0Odgc4+KbUSpdEJr3EzaANd3djzWlX0C6xzaf9j4E7jxvcZM7v+7BaFG31mRar3d+0Ln2tuN2NkEushntvPWerVcqbKTQc6soqlitxgBdtV9dQ==
   </data>
  </layer>
- <layer name="tiles" width="41" height="27">
+ <layer name="GroundMiddleLayer" width="41" height="27">
   <data encoding="base64" compression="zlib">
-   eJztlEsKwjAQQLtz0VzErSvXPYIrj9CVegL1BOotrCewLl0U9SAFRXApfkCcUINDaL7GUjGBxwRmOnkMabIwCDLPX9Jw2KtJCnRq6dLt2zZwaKnymn6mRAa1XbTvgU8fGCCvqGaOQ/AZAeMKHDsGtTHaT8BnCsyQV/wlR1tSUrCqgYt3tEfnXO8oZknPflHqhSFvktAtKkfmYuLoGpnjBthKYH62eV0+vQuy+6fKV3VfvaM+N2APHBw4zsPyf3ehcDhxkfej6wLx6sARv2cY1bwfXMSw+R0FDqlgLongbFvHsvkx2PzuaK4sp3qbKDuun+gbvg6Tk2J+NNaV8w+w9jjhCTNCf6Q=
+   eJztwYEAAAAAw6D5U1/hAFUBAAAA8BoRTAAB
+  </data>
+ </layer>
+ <layer name="GroundTopLayer" width="41" height="27">
+  <data encoding="base64" compression="zlib">
+   eJztwYEAAAAAw6D5U1/hAFUBAAAA8BoRTAAB
+  </data>
+ </layer>
+ <layer name="WallBottomLayer" width="41" height="27">
+  <data encoding="base64" compression="zlib">
+   eJxjYBgFIxWwczMwaJKINXDQ1MLowAiLGC5ASC0pZpECnEgwF1ltHpCdD8QF3NjlqQnIdWMdkF0PxA10cGMQCeZmIKntA7L7gXgCN3b5UTAKRsEoGAWDB/wdLZ9HwSjAAD+A+eL3EMobIPf+HALuHSruHAVDFwAAyu8XIQ==
+  </data>
+ </layer>
+ <layer name="WallMiddleLayer" width="41" height="27">
+  <data encoding="base64" compression="zlib">
+   eJztlk0OwUAYhrufnsAN2LHxv7EhfjY2mmJN3IIQFyBOxQ2ItQ1LEilv0zZGM6XMSD9J3+TJl5m2M0/bSWYMpmkGqANK6bhePCYxxwF8hj5GxBz/PQl8z0xIsrqm5UDeJeerBT38WOkX10SO/rUaRBUOhksR7RIos0dfXXfmrkgi49jhHBtoN0GLczRBRf+NYzskA86xi3YP9DnHEWgrQORIPbGjmniOZ9QLe1TVmUiM6TnOuTEOChxnzGEFppLjeY4rwv+c4npMsmdSBB3z7JkCQUd7T6tx+5vMWXeNZzc/eMegs+4R9fThfFvcv1PsaLHgs+7NroK9UpS9wEvUZ+dKcC19Gyvidxm/mT9qPz4LuCz/yDdOHDt3nItXOw==
+  </data>
+ </layer>
+ <layer name="WallTopLayer" width="41" height="27">
+  <data encoding="base64" compression="zlib">
+   eJyL4GZgiABiLyAeTCAc6q4uJDpqkLkxHeieDCCehURnDTI3jlRQyoNK0wOUQ+O+mxvBhol3I/ErcLgJWRyfGcSI4wMeQHWzsahFFusAuqUczZ0gfgcPdvX4xPCJUwJm4AhHXOKjYBSQCyYC0+8kOpftp4D2nSbBzoVAtYvo7MZbQPtuj9Z5o2CYgwdY0jg2sVEw8OAfN4L+N4Ti6D6d3dpGhH2khB857sen5xUWOXzqh1JcEwJPuRgYngHxcyB+wTXQrsEOvgLd9Q2IvwPxj0HqRnoCAMe7MPY=
+  </data>
+ </layer>
+ <layer name="ForegroundBottomLayer" width="41" height="27">
+  <data encoding="base64" compression="zlib">
+   eJxjYBgFo2AUjIJRMAroD15wMzC85EbQo2AUjALKwFukfHQAyl4LpNdxo4oNFnAB6p69QHofN6rYYAHYwgxXON4h0e3vqORXbGGGKxzfkGknzK0gGsbeP8BxRUz4nYfWMa+xqCXH/aToAbkPm3pC7kauE8+T4UZS9ZxHilt0gM+to3X3KBgFDAwAJYIlRw==
+  </data>
+ </layer>
+ <layer name="ForegroundMiddleLayer" width="41" height="27">
+  <data encoding="base64" compression="zlib">
+   eJztwYEAAAAAw6D5U1/hAFUBAAAA8BoRTAAB
+  </data>
+ </layer>
+ <layer name="ForegroundTopLayer" width="41" height="27">
+  <data encoding="base64" compression="zlib">
+   eJztwYEAAAAAw6D5U1/hAFUBAAAA8BoRTAAB
   </data>
  </layer>
  <objectgroup name="objects">
   <object id="2" name="Guard" type="npc" x="560" y="322.667"/>
   <object id="3" name="Guard" type="npc" x="660" y="324"/>
-  <object id="4" name="Merchant" type="npc" x="257.333" y="485.333"/>
+  <object id="4" name="Merchant" type="npc" x="257.333" y="450"/>
   <object id="5" name="Villager" type="npc" x="900" y="365.333"/>
   <object id="6" name="Villager" type="npc" x="1017.33" y="672"/>
-  <object id="7" name="Villager" type="npc" x="569.333" y="717.333"/>
-  <object id="8" name="Villager" type="npc" x="612" y="717.333"/>
+  <object id="7" name="Villager" type="npc" x="569.333" y="744.333"/>
+  <object id="8" name="Villager" type="npc" x="612" y="744.333"/>
   <object id="9" name="Villager" type="npc" x="472" y="450.667"/>
-  <object id="10" name="Villager" type="npc" x="285.333" y="597.333"/>
+  <object id="10" name="Villager" type="npc" x="325.333" y="593.333"/>
   <object id="14" name="wall" type="wall" x="149.333" y="230.667" width="1168" height="22.6667"/>
-  <object id="15" name="wall" type="wall" x="1157.33" y="365.333" width="53.3333" height="48"/>
-  <object id="17" name="wall" type="wall" x="836" y="356" width="149.333" height="61.3333"/>
-  <object id="18" name="wall" type="wall" x="202.667" y="349.333" width="109.333" height="86.6667"/>
-  <object id="19" name="wall" type="wall" x="133.333" y="245.333" width="24" height="517.333"/>
-  <object id="20" name="wall" type="wall" x="148" y="764" width="1162.67" height="30.6667"/>
-  <object id="22" name="wall" type="wall" x="164" y="600" width="276" height="152"/>
-  <object id="23" name="wall" type="wall" x="613.333" y="498.667" width="53.3333" height="109.333"/>
+  <object id="15" name="wall" type="wall" x="1157.33" y="352" width="53.3333" height="61.333"/>
+  <object id="17" name="wall" type="wall" x="836" y="385" width="125" height="32.3333"/>
+  <object id="18" name="wall" type="wall" x="193" y="349.333" width="124" height="67.667"/>
+  <object id="19" name="wall" type="wall" x="133.333" y="245.333" width="24" height="423.667"/>
+  <object id="20" name="wall" type="wall" x="0" y="764" width="1310.67" height="30.6667"/>
+  <object id="23" name="wall" type="wall" x="613.333" y="540" width="53.3333" height="68"/>
   <object id="28" name="portal" type="portal" x="1288" y="430" width="14" height="69">
    <properties>
     <property name="destination" value="woods"/>
    </properties>
   </object>
   <object id="29" name="east-landing" type="landing" x="1248" y="436" width="13" height="62"/>
-  <object id="30" name="wall" type="wall" x="721" y="635"/>
-  <object id="31" name="wall" type="wall" x="725" y="554"/>
-  <object id="32" name="wall" type="wall" x="563" y="551"/>
-  <object id="33" name="wall" type="wall" x="564" y="632"/>
-  <object id="34" name="wall" type="wall" x="1016" y="715" width="56" height="7"/>
-  <object id="35" name="wall" type="wall" x="1102" y="688" width="11" height="1"/>
-  <object id="36" name="wall" type="wall" x="906" y="582" width="11" height="47"/>
-  <object id="37" name="wall" type="wall" x="934" y="694" width="8"/>
-  <object id="40" name="wall" type="wall" x="840" y="650" width="14" height="79"/>
-  <object id="41" name="wall" type="wall" x="1222" y="631" width="16" height="94"/>
-  <object id="42" name="wall" type="wall" x="1195" y="660" width="10" height="33"/>
-  <object id="43" name="wall" type="wall" x="1287" y="565" width="14" height="30"/>
-  <object id="44" name="wall" type="wall" x="1289" y="691" width="10" height="29"/>
+  <object id="30" name="wall" type="wall" x="714" y="608" width="17" height="33"/>
+  <object id="31" name="wall" type="wall" x="714" y="543" width="15" height="34"/>
+  <object id="32" name="wall" type="wall" x="554" y="543" width="18" height="35"/>
+  <object id="33" name="wall" type="wall" x="555" y="607" width="15" height="36"/>
+  <object id="34" name="wall" type="wall" x="1001" y="706" width="83" height="26"/>
+  <object id="36" name="wall" type="wall" x="899" y="607" width="28" height="30"/>
+  <object id="40" name="wall" type="wall" x="833" y="703" width="28" height="29"/>
+  <object id="41" name="wall" type="wall" x="1220" y="705" width="23" height="30"/>
+  <object id="42" name="wall" type="wall" x="1187" y="673" width="25" height="30"/>
+  <object id="43" name="wall" type="wall" x="1283" y="579" width="18" height="16"/>
+  <object id="44" name="wall" type="wall" x="1284" y="707" width="25" height="26"/>
+  <object id="47" name="wall" type="wall" x="966" y="359" width="19" height="21"/>
+  <object id="49" name="wall" type="wall" x="197" y="422" width="22" height="23"/>
+  <object id="52" name="wall" type="wall" x="194" y="672" width="91" height="29"/>
+  <object id="53" name="wall" type="wall" x="46" y="653"/>
+  <object id="54" name="wall" type="wall" x="111" y="659"/>
+  <object id="55" name="wall" type="wall" x="143" y="658"/>
+  <object id="56" name="wall" type="wall" x="66" y="708" width="28" height="23"/>
+  <object id="58" name="wall" type="wall" x="4" y="614" width="142" height="23"/>
+  <object id="59" name="wall" type="wall" x="3" y="641" width="9" height="126"/>
+  <object id="60" name="wall" type="wall" x="322" y="703" width="58" height="31"/>
+  <object id="61" name="wall" type="wall" x="357" y="734" width="55" height="32"/>
+  <object id="62" name="wall" type="wall" x="420" y="697" width="25" height="29"/>
+  <object id="63" name="wall" type="wall" x="452" y="510" width="26" height="28"/>
+  <object id="64" name="wall" type="wall" x="931" y="673" width="26" height="28"/>
+  <object id="65" name="wall" type="wall" x="1088" y="675" width="33" height="25"/>
+  <object id="66" name="wall" type="wall" x="1219" y="640" width="27" height="29"/>
+  <object id="70" name="wall" type="wall" x="133" y="737" width="26" height="24"/>
+  <object id="72" name="wall" type="wall" x="198" y="577" width="53" height="64"/>
  </objectgroup>
- <layer name="Tile Layer 2" width="41" height="27">
-  <data encoding="base64" compression="zlib">
-   eJyT5GZgkKQQS/DgwNyU4whcdlKAUdxMBf/TAlM7HLHZAQKa3CRgoFs0eLDTMECSeVgwuhulgNiISGwOdIcFEFtCsQUabcVDvFmGeOSwuTGCSOwOdEMEFNsBsT0QOyCJefFA7HaiEFPixnAk9/gBsT8QByCJRQGxEw9t3BhEJE5Hck8cEMcDcQKSWBYQB1EBY3MjOWA7mfqIAUPZjS+A9EtuBD0Y3fgDSP/kRtDUdmMTCepxubEdyYxXVHBjKzcETwfiFhL9g8uN09HMWcGNH9MSEMozO7hxY3oB9LpRiwy7D0D1rAXS67hRxagBLLlRsRUZZl+A6tkLpPdxo4pRA4DqNA+k+s2LgnA8C6TPEQjHOySa/44bsw6OgprxHkh/INI8WJjdBdL3CITjGxLd+A+oPgMNZ0HN+A+iefBqh4MHWOzFJgYCf4h04zs65klyAMh9/wbYjY0E7Ed230CH5xSg/VNJcO8oGAWDAQAAkBOSJA==
-  </data>
- </layer>
- <layer name="Tile Layer 3" width="41" height="27">
-  <data encoding="base64" compression="zlib">
-   eJyL4GZgiABiLyAeTCAc6i4QiICyowaZG9OB7slAw1mDzI0jFZTyoNL0AOXchNkgUIHDTejixJiHzx5cwIMIdR1At5Sju4cHIj5YwAwcbsElPgpGAblgIjDPTKJz2X4KaN9pEuxcCFS7iM5uvAW07/ZonTcKRsGIAO+4ETSMvX+Q5f9/3Agaxj6Px43kuJ9UPdjUv0MTu4/HTHzuJ1dPG5o8NvX/kOKbEMDnfnL0vMIih0/9v0GWDikBT7kYGJ4B8XMgfsE10K7BDr4C3fUNiL8D8Y9B6kZ6AgBfKDM2
-  </data>
- </layer>
- <layer name="Tile Layer 5" width="41" height="27">
-  <data encoding="base64" compression="zlib">
-   eJzt0jEKADAIQ1F3b97eoL1scRSyCA5C/1sCATNpNtvynBMdz4m/bfEHquvaqG6HK25U17VR3QYAAACAyR7f+Aih
-  </data>
- </layer>
 </map>

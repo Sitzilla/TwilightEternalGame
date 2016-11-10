@@ -32,11 +32,12 @@ public class TmxLevelLoader {
     public static Level load(final Vector2 gridPosition, final TwilightEternal game, final GameScreen gameScreen, final String zone) {
         final TiledMap map = loadMap(zone);
         final Level level = new Level();
+
         setDefaults(level);
         level.name = (String) map.getProperties().get("name");
         level.level.set(gridPosition.x, gridPosition.y);
 
-        final TiledMapTileLayer tiledMapTileLayer = (TiledMapTileLayer) map.getLayers().get("tiles");
+        final TiledMapTileLayer tiledMapTileLayer = (TiledMapTileLayer) map.getLayers().get("GroundBottomLayer");
 
         final MapLayer objectLayer = map.getLayers().get("objects");
 
@@ -49,10 +50,17 @@ public class TmxLevelLoader {
         level.mapWidth = map.getProperties().get("width", Integer.class);
         level.tileHeight = map.getProperties().get("tileheight", Integer.class);
         level.tileWidth = map.getProperties().get("tilewidth", Integer.class);
-
-
         level.length =  tiledMapTileLayer.getHeight() * level.tileSize;
         level.velocity.set(0, 32);
+
+        // TODO create wall tiles
+        for (final MapLayer layer : map.getLayers()) {
+            if (!layer.getName().contains("Wall")) {
+                continue;
+            }
+
+            System.out.println(layer);
+        }
 
         for(RectangleMapObject object : objects) {
             final MapProperties properties = object.getProperties();
@@ -138,6 +146,7 @@ public class TmxLevelLoader {
         try {
             final Npc npc = (Npc) Class.forName(clazz).getConstructor(TwilightEternal.class).newInstance(game);
             POSITION_READER.readEntityPosition(npc, object);
+            npc.setSpritesPositions();
             return npc;
         }
         catch (Exception e) {

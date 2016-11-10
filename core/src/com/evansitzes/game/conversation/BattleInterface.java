@@ -34,7 +34,7 @@ public class BattleInterface extends Dialog {
 //            label.setAlignment(Align.center);
 
 //        padTop(50).padBottom(50);
-//            getContentTable().add(label).width(250).row();
+//            getContentTable().add(label).WIDTH(250).row();
 
 //        getButtonTable().padTop(50);
         setPosition(600, 0);
@@ -101,13 +101,13 @@ public class BattleInterface extends Dialog {
 
     @Override
     public float getPrefWidth() {
-        // force dialog width
+        // force dialog WIDTH
         return 650f;
     }
 
     @Override
     public float getPrefHeight() {
-        // force dialog height
+        // force dialog HEIGHT
         return 200f;
     }
 

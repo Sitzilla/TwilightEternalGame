@@ -42,6 +42,8 @@ public class GameScreen extends TwilightEternalScreen implements Screen, InputPr
 
     private Level level;
     private boolean battleMode;
+    private int[] layerBackground = {0, 1, 2, 3, 4, 5}; // Ground and Wall layers (behind player)
+    private int[] layerAfterBackground = {6, 7, 8}; // Foreground Layers (in front of player)
 
     private final Array<Entity> obstructables = new Array();
     private final Array<Enemy> enemies = new Array();
@@ -63,12 +65,10 @@ public class GameScreen extends TwilightEternalScreen implements Screen, InputPr
         this.game = game;
         this.gameflowController = gameflowController;
         configuration = new Configuration();
-        final float w = (float) Gdx.graphics.getWidth();
-        final float h = (float) Gdx.graphics.getHeight();
 
-         camera = new OrthographicCamera();
-        camera.setToOrtho(false, 864, 576); // 1.5 of w and h
-        camera.position.set(configuration.startingPositionX, configuration.startingPositionY, 0);
+        camera = new OrthographicCamera();
+        camera.setToOrtho(false, configuration.CAMERA_WIDTH, configuration.CAMERA_HEIGHT);
+        camera.position.set(configuration.STARTING_POSITION_X, configuration.STARTING_POSITION_Y, 0);
         camera.update();
 
         stage = new Stage();
@@ -77,7 +77,7 @@ public class GameScreen extends TwilightEternalScreen implements Screen, InputPr
 
         playerSprite = new PlayerSprite(game, this);
         this.battleMode = false;
-        this.level = TmxLevelLoader.load(Vector2.Zero, game, this, "woods");
+        this.level = TmxLevelLoader.load(Vector2.Zero, game, this, configuration.STARTING_LEVEL);
         mapMaxX = level.mapWidth * level.tileWidth;
         mapMaxY = level.mapHeight * level.tileHeight;
         this.tiledMapRenderer = new OrthogonalTiledMapRenderer(level.map);
@@ -119,7 +119,7 @@ public class GameScreen extends TwilightEternalScreen implements Screen, InputPr
                 camera.position.set(calculateCameraPositionX(), calculateCameraPositionY(), 0);
                 camera.update();
                 tiledMapRenderer.setView(camera);
-                tiledMapRenderer.render();
+                tiledMapRenderer.render(layerBackground);
                 game.batch.setProjectionMatrix(camera.combined);
 
                 game.batch.begin();
@@ -157,6 +157,8 @@ public class GameScreen extends TwilightEternalScreen implements Screen, InputPr
                 }
 
                 game.batch.end();
+
+                tiledMapRenderer.render(layerAfterBackground);
                 handleEnemies(delta);
                 break;
 
@@ -341,14 +343,11 @@ public class GameScreen extends TwilightEternalScreen implements Screen, InputPr
                     final Conversation conversation = new Conversation(true, gameflowController);
                     conversation.setText(npc.conversationText);
                     conversation.show(stage);
-//                    System.out.print("Result is: " + conversation.isSeeWares());
 
                     if (conversation.isSeeWares()) {
                         System.out.println("askjfahsdlkfjhlksjdhf");
                     }
                 }
-
-//                setGameState(State.PAUSE);
 
                 return;
             }
@@ -370,8 +369,6 @@ public class GameScreen extends TwilightEternalScreen implements Screen, InputPr
 
     @Override
     public void show() {
-//        Sounds.MAIN_THEME.play();
-
         // TODO use game state to control this
         final InputMultiplexer multiplexer = new InputMultiplexer();
         multiplexer.addProcessor(stage);

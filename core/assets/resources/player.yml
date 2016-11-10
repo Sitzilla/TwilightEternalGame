@@ -1,16 +1,17 @@
 ---
 characters:
 - name: "Toshiro"
-  gold: 33
+  gold: 100
   equipment:
   - "bronze_helmet"
-  - "bronze_armor"
   - "bronze_pants"
+  - "bronze_armor"
   - "bronze_boots"
   - "bronze_sword"
   inventory:
   - "veggies"
   - "bone"
+  - "apple"
   - "apple"
   - "apple"
   - "apple"

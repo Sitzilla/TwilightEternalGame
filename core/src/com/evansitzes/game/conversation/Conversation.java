@@ -27,7 +27,7 @@ public class Conversation extends Dialog {
 //            label.setAlignment(Align.center);
 
         padTop(50).padBottom(50);
-//            getContentTable().add(label).width(250).row();
+//            getContentTable().add(label).WIDTH(250).row();
         getButtonTable().padTop(50);
         setHeight(100);
         setWidth(150);
@@ -53,13 +53,13 @@ public class Conversation extends Dialog {
 
     @Override
     public float getPrefWidth() {
-        // force dialog width
+        // force dialog WIDTH
         return 800f;
     }
 
     @Override
     public float getPrefHeight() {
-        // force dialog height
+        // force dialog HEIGHT
         return 400f;
     }
 
