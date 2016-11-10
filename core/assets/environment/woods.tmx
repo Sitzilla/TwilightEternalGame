@@ -64,7 +64,7 @@
   <object id="12" name="wall" type="wall" x="365" y="172" width="77" height="17"/>
   <object id="13" name="wall" type="wall" x="357" y="108" width="17" height="76"/>
   <object id="16" name="wall" type="wall" x="128" y="120" width="227" height="11"/>
-  <object id="17" name="wall" type="wall" x="226" y="161" width="28" height="32"/>
+  <object id="17" name="wall" type="wall" x="226" y="161" width="28" height="26"/>
   <object id="19" name="wall" type="wall" x="840" y="171" width="21" height="75"/>
   <object id="20" name="wall" type="wall" x="859" y="164" width="158" height="23"/>
   <object id="22" name="wall" type="wall" x="1024" y="197" width="59" height="116"/>
@@ -94,7 +94,7 @@
   <object id="52" name="wall" type="wall" x="258" y="514" width="24" height="34"/>
   <object id="53" name="wall" type="wall" x="111" y="3" width="26" height="117"/>
   <object id="57" name="wall" type="wall" x="424" y="450" width="52" height="55"/>
-  <object id="60" name="wall" type="wall" x="304" y="206"/>
+  <object id="60" name="wall" type="wall" x="289" y="194" width="30" height="27"/>
   <object id="61" name="wall" type="wall" x="523" y="673" width="77" height="60"/>
   <object id="62" name="GoblinWarrior" type="enemy" x="138" y="435"/>
   <object id="63" name="GoblinWarrior" type="enemy" x="821" y="600"/>

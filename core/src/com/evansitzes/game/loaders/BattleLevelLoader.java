@@ -34,8 +34,8 @@ public class BattleLevelLoader {
         final TiledMapTileLayer tiledMapTileLayer = (TiledMapTileLayer) map.getLayers().get("tiles");
 
         level.map = map;
-        level.mapHeight = map.getProperties().get("HEIGHT", Integer.class);
-        level.mapWidth = map.getProperties().get("WIDTH", Integer.class);
+        level.mapHeight = map.getProperties().get("height", Integer.class);
+        level.mapWidth = map.getProperties().get("width", Integer.class);
         level.tileHeight = map.getProperties().get("tileheight", Integer.class);
         level.tileWidth = map.getProperties().get("tilewidth", Integer.class);
         level.velocity.set(0, 32);
