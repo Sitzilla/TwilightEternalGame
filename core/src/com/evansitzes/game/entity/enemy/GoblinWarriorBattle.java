@@ -1,6 +1,8 @@
 package com.evansitzes.game.entity.enemy;
 
+import com.badlogic.gdx.graphics.g2d.Animation;
 import com.badlogic.gdx.graphics.g2d.Sprite;
+import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.evansitzes.game.TwilightEternal;
 import com.evansitzes.game.helpers.Textures;
 
@@ -9,6 +11,11 @@ import com.evansitzes.game.helpers.Textures;
  */
 public class GoblinWarriorBattle extends Enemy {
     public Sprite sprite;
+    private TextureRegion currentFrame;
+    private Animation currentAnimation;
+    private float animationSpeed = 1f/6f;
+    private boolean looping = true;
+    private float stateTime;
 
     public GoblinWarriorBattle(final TwilightEternal game) {
         super(game);
@@ -27,6 +34,15 @@ public class GoblinWarriorBattle extends Enemy {
         if (life < 0) {
             kill();
         }
+    }
+
+    @Override
+    public void takesHit() {
+        stateTime = 20000;
+        currentAnimation = new Animation(animationSpeed, Textures.Enemies.GOBLIN_WARRIOR_BATTLE);
+        currentFrame = currentAnimation.getKeyFrame(stateTime, looping);
+
+        game.batch.draw(currentFrame, position.x + 20, position.y + 20);
     }
 
     @Override

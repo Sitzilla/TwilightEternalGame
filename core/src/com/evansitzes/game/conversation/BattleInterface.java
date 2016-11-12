@@ -2,6 +2,7 @@ package com.evansitzes.game.conversation;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
+import com.badlogic.gdx.scenes.scene2d.Touchable;
 import com.badlogic.gdx.scenes.scene2d.ui.Dialog;
 import com.badlogic.gdx.scenes.scene2d.ui.List;
 import com.badlogic.gdx.scenes.scene2d.ui.ScrollPane;
@@ -22,9 +23,7 @@ public class BattleInterface extends Dialog {
 //    private BattleStatusEnum status;
 
     public BattleInterface(final Array<Enemy> enemies, final Player player) {
-//        super("", new Skin(Gdx.files.internal("skins/golden-ui-skin.json")));
         super("", new Skin(Gdx.files.internal("skins/james/plain-james-ui.json")));
-//        final Skin skin = new Skin(Gdx.files.internal("skins/golden-ui-skin.json"));
         final Skin skin = new Skin(Gdx.files.internal("skins/james/plain-james-ui.json"));
         this.setMovable(false);
         setResizable(false);
@@ -35,7 +34,6 @@ public class BattleInterface extends Dialog {
 
 //        padTop(50).padBottom(50);
 //            getContentTable().add(label).WIDTH(250).row();
-
 //        getButtonTable().padTop(50);
         setPosition(600, 0);
 
@@ -60,6 +58,7 @@ public class BattleInterface extends Dialog {
         choices.setItems(choiceItems);
 
         final ScrollPane scrollPane = new ScrollPane(choices);
+        
         scrollPane.setOverscroll(false, false);
         scrollPane.setFadeScrollBars(false);
         scrollPane.setScrollingDisabled(true, false);
@@ -75,6 +74,7 @@ public class BattleInterface extends Dialog {
             @Override
             public void clicked(final InputEvent event, final float x, final float y) {
                 final String choice = choices.getSelected();
+                disableInterface();
 
                 if (choice.equals("Attack")) {
                     currentChoice = BattleChoiceEnum.ATTACK;
@@ -124,6 +124,14 @@ public class BattleInterface extends Dialog {
 //    public BattleStatusEnum pollStatus() {
 //        return status;
 //    }
+
+    public void disableInterface() {
+        this.setTouchable(Touchable.disabled);
+    }
+
+    public void enableInterface() {
+        this.setTouchable(Touchable.enabled);
+    }
 
     public BattleChoiceEnum pollChoice() {
         return currentChoice;

@@ -11,7 +11,7 @@ articles:
 - name: "bronze_sword"
   description: "Basic sword"
 - name: "apple"
-  description: "Tasty treat (restore 20 HP)"
+  description: "Tasty treat (restore 20 HP) \n *Double-click to consume*"
 - name: "veggies"
   description: "Cooking Ingredients"
 - name: "bone"
