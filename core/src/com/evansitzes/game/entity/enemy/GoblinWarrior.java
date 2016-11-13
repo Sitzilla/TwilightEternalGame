@@ -25,6 +25,11 @@ public class GoblinWarrior extends Enemy {
     }
 
     @Override
+    public void takesHit() {
+
+    }
+
+    @Override
     public void draw() {
 //        if (!dead) {
             sprite.setPosition(this.x, this.y);

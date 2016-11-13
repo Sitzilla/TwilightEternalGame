@@ -27,7 +27,7 @@ public abstract class Enemy extends Entity {
         name = "enemy";
 //        this.movement = movement;
     }
-
+    public abstract void takesHit();
     public abstract void takeDamage(final int rawDamage);
     public abstract void draw();
     public abstract void kill();

@@ -6,6 +6,9 @@ import com.badlogic.gdx.InputProcessor;
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.OrthographicCamera;
+import com.badlogic.gdx.graphics.g2d.BitmapFont;
+import com.badlogic.gdx.graphics.g2d.NinePatch;
+import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.maps.tiled.TiledMapRenderer;
 import com.badlogic.gdx.maps.tiled.renderers.OrthogonalTiledMapRenderer;
 import com.badlogic.gdx.math.Vector2;
@@ -21,6 +24,8 @@ import com.evansitzes.game.conversation.BattleInterface;
 import com.evansitzes.game.conversation.BattleStatus;
 import com.evansitzes.game.entity.enemy.Enemy;
 import com.evansitzes.game.helpers.BattleChoiceEnum;
+import com.evansitzes.game.helpers.Sounds;
+import com.evansitzes.game.helpers.Textures;
 import com.evansitzes.game.loaders.BattleLevelLoader;
 
 import java.util.Random;
@@ -41,6 +46,14 @@ public class BattleScreen extends TwilightEternalScreen implements Screen, Input
     private boolean playersTurn;
     private boolean enemysTurn;
     private boolean endBattle;
+
+    private NinePatch health;
+    private NinePatch container;
+    private float width;
+    private int totalBarWidth;
+    private TextureRegion gradient;
+    private TextureRegion containerRegion;
+    private BitmapFont font;
 
     private TiledMapRenderer tiledMapRenderer;
 
@@ -69,6 +82,14 @@ public class BattleScreen extends TwilightEternalScreen implements Screen, Input
         camera.position.set(320, 240, 0);
         camera.update();
 
+        // TODO abstract out healthbar
+        gradient = Textures.Life.LIFE_BAR;
+        containerRegion = Textures.Life.LIFE_BAR_CONTAINER;
+        health = new NinePatch(gradient, 0, 0, 0, 0);
+        container = new NinePatch(containerRegion, 5, 5, 2, 2);
+        totalBarWidth = 100;
+        font = new BitmapFont();
+
         stage = new Stage();
         skin = new Skin(Gdx.files.internal("skins/golden-ui-skin.json"));
         battleStatus = new BattleStatus();
@@ -88,7 +109,8 @@ public class BattleScreen extends TwilightEternalScreen implements Screen, Input
 
     @Override
     public void show() {
-
+//        MyInputProcessor inputProcessor = new MyInputProcessor();
+//        Gdx.input.setInputProcessor(inputProcessor);
     }
 
     @Override
@@ -99,6 +121,7 @@ public class BattleScreen extends TwilightEternalScreen implements Screen, Input
         tiledMapRenderer.setView(camera);
         tiledMapRenderer.render();
         game.batch.setProjectionMatrix(camera.combined);
+        width = game.player.currentHealth / game.player.maxHealth * totalBarWidth;
 
         game.batch.begin();
 
@@ -106,6 +129,10 @@ public class BattleScreen extends TwilightEternalScreen implements Screen, Input
             enemy.draw();
         }
         game.player.draw();
+
+        font.draw(game.batch, "Current life: " + game.player.currentHealth + "/" + game.player.maxHealth, 490, 145);
+        container.draw(game.batch, 505, 110, totalBarWidth + 10, 20);
+        health.draw(game.batch, 510, 115, width, 10);
 
         game.batch.end();
 
@@ -123,6 +150,8 @@ public class BattleScreen extends TwilightEternalScreen implements Screen, Input
             doEnemyAction();
         }
 
+
+
     }
 
     private void doEnemyAction() {
@@ -136,9 +165,14 @@ public class BattleScreen extends TwilightEternalScreen implements Screen, Input
             @Override
             public void run() {
                 updateBattleStatus("Enemy has attacked! \n You take " + enemies.get(0).damage + " damage.\n ");
-//                battleStatus.text("Enemy has attacked! \n You take " + enemies.get(0).hitDamage + " damage.\n ");
+                Sounds.REALISTIC_PUNCH.play();
                 game.player.takeDamage(enemies.get(0).damage);
                 playersTurn = true;
+                battleInterface.enableInterface();
+
+                if(game.player.dead) {
+                    endBattle();
+                }
             }
         }, delay);
         enemysTurn = false;
@@ -148,16 +182,16 @@ public class BattleScreen extends TwilightEternalScreen implements Screen, Input
         switch (currentChoice) {
             case ATTACK:
                 updateBattleStatus("You have attacked! \n Enemy takes " + game.player.damage + " damage.\n ");
-//                battleStatus.text("You have attacked! \n Enemy takes " + game.player.damage + " damage.\n ");
                 // TODO allow selection of enemy
                 delay = 1;
+                Sounds.REALISTIC_PUNCH.play();
+//                enemies.get(0).takesHit();
                 enemies.get(0).takeDamage(game.player.damage);
 
                 if (enemies.get(0).dead) {
                     final int goldWon = getRandomGold();
                     updateBattleStatus("You have killed the enemy! \n You have found " + goldWon + " gold!");
                     game.player.saveGold(goldWon);
-//                    battleStatus.text("You have killed the enemy!");
                 }
 
                 Timer.schedule(new Timer.Task() {
@@ -175,14 +209,12 @@ public class BattleScreen extends TwilightEternalScreen implements Screen, Input
                 break;
             case PEE_PANTS:
                 updateBattleStatus("Haha you have have peed your pants!\n");
-//                battleStatus.text("Haha you have have peed your pants!\n");
                 battleInterface.resetChoice();
                 playersTurn = false;
                 enemysTurn = true;
                 break;
             case RUN:
                 updateBattleStatus("You have run away!\n");
-//                battleStatus.text("You have run away!\n");
                 battleInterface.resetChoice();
                 delay = 2;
 
@@ -246,42 +278,42 @@ public class BattleScreen extends TwilightEternalScreen implements Screen, Input
     }
 
     @Override
-    public boolean keyDown(final int keycode) {
+    public boolean keyDown(int keycode) {
         return false;
     }
 
     @Override
-    public boolean keyUp(final int keycode) {
+    public boolean keyUp(int keycode) {
         return false;
     }
 
     @Override
-    public boolean keyTyped(final char character) {
+    public boolean keyTyped(char character) {
         return false;
     }
 
     @Override
-    public boolean touchDown(final int screenX, final int screenY, final int pointer, final int button) {
+    public boolean touchDown(int screenX, int screenY, int pointer, int button) {
         return false;
     }
 
     @Override
-    public boolean touchUp(final int screenX, final int screenY, final int pointer, final int button) {
+    public boolean touchUp(int screenX, int screenY, int pointer, int button) {
         return false;
     }
 
     @Override
-    public boolean touchDragged(final int screenX, final int screenY, final int pointer) {
+    public boolean touchDragged(int screenX, int screenY, int pointer) {
         return false;
     }
 
     @Override
-    public boolean mouseMoved(final int screenX, final int screenY) {
+    public boolean mouseMoved(int screenX, int screenY) {
         return false;
     }
 
     @Override
-    public boolean scrolled(final int amount) {
+    public boolean scrolled(int amount) {
         return false;
     }
 }
