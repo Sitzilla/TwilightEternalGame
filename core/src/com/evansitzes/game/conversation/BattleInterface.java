@@ -58,7 +58,7 @@ public class BattleInterface extends Dialog {
         choices.setItems(choiceItems);
 
         final ScrollPane scrollPane = new ScrollPane(choices);
-        
+
         scrollPane.setOverscroll(false, false);
         scrollPane.setFadeScrollBars(false);
         scrollPane.setScrollingDisabled(true, false);

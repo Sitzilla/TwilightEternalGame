@@ -109,7 +109,8 @@ public class BattleScreen extends TwilightEternalScreen implements Screen, Input
 
     @Override
     public void show() {
-
+//        MyInputProcessor inputProcessor = new MyInputProcessor();
+//        Gdx.input.setInputProcessor(inputProcessor);
     }
 
     @Override
@@ -129,7 +130,7 @@ public class BattleScreen extends TwilightEternalScreen implements Screen, Input
         }
         game.player.draw();
 
-        font.draw(game.batch, "Current life:", 505, 130);
+        font.draw(game.batch, "Current life: " + game.player.currentHealth + "/" + game.player.maxHealth, 490, 145);
         container.draw(game.batch, 505, 110, totalBarWidth + 10, 20);
         health.draw(game.batch, 510, 115, width, 10);
 
@@ -168,6 +169,10 @@ public class BattleScreen extends TwilightEternalScreen implements Screen, Input
                 game.player.takeDamage(enemies.get(0).damage);
                 playersTurn = true;
                 battleInterface.enableInterface();
+
+                if(game.player.dead) {
+                    endBattle();
+                }
             }
         }, delay);
         enemysTurn = false;
@@ -273,42 +278,42 @@ public class BattleScreen extends TwilightEternalScreen implements Screen, Input
     }
 
     @Override
-    public boolean keyDown(final int keycode) {
+    public boolean keyDown(int keycode) {
         return false;
     }
 
     @Override
-    public boolean keyUp(final int keycode) {
+    public boolean keyUp(int keycode) {
         return false;
     }
 
     @Override
-    public boolean keyTyped(final char character) {
+    public boolean keyTyped(char character) {
         return false;
     }
 
     @Override
-    public boolean touchDown(final int screenX, final int screenY, final int pointer, final int button) {
+    public boolean touchDown(int screenX, int screenY, int pointer, int button) {
         return false;
     }
 
     @Override
-    public boolean touchUp(final int screenX, final int screenY, final int pointer, final int button) {
+    public boolean touchUp(int screenX, int screenY, int pointer, int button) {
         return false;
     }
 
     @Override
-    public boolean touchDragged(final int screenX, final int screenY, final int pointer) {
+    public boolean touchDragged(int screenX, int screenY, int pointer) {
         return false;
     }
 
     @Override
-    public boolean mouseMoved(final int screenX, final int screenY) {
+    public boolean mouseMoved(int screenX, int screenY) {
         return false;
     }
 
     @Override
-    public boolean scrolled(final int amount) {
+    public boolean scrolled(int amount) {
         return false;
     }
 }

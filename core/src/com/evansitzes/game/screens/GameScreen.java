@@ -94,6 +94,12 @@ public class GameScreen extends TwilightEternalScreen implements Screen, InputPr
         Gdx.gl.glClearColor(0, 0, 0.0f, 1);
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
 
+        if(game.player.dead) {
+            final Conversation conversation = new Conversation(false, gameflowController);
+            conversation.setText("You have died. The world is forever fated \n to remain stuck between shadow and light.");
+            conversation.show(stage);
+        }
+
         switch (state) {
 
             case RUN:

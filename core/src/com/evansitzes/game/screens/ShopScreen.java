@@ -166,13 +166,13 @@ public class ShopScreen extends TwilightEternalScreen implements Screen {
     private ArrayList<String> getApples() {
 
         final ArrayList<String> apples = new ArrayList<String>();
-        apples.add("apple");
-        apples.add("apple");
-        apples.add("apple");
-        apples.add("apple");
-        apples.add("apple");
-        apples.add("apple");
-        apples.add("apple");
+        apples.add("Apple");
+        apples.add("Apple");
+        apples.add("Apple");
+        apples.add("Apple");
+        apples.add("Apple");
+        apples.add("Apple");
+        apples.add("Apple");
 
         return apples;
     }
