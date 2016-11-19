@@ -1,17 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <map version="1.0" orientation="orthogonal" renderorder="right-down" width="20" height="15" tilewidth="32" tileheight="32" nextobjectid="48">
- <tileset firstgid="1" name="caves" tilewidth="32" tileheight="32" tilecount="80" columns="8">
-  <image source="cave.png" trans="000000" width="256" height="336"/>
- </tileset>
- <tileset firstgid="81" name="caves2" tilewidth="32" tileheight="32" tilecount="66" columns="11">
-  <image source="cave2.png" trans="000000" width="352" height="192"/>
- </tileset>
- <tileset firstgid="147" name="ice_caves" tilewidth="32" tileheight="32" tilecount="300" columns="20">
+ <tileset firstgid="1" name="ice_caves" tilewidth="32" tileheight="32" tilecount="300" columns="20">
   <image source="ice_caves.png" trans="000000" width="640" height="480"/>
  </tileset>
  <layer name="GroundBottomLayer" width="20" height="15">
   <data encoding="base64" compression="zlib">
-   eJxVzlVoFlAUAOB/Jj7Y3d0NdieKgigoYrfY3d3dNd3s6WZuxnR2d3d3oiAIxoP9yX5wHu7HOYfLOfcuDgQCS1jKMkJZzgrCCGclq1jNGtayjvVEsIGNRBLFJjazha1sYzvRxLCDnexiN7HsYS9x7GM/BzjIIQ5zhKMc4zgnOMkpTnOGs5zjPBe4yCUuc4WrXOM6N7jJLW5zh7vc4z4PeMgjHvOEpzzjOS94ySte84a3gfh4x/vAv/iQoP6YoP7EZ77wNfB/fOM7P/jJL37/vQhxSERikpCUZCQPiZ9NEfL/rpT6VKQmDWlJR3oykJFMZCYLWclGdnKQk1zkJg95yUd+ClCQQhSmCEUpRnFKUJJSlKYMZRP8r5y6PBWoSCUqU4WqVKM6NahJLWpTh7rUo35wXwO5IY1oHPQ3moTEaxrULMH7zdUtgn3LYG4lt6YNbWlHezrQkU50pgtd6Ub34GwPuSe96E0f+tKP/gxgIIMYzBCGMozhjGAkoxjNGMYyjvFMYCKTmMwUpjKN6cxgJrOYzRzmMo/5LGAhi1jMEpayjFCWs4IwwlnJKlazhrWsYz0RbGAjkUSxic1sYSvb2E40MexgJ7vYTSx72Esc+9jPAQ5yiMMc4Q/6gJDs
+   eJxdzlVoFmAUBuDfnHPqrDl7c7ab3d3dhYIgGBd2ixd2d3eD3YmiIAqK2C12d3f3I/7g9OV7+M7NiQSBQCAhiUhMEpISQjJCSU4YKUhJKsJJTRrSko70RJCBSDKSicxkISvZyE4U0eQghpzkIjd5yEs+8lOAWOIoSCEKU4SiFKM4JShJKUpThrKUozwVqEglKlOFqlSjOjWoSS1qU4e61KM+DWhIIxrThKY0ozktaBn4k1a0DvxNm3h123h1O9rTgY6Bf9OJznShK93oTg960ove9KEv/egf7B3w36yBDGIwQxjKMIYzgpGMYjRjGMs4xjOBiUxiMlOYyjSmM4OZzGI2c5jLPOazgIUsYjFLWBrvtmUsZwUrWcVq1rCWdaxnAxvZxGa2sJVtbA/O2sFOdrE76Hf2BO0N2hdv/34OBOuDwf8QhznCUY5xnBOc5BSnOcNZznE+2HuBi1ziMle4yjWuc4Ob3OI2d7jLPe7zgIc84jFPeMoznvOCl7ziNW94yzve84GPfOIzX/jKN77zg5+/D03gkZBEJCYJSQkhGaEkJ4wUpCQV4aQmDWlJR3oiyEAkGclEZrKQlWxkJ4pochBDTnKRmzzkJR/5KUAscfwCm4N3bQ==
   </data>
  </layer>
  <layer name="GroundMiddleLayer" width="20" height="15">
@@ -26,7 +20,7 @@
  </layer>
  <layer name="WallBottomLayer" width="20" height="15">
   <data encoding="base64" compression="zlib">
-   eJxjYBgF1AYvkNivgfgNlP0OiN9D2R+B+BMeM/5QYD8HI4TmAtLcQMzDSIFhNAbGVHSbG5JZnkhsHyDbF4s9QWhiYVB+BAVuSh/EYT0cAAChrgp0
+   eJxjYBgF1AZhSOxIII6CsmOAOBbKjgfiBDxmZFFgfxmUrgDiSiCuosAsWoOFVDRrCxJ7OxJ7FxDvxqL+ABr/CJQ+RoEbrlKgdxQQBgBaLgtt
   </data>
  </layer>
  <layer name="WallMiddleLayer" width="20" height="15">
@@ -41,7 +35,7 @@
  </layer>
  <layer name="ForegroundBottomLayer" width="20" height="15">
   <data encoding="base64" compression="zlib">
-   eJxjYBgF6OAGFrG7QHyPDnZ/B+IfdLBnMAAjxoF2AQND8CBwwyggHgAALzoFCg==
+   eJxjYBgF6MANi5g3EPvQwe5UIE6jgz2DASwYaAcAwcGBdsAoIAkAADTQAwo=
   </data>
  </layer>
  <layer name="ForegroundMiddleLayer" width="20" height="15">

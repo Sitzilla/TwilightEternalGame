@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.0" orientation="orthogonal" renderorder="right-down" width="41" height="27" tilewidth="32" tileheight="32" nextobjectid="90">
+<map version="1.0" orientation="orthogonal" renderorder="right-down" width="41" height="27" tilewidth="32" tileheight="32" nextobjectid="91">
  <tileset firstgid="1" name="image" tilewidth="32" tileheight="32" tilecount="256" columns="16">
   <image source="image.png" trans="000000" width="512" height="512"/>
  </tileset>
@@ -26,7 +26,7 @@
  </layer>
  <layer name="WallBottomLayer" width="41" height="27">
   <data encoding="base64" compression="zlib">
-   eJzNmDlv1EAUgL1uuH4AIKAHhZ4i9EhAz/EHOHrClYSK+6q4goAyQICkCwn0wUkEJbBcJRCuMiFRgG+Uedq3j/Gu19mJ8qRPY3vt8efnGc/MJkktxipJ8gIyGA+UI4bM47ZH/Tl5yLnP4Hmlds/PbP+An/ALvsIUfFPn6HjN8TfwFqrqHNnPAl6y3chPe07ApLn/PPt/4C/8hlmYy3F0z/RFPYuE7O9Jk2Qv7Evrc1nU0fnt59r3OfcvEtNcO6OeRUL2D1D/QTiU1ueyyLt27+Gdf4ffcxzXpOXdJY5SxzE4DtvS+vb6El4FSsm7y99OONGCRxnns1xzDs7DDviAw0f4FCiP8HtXupA/l/fDabiNNfLYwG8bC3rm1aP7oy1Pc80Zlfe8/DVy7OC3rYt8/7o/2vIadV9Xeb9Q4l6dXLO9DW00ZuzCb/cycbTvux39O0YsV69QONebtOdb0Ae3S37vYz5zP0734QE8hIFFjEntiE2BZx3G6WmlNtaOlnQ8Sd3dkXI55h2zFhxDbeMifpciOeo8ylibFzcqC34rcFkJq2A1PIrcPuwcdlzlyJZ9vu2uxWsdrE//n5/GCDuHrar+k1e69iCOoflpu8POYae8QzO0Y+w82jnsrMmrLavecTN+WyLk8Q513YV7TerUebWlXR+E5vk9HOuFUy30c3F7DE9gEIYauOq82tKuD9w81c7zL3PsClwt4Bhyk3YvY0qZ74ZeH7Qyz7fRr9x0v9RrogGP/cY0C70+KDNPlRj2TuKl17567R76tixVyBin17sjAUdx1yxVuG+z/Q8kCzjq8UX4By06JJY=
+   eJzNmDlv1EAUgL1uuH4AIBA1CHoK6JGAnuMPcPTcV8V9VVxBQBkgXF1IoA8OCEpguUogXCUQxPGNMk/79jHj9Xp3ojzp09hee/z5ecYzs1nWirFGlj2CAsYD5Yih8LjtUX9ODDn3ATxstO75nu0v8BW+wUeYgE/qHB3POf4CXkJTnSP7RcBLtsv8tOdjeGLu/5v9P/AXfsIk/Io4umf6oJ5FQvY35Fm2ETbl7bms6uj8NnPt68j9q8R3rv2hnkVC9rdQ/1bYlrfnssq7du/hlX+HnyOO8/L67hK7qGM37IGVeXt7fQrPAqXk3eVvLeztwqOO81GuOQbHYQ28weEtvAuUO/h9Zz6VP5f37Xm4jZV5LOK3xRU9Y/Xo/mjLw1xzROU9lr8yx+X8tqLH96/7oy3PUfd5lfcTJfeKea7i+Oo+tNGUsQ6/9TPE0eaxH/07RcxULx3i6MqLtOdLMACXa37vy555SY/5GMTpOtyAmzDUw5iUKoZxut9ojbWjNR33kav9idrPmHcsunAMtY2T+J1K5KjzKGNtLC40pvxm4TIb5sBcuJW4fdg57LjKkS0HfNudj9cCWJj/Pz9NEXYO21T9J1a69iCOoflpv8POYSe8Qye0Y+o82jnspMmrLZvecSl+yxLk8Qp1XYVrHerUebWlXR+E5vkHOHYQDnXRz8XtNtyBu3CvxFXn1ZZ2feDmqXaef5pjZ+BsBceQm7R7GVPqfDf0+qCbeb6NQeWm+6VeEw157DemU+j1Qdk8tVMMeyfx0mtfvXYPfVumK2SM0+vdkYCjuGumK9y32f4HUgQc9fgi/ANt9SSx
   </data>
  </layer>
  <layer name="WallMiddleLayer" width="41" height="27">
@@ -41,7 +41,7 @@
  </layer>
  <layer name="ForegroundBottomLayer" width="41" height="27">
   <data encoding="base64" compression="zlib">
-   eJxjYBgFo2AU0BroMg20CwgD2yHgxlEwCkYBaSAamK9jqJC3+WhYPmQDzc4ZLX+GDcgFxmUeEOcP4jitBbqtbhC7bxTQHwyFdEtNUAD0Z+Eg92sD0H2Ng9yNo2AUAABhgwee
+   eJzt08kNgDAMRNGIAuiEEqgEOmAvgAg6ZxpAcGAZS/9Jvn/LSUoA3lYVfxdcqwM0AlGUJv+pUUdr0nKmU19v3oj7Bt1y1EzGN13Vlo378L0I7/ZJs/ZczHfd1LebNwIHboMHng==
   </data>
  </layer>
  <layer name="ForegroundMiddleLayer" width="41" height="27">
@@ -68,7 +68,7 @@
   <object id="20" name="wall" type="wall" x="859" y="164" width="158" height="23"/>
   <object id="22" name="wall" type="wall" x="1024" y="197" width="59" height="116"/>
   <object id="23" name="wall" type="wall" x="1097" y="343" width="50" height="65"/>
-  <object id="24" name="wall" type="wall" x="992" y="417" width="31" height="25"/>
+  <object id="24" name="wall" type="wall" x="640" y="386" width="31" height="25"/>
   <object id="25" name="wall" type="wall" x="1171" y="406" width="20" height="227"/>
   <object id="27" name="wall" type="wall" x="1196" y="200" width="57" height="121"/>
   <object id="29" name="wall" type="wall" x="1063" y="102" width="87" height="89"/>
@@ -96,8 +96,8 @@
   <object id="60" name="wall" type="wall" x="289" y="194" width="30" height="27"/>
   <object id="61" name="wall" type="wall" x="523" y="673" width="77" height="60"/>
   <object id="62" name="GoblinWarrior" type="enemy" x="138" y="435"/>
-  <object id="63" name="GoblinWarrior" type="enemy" x="821" y="600"/>
-  <object id="64" name="GoblinWarrior" type="enemy" x="877" y="562"/>
+  <object id="63" name="GoblinWarrior" type="enemy" x="881" y="563"/>
+  <object id="64" name="GoblinWarrior" type="enemy" x="1052" y="488"/>
   <object id="75" name="portal" type="portal" x="0" y="236" width="13" height="105">
    <properties>
     <property name="destination" value="town"/>
@@ -106,7 +106,7 @@
   </object>
   <object id="79" name="west-landing" type="landing" x="55" y="242" width="14" height="98">
    <properties>
-    <property name="position" value="east"/>
+    <property name="position" value="west"/>
    </properties>
   </object>
   <object id="83" name="wall" type="wall" x="419" y="388" width="26" height="25"/>
@@ -121,6 +121,11 @@
   <object id="89" name="north-landing" type="landing" x="705" y="333" width="71" height="20">
    <properties>
     <property name="position" value="north"/>
+   </properties>
+  </object>
+  <object id="90" name="conversation-zone" type="conversation" x="626" y="415" width="59" height="36">
+   <properties>
+    <property name="text" value="The village of FrostVale: West"/>
    </properties>
   </object>
  </objectgroup>
