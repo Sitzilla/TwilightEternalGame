@@ -95,8 +95,7 @@ public class TmxLevelLoader {
     private static Portal readPortal(final RectangleMapObject object, final TwilightEternal game) {
         final String clazz = "com.evansitzes.game.entity.environment.Portal";
         try {
-//            final Portal portal = (Portal) Class.forName(clazz).getConstructor(TwilightEternal.class).newInstance(game);
-            final Portal portal = new Portal(game, (String) object.getProperties().get("destination"));
+            final Portal portal = new Portal(game, (String) object.getProperties().get("destination"), (String) object.getProperties().get("landing"));
             readRectanglePosition(portal, object);
             return portal;
         }
@@ -112,7 +111,7 @@ public class TmxLevelLoader {
     private static Landing readLanding(final RectangleMapObject object, final TwilightEternal game) {
         final String clazz = "com.evansitzes.game.entity.environment.Landing";
         try {
-            final Landing landing = new Landing(game, (String) object.getProperties().get("destination"));
+            final Landing landing = new Landing(game, (String) object.getProperties().get("position"));
             readRectanglePosition(landing, object);
             return landing;
         }

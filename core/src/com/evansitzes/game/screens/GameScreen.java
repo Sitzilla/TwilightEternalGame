@@ -105,21 +105,22 @@ public class GameScreen extends TwilightEternalScreen implements Screen, InputPr
             case RUN:
                 if (isPortal()) {
                     final Portal currentPortal = getCurrentPortal();
+                    final String destination = currentPortal.getDestination();
+                    final String landingPosition = currentPortal.getLanding();
+                    Landing currentLanding = landings.get(0);
 
-                    //TODO scale this
-                    if (currentPortal.getDestination().equals("town")) {
-                        resetObjects();
-                        this.level = TmxLevelLoader.load(Vector2.Zero, game, this, "town");
-                        playerSprite.setToLandingPage(landings.get(0).rectangle.getX(), landings.get(0).rectangle.getY());
-                        this.tiledMapRenderer = new OrthogonalTiledMapRenderer(level.map);
+                    resetObjects();
+                    this.level = TmxLevelLoader.load(Vector2.Zero, game, this, destination);
+
+                    for (final Landing landing : landings) {
+                        if (landingPosition.equals(landing.getPosition())) {
+                            currentLanding = landing;
+                        }
                     }
 
-                    if (currentPortal.getDestination().equals("woods")) {
-                        resetObjects();
-                        this.level = TmxLevelLoader.load(Vector2.Zero, game, this, "woods");
-                        playerSprite.setToLandingPage(landings.get(0).rectangle.getX(), landings.get(0).rectangle.getY());
-                        this.tiledMapRenderer = new OrthogonalTiledMapRenderer(level.map);
-                    }
+                    playerSprite.setToLandingPage(currentLanding.rectangle.getX(), currentLanding.rectangle.getY());
+                    this.tiledMapRenderer = new OrthogonalTiledMapRenderer(level.map);
+
                 }
 
                 camera.position.set(calculateCameraPositionX(), calculateCameraPositionY(), 0);

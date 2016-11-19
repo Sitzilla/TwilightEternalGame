@@ -8,11 +8,11 @@ import com.evansitzes.game.entity.Entity;
  */
 public class Landing extends Entity {
 
-    private final String destination;
+    private final String position;
 
-    public Landing(final TwilightEternal game, final String destination) {
+    public Landing(final TwilightEternal game, final String position) {
         super(game);
-        this.destination = destination;
+        this.position = position;
         this.rectangle.set(this.x, this.y, 20, 20);
     }
 
@@ -21,7 +21,7 @@ public class Landing extends Entity {
 
     }
 
-    public String getDestination() {
-        return destination;
+    public String getPosition() {
+        return position;
     }
 }

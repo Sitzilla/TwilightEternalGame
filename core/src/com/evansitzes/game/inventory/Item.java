@@ -59,15 +59,15 @@ public class Item {
             return Textures.Items.BRONZE_SWORD;
         }
 
-        if (name.equals("apple")) {
+        if (name.equals("Apple")) {
             return Textures.Items.APPLE;
         }
 
-        if (name.equals("bone")) {
+        if (name.equals("Bone")) {
             return Textures.Items.BONE;
         }
 
-        if (name.equals("veggies")) {
+        if (name.equals("V eggies")) {
             return Textures.Items.VEGGIES;
         }
 
