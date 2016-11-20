@@ -67,7 +67,7 @@ public class Item {
             return Textures.Items.BONE;
         }
 
-        if (name.equals("V eggies")) {
+        if (name.equals("Veggies")) {
             return Textures.Items.VEGGIES;
         }
 

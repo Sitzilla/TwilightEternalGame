@@ -198,6 +198,9 @@ public class Textures {
 
     public static class Items {
 
+        public static final TextureRegion BACKPACK = loadInventory()[0][0];
+        public static final TextureRegion SPELLS = loadInventory()[0][1];
+
         public static final TextureRegion BLANK = loadItems()[0][15];
 
         public static final TextureRegion BRONZE_SWORD = loadItems()[4][0];
@@ -209,12 +212,18 @@ public class Textures {
         public static final TextureRegion BONE = loadItems()[1][12];
         public static final TextureRegion VEGGIES = loadItems()[0][9];
 
-
         private static TextureRegion[][] loadItems() {
             final int frameColumns = 16;
             final int frameRows = 16;
 
             return splitTextureRegion(frameColumns, frameRows, new Texture(Gdx.files.internal("icons/items.jpg")));
+        }
+
+        private static TextureRegion[][] loadInventory() {
+            final int frameColumns = 4;
+            final int frameRows = 3;
+
+            return splitTextureRegion(frameColumns, frameRows, new Texture(Gdx.files.internal("icons/icons.jpg")));
         }
 
     }
