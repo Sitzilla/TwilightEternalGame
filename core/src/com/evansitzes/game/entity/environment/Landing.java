@@ -8,20 +8,24 @@ import com.evansitzes.game.entity.Entity;
  */
 public class Landing extends Entity {
 
-    private final String destination;
+    private String position;
 
-    public Landing(final TwilightEternal game, final String destination) {
+    public Landing(final TwilightEternal game) {
         super(game);
-        this.destination = destination;
         this.rectangle.set(this.x, this.y, 20, 20);
     }
 
     @Override
-    public void handle(float delta) {
+    public void handle(final float delta) {
 
     }
 
-    public String getDestination() {
-        return destination;
+    public String getPosition() {
+        return position;
+    }
+    @Override
+
+    public void setPosition(final String position) {
+        this.position = position;
     }
 }

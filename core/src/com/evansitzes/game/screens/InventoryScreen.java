@@ -14,10 +14,11 @@ import com.badlogic.gdx.scenes.scene2d.utils.DragAndDrop;
 import com.evansitzes.game.GameflowController;
 import com.evansitzes.game.TwilightEternal;
 import com.evansitzes.game.entity.sprites.InventorySprite;
+import com.evansitzes.game.helpers.Sounds;
+import com.evansitzes.game.helpers.Textures.Life;
 import com.evansitzes.game.inventory.EquipmentActor;
 import com.evansitzes.game.inventory.Inventory;
 import com.evansitzes.game.inventory.InventoryActor;
-import com.evansitzes.game.helpers.Textures.Life;
 import com.evansitzes.game.inventory.SlotActor;
 
 /**
@@ -129,7 +130,9 @@ public class InventoryScreen extends TwilightEternalScreen implements Screen {
     public void consumeItem(SlotActor slotActor) {
         System.out.println("DOUBLE CLICK");
 
-        if (slotActor.getSlot().getItem().getName().equals("apple")) {
+        //TODO wtf is this hardcoded?II
+        if (slotActor.getSlot().getItem().getName().equals("Apple")) {
+            Sounds.BOTTLE.play();
             game.player.restoreLife(20);
             inventory.removeItem(slotActor.getSlot().getItem());
         }

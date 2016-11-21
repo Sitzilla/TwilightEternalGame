@@ -16,6 +16,18 @@ public class Sounds {
 
     public static final Music REALISTIC_PUNCH = Gdx.audio.newMusic(Gdx.files.internal("sound/realistic-punch.mp3"));
 
+    public static final Music SWORD_SWING = Gdx.audio.newMusic(Gdx.files.internal("sound/swing.mp3"));
+
+    public static final Music SWORD_UNSHEATHE = Gdx.audio.newMusic(Gdx.files.internal("sound/sword-unsheathe.mp3"));
+
+    public static final Music MONSTER = Gdx.audio.newMusic(Gdx.files.internal("sound/mnstr2.mp3"));
+
+    public static final Music COINS = Gdx.audio.newMusic(Gdx.files.internal("sound/coin3.mp3"));
+
+    public static final Music BOTTLE = Gdx.audio.newMusic(Gdx.files.internal("sound/bottle.mp3"));
+
+    public static final Music INTERFACE = Gdx.audio.newMusic(Gdx.files.internal("sound/interface2.mp3"));
+
     public void dispose() {
         TITLE_THEME.dispose();
     }

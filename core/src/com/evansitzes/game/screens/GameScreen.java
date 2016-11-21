@@ -7,12 +7,14 @@ import com.badlogic.gdx.maps.tiled.TiledMapRenderer;
 import com.badlogic.gdx.maps.tiled.renderers.OrthogonalTiledMapRenderer;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.scenes.scene2d.Stage;
+import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.badlogic.gdx.utils.Array;
 import com.evansitzes.game.*;
 import com.evansitzes.game.conversation.Conversation;
 import com.evansitzes.game.conversation.ConversationChoice;
 import com.evansitzes.game.entity.Entity;
 import com.evansitzes.game.entity.enemy.Enemy;
+import com.evansitzes.game.entity.environment.ConversationZone;
 import com.evansitzes.game.entity.environment.Landing;
 import com.evansitzes.game.entity.environment.Portal;
 import com.evansitzes.game.entity.environment.Wall;
@@ -21,6 +23,8 @@ import com.evansitzes.game.entity.npc.Merchant;
 import com.evansitzes.game.entity.npc.Npc;
 import com.evansitzes.game.entity.npc.Villager;
 import com.evansitzes.game.entity.sprites.PlayerSprite;
+import com.evansitzes.game.icons.Icon;
+import com.evansitzes.game.icons.IconActor;
 import com.evansitzes.game.loaders.TmxLevelLoader;
 
 import java.util.Iterator;
@@ -40,6 +44,11 @@ public class GameScreen extends TwilightEternalScreen implements Screen, InputPr
     private GameflowController gameflowController;
     private final PlayerSprite playerSprite;
 
+    private IconActor inventoryIconActor;
+    private Icon inventoryIcon;
+    private IconActor spellsIconActor;
+    private Icon spellsIcon;
+
     private Level level;
     private boolean battleMode;
     private int[] layerBackground = {0, 1, 2, 3, 4, 5}; // Ground and Wall layers (behind player)
@@ -51,6 +60,7 @@ public class GameScreen extends TwilightEternalScreen implements Screen, InputPr
     private final Array<Wall> walls = new Array();
     private final Array<Portal> portals = new Array();
     private final Array<Landing> landings = new Array();
+    private final Array<ConversationZone> conversationZones = new Array();
 
     private State state = State.RUN;
 
@@ -72,17 +82,44 @@ public class GameScreen extends TwilightEternalScreen implements Screen, InputPr
         camera.update();
 
         stage = new Stage();
-
         Gdx.input.setInputProcessor(stage);
+
+        // Bottom of the screen icons
+        final Skin skin = new Skin(Gdx.files.internal("skins/uiskin.json"));
+
+        inventoryIcon = new Icon(skin, "backpack");
+        inventoryIconActor = new IconActor(this, inventoryIcon, skin);
+        inventoryIconActor.setPosition(20, 20);
+        stage.addActor(inventoryIconActor);
+        inventoryIconActor.setVisible(true);
+        inventoryIconActor.setMovable(false);
+
+        spellsIcon = new Icon(skin, "spells");
+        spellsIconActor = new IconActor(this, spellsIcon, skin);
+        spellsIconActor.setPosition(140, 20);
+        stage.addActor(spellsIconActor);
+        spellsIconActor.setVisible(true);
+        spellsIconActor.setMovable(false);
+
 
         playerSprite = new PlayerSprite(game, this);
         this.battleMode = false;
         this.level = TmxLevelLoader.load(Vector2.Zero, game, this, configuration.STARTING_LEVEL);
+        gameflowController.setCurrentGameZone(configuration.STARTING_LEVEL);
         mapMaxX = level.mapWidth * level.tileWidth;
         mapMaxY = level.mapHeight * level.tileHeight;
         this.tiledMapRenderer = new OrthogonalTiledMapRenderer(level.map);
         tiledMapRenderer.setView(camera);
 
+        final InputMultiplexer multiplexer = new InputMultiplexer();
+        multiplexer.addProcessor(stage);
+        multiplexer.addProcessor(this);
+        Gdx.input.setInputProcessor(multiplexer);
+    }
+
+    @Override
+    public void show() {
+        // TODO is this realllllly necessary?
         final InputMultiplexer multiplexer = new InputMultiplexer();
         multiplexer.addProcessor(stage);
         multiplexer.addProcessor(this);
@@ -105,21 +142,23 @@ public class GameScreen extends TwilightEternalScreen implements Screen, InputPr
             case RUN:
                 if (isPortal()) {
                     final Portal currentPortal = getCurrentPortal();
+                    final String destination = currentPortal.getDestination();
+                    final String landingPosition = currentPortal.getLanding();
+                    Landing currentLanding = landings.get(0);
 
-                    //TODO scale this
-                    if (currentPortal.getDestination().equals("town")) {
-                        resetObjects();
-                        this.level = TmxLevelLoader.load(Vector2.Zero, game, this, "town");
-                        playerSprite.setToLandingPage(landings.get(0).rectangle.getX(), landings.get(0).rectangle.getY());
-                        this.tiledMapRenderer = new OrthogonalTiledMapRenderer(level.map);
+                    resetObjects();
+                    this.level = TmxLevelLoader.load(Vector2.Zero, game, this, destination);
+                    gameflowController.setCurrentGameZone(destination);
+
+                    for (final Landing landing : landings) {
+                        if (landingPosition.equals(landing.getPosition())) {
+                            currentLanding = landing;
+                        }
                     }
 
-                    if (currentPortal.getDestination().equals("woods")) {
-                        resetObjects();
-                        this.level = TmxLevelLoader.load(Vector2.Zero, game, this, "woods");
-                        playerSprite.setToLandingPage(landings.get(0).rectangle.getX(), landings.get(0).rectangle.getY());
-                        this.tiledMapRenderer = new OrthogonalTiledMapRenderer(level.map);
-                    }
+                    playerSprite.setToLandingPage(currentLanding.rectangle.getX(), currentLanding.rectangle.getY());
+                    this.tiledMapRenderer = new OrthogonalTiledMapRenderer(level.map);
+
                 }
 
                 camera.position.set(calculateCameraPositionX(), calculateCameraPositionY(), 0);
@@ -162,6 +201,7 @@ public class GameScreen extends TwilightEternalScreen implements Screen, InputPr
                     npc.draw();
                 }
 
+//                inventoryIconActor.drawIcon();
                 game.batch.end();
 
                 tiledMapRenderer.render(layerAfterBackground);
@@ -317,6 +357,7 @@ public class GameScreen extends TwilightEternalScreen implements Screen, InputPr
 
             if (enemy.overlaps(playerSprite) && !enemy.dead) {
                 enemy.kill();
+                enemyIterator.remove();
                 gameflowController.setBattleScreen();
             }
         }
@@ -360,6 +401,26 @@ public class GameScreen extends TwilightEternalScreen implements Screen, InputPr
         }
     }
 
+    private void handleConversationZone() {
+        if(conversationZones.size == 0) { return; }
+
+        final Iterator<ConversationZone> conversationZoneIterator = conversationZones.iterator();
+
+        while(conversationZoneIterator.hasNext()) {
+            final ConversationZone conversationZone = conversationZoneIterator.next();
+
+            if (conversationZone.overlapsConversationZone(playerSprite)) {
+                System.out.println("Overlap conversation zone: " + conversationZone);
+
+                final Conversation conversation = new Conversation(false, gameflowController);
+                conversation.setText(conversationZone.getText());
+                conversation.show(stage);
+
+                return;
+            }
+        }
+    }
+
     private void resetObjects() {
         enemies.clear();
         npcs.clear();
@@ -367,19 +428,21 @@ public class GameScreen extends TwilightEternalScreen implements Screen, InputPr
         portals.clear();
         obstructables.clear();
         landings.clear();
+        conversationZones.clear();
     }
 
     public void setGameState(final State s){
         this.state = s;
     }
 
-    @Override
-    public void show() {
-        // TODO use game state to control this
-        final InputMultiplexer multiplexer = new InputMultiplexer();
-        multiplexer.addProcessor(stage);
-        multiplexer.addProcessor(this);
-        Gdx.input.setInputProcessor(multiplexer);
+    public void setInventoryScreen() {
+        gameflowController.setInventoryScreen();
+    }
+
+    public void setConversationWindow(final String text) {
+        final Conversation conversation = new Conversation(false, gameflowController);
+        conversation.setText(text);
+        conversation.show(stage);
     }
 
     @Override
@@ -399,7 +462,6 @@ public class GameScreen extends TwilightEternalScreen implements Screen, InputPr
 
     @Override
     public void hide() {
-//        Sounds.MAIN_THEME.stop();
         dispose();
     }
 
@@ -413,15 +475,14 @@ public class GameScreen extends TwilightEternalScreen implements Screen, InputPr
     @Override
     public boolean keyDown(final int keycode) {
         System.out.println(keycode);
-        if (keycode == Input.Keys.SPACE) {
+        if (keycode == Input.Keys.SPACE || keycode == Input.Keys.ENTER) {
             handleNpc();
+            handleConversationZone();
         }
 
         if (keycode == Input.Keys.I) {
             System.out.println("Showing screen~");
-            gameflowController.setInventoryScreen();
-
-
+            setInventoryScreen();
         }
         return false;
     }
@@ -523,5 +584,9 @@ public class GameScreen extends TwilightEternalScreen implements Screen, InputPr
 
     public Array<Landing> getLandings() {
         return landings;
+    }
+
+    public Array<ConversationZone> getConversationZones() {
+        return conversationZones;
     }
 }

@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<map version="1.0" orientation="orthogonal" renderorder="right-down" width="20" height="15" tilewidth="32" tileheight="32" nextobjectid="48">
+ <tileset firstgid="1" name="ice_caves" tilewidth="32" tileheight="32" tilecount="300" columns="20">
+  <image source="ice_caves.png" trans="000000" width="640" height="480"/>
+ </tileset>
+ <layer name="GroundBottomLayer" width="20" height="15">
+  <data encoding="base64" compression="zlib">
+   eJxdzlVoFmAUBuDfnHPqrDl7c7ab3d3dhYIgGBd2ixd2d3eD3YmiIAqK2C12d3f3I/7g9OV7+M7NiQSBQCAhiUhMEpISQjJCSU4YKUhJKsJJTRrSko70RJCBSDKSicxkISvZyE4U0eQghpzkIjd5yEs+8lOAWOIoSCEKU4SiFKM4JShJKUpThrKUozwVqEglKlOFqlSjOjWoSS1qU4e61KM+DWhIIxrThKY0ozktaBn4k1a0DvxNm3h123h1O9rTgY6Bf9OJznShK93oTg960ove9KEv/egf7B3w36yBDGIwQxjKMIYzgpGMYjRjGMs4xjOBiUxiMlOYyjSmM4OZzGI2c5jLPOazgIUsYjFLWBrvtmUsZwUrWcVq1rCWdaxnAxvZxGa2sJVtbA/O2sFOdrE76Hf2BO0N2hdv/34OBOuDwf8QhznCUY5xnBOc5BSnOcNZznE+2HuBi1ziMle4yjWuc4Ob3OI2d7jLPe7zgIc84jFPeMoznvOCl7ziNW94yzve84GPfOIzX/jKN77zg5+/D03gkZBEJCYJSQkhGaEkJ4wUpCQV4aQmDWlJR3oiyEAkGclEZrKQlWxkJ4pochBDTnKRmzzkJR/5KUAscfwCm4N3bQ==
+  </data>
+ </layer>
+ <layer name="GroundMiddleLayer" width="20" height="15">
+  <data encoding="base64" compression="zlib">
+   eJxjYBgFo2AUjIKhAQAEsAAB
+  </data>
+ </layer>
+ <layer name="GroundTopLayer" width="20" height="15">
+  <data encoding="base64" compression="zlib">
+   eJxjYBgFo2AUjIKhAQAEsAAB
+  </data>
+ </layer>
+ <layer name="WallBottomLayer" width="20" height="15">
+  <data encoding="base64" compression="zlib">
+   eJxjYBgF1AZhSOxIII6CsmOAOBbKjgfiBDxmZFFgfxmUrgDiSiCuosAsWoOFVDRrCxJ7OxJ7FxDvxqL+ABr/CJQ+RoEbrlKgdxQQBgBaLgtt
+  </data>
+ </layer>
+ <layer name="WallMiddleLayer" width="20" height="15">
+  <data encoding="base64" compression="zlib">
+   eJxjYBgFo2AUjIKhAQAEsAAB
+  </data>
+ </layer>
+ <layer name="WallTopLayer" width="20" height="15">
+  <data encoding="base64" compression="zlib">
+   eJxjYBgFo2AUjIKhAQAEsAAB
+  </data>
+ </layer>
+ <layer name="ForegroundBottomLayer" width="20" height="15">
+  <data encoding="base64" compression="zlib">
+   eJxjYBgF6MANi5g3EPvQwe5UIE6jgz2DASwYaAcAwcGBdsAoIAkAADTQAwo=
+  </data>
+ </layer>
+ <layer name="ForegroundMiddleLayer" width="20" height="15">
+  <data encoding="base64" compression="zlib">
+   eJxjYBgFo2AUjIKhAQAEsAAB
+  </data>
+ </layer>
+ <layer name="ForegroundTopLayer" width="20" height="15">
+  <data encoding="base64" compression="zlib">
+   eJxjYBgFo2AUjIKhAQAEsAAB
+  </data>
+ </layer>
+ <objectgroup name="objects">
+  <object id="2" name="wall" type="wall" x="2" y="327" width="111" height="27"/>
+  <object id="3" name="wall" type="wall" x="111" y="338" width="14" height="32"/>
+  <object id="5" name="wall" type="wall" x="127" y="360" width="40" height="12"/>
+  <object id="6" name="wall" type="wall" x="165" y="367" width="20" height="16"/>
+  <object id="7" name="wall" type="wall" x="184" y="382" width="5" height="18"/>
+  <object id="8" name="wall" type="wall" x="186" y="397" width="26" height="12"/>
+  <object id="9" name="wall" type="wall" x="212" y="410" width="7" height="22"/>
+  <object id="11" name="wall" type="wall" x="220" y="421" width="234" height="15"/>
+  <object id="13" name="wall" type="wall" x="454" y="406" width="11" height="20"/>
+  <object id="14" name="wall" type="wall" x="462" y="397" width="33" height="10"/>
+  <object id="15" name="wall" type="wall" x="487" y="344" width="14" height="58"/>
+  <object id="16" name="wall" type="wall" x="498" y="330" width="138" height="11"/>
+  <object id="17" name="north-landing" type="landing" x="264" y="173" width="30" height="22">
+   <properties>
+    <property name="position" value="north"/>
+   </properties>
+  </object>
+  <object id="18" name="GoblinWarrior" type="enemy" x="481" y="236" width="26" height="25"/>
+  <object id="19" name="portal" type="portal" x="221" y="128" width="43" height="17">
+   <properties>
+    <property name="destination" value="woods"/>
+    <property name="landing" value="north"/>
+   </properties>
+  </object>
+  <object id="21" name="wall" type="wall" x="3" y="259" width="28" height="28"/>
+  <object id="22" name="wall" type="wall" x="0" y="145" width="144" height="11"/>
+  <object id="23" name="wall" type="wall" x="144" y="125" width="13" height="14"/>
+  <object id="24" name="wall" type="wall" x="154" y="112" width="360" height="11"/>
+  <object id="25" name="wall" type="wall" x="517" y="118" width="9" height="25"/>
+  <object id="27" name="wall" type="wall" x="530" y="142" width="108" height="13"/>
+  <object id="28" name="wall" type="wall" x="551" y="166" width="20" height="23"/>
+  <object id="29" name="wall" type="wall" x="613" y="165" width="22" height="23"/>
+  <object id="30" name="wall" type="wall" x="611" y="228" width="27" height="55"/>
+  <object id="31" name="wall" type="wall" x="452" y="125" width="61" height="32"/>
+  <object id="32" name="wall" type="wall" x="485" y="293" width="24" height="24"/>
+  <object id="33" name="wall" type="wall" x="386" y="291" width="29" height="57"/>
+  <object id="34" name="wall" type="wall" x="351" y="291" width="29" height="27"/>
+  <object id="35" name="wall" type="wall" x="161" y="294" width="58" height="24"/>
+  <object id="36" name="wall" type="wall" x="68" y="292" width="25" height="27"/>
+  <object id="37" name="wall" type="wall" x="-1" y="157" width="61" height="64"/>
+  <object id="38" name="wall" type="wall" x="354" y="132" width="61" height="25"/>
+  <object id="39" name="wall" type="wall" x="264" y="127" width="54" height="29"/>
+  <object id="40" name="wall" type="wall" x="158" y="130" width="32" height="27"/>
+  <object id="41" name="wall" type="wall" x="546" y="291" width="29" height="30"/>
+  <object id="46" name="wall" type="wall" x="0" y="182" width="9" height="147"/>
+  <object id="47" name="wall" type="wall" x="630" y="130" width="8" height="209"/>
+ </objectgroup>
+</map>

@@ -16,4 +16,12 @@ public abstract class TwilightEternalScreen implements Screen {
 
     public void consumeItem(SlotActor slotActor) {
     }
+
+    public void setInventoryScreen() {
+
+    }
+
+    public void setConversationWindow(final String text) {
+
+    }
 }

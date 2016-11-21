@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.0" orientation="orthogonal" renderorder="right-down" width="41" height="27" tilewidth="32" tileheight="32" nextobjectid="86">
+<map version="1.0" orientation="orthogonal" renderorder="right-down" width="41" height="27" tilewidth="32" tileheight="32" nextobjectid="91">
  <tileset firstgid="1" name="image" tilewidth="32" tileheight="32" tilecount="256" columns="16">
   <image source="image.png" trans="000000" width="512" height="512"/>
  </tileset>
@@ -16,7 +16,7 @@
  </layer>
  <layer name="GroundMiddleLayer" width="41" height="27">
   <data encoding="base64" compression="zlib">
-   eJztlcENgCAUQ8ERdAPdfwt0AuME6Bxiwo/4gx6gJhz6ksaTzYMDNYYQQkiO2eaz2LK+Vf3Xd8YMIVth38Vu72ivN/+vaMcx+E2Vjim6P/UviZzZhe8BcvSxG9UnZ0bd4R/QEQMdMdCxDhffc6FFR7k/xA7+hTiidxCJ3tQWHb197jZqWwlpgRMhbUMh
+   eJztlUEKg0AMRROPUG9Q738L6wmKYNdaaG9QV83CoIbqwvnWCHnwmdWENwMzn+jcNEz04KMt1nmJ39u540f8eueOQfBvbvw71ca3cjf7LhlRLqkT3l7HY6zXkv9arONV/IpExyl2/tR/S/TMpaxPkGM7zEbN0zOj7nAPwhFDOGIIxzTK4T9XPDrq/SF6cC/UEd2DSGynenRsed7bqG4NAg98AV6USKA=
   </data>
  </layer>
  <layer name="GroundTopLayer" width="41" height="27">
@@ -26,7 +26,7 @@
  </layer>
  <layer name="WallBottomLayer" width="41" height="27">
   <data encoding="base64" compression="zlib">
-   eJzNmElv1DAUgDO+sP0AQCznVnDnAHck4M7yB6Aci8q+SCDKDhKIAkXAsZSy3UoL95KC6LEwUDgCZTsCRSyfVVt583BmMum46pM+OckkzucXO7EnSbIYqSTJU0hhNFAOKVKH3R525+Thz30MTyrZPd+z/QW+wjf4CJPwSZwjY5zjL+EVVKHTJMkuk+2nAS+/Xc9Pej6D5+r+v9n/A3/hJ0zBrxxH26YPoi1H8Ttmsv3NbG+BraY2l0Udrd82rn2Tc/8i8Z1rf4i2XKS+Sybb3872Dugwtbks8qztc3jtnuHnHMdFpry7jz3UsRf2wRpT219fwFig9Hm3+dsA+5vwKOK8Up1zgv2TcArWwwQOb+FdoOzi991mOn827ztNuI/V81jGb8sLtimvHjkedXmca7pF3vPyV89xFb+tnuHzl+NRl5epu0fk/XSJe63lmnUt6KMxYyN+m+aIo37erRjfMWKueoXCul6lP1+DXrhe8n0fs819ON2GfrgDAzP4JrUiVgTaOojTo0r2rR0u6XiAug9GyuWIc0ybcAz1jTP4nY3kKPPov7V5caUy7TcPl/mwABbC3cj9Q89hR0WOdNnr+u5ivJbAUvP//DRG6DlsVYyfvNL2B+8Ymp+2OvQcdtI5NEI6xs6jnsNOqbzqsuoc2/Brj5DHG9R1E241qFPmVZd6fRCa5x/i2GE40sQ492734D48gId1XGVedanXB3aequf55zh2Hi4UcAy5+X7vvyll3htyfdDMPF9Hn3CT41KuiQYc+h3TKOT6oMw81cegc/Jecu0r1+6hd8tshf/GyfXuUMDRu0tmK+y7Wf8HkgYc5ffF8w8l5SfR
+   eJzNmDlv1EAUgL1uuH4AIBA1CHoK6JGAnuMPcPTcV8V9VVxBQBkgXF1IoA8OCEpguUogXCUQxPGNMk/79jHj9Xp3ojzp09hee/z5ecYzs1nWirFGlj2CAsYD5Yih8LjtUX9ODDn3ATxstO75nu0v8BW+wUeYgE/qHB3POf4CXkJTnSP7RcBLtsv8tOdjeGLu/5v9P/AXfsIk/Io4umf6oJ5FQvY35Fm2ETbl7bms6uj8NnPt68j9q8R3rv2hnkVC9rdQ/1bYlrfnssq7du/hlX+HnyOO8/L67hK7qGM37IGVeXt7fQrPAqXk3eVvLeztwqOO81GuOQbHYQ28weEtvAuUO/h9Zz6VP5f37Xm4jZV5LOK3xRU9Y/Xo/mjLw1xzROU9lr8yx+X8tqLH96/7oy3PUfd5lfcTJfeKea7i+Oo+tNGUsQ6/9TPE0eaxH/07RcxULx3i6MqLtOdLMACXa37vy555SY/5GMTpOtyAmzDUw5iUKoZxut9ojbWjNR33kav9idrPmHcsunAMtY2T+J1K5KjzKGNtLC40pvxm4TIb5sBcuJW4fdg57LjKkS0HfNudj9cCWJj/Pz9NEXYO21T9J1a69iCOoflpv8POYSe8Qye0Y+o82jnspMmrLZvecSl+yxLk8Qp1XYVrHerUebWlXR+E5vkHOHYQDnXRz8XtNtyBu3CvxFXn1ZZ2feDmqXaef5pjZ+BsBceQm7R7GVPqfDf0+qCbeb6NQeWm+6VeEw157DemU+j1Qdk8tVMMeyfx0mtfvXYPfVumK2SM0+vdkYCjuGumK9y32f4HUgQc9fgi/ANt9SSx
   </data>
  </layer>
  <layer name="WallMiddleLayer" width="41" height="27">
@@ -41,7 +41,7 @@
  </layer>
  <layer name="ForegroundBottomLayer" width="41" height="27">
   <data encoding="base64" compression="zlib">
-   eJxjYBgFo2BoAD6mgXYB+UB3CLjddgi4cRSMglFAGogG5usYKuRtWpa/2UCzc0bLn2EDcoFxmQfE+YM4TmuBbqsbxO4bBfQHQyHdUhMUAP1ZOMj92gB0X+Mgd+MoGAUAS5AHrg==
+   eJzt08kNgDAMRNGIAuiEEqgEOmAvgAg6ZxpAcGAZS/9Jvn/LSUoA3lYVfxdcqwM0AlGUJv+pUUdr0nKmU19v3oj7Bt1y1EzGN13Vlo378L0I7/ZJs/ZczHfd1LebNwIHboMHng==
   </data>
  </layer>
  <layer name="ForegroundMiddleLayer" width="41" height="27">
@@ -64,12 +64,11 @@
   <object id="12" name="wall" type="wall" x="365" y="172" width="77" height="17"/>
   <object id="13" name="wall" type="wall" x="357" y="108" width="17" height="76"/>
   <object id="16" name="wall" type="wall" x="128" y="120" width="227" height="11"/>
-  <object id="17" name="wall" type="wall" x="226" y="161" width="28" height="26"/>
   <object id="19" name="wall" type="wall" x="840" y="171" width="21" height="75"/>
   <object id="20" name="wall" type="wall" x="859" y="164" width="158" height="23"/>
   <object id="22" name="wall" type="wall" x="1024" y="197" width="59" height="116"/>
   <object id="23" name="wall" type="wall" x="1097" y="343" width="50" height="65"/>
-  <object id="24" name="wall" type="wall" x="992" y="417" width="31" height="25"/>
+  <object id="24" name="wall" type="wall" x="640" y="386" width="31" height="25"/>
   <object id="25" name="wall" type="wall" x="1171" y="406" width="20" height="227"/>
   <object id="27" name="wall" type="wall" x="1196" y="200" width="57" height="121"/>
   <object id="29" name="wall" type="wall" x="1063" y="102" width="87" height="89"/>
@@ -97,15 +96,37 @@
   <object id="60" name="wall" type="wall" x="289" y="194" width="30" height="27"/>
   <object id="61" name="wall" type="wall" x="523" y="673" width="77" height="60"/>
   <object id="62" name="GoblinWarrior" type="enemy" x="138" y="435"/>
-  <object id="63" name="GoblinWarrior" type="enemy" x="821" y="600"/>
-  <object id="64" name="GoblinWarrior" type="enemy" x="877" y="562"/>
+  <object id="63" name="GoblinWarrior" type="enemy" x="881" y="563"/>
+  <object id="64" name="GoblinWarrior" type="enemy" x="1052" y="488"/>
   <object id="75" name="portal" type="portal" x="0" y="236" width="13" height="105">
    <properties>
     <property name="destination" value="town"/>
+    <property name="landing" value="east"/>
    </properties>
   </object>
-  <object id="79" name="west-landing" type="landing" x="55" y="242" width="14" height="98"/>
+  <object id="79" name="west-landing" type="landing" x="55" y="242" width="14" height="98">
+   <properties>
+    <property name="position" value="west"/>
+   </properties>
+  </object>
   <object id="83" name="wall" type="wall" x="419" y="388" width="26" height="25"/>
   <object id="84" name="wall" type="wall" x="1143" y="730"/>
+  <object id="86" name="GoblinWarrior" type="enemy" x="138" y="168"/>
+  <object id="88" name="portal" type="portal" x="697" y="254" width="76" height="13">
+   <properties>
+    <property name="destination" value="ice_cave"/>
+    <property name="landing" value="north"/>
+   </properties>
+  </object>
+  <object id="89" name="north-landing" type="landing" x="705" y="333" width="71" height="20">
+   <properties>
+    <property name="position" value="north"/>
+   </properties>
+  </object>
+  <object id="90" name="conversation-zone" type="conversation" x="626" y="415" width="59" height="36">
+   <properties>
+    <property name="text" value="The village of FrostVale: West"/>
+   </properties>
+  </object>
  </objectgroup>
 </map>

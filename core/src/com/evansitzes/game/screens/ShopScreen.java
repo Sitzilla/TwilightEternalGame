@@ -14,6 +14,7 @@ import com.badlogic.gdx.scenes.scene2d.utils.DragAndDrop;
 import com.evansitzes.game.GameflowController;
 import com.evansitzes.game.TwilightEternal;
 import com.evansitzes.game.entity.sprites.InventorySprite;
+import com.evansitzes.game.helpers.Sounds;
 import com.evansitzes.game.helpers.Textures.Life;
 import com.evansitzes.game.inventory.*;
 
@@ -132,6 +133,7 @@ public class ShopScreen extends TwilightEternalScreen implements Screen {
     @Override
     public void wasClicked(SlotActor slotActor) {
         // Add to Inventory
+        Sounds.COINS.play();
         inventory.store(slotActor.getSlot().getItem(), 1);
         game.player.loseGold(20);
         game.player.saveEquipment(equipment.getItems(), inventory.getItems());
