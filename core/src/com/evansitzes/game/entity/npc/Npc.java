@@ -46,6 +46,7 @@ public abstract class Npc extends Entity {
         sprite.draw(game.batch);
     }
 
+    @Override
     public void setSpritesPositions() {
         final Configuration configuration = new Configuration();
         sprite.setPosition(this.x - configuration.NPC_STARTING_OFFSET_X, this.y - configuration.NPC_STARTING_OFFSET_Y);

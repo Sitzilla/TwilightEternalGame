@@ -11,12 +11,14 @@ import com.evansitzes.game.screens.*;
  */
 public class GameflowController implements ApplicationListener {
 
+    private final TwilightEternal game;
+
     private TitleScreen titleScreen;
     private GameScreen gameScreen;
     private BattleScreen battleScreen;
     private InventoryScreen inventoryScreen;
     private ShopScreen shopScreen;
-    private final TwilightEternal game;
+    private String currentGameZone;
 
 
     public GameflowController(final TwilightEternal game) {
@@ -53,6 +55,14 @@ public class GameflowController implements ApplicationListener {
     public void setShopScreen() {
         shopScreen = new ShopScreen(game, this);
         game.setScreen(shopScreen);
+    }
+
+    public String getCurrentGameZone() {
+        return currentGameZone;
+    }
+
+    public void setCurrentGameZone(String currentGameZone) {
+        this.currentGameZone = currentGameZone;
     }
 
     @Override

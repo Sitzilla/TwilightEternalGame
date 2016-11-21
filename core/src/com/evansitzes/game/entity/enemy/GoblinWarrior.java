@@ -32,8 +32,11 @@ public class GoblinWarrior extends Enemy {
     @Override
     public void draw() {
 //        if (!dead) {
+        // TODO should I be setting position off the sprites position or the rectangles?
             sprite.setPosition(this.x, this.y);
             this.rectangle.set(this.x + 20, this.y + 20, 10, 10);
+//            sprite.setPosition(this.rectangle.x, this.rectangle.y);
+//            this.rectangle.set(this.rectangle.x + 20, this.rectangle.y + 20, 10, 10);
             sprite.draw(game.batch);
 //        }
     }
@@ -47,6 +50,5 @@ public class GoblinWarrior extends Enemy {
     public void kill() {
         life = 0;
         dead = true;
-        sprite.setRegion(Textures.Enemies.EXPLOSION);
     }
 }

@@ -8,13 +8,11 @@ import com.evansitzes.game.entity.Entity;
  */
 public class Portal extends Entity {
 
-    private final String destination;
-    private final String landing;
+    private String destination;
+    private String landing;
 
-    public Portal(final TwilightEternal game, final String destination, final String landing) {
+    public Portal(final TwilightEternal game) {
         super(game);
-        this.destination = destination;
-        this.landing = landing;
         this.rectangle.set(this.x, this.y, 20, 20);
     }
 
@@ -27,7 +25,17 @@ public class Portal extends Entity {
         return destination;
     }
 
+    @Override
+    public void setDestination(final String destination) {
+        this.destination = destination;
+    }
+
     public String getLanding() {
         return landing;
+    }
+
+    @Override
+    public void setLanding(final String landing) {
+        this.landing = landing;
     }
 }

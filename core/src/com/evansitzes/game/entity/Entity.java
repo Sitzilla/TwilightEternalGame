@@ -16,6 +16,10 @@ public abstract class Entity extends Rectangle {
     public final Vector3 position = new Vector3();
     public Rectangle rectangle;
 
+    // TODO for portal replace with map
+    private String destination;
+    private String landing;
+
     public Entity(final TwilightEternal game) {
         this.game = game;
         rectangle = new Rectangle();
@@ -42,4 +46,28 @@ public abstract class Entity extends Rectangle {
 
     public void setConversationRectangle() {}
 
+    public String getDestination() {
+        return destination;
+    }
+
+    public void setDestination(String destination) {
+        this.destination = destination;
+    }
+
+    public String getLanding() {
+        return landing;
+    }
+
+    public void setLanding(String landing) {
+        this.landing = landing;
+    }
+
+    public void setPosition(String position) {
+    }
+
+    //TODO abstract?
+    public void setText(String text) {
+    }
+
+    public void setSpritesPositions() {}
 }

@@ -71,7 +71,7 @@ public class BattleScreen extends TwilightEternalScreen implements Screen, Input
         this.gameflowController = gameflowController;
         configuration = new Configuration();
 
-        this.level = BattleLevelLoader.load(Vector2.Zero, game, this, "forest-battle-map");
+        this.level = BattleLevelLoader.load(Vector2.Zero, game, this, gameflowController.getCurrentGameZone() + "-battle");
         playersTurn = true;
         enemysTurn = false;
         delay = 2;
@@ -109,6 +109,7 @@ public class BattleScreen extends TwilightEternalScreen implements Screen, Input
 
     @Override
     public void show() {
+        Sounds.SWORD_UNSHEATHE.play();
 //        MyInputProcessor inputProcessor = new MyInputProcessor();
 //        Gdx.input.setInputProcessor(inputProcessor);
     }
@@ -165,7 +166,7 @@ public class BattleScreen extends TwilightEternalScreen implements Screen, Input
             @Override
             public void run() {
                 updateBattleStatus("Enemy has attacked! \n You take " + enemies.get(0).damage + " damage.\n ");
-                Sounds.REALISTIC_PUNCH.play();
+                Sounds.MONSTER.play();
                 game.player.takeDamage(enemies.get(0).damage);
                 playersTurn = true;
                 battleInterface.enableInterface();
@@ -183,8 +184,8 @@ public class BattleScreen extends TwilightEternalScreen implements Screen, Input
             case ATTACK:
                 updateBattleStatus("You have attacked! \n Enemy takes " + game.player.damage + " damage.\n ");
                 // TODO allow selection of enemy
-                delay = 1;
-                Sounds.REALISTIC_PUNCH.play();
+                delay = 2;
+                Sounds.SWORD_SWING.play();
 //                enemies.get(0).takesHit();
                 enemies.get(0).takeDamage(game.player.damage);
 

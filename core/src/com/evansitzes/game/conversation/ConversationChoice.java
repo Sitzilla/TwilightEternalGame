@@ -16,6 +16,8 @@ public class ConversationChoice {
         choices.add("I cannot remember the last time I saw the sun... or the moon.");
         choices.add("The King has holed himself up in the castle.");
         choices.add("Why isn't the King doing anything about the strangeness in the woods?");
+        choices.add("The goblins have been more bold as of late");
+
     }
 
     public String getRandomConversation() {
