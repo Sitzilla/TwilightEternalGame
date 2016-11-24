@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.0" orientation="orthogonal" renderorder="right-down" width="41" height="27" tilewidth="32" tileheight="32" nextobjectid="75">
+<map version="1.0" orientation="orthogonal" renderorder="right-down" width="41" height="27" tilewidth="32" tileheight="32" nextobjectid="76">
  <tileset firstgid="1" name="snowWIP" tilewidth="32" tileheight="32" tilecount="256" columns="16">
   <image source="snowWIP.png" trans="000000" width="512" height="512"/>
  </tileset>
@@ -42,12 +42,12 @@
  </layer>
  <layer name="WallTopLayer" width="41" height="27">
   <data encoding="base64" compression="zlib">
-   eJyL4GZgiABiLyAeTCAc6q4uJDpqkLkxHeieDCCehURnDTI3jlRQyoNK0wOUQ+O+mxvBhol3I/ErcLgJWRyfGcSI4wMeQHWzsahFFusAuqUczZ0gfgcPdvX4xPCJUwJm4AhHXOKjYBSQCyYC0+8kOpftp4D2nSbBzoVAtYvo7MZbQPtuj9Z5o2CYgwdY0jg2sVEw8OAfN4L+N4Ti6D6d3dpGhH2khB857sen5xUWOXzqh1JcEwJPuRgYngHxcyB+wTXQrsEOvgLd9Q2IvwPxj0HqRnoCAMe7MPY=
+   eJyL4GZgiABiLyAeTCAc6q4uJDpqkLkxHeieDCCehURnDTI3jlRQyoNK0wOUQ+O+mxvBhol3I/ErcLgJWRyfGcSI4wMeQHWzsahFFusAuqUczZ0gfgcPdvX4xPCJUwJm4AhHXOKjYBSQCyYC0++kQV62LwS6bxGd3XgLaN/tQR4uo2AUUAoeYEnj2MRGwcCDf9wI+t8QiqP7dHZrGxH2kRJ+5Lgfn55XWOTwqR9KcU0IPOViYHgGxM+B+AXXQLsGO/gKdNc3IP4OxD8GqRvpCQChqS9L
   </data>
  </layer>
  <layer name="ForegroundBottomLayer" width="41" height="27">
   <data encoding="base64" compression="zlib">
-   eJxjYBgFo2AUjIJRMAroD15wMzC85EbQo2AUjALKwFukfHQAyl4LpNdxo4oNFnAB6p69QHofN6rYYAHYwgxXON4h0e3vqORXbGGGKxzfkGknzK0gGsbeP8BxRUz4nYfWMa+xqCXH/aToAbkPm3pC7kauE8+T4UZS9ZxHilt0gM+to3X3KBgFDAwAJYIlRw==
+   eJxjYBgFo2AUjIJRMAroD15wMzC85EbQowABTgHD4/RomIwCEsFbpDRzAMpeC6TXcaOKDRZwAeqevUB6Hzeq2GAB2MIMVzjeIdHt76jkV2xhhisc35BpJ8ytIBrG3j/AcUVM+J2H1jGvsaglx/2k6AG5D5t6Qu5GrhPPk+FGUvWcR4pbdIDPraN19ygYBQwMAEuUJvI=
   </data>
  </layer>
  <layer name="ForegroundMiddleLayer" width="41" height="27">
@@ -71,7 +71,7 @@
   <object id="9" name="Villager" type="npc" x="471" y="403.667"/>
   <object id="10" name="Villager" type="npc" x="367.333" y="557.333"/>
   <object id="14" name="wall" type="wall" x="149.333" y="230.667" width="1168" height="22.6667"/>
-  <object id="15" name="wall" type="wall" x="1157.33" y="352" width="53.3333" height="61.333"/>
+  <object id="15" name="wall" type="wall" x="1157.33" y="365" width="53.3333" height="48.333"/>
   <object id="17" name="wall" type="wall" x="836" y="385" width="125" height="32.3333"/>
   <object id="18" name="wall" type="wall" x="193" y="349.333" width="124" height="67.667"/>
   <object id="19" name="wall" type="wall" x="133.333" y="245.333" width="24" height="423.667"/>
