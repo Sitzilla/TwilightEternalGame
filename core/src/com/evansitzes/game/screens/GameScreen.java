@@ -37,6 +37,7 @@ import static com.evansitzes.game.entity.sprites.PlayerSprite.Facing.*;
 public class GameScreen extends TwilightEternalScreen implements Screen, InputProcessor {
     private final Configuration configuration;
     private final OrthographicCamera camera; // playerSprite Camera
+    final Skin skin;
 
     private TiledMapRenderer tiledMapRenderer;
 
@@ -85,22 +86,9 @@ public class GameScreen extends TwilightEternalScreen implements Screen, InputPr
         Gdx.input.setInputProcessor(stage);
 
         // Bottom of the screen icons
-        final Skin skin = new Skin(Gdx.files.internal("skins/uiskin.json"));
+        skin = new Skin(Gdx.files.internal("skins/uiskin.json"));
 
-        inventoryIcon = new Icon(skin, "backpack");
-        inventoryIconActor = new IconActor(this, inventoryIcon, skin);
-        inventoryIconActor.setPosition(20, 20);
-        stage.addActor(inventoryIconActor);
-        inventoryIconActor.setVisible(true);
-        inventoryIconActor.setMovable(false);
-
-        spellsIcon = new Icon(skin, "spells");
-        spellsIconActor = new IconActor(this, spellsIcon, skin);
-        spellsIconActor.setPosition(140, 20);
-        stage.addActor(spellsIconActor);
-        spellsIconActor.setVisible(true);
-        spellsIconActor.setMovable(false);
-
+        createIcons();
 
         playerSprite = new PlayerSprite(game, this);
         this.battleMode = false;
@@ -419,6 +407,22 @@ public class GameScreen extends TwilightEternalScreen implements Screen, InputPr
                 return;
             }
         }
+    }
+
+    private void createIcons() {
+        inventoryIcon = new Icon(skin, "backpack");
+        inventoryIconActor = new IconActor(this, inventoryIcon, skin);
+        inventoryIconActor.setPosition(20, 20);
+        stage.addActor(inventoryIconActor);
+        inventoryIconActor.setVisible(true);
+        inventoryIconActor.setMovable(false);
+
+        spellsIcon = new Icon(skin, "spells");
+        spellsIconActor = new IconActor(this, spellsIcon, skin);
+        spellsIconActor.setPosition(140, 20);
+        stage.addActor(spellsIconActor);
+        spellsIconActor.setVisible(true);
+        spellsIconActor.setMovable(false);
     }
 
     private void resetObjects() {
