@@ -1,8 +1,6 @@
 package com.evansitzes.game.screens;
 
 import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.InputMultiplexer;
-import com.badlogic.gdx.InputProcessor;
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.OrthographicCamera;
@@ -14,6 +12,8 @@ import com.badlogic.gdx.maps.tiled.renderers.OrthogonalTiledMapRenderer;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
+import com.badlogic.gdx.scenes.scene2d.ui.Table;
+import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
 import com.badlogic.gdx.utils.Array;
 import com.badlogic.gdx.utils.Timer;
 import com.evansitzes.game.Configuration;
@@ -33,7 +33,7 @@ import java.util.Random;
 /**
  * Created by evan on 9/10/16.
  */
-public class BattleScreen extends TwilightEternalScreen implements Screen, InputProcessor {
+public class BattleScreen extends TwilightEternalScreen implements Screen {
 
     private static final int MAXIMUM_GOLD_PER_KILL = 5;
 
@@ -46,6 +46,7 @@ public class BattleScreen extends TwilightEternalScreen implements Screen, Input
     private boolean playersTurn;
     private boolean enemysTurn;
     private boolean endBattle;
+    private Table table;
 
     private NinePatch health;
     private NinePatch container;
@@ -54,13 +55,13 @@ public class BattleScreen extends TwilightEternalScreen implements Screen, Input
     private TextureRegion gradient;
     private TextureRegion containerRegion;
     private BitmapFont font;
+    TextButton.TextButtonStyle textButtonStyle;
 
     private TiledMapRenderer tiledMapRenderer;
 
     private final Array<Enemy> enemies = new Array();
 
     private Skin skin;
-//    private Stage stage;
     private BattleInterface battleInterface;
     private BattleStatus battleStatus;
     private BattleChoiceEnum currentChoice;
@@ -91,20 +92,24 @@ public class BattleScreen extends TwilightEternalScreen implements Screen, Input
         font = new BitmapFont();
 
         stage = new Stage();
-        skin = new Skin(Gdx.files.internal("skins/golden-ui-skin.json"));
+        skin = new Skin(Gdx.files.internal("skins/james/plain-james-ui.json"));
+
         battleStatus = new BattleStatus();
         battleInterface = new BattleInterface(enemies, game.player);
         stage.addActor(battleStatus);
         stage.addActor(battleInterface);
 
-        Gdx.input.setInputProcessor(stage);
-        final InputMultiplexer multiplexer = new InputMultiplexer();
-        multiplexer.addProcessor(stage);
-        multiplexer.addProcessor(this);
-        Gdx.input.setInputProcessor(multiplexer);
+        Gdx.input.setInputProcessor(battleInterface.stage);
+//        final InputMultiplexer multiplexer = new InputMultiplexer();
+//        multiplexer.addProcessor(stage);
+//        multiplexer.addProcessor(this);
+//        Gdx.input.setInputProcessor(multiplexer);
 
         this.tiledMapRenderer = new OrthogonalTiledMapRenderer(level.map);
         tiledMapRenderer.setView(camera);
+        table = new Table(skin);
+        table.setBounds(0, 0, Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
+
     }
 
     @Override
@@ -150,9 +155,7 @@ public class BattleScreen extends TwilightEternalScreen implements Screen, Input
         if (enemysTurn) {
             doEnemyAction();
         }
-
-
-
+        
     }
 
     private void doEnemyAction() {
@@ -161,7 +164,7 @@ public class BattleScreen extends TwilightEternalScreen implements Screen, Input
         if (enemies.get(0).dead) {
             return;
         }
-        
+
         Timer.schedule(new Timer.Task() {
             @Override
             public void run() {
@@ -276,45 +279,5 @@ public class BattleScreen extends TwilightEternalScreen implements Screen, Input
 
     public Array<Enemy> getEnemies() {
         return enemies;
-    }
-
-    @Override
-    public boolean keyDown(int keycode) {
-        return false;
-    }
-
-    @Override
-    public boolean keyUp(int keycode) {
-        return false;
-    }
-
-    @Override
-    public boolean keyTyped(char character) {
-        return false;
-    }
-
-    @Override
-    public boolean touchDown(int screenX, int screenY, int pointer, int button) {
-        return false;
-    }
-
-    @Override
-    public boolean touchUp(int screenX, int screenY, int pointer, int button) {
-        return false;
-    }
-
-    @Override
-    public boolean touchDragged(int screenX, int screenY, int pointer) {
-        return false;
-    }
-
-    @Override
-    public boolean mouseMoved(int screenX, int screenY) {
-        return false;
-    }
-
-    @Override
-    public boolean scrolled(int amount) {
-        return false;
     }
 }
