@@ -456,7 +456,7 @@ public class GameScreen extends TwilightEternalScreen implements Screen, InputPr
 
     @Override
     public void pause() {
-        this.state = State.PAUSE;
+//        this.state = State.PAUSE;
     }
 
     @Override
