@@ -13,14 +13,10 @@ public abstract class Enemy extends Entity {
 
     public boolean expire = false;
 
-    public int life = 1;
     public int score = 0;
     public boolean invincible;
     public long lastHitTime = -1;
     public long lastFired;
-    public boolean dead = false;
-    public int damage;
-    public String name;
 
     public Enemy(final TwilightEternal game) {
         super(game);

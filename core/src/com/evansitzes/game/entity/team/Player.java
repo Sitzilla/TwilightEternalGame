@@ -23,8 +23,9 @@ public class Player extends TeamMember {
         maxHealth = 50;
         currentHealth = 50;
         score = 25;
+        speed = 10;
         dead = false;
-        damage = 25;
+        damage = 15;
         battleSprite = new Sprite(Textures.People.BATTLE_PLAYER);
         battleSprite.setPosition(450, 140);
     }

@@ -19,9 +19,10 @@ public class GoblinWarriorBattle extends Enemy {
 
     public GoblinWarriorBattle(final TwilightEternal game) {
         super(game);
-        life = 30;
+        life = 20;
         score = 25;
-        damage = 15;
+        damage = 10;
+        speed = 5;
         dead = false;
         sprite = new Sprite(Textures.Enemies.GOBLIN_WARRIOR_BATTLE);
         sprite.setSize((float) (sprite.getWidth() * 0.4), (float) (sprite.getHeight() * 0.4));

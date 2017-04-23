@@ -33,7 +33,8 @@ public class TwilightEternal extends Game {
         font = new BitmapFont();
 
         gameflowController = new GameflowController(this);
-        gameflowController.setTitleScreen();
+        gameflowController.setBattleScreen();
+        //        gameflowController.setTitleScreen();
 //        this.setScreen(new TitleScreen(this));
     }
 

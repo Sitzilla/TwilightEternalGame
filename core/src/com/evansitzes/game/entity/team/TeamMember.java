@@ -10,13 +10,14 @@ import java.util.ArrayList;
  */
 public abstract class TeamMember extends Entity {
 
-    public String name;
+//    public String name;
     public float maxHealth;
     public float currentHealth;
     public int score;
-    public int damage;
+//    public int damage;
+//    public int speed;
     public int gold;
-    public boolean dead;
+//    public boolean dead;
     public ArrayList<String> equipment;
     public ArrayList<String> inventory;
 

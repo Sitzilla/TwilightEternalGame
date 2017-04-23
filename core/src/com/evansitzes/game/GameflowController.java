@@ -3,7 +3,6 @@ package com.evansitzes.game;
 import com.badlogic.gdx.ApplicationListener;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.GL20;
-import com.evansitzes.game.helpers.Sounds;
 import com.evansitzes.game.screens.*;
 
 /**
@@ -38,7 +37,7 @@ public class GameflowController implements ApplicationListener {
     }
 
     public void setGameScreen() {
-        Sounds.MAIN_THEME.play();
+//        Sounds.MAIN_THEME.play();
         game.setScreen(gameScreen);
     }
 

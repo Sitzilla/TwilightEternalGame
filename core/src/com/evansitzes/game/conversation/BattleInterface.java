@@ -5,7 +5,6 @@ import com.badlogic.gdx.Input;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.InputListener;
 import com.badlogic.gdx.scenes.scene2d.Stage;
-import com.badlogic.gdx.scenes.scene2d.Touchable;
 import com.badlogic.gdx.scenes.scene2d.ui.Dialog;
 import com.badlogic.gdx.scenes.scene2d.ui.List;
 import com.badlogic.gdx.scenes.scene2d.ui.ScrollPane;
@@ -24,6 +23,8 @@ public class BattleInterface extends Dialog {
     private BattleChoiceEnum currentChoice;
 //    private BattleStatusEnum status;
     public Stage stage;
+    private boolean canMove;
+    private final ScrollPane scrollPane;
 
     public BattleInterface(final Array<Enemy> enemies, final Player player) {
         super("", new Skin(Gdx.files.internal("skins/james/plain-james-ui.json")));
@@ -58,12 +59,13 @@ public class BattleInterface extends Dialog {
         choiceItems.add("Pee Pants");
         choices.setItems(choiceItems);
 
-        final ScrollPane scrollPane = new ScrollPane(choices);
+        scrollPane = new ScrollPane(choices);
         scrollPane.setOverscroll(false, false);
         scrollPane.setFadeScrollBars(false);
         scrollPane.setScrollingDisabled(true, false);
         scrollPane.setForceScroll(true, false);
         scrollPane.setScrollBarPositions(false, true);
+        scrollPane.setPosition(400, 0);
         choices.setSelectedIndex(0);
         stage.addActor(scrollPane);
 
@@ -114,7 +116,7 @@ public class BattleInterface extends Dialog {
         stage.addListener(new InputListener() {
             int buttonToggleState = 1;
             public boolean keyDown (InputEvent event, int keycode) {
-                if (keycode == Input.Keys.DOWN) {
+                if (keycode == Input.Keys.DOWN && canMove) {
                     if (buttonToggleState == 3) {
                         buttonToggleState = 1;
                     } else {
@@ -123,7 +125,7 @@ public class BattleInterface extends Dialog {
                     System.out.println("State: " + buttonToggleState);
                 }
 
-                if (keycode == Input.Keys.UP) {
+                if (keycode == Input.Keys.UP && canMove) {
                     if (buttonToggleState == 1) {
                         buttonToggleState = 3;
                     } else {
@@ -132,25 +134,27 @@ public class BattleInterface extends Dialog {
                     System.out.println("State: " + buttonToggleState);
                 }
 
-                switch (buttonToggleState) {
-                    case 1:
-                        choices.setSelectedIndex(0);
+                if (canMove) {
+                    switch (buttonToggleState) {
+                        case 1:
+                            choices.setSelectedIndex(0);
 //                        stage.setKeyboardFocus(choices);
-                        break;
-                    case 2:
-                        choices.setSelectedIndex(1);
+                            break;
+                        case 2:
+                            choices.setSelectedIndex(1);
 //                        stage.setKeyboardFocus(choices);
-                        break;
-                    case 3:
-                        choices.setSelectedIndex(2);
+                            break;
+                        case 3:
+                            choices.setSelectedIndex(2);
 //                        stage.setKeyboardFocus(choices);
-                        break;
-                    default:
-                        break;
+                            break;
+                        default:
+                            break;
+                    }
                 }
 
-                if (keycode == Input.Keys.ENTER) {
-                    disableInterface();
+                if (keycode == Input.Keys.ENTER && canMove) {
+//                    disableInterface();
 
                     if (buttonToggleState == 1) {
                         currentChoice = BattleChoiceEnum.ATTACK;
@@ -232,11 +236,13 @@ public class BattleInterface extends Dialog {
 //    }
 
     public void disableInterface() {
-        this.setTouchable(Touchable.disabled);
+        scrollPane.setVisible(false);
+        canMove = false;
     }
 
     public void enableInterface() {
-        this.setTouchable(Touchable.enabled);
+        scrollPane.setVisible(true);
+        canMove = true;
     }
 
     public BattleChoiceEnum pollChoice() {

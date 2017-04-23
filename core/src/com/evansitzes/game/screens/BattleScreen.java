@@ -13,7 +13,6 @@ import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
-import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
 import com.badlogic.gdx.utils.Array;
 import com.badlogic.gdx.utils.Timer;
 import com.evansitzes.game.Configuration;
@@ -22,13 +21,14 @@ import com.evansitzes.game.Level;
 import com.evansitzes.game.TwilightEternal;
 import com.evansitzes.game.conversation.BattleInterface;
 import com.evansitzes.game.conversation.BattleStatus;
+import com.evansitzes.game.entity.Entity;
 import com.evansitzes.game.entity.enemy.Enemy;
 import com.evansitzes.game.helpers.BattleChoiceEnum;
 import com.evansitzes.game.helpers.Sounds;
 import com.evansitzes.game.helpers.Textures;
 import com.evansitzes.game.loaders.BattleLevelLoader;
 
-import java.util.Random;
+import java.util.*;
 
 /**
  * Created by evan on 9/10/16.
@@ -43,10 +43,10 @@ public class BattleScreen extends TwilightEternalScreen implements Screen {
     private final Configuration configuration;
     private Level level;
     private float delay;
-    private boolean playersTurn;
-    private boolean enemysTurn;
     private boolean endBattle;
     private Table table;
+    private Entity currentCombatant;
+    private boolean isBattleCurrentlyDelayed = false;
 
     private NinePatch health;
     private NinePatch container;
@@ -55,11 +55,11 @@ public class BattleScreen extends TwilightEternalScreen implements Screen {
     private TextureRegion gradient;
     private TextureRegion containerRegion;
     private BitmapFont font;
-    TextButton.TextButtonStyle textButtonStyle;
 
     private TiledMapRenderer tiledMapRenderer;
 
     private final Array<Enemy> enemies = new Array();
+    private final Stack<Entity> orderedCombatants = new Stack<Entity>();
 
     private Skin skin;
     private BattleInterface battleInterface;
@@ -73,8 +73,8 @@ public class BattleScreen extends TwilightEternalScreen implements Screen {
         configuration = new Configuration();
 
         this.level = BattleLevelLoader.load(Vector2.Zero, game, this, gameflowController.getCurrentGameZone() + "-battle");
-        playersTurn = true;
-        enemysTurn = false;
+        buildOrderedCombatants();
+        currentCombatant = orderedCombatants.pop();
         delay = 2;
         endBattle = false;
 
@@ -124,6 +124,7 @@ public class BattleScreen extends TwilightEternalScreen implements Screen {
         Gdx.gl.glClearColor(0, 0, 0.0f, 1);
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
 
+        // Battle Map Rendering Logic
         tiledMapRenderer.setView(camera);
         tiledMapRenderer.render();
         game.batch.setProjectionMatrix(camera.combined);
@@ -147,15 +148,20 @@ public class BattleScreen extends TwilightEternalScreen implements Screen {
         stage.act(delta);
         stage.draw();
 
+        if (isBattleCurrentlyDelayed) {
+            return;
+        }
+
+                // Battle Action Logic
         currentChoice = battleInterface.pollChoice();
 
-        if (playersTurn) {
+        if (currentCombatant instanceof Enemy) {
+            battleInterface.disableInterface();
+            doEnemyAction();
+        } else {
+            battleInterface.enableInterface();
             doPlayerAction();
         }
-        if (enemysTurn) {
-            doEnemyAction();
-        }
-        
     }
 
     private void doEnemyAction() {
@@ -168,23 +174,24 @@ public class BattleScreen extends TwilightEternalScreen implements Screen {
         Timer.schedule(new Timer.Task() {
             @Override
             public void run() {
-                updateBattleStatus("Enemy has attacked! \n You take " + enemies.get(0).damage + " damage.\n ");
+                updateBattleStatus("Enemy has attacked! \n You take " + currentCombatant.damage + " damage.\n ");
                 Sounds.MONSTER.play();
-                game.player.takeDamage(enemies.get(0).damage);
-                playersTurn = true;
-                battleInterface.enableInterface();
+                game.player.takeDamage(currentCombatant.damage);
+                updateNextCombatant();
 
                 if(game.player.dead) {
                     endBattle();
                 }
+                isBattleCurrentlyDelayed = false;
             }
         }, delay);
-        enemysTurn = false;
+        isBattleCurrentlyDelayed = true;
     }
 
     private void doPlayerAction() {
         switch (currentChoice) {
             case ATTACK:
+                updateNextCombatant();
                 updateBattleStatus("You have attacked! \n Enemy takes " + game.player.damage + " damage.\n ");
                 // TODO allow selection of enemy
                 delay = 2;
@@ -208,15 +215,15 @@ public class BattleScreen extends TwilightEternalScreen implements Screen {
                 }, delay);
 
                 battleInterface.resetChoice();
-                playersTurn = false;
-                enemysTurn = true;
                 break;
+
             case PEE_PANTS:
+                updateNextCombatant();
                 updateBattleStatus("Haha you have have peed your pants!\n");
                 battleInterface.resetChoice();
-                playersTurn = false;
-                enemysTurn = true;
+                updateNextCombatant();
                 break;
+
             case RUN:
                 updateBattleStatus("You have run away!\n");
                 battleInterface.resetChoice();
@@ -242,7 +249,6 @@ public class BattleScreen extends TwilightEternalScreen implements Screen {
         stage.addActor(battleInterface);
     }
 
-
     private int getRandomGold() {
         final Random rand = new Random();
         return rand.nextInt(MAXIMUM_GOLD_PER_KILL) + 1;
@@ -250,6 +256,27 @@ public class BattleScreen extends TwilightEternalScreen implements Screen {
 
     private void endBattle() {
         gameflowController.setGameScreen();
+    }
+
+    private void buildOrderedCombatants() {
+        for (final Entity enemy : enemies) {
+            orderedCombatants.add(enemy);
+        }
+        orderedCombatants.add(game.player);
+
+        Collections.sort(orderedCombatants, new Comparator<Entity>() {
+            public int compare(final Entity s1, final Entity s2) {
+                return ((Integer)s1.speed).compareTo(s2.speed);
+            }
+        });
+    }
+
+    private void updateNextCombatant() {
+        if (orderedCombatants.isEmpty()) {
+            buildOrderedCombatants();
+        }
+
+        currentCombatant = orderedCombatants.pop();
     }
 
     @Override
