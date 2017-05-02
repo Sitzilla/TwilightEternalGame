@@ -70,8 +70,6 @@ public class GameScreen extends TwilightEternalScreen implements Screen, InputPr
     private final float mapMinY = 0;
     private final float mapMaxY;
 
-//    private final Stage stage;
-
     public GameScreen(final TwilightEternal game, final GameflowController gameflowController) {
         this.game = game;
         this.gameflowController = gameflowController;
@@ -156,28 +154,6 @@ public class GameScreen extends TwilightEternalScreen implements Screen, InputPr
                 game.batch.setProjectionMatrix(camera.combined);
 
                 game.batch.begin();
-
-                if (Gdx.input.isKeyPressed(Input.Keys.RIGHT)) {
-                    if (!areCollisions(PlayerSprite.Facing.RIGHT)) {
-                        playerSprite.state = PlayerSprite.State.WALKING;
-                        playerSprite.direction = PlayerSprite.Facing.RIGHT;
-                    }
-                } else if (Gdx.input.isKeyPressed(Input.Keys.LEFT)) {
-                    if (!areCollisions(PlayerSprite.Facing.LEFT)) {
-                        playerSprite.state = PlayerSprite.State.WALKING;
-                        playerSprite.direction = PlayerSprite.Facing.LEFT;
-                    }
-                } else if (Gdx.input.isKeyPressed(Input.Keys.UP)) {
-                    if (!areCollisions(PlayerSprite.Facing.UP)) {
-                        playerSprite.state = PlayerSprite.State.WALKING;
-                        playerSprite.direction = PlayerSprite.Facing.UP;
-                    }
-                } else if (Gdx.input.isKeyPressed(Input.Keys.DOWN)) {
-                    if (!areCollisions(PlayerSprite.Facing.DOWN)) {
-                        playerSprite.state = PlayerSprite.State.WALKING;
-                        playerSprite.direction = PlayerSprite.Facing.DOWN;
-                    }
-                }
 
                 playerSprite.handle(delta);
 
@@ -447,6 +423,30 @@ public class GameScreen extends TwilightEternalScreen implements Screen, InputPr
         final Conversation conversation = new Conversation(false, gameflowController);
         conversation.setText(text);
         conversation.show(stage);
+    }
+
+    private void setPlayerDirectionState() {
+        if (Gdx.input.isKeyPressed(Input.Keys.RIGHT)) {
+            if (!areCollisions(PlayerSprite.Facing.RIGHT)) {
+                playerSprite.state = PlayerSprite.State.WALKING;
+                playerSprite.direction = PlayerSprite.Facing.RIGHT;
+            }
+        } else if (Gdx.input.isKeyPressed(Input.Keys.LEFT)) {
+            if (!areCollisions(PlayerSprite.Facing.LEFT)) {
+                playerSprite.state = PlayerSprite.State.WALKING;
+                playerSprite.direction = PlayerSprite.Facing.LEFT;
+            }
+        } else if (Gdx.input.isKeyPressed(Input.Keys.UP)) {
+            if (!areCollisions(PlayerSprite.Facing.UP)) {
+                playerSprite.state = PlayerSprite.State.WALKING;
+                playerSprite.direction = PlayerSprite.Facing.UP;
+            }
+        } else if (Gdx.input.isKeyPressed(Input.Keys.DOWN)) {
+            if (!areCollisions(PlayerSprite.Facing.DOWN)) {
+                playerSprite.state = PlayerSprite.State.WALKING;
+                playerSprite.direction = PlayerSprite.Facing.DOWN;
+            }
+        }
     }
 
     @Override
