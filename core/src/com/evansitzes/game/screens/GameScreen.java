@@ -155,6 +155,7 @@ public class GameScreen extends TwilightEternalScreen implements Screen, InputPr
 
                 game.batch.begin();
 
+                setPlayerDirectionState();
                 playerSprite.handle(delta);
 
                 for (final Enemy enemy : enemies) {

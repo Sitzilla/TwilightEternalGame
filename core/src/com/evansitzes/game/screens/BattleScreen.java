@@ -19,16 +19,20 @@ import com.evansitzes.game.Configuration;
 import com.evansitzes.game.GameflowController;
 import com.evansitzes.game.Level;
 import com.evansitzes.game.TwilightEternal;
+import com.evansitzes.game.battle.BattleInterfaceData;
+import com.evansitzes.game.battle.BattleInterfaceSelection;
 import com.evansitzes.game.conversation.BattleInterface;
 import com.evansitzes.game.conversation.BattleStatus;
 import com.evansitzes.game.entity.Entity;
 import com.evansitzes.game.entity.enemy.Enemy;
 import com.evansitzes.game.helpers.BattleChoiceEnum;
-import com.evansitzes.game.helpers.Sounds;
 import com.evansitzes.game.helpers.Textures;
 import com.evansitzes.game.loaders.BattleLevelLoader;
 
-import java.util.*;
+import java.util.Collections;
+import java.util.Comparator;
+import java.util.Random;
+import java.util.Stack;
 
 /**
  * Created by evan on 9/10/16.
@@ -63,6 +67,7 @@ public class BattleScreen extends TwilightEternalScreen implements Screen {
 
     private Skin skin;
     private BattleInterface battleInterface;
+    private BattleInterfaceData battleInterfaceData;
     private BattleStatus battleStatus;
     private BattleChoiceEnum currentChoice;
     private GameflowController gameflowController;
@@ -96,6 +101,11 @@ public class BattleScreen extends TwilightEternalScreen implements Screen {
 
         battleStatus = new BattleStatus();
         battleInterface = new BattleInterface(enemies, game.player);
+        battleInterfaceData = new BattleInterfaceData();
+        battleInterfaceData.battleSelectionsOptions.add(new BattleInterfaceSelection("Attack", BattleChoiceEnum.ATTACK));
+        battleInterfaceData.battleSelectionsOptions.add(new BattleInterfaceSelection("Run", BattleChoiceEnum.RUN));
+        battleInterfaceData.battleSelectionsOptions.add(new BattleInterfaceSelection("Pee Pants", BattleChoiceEnum.PEE_PANTS));
+        battleInterface.setInterface(battleInterfaceData);
         stage.addActor(battleStatus);
         stage.addActor(battleInterface);
 
@@ -114,7 +124,7 @@ public class BattleScreen extends TwilightEternalScreen implements Screen {
 
     @Override
     public void show() {
-        Sounds.SWORD_UNSHEATHE.play();
+//        Sounds.SWORD_UNSHEATHE.play();
 //        MyInputProcessor inputProcessor = new MyInputProcessor();
 //        Gdx.input.setInputProcessor(inputProcessor);
     }
@@ -175,7 +185,7 @@ public class BattleScreen extends TwilightEternalScreen implements Screen {
             @Override
             public void run() {
                 updateBattleStatus("Enemy has attacked! \n You take " + currentCombatant.damage + " damage.\n ");
-                Sounds.MONSTER.play();
+//                Sounds.MONSTER.play();
                 game.player.takeDamage(currentCombatant.damage);
                 updateNextCombatant();
 
@@ -195,7 +205,7 @@ public class BattleScreen extends TwilightEternalScreen implements Screen {
                 updateBattleStatus("You have attacked! \n Enemy takes " + game.player.damage + " damage.\n ");
                 // TODO allow selection of enemy
                 delay = 2;
-                Sounds.SWORD_SWING.play();
+//                Sounds.SWORD_SWING.play();
 //                enemies.get(0).takesHit();
                 enemies.get(0).takeDamage(game.player.damage);
 
