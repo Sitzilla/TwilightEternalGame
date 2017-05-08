@@ -111,9 +111,25 @@ public class InventoryScreen extends TwilightEternalScreen implements Screen {
         game.batch.begin();
         inventorySprite.draw();
 
-        font.draw(game.batch, "Current life:", 400, 230);
-        container.draw(game.batch, 395, 195, totalBarWidth + 10, 20);
-        health.draw(game.batch, 400, 200, width, 10);
+        // Draw life
+        font.draw(game.batch, "Current life:", 400, 300);
+        container.draw(game.batch, 395, 265, totalBarWidth + 10, 20);
+        health.draw(game.batch, 400, 270, width, 10);
+
+        // Draw Stats
+        font.draw(game.batch, "Strength:", 450, 220);
+        font.draw(game.batch, "Dexterity:", 450, 195);
+        font.draw(game.batch, "Constitution:", 450, 170);
+        font.draw(game.batch, "Wisdom:", 450, 145);
+        font.draw(game.batch, "Intelligence:", 450, 120);
+        font.draw(game.batch, "Charisma:", 450, 95);
+        font.draw(game.batch, String.valueOf(game.player.totalStrength), 535, 220);
+        font.draw(game.batch, String.valueOf(game.player.totalDexterity), 535, 195);
+        font.draw(game.batch, String.valueOf(game.player.totalConstitution), 535, 170);
+        font.draw(game.batch, String.valueOf(game.player.totalWisdom), 535, 145);
+        font.draw(game.batch, String.valueOf(game.player.totalIntelligence), 535, 120);
+        font.draw(game.batch, String.valueOf(game.player.totalCharisma), 535, 95);
+
 
         font.draw(game.batch, "Press spacebar to exit", 300, 0);
         font.draw(game.batch, "Current player: " + game.player.name, 300, 500);

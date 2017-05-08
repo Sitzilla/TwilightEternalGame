@@ -2,6 +2,8 @@ package com.evansitzes.game.model;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 
+import java.util.HashMap;
+
 /**
  * Created by evan on 11/4/16.
  */
@@ -12,6 +14,9 @@ public class Article {
     @JsonProperty
     private String description;
 
+    @JsonProperty
+    private HashMap<String, Integer> attributes;
+
     public Article() {
     }
 
@@ -19,7 +24,7 @@ public class Article {
         return name;
     }
 
-    public void setName(String name) {
+    public void setName(final String name) {
         this.name = name;
     }
 
@@ -27,8 +32,16 @@ public class Article {
         return description;
     }
 
-    public void setDescription(String description) {
+    public void setDescription(final String description) {
         this.description = description;
+    }
+
+    public HashMap getAttributes() {
+        return attributes;
+    }
+
+    public void setAttributes(final HashMap<String, Integer> attributes) {
+        this.attributes = attributes;
     }
 
     @Override
@@ -36,6 +49,7 @@ public class Article {
         return "Article{" +
                 "name='" + name + '\'' +
                 ", description='" + description + '\'' +
+                ", attributes=" + attributes +
                 '}';
     }
 }

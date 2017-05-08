@@ -12,10 +12,34 @@ public abstract class Entity extends Rectangle {
 
     public final TwilightEternal game;
     public String name;
-    public int damage;
-    public int speed;
+//    public int damage;
+//    public int speed;
     public int life = 1;
     public boolean dead = false;
+
+    public int baseStrength = 1;
+    public int baseDexterity = 1;
+    public int baseConstitution = 1;
+    public int baseWisdom = 1;
+    public int baseIntelligence = 1;
+    public int baseCharisma = 1;
+    public int baseArmorClass = 1;
+
+    public int strengthModifier = 0;
+    public int dexterityModifier = 0;
+    public int constitutionModifier = 0;
+    public int wisdomModifier = 0;
+    public int intelligenceModifier = 0;
+    public int charismaModifier = 0;
+    public int armorClassModifier = 0;
+
+    public int totalStrength = 1;
+    public int totalDexterity = 1;
+    public int totalConstitution = 1;
+    public int totalWisdom = 1;
+    public int totalIntelligence = 1;
+    public int totalCharisma = 1;
+    public int totalArmorClass = 1;
 
     public final Vector3 position = new Vector3();
     public Rectangle rectangle;

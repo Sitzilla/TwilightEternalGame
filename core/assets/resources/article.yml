@@ -2,14 +2,19 @@
 articles:
 - name: "bronze_helmet"
   description: "Basic headgear"
+  attributes: {"strength": 0, "dexterity": 0, "constitution": 1, "wisdom": 0, "intelligence": 0, "charisma": 0}
 - name: "bronze_armor"
   description: "Basic armor"
+  attributes: {"strength": 0, "dexterity": -1, "constitution": 1, "wisdom": 0, "intelligence": 0, "charisma": 0}
 - name: "bronze_pants"
   description: "Basic leg gear"
+  attributes: {"strength": 0, "dexterity": 0, "constitution": 1, "wisdom": 0, "intelligence": 0, "charisma": 0}
 - name: "bronze_boots"
   description: "Basic boots"
+  attributes: {"strength": 0, "dexterity": 1, "constitution": 0, "wisdom": 0, "intelligence": 0, "charisma": 0}
 - name: "bronze_sword"
   description: "Basic sword"
+  attributes: {"strength": 2, "dexterity": 0, "constitution": 0, "wisdom": 0, "intelligence": 0, "charisma": 0}
 - name: "Apple"
   description: "Tasty treat (restore 20 HP) \n *Double-click to consume*"
 - name: "Veggies"

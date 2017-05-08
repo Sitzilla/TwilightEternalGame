@@ -7,6 +7,8 @@ import com.evansitzes.game.model.Character;
 
 import java.util.ArrayList;
 
+import static com.evansitzes.game.Configuration.PLAYER_BASE_LIFE;
+
 /**
  * Created by evan on 9/23/16.
  */
@@ -20,14 +22,24 @@ public class Player extends TeamMember {
         equipment = character.getEquipment();
         inventory = character.getInventory();
         gold = character.getGold();
-        maxHealth = 50;
-        currentHealth = 50;
         score = 25;
-        speed = 10;
         dead = false;
-        damage = 15;
         battleSprite = new Sprite(Textures.People.BATTLE_PLAYER);
         battleSprite.setPosition(450, 140);
+
+        // TODO consider moving this to a configuration class
+        baseStrength = 8;
+        baseDexterity = 8;
+        baseConstitution = 8;
+        baseWisdom = 8;
+        baseIntelligence = 8;
+        baseCharisma = 8;
+        baseArmorClass = 1;
+
+        totalArmorClass = baseArmorClass + armorClassModifier;
+
+        maxHealth = PLAYER_BASE_LIFE + baseConstitution;
+        currentHealth = maxHealth;
     }
 
     @Override
@@ -78,5 +90,14 @@ public class Player extends TeamMember {
     public void loseGold(int gold) {
         this.gold -= gold;
         game.savePlayerGold(this.gold);
+    }
+
+    public void updateTotalAttributes() {
+        totalStrength = baseStrength + strengthModifier;
+        totalDexterity = baseDexterity + dexterityModifier;
+        totalConstitution = baseConstitution + constitutionModifier;
+        totalWisdom = baseWisdom + wisdomModifier;
+        totalIntelligence = baseIntelligence + intelligenceModifier;
+        totalCharisma = baseCharisma + charismaModifier;
     }
 }

@@ -26,6 +26,7 @@ import com.evansitzes.game.conversation.BattleStatus;
 import com.evansitzes.game.entity.Entity;
 import com.evansitzes.game.entity.enemy.Enemy;
 import com.evansitzes.game.helpers.BattleChoiceEnum;
+import com.evansitzes.game.helpers.DamageCalculator;
 import com.evansitzes.game.helpers.Textures;
 import com.evansitzes.game.loaders.BattleLevelLoader;
 
@@ -184,9 +185,10 @@ public class BattleScreen extends TwilightEternalScreen implements Screen {
         Timer.schedule(new Timer.Task() {
             @Override
             public void run() {
-                updateBattleStatus("Enemy has attacked! \n You take " + currentCombatant.damage + " damage.\n ");
+                int damageTaken = DamageCalculator.calculatePhysicalDamage(currentCombatant, game.player);
+                updateBattleStatus("Enemy has attacked! \n You take " + damageTaken + " damage.\n ");
 //                Sounds.MONSTER.play();
-                game.player.takeDamage(currentCombatant.damage);
+                game.player.takeDamage(damageTaken);
                 updateNextCombatant();
 
                 if(game.player.dead) {
@@ -202,12 +204,13 @@ public class BattleScreen extends TwilightEternalScreen implements Screen {
         switch (currentChoice) {
             case ATTACK:
                 updateNextCombatant();
-                updateBattleStatus("You have attacked! \n Enemy takes " + game.player.damage + " damage.\n ");
+                int damageDealt = DamageCalculator.calculatePhysicalDamage(game.player, enemies.get(0));
+                updateBattleStatus("You have attacked! \n Enemy takes " + damageDealt + " damage.\n ");
                 // TODO allow selection of enemy
                 delay = 2;
 //                Sounds.SWORD_SWING.play();
 //                enemies.get(0).takesHit();
-                enemies.get(0).takeDamage(game.player.damage);
+                enemies.get(0).takeDamage(damageDealt);
 
                 if (enemies.get(0).dead) {
                     final int goldWon = getRandomGold();
@@ -276,7 +279,7 @@ public class BattleScreen extends TwilightEternalScreen implements Screen {
 
         Collections.sort(orderedCombatants, new Comparator<Entity>() {
             public int compare(final Entity s1, final Entity s2) {
-                return ((Integer)s1.speed).compareTo(s2.speed);
+                return ((Integer)s1.totalDexterity).compareTo(s2.totalDexterity);
             }
         });
     }

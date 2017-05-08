@@ -19,13 +19,31 @@ public class GoblinWarriorBattle extends Enemy {
 
     public GoblinWarriorBattle(final TwilightEternal game) {
         super(game);
-        life = 20;
         score = 25;
-        damage = 10;
-        speed = 5;
         dead = false;
         sprite = new Sprite(Textures.Enemies.GOBLIN_WARRIOR_BATTLE);
         sprite.setSize((float) (sprite.getWidth() * 0.4), (float) (sprite.getHeight() * 0.4));
+
+        // TODO consider moving this to a configuration class
+        baseStrength = 4;
+        baseDexterity = 4;
+        baseConstitution = 4;
+        baseWisdom = 4;
+        baseIntelligence = 4;
+        baseCharisma = 4;
+        baseArmorClass = 2;
+
+        totalStrength = baseStrength + strengthModifier;
+        totalDexterity = baseDexterity + dexterityModifier;
+        totalConstitution = baseConstitution + constitutionModifier;
+        totalWisdom = baseWisdom + wisdomModifier;
+        totalConstitution = baseConstitution + constitutionModifier;
+        totalIntelligence = baseIntelligence + intelligenceModifier;
+        totalCharisma = baseCharisma + charismaModifier;
+        totalArmorClass = baseArmorClass + armorClassModifier;
+
+        life = 5 + baseConstitution;
+
     }
 
     @Override
