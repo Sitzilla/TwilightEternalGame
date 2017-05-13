@@ -2,22 +2,31 @@
 articles:
 - name: "bronze_helmet"
   description: "Basic headgear"
+  item_type: "helmet"
   attributes: {"strength": 0, "dexterity": 0, "constitution": 1, "wisdom": 0, "intelligence": 0, "charisma": 0}
 - name: "bronze_armor"
   description: "Basic armor"
+  item_type: "armor"
   attributes: {"strength": 0, "dexterity": -1, "constitution": 1, "wisdom": 0, "intelligence": 0, "charisma": 0}
 - name: "bronze_pants"
   description: "Basic leg gear"
+  item_type: "pants"
   attributes: {"strength": 0, "dexterity": 0, "constitution": 1, "wisdom": 0, "intelligence": 0, "charisma": 0}
 - name: "bronze_boots"
   description: "Basic boots"
+  item_type: "shoes"
   attributes: {"strength": 0, "dexterity": 1, "constitution": 0, "wisdom": 0, "intelligence": 0, "charisma": 0}
 - name: "bronze_sword"
   description: "Basic sword"
+  item_type: "weapon"
   attributes: {"strength": 2, "dexterity": 0, "constitution": 0, "wisdom": 0, "intelligence": 0, "charisma": 0}
 - name: "Apple"
   description: "Tasty treat (restore 20 HP) \n *Double-click to consume*"
+  item_type: "food"
 - name: "Veggies"
   description: "Cooking Ingredients"
+  item_type: "general"
 - name: "Bone"
-  description: "Animal bone"
+  description: "Animal bone. Can be used as a weak weapon"
+  item_type: "weapon"
+  attributes: {"strength": 1, "dexterity": 0, "constitution": 0, "wisdom": 0, "intelligence": 0, "charisma": 0}

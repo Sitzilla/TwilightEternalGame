@@ -14,12 +14,10 @@ import com.badlogic.gdx.scenes.scene2d.utils.DragAndDrop;
 import com.evansitzes.game.GameflowController;
 import com.evansitzes.game.TwilightEternal;
 import com.evansitzes.game.entity.sprites.InventorySprite;
+import com.evansitzes.game.helpers.PlayerStatsHelper;
 import com.evansitzes.game.helpers.Sounds;
 import com.evansitzes.game.helpers.Textures.Life;
-import com.evansitzes.game.inventory.EquipmentActor;
-import com.evansitzes.game.inventory.Inventory;
-import com.evansitzes.game.inventory.InventoryActor;
-import com.evansitzes.game.inventory.SlotActor;
+import com.evansitzes.game.inventory.*;
 
 /**
  * Created by evan on 9/27/16.
@@ -58,8 +56,8 @@ public class InventoryScreen extends TwilightEternalScreen implements Screen {
         container = new NinePatch(containerRegion, 5, 5, 2, 2);
         totalBarWidth = 100;
 
-        inventory = new Inventory(SIZE_OF_INVENTORY);
-        equipment = new Inventory(SIZE_OF_EQUIPMENT);
+        inventory = new Inventory(SIZE_OF_INVENTORY, "inventory");
+        equipment = new Inventory(SIZE_OF_EQUIPMENT, "equipment");
         inventory.populateInventory(game.player.inventory);
         equipment.populateEquipment(game.player.equipment);
 
@@ -85,7 +83,7 @@ public class InventoryScreen extends TwilightEternalScreen implements Screen {
         inventoryActor = new InventoryActor(this, inventory, dragAndDrop, skin);
         inventoryActor.setPosition(80, 50);
         equipmentActor = new EquipmentActor(this, equipment, dragAndDrop, skin);
-        equipmentActor.setPosition(100, 700);
+        equipmentActor.setPosition(200, 700);
 
         stage.addActor(inventoryActor);
         stage.addActor(equipmentActor);
@@ -110,6 +108,13 @@ public class InventoryScreen extends TwilightEternalScreen implements Screen {
 
         game.batch.begin();
         inventorySprite.draw();
+
+        // Draw Equipment Titles
+        font.draw(game.batch, "Helmet:", 50, 510);
+        font.draw(game.batch, "Armor:", 50, 460);
+        font.draw(game.batch, "Weapon:", 50, 410);
+        font.draw(game.batch, "Pants:", 50, 360);
+        font.draw(game.batch, "Shoes:", 50, 310);
 
         // Draw life
         font.draw(game.batch, "Current life:", 400, 300);
@@ -143,7 +148,7 @@ public class InventoryScreen extends TwilightEternalScreen implements Screen {
     }
 
     @Override
-    public void consumeItem(SlotActor slotActor) {
+    public void consumeItem(final SlotActor slotActor) {
         System.out.println("DOUBLE CLICK");
 
         //TODO wtf is this hardcoded?II
@@ -151,6 +156,27 @@ public class InventoryScreen extends TwilightEternalScreen implements Screen {
             Sounds.BOTTLE.play();
             game.player.restoreLife(20);
             inventory.removeItem(slotActor.getSlot().getItem());
+        }
+    }
+
+    @Override
+    public void switchItems(final Slot payloadSlot, final Slot targetSlot) {
+
+        if (payloadSlot.isEquipment() && targetSlot.getItem() == null) {
+            PlayerStatsHelper.removePlayerEquipment(game.player, payloadSlot.getItem());
+        }
+
+        if (targetSlot.isEquipment() && targetSlot.getItem() == null) {
+            PlayerStatsHelper.addPlayerEquipment(game.player, payloadSlot.getItem());
+        }
+
+        if ((targetSlot.isEquipment() || payloadSlot.isEquipment()) &&
+                targetSlot.getItem() != null) {
+            if (targetSlot.isEquipment()) {
+                PlayerStatsHelper.switchPlayerEquipment(game.player, targetSlot.getItem(), payloadSlot.getItem());
+            } else {
+                PlayerStatsHelper.switchPlayerEquipment(game.player, payloadSlot.getItem(), targetSlot.getItem());
+            }
         }
     }
 

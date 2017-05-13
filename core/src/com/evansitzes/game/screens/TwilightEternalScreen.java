@@ -2,6 +2,7 @@ package com.evansitzes.game.screens;
 
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.scenes.scene2d.Stage;
+import com.evansitzes.game.inventory.Slot;
 import com.evansitzes.game.inventory.SlotActor;
 
 /**
@@ -10,11 +11,15 @@ import com.evansitzes.game.inventory.SlotActor;
 public abstract class TwilightEternalScreen implements Screen {
     public Stage stage;
 
-    public void wasClicked(SlotActor slotActor) {
+    public void wasClicked(final SlotActor slotActor) {
 
     }
 
-    public void consumeItem(SlotActor slotActor) {
+    public void consumeItem(final SlotActor slotActor) {
+    }
+
+    public void switchItems(final Slot item, final Slot payloadSlotItem) {
+
     }
 
     public void setInventoryScreen() {

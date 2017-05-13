@@ -14,6 +14,9 @@ public class Article {
     @JsonProperty
     private String description;
 
+    @JsonProperty("item_type")
+    private String itemType;
+
     @JsonProperty
     private HashMap<String, Integer> attributes;
 
@@ -36,6 +39,14 @@ public class Article {
         this.description = description;
     }
 
+    public String getItemType() {
+        return itemType;
+    }
+
+    public void setItemType(String itemType) {
+        this.itemType = itemType;
+    }
+
     public HashMap getAttributes() {
         return attributes;
     }
@@ -49,6 +60,7 @@ public class Article {
         return "Article{" +
                 "name='" + name + '\'' +
                 ", description='" + description + '\'' +
+                ", itemType='" + itemType + '\'' +
                 ", attributes=" + attributes +
                 '}';
     }

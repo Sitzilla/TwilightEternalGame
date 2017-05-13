@@ -8,21 +8,24 @@ import com.badlogic.gdx.utils.Array;
 public class Slot {
 
     private Item item;
-
+    private InventoryTypeEnum inventoryType;
     private int amount;
+    private boolean isEquipment;
 
     private Array<SlotListener> slotListeners = new Array<SlotListener>();
 
-    public Slot(Item item, int amount) {
+    public Slot(final Item item, final InventoryTypeEnum inventoryType, final int amount, final boolean isEquipment) {
         this.item = item;
+        this.inventoryType = inventoryType;
         this.amount = amount;
+        this.isEquipment = isEquipment;
     }
 
     public boolean isEmpty() {
         return item == null || amount <= 0;
     }
 
-    public boolean add(Item item, int amount) {
+    public boolean add(final Item item, final int amount) {
         if (this.item == item || this.item == null) {
             this.item = item;
             this.amount += amount;
@@ -33,7 +36,7 @@ public class Slot {
         return false;
     }
 
-    public boolean take(int amount) {
+    public boolean take(final int amount) {
         if (this.amount >= amount) {
             this.amount -= amount;
             if (this.amount == 0) {
@@ -46,16 +49,16 @@ public class Slot {
         return false;
     }
 
-    public void addListener(SlotListener slotListener) {
+    public void addListener(final SlotListener slotListener) {
         slotListeners.add(slotListener);
     }
 
-    public void removeListener(SlotListener slotListener) {
+    public void removeListener(final SlotListener slotListener) {
         slotListeners.removeValue(slotListener, true);
     }
 
     private void notifyListeners() {
-        for (SlotListener slotListener : slotListeners) {
+        for (final SlotListener slotListener : slotListeners) {
             slotListener.hasChanged(this);
         }
     }
@@ -64,7 +67,7 @@ public class Slot {
         return item;
     }
 
-    public void setItem(Item item, int amount) {
+    public void setItem(final Item item, final int amount) {
         this.item = item;
         this.amount = amount;
         notifyListeners();
@@ -72,6 +75,14 @@ public class Slot {
 
     public int getAmount() {
         return amount;
+    }
+
+    public InventoryTypeEnum getInventoryType() {
+        return inventoryType;
+    }
+
+    public boolean isEquipment() {
+        return isEquipment;
     }
 
     @Override

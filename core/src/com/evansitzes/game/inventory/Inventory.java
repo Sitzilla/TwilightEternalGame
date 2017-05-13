@@ -1,6 +1,7 @@
 package com.evansitzes.game.inventory;
 
 import com.badlogic.gdx.utils.Array;
+import com.evansitzes.game.helpers.ItemTypeParser;
 import com.evansitzes.game.helpers.YamlParser;
 import com.evansitzes.game.model.Article;
 import com.evansitzes.game.model.ArticlesEnvelope;
@@ -15,10 +16,21 @@ public class Inventory {
     private Array<Slot> slots;
     private ArticlesEnvelope articlesEnvelope;
 
-    public Inventory(final int size) {
-        slots = new Array<Slot>(size);
-        for (int i = 0; i < size; i++) {
-            slots.add(new Slot(null, 0));
+    public Inventory(final int size, final String type) {
+
+        // TODO this is currently hardcoded
+        if (type.equals("inventory")) {
+            slots = new Array<Slot>(size);
+            for (int i = 0; i < size; i++) {
+                slots.add(new Slot(null, InventoryTypeEnum.GENERAL, 0, false));
+            }
+        } else {
+            slots = new Array<Slot>(size);
+            slots.add(new Slot(null, InventoryTypeEnum.HELMET, 0, true));
+            slots.add(new Slot(null, InventoryTypeEnum.ARMOR, 0, true));
+            slots.add(new Slot(null, InventoryTypeEnum.WEAPON, 0, true));
+            slots.add(new Slot(null, InventoryTypeEnum.PANTS, 0, true));
+            slots.add(new Slot(null, InventoryTypeEnum.SHOES, 0, true));
         }
 
         articlesEnvelope = new YamlParser().loadItemMap();
@@ -31,7 +43,7 @@ public class Inventory {
            try {
                if (equipment.get(i) != null) {
                    final Article article = articlesEnvelope.getArticle(equipment.get(i));
-                   slots.get(i).add(new Item(article.getName(), article.getDescription()), 1);
+                   slots.get(i).add(new Item(article.getName(), ItemTypeParser.parse(article), article.getDescription()), 1);
                }
 
            } catch (IndexOutOfBoundsException e) {
@@ -43,7 +55,7 @@ public class Inventory {
         for (int i = 0; i < slots.size; i++) {
             if (equipment.get(i) != null) {
                 final Article article = articlesEnvelope.getArticle(equipment.get(i));
-                slots.get(i).add(new Item(article.getName(), article.getDescription()), 1);
+                slots.get(i).add(new Item(article.getName(), ItemTypeParser.parse(article), article.getDescription()), 1);
                 continue;
             }
 

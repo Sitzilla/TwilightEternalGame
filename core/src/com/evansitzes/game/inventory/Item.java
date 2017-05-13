@@ -9,12 +9,14 @@ import com.evansitzes.game.helpers.Textures;
  */
 public class Item {
     private TextureRegion texture;
+    private InventoryTypeEnum inventoryType;
     private String name;
     private String description;
     public Sprite sprite;
 
-    public Item(final String name, final String description) {
+    public Item(final String name, final InventoryTypeEnum inventoryType, final String description) {
         this.name = name;
+        this.inventoryType = inventoryType;
         this.description = description;
         this.texture = new TextureRegion(getTexture(name));
         this.sprite = new Sprite(texture);
@@ -29,12 +31,16 @@ public class Item {
         return name;
     }
 
-    public void setName(String name) {
+    public void setName(final String name) {
         this.name = name;
     }
 
     public String getDescription() {
         return description;
+    }
+
+    public InventoryTypeEnum getInventoryType() {
+        return inventoryType;
     }
 
     //TODO replace this with DB lookup

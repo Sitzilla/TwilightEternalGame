@@ -12,14 +12,15 @@ import com.evansitzes.game.screens.TwilightEternalScreen;
  */
 public class SlotActor extends ImageButton implements SlotListener {
 
+    private TwilightEternalScreen currentScreen;
     private Slot slot;
-
     private Skin skin;
 
     public SlotActor(final TwilightEternalScreen currentScreen, final Skin skin, final Slot slot) {
         super(createStyle(skin, slot));
         this.slot = slot;
         this.skin = skin;
+        this.currentScreen = currentScreen;
 
         // this actor has to be notified when the slot itself changes
         slot.addListener(this);
@@ -56,4 +57,7 @@ public class SlotActor extends ImageButton implements SlotListener {
         return slot;
     }
 
+    public TwilightEternalScreen getCurrentScreen() {
+        return currentScreen;
+    }
 }

@@ -49,8 +49,8 @@ public class ShopScreen extends TwilightEternalScreen implements Screen {
         this.gameflowController = gameflowController;
         this.inventorySprite = new InventorySprite(game);
 
-        inventory = new Inventory(SIZE_OF_INVENTORY);
-        equipment = new Inventory(SIZE_OF_EQUIPMENT);
+        inventory = new Inventory(SIZE_OF_INVENTORY, "inventory");
+        equipment = new Inventory(SIZE_OF_EQUIPMENT, "equipment");
         inventory.populateInventory(game.player.inventory);
         equipment.populateEquipment(game.player.equipment);
 
@@ -60,7 +60,7 @@ public class ShopScreen extends TwilightEternalScreen implements Screen {
 //        container = new NinePatch(containerRegion, 5, 5, 2, 2);
 //        totalBarWidth = 100;
 
-        shopInventory = new Inventory(SIZE_OF_SHOP_INVENTORY);
+        shopInventory = new Inventory(SIZE_OF_SHOP_INVENTORY, "inventory");
         shopInventory.populateInventory(getApples());
 
         font = new BitmapFont();
