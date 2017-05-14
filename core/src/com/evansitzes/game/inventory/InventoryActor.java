@@ -13,12 +13,13 @@ import com.evansitzes.game.screens.TwilightEternalScreen;
 public class InventoryActor extends Window {
 
 
-    public InventoryActor(final TwilightEternalScreen currentScreen, final Inventory inventory, final DragAndDrop dragAndDrop, final Skin skin) {
-        super("Inventory", skin);
+    public InventoryActor(final TwilightEternalScreen currentScreen, final CurrentInventory inventory, final DragAndDrop dragAndDrop, final Skin skin) {
+        super("CurrentInventory", skin);
 
         // basic layout
         defaults().space(8);
         row().fill().expandX();
+        this.setMovable(false);
 
         // run through all slots and create SlotActors for each
         int i = 0;
@@ -31,7 +32,7 @@ public class InventoryActor extends Window {
                 public void clicked(final InputEvent event, final float x, final float y) {
 
                     if (getTapCount() == 2) {
-                        currentScreen.consumeItem(slotActor);
+                        currentScreen.doubleClickItem(slotActor);
                     }
                 }
 

@@ -11,8 +11,8 @@ import com.evansitzes.game.screens.TwilightEternalScreen;
  */
 public class ShopInventoryActor extends Window {
 
-    public ShopInventoryActor(final TwilightEternalScreen currentScreen, final Inventory inventory, final Skin skin) {
-        super("Shop Inventory", skin);
+    public ShopInventoryActor(final TwilightEternalScreen currentScreen, final CurrentInventory inventory, final Skin skin) {
+        super("Shop CurrentInventory", skin);
 
         // basic layout
         defaults().space(8);

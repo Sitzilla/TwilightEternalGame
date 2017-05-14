@@ -19,6 +19,8 @@ import com.evansitzes.game.helpers.Sounds;
 import com.evansitzes.game.helpers.Textures.Life;
 import com.evansitzes.game.inventory.*;
 
+import static com.evansitzes.game.inventory.InventoryTypeEnum.*;
+
 /**
  * Created by evan on 9/27/16.
  */
@@ -28,12 +30,11 @@ public class InventoryScreen extends TwilightEternalScreen implements Screen {
     private static final int SIZE_OF_EQUIPMENT = 5;
 
     private InventoryActor inventoryActor;
-    private Inventory inventory;
+    private CurrentInventory inventory;
     private EquipmentActor equipmentActor;
-    private Inventory equipment;
+    private CurrentEquipment equipment;
     private GameflowController gameflowController;
     private TwilightEternal game;
-//    public static Stage stage;
     public InventorySprite inventorySprite;
     private final OrthographicCamera camera;
     private NinePatch health;
@@ -56,8 +57,8 @@ public class InventoryScreen extends TwilightEternalScreen implements Screen {
         container = new NinePatch(containerRegion, 5, 5, 2, 2);
         totalBarWidth = 100;
 
-        inventory = new Inventory(SIZE_OF_INVENTORY, "inventory");
-        equipment = new Inventory(SIZE_OF_EQUIPMENT, "equipment");
+        inventory = new CurrentInventory(SIZE_OF_INVENTORY);
+        equipment = new CurrentEquipment(SIZE_OF_EQUIPMENT);
         inventory.populateInventory(game.player.inventory);
         equipment.populateEquipment(game.player.equipment);
 
@@ -148,14 +149,42 @@ public class InventoryScreen extends TwilightEternalScreen implements Screen {
     }
 
     @Override
-    public void consumeItem(final SlotActor slotActor) {
-        System.out.println("DOUBLE CLICK");
+    public void doubleClickItem(final SlotActor slotActor) {
+        if (slotActor.getSlot().getItem() == null) {
+            return;
+        }
 
         //TODO wtf is this hardcoded?II
         if (slotActor.getSlot().getItem().getName().equals("Apple")) {
             Sounds.BOTTLE.play();
             game.player.restoreLife(20);
             inventory.removeItem(slotActor.getSlot().getItem());
+            return;
+        }
+
+        if (isEquipment(slotActor)) {
+
+            if (slotActor.getSlot().isEquipment()) {
+                removeEquipment(slotActor);
+                return;
+            }
+
+            final Slot targetEquipmentSlot = equipment.getEquipmentSlotOfSpecificType(slotActor.getSlot().getItem().getInventoryType());
+
+            if (targetEquipmentSlot.getItem() == null) {
+                final Item item = slotActor.getSlot().getItem();
+                PlayerStatsHelper.addPlayerEquipment(game.player, item);
+                inventory.removeItem(item);
+                equipment.addItem(item);
+            } else {
+                final Item item = slotActor.getSlot().getItem();
+                PlayerStatsHelper.switchPlayerEquipment(game.player, targetEquipmentSlot.getItem(), item);
+                inventory.removeItem(item);
+                inventory.store(targetEquipmentSlot.getItem(), 1);
+                equipment.removeItem(targetEquipmentSlot.getItem());
+                equipment.addItem(item);
+            }
+
         }
     }
 
@@ -207,5 +236,24 @@ public class InventoryScreen extends TwilightEternalScreen implements Screen {
     @Override
     public void resume() {
 
+    }
+
+    private void removeEquipment(SlotActor slotActor) {
+        final Item item = slotActor.getSlot().getItem();
+        PlayerStatsHelper.removePlayerEquipment(game.player, item);
+        equipment.removeItem(item);
+        inventory.store(item, 1);
+        return;
+    }
+
+    // TODO consider abstract this out with an "isEquipment" method in the item
+    private static boolean isEquipment(final SlotActor slotActor) {
+        final InventoryTypeEnum inventoryType = slotActor.getSlot().getItem().getInventoryType();
+
+        return inventoryType == HELMET ||
+                inventoryType == ARMOR ||
+                inventoryType == WEAPON ||
+                inventoryType == PANTS ||
+                inventoryType == SHOES;
     }
 }
