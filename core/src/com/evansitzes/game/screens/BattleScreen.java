@@ -21,6 +21,7 @@ import com.evansitzes.game.Level;
 import com.evansitzes.game.TwilightEternal;
 import com.evansitzes.game.battle.BattleInterfaceData;
 import com.evansitzes.game.battle.BattleInterfaceSelection;
+import com.evansitzes.game.battle.BattleSelectionPath;
 import com.evansitzes.game.conversation.BattleInterface;
 import com.evansitzes.game.conversation.BattleStatus;
 import com.evansitzes.game.entity.Entity;
@@ -30,10 +31,10 @@ import com.evansitzes.game.helpers.DamageCalculator;
 import com.evansitzes.game.helpers.Textures;
 import com.evansitzes.game.loaders.BattleLevelLoader;
 
-import java.util.Collections;
-import java.util.Comparator;
-import java.util.Random;
-import java.util.Stack;
+import java.util.*;
+
+import static com.evansitzes.game.helpers.BattleChoiceEnum.PEE_PANTS;
+import static com.evansitzes.game.helpers.BattleChoiceEnum.RUN;
 
 /**
  * Created by evan on 9/10/16.
@@ -48,10 +49,11 @@ public class BattleScreen extends TwilightEternalScreen implements Screen {
     private final Configuration configuration;
     private Level level;
     private float delay;
-    private boolean endBattle;
     private Table table;
     private Entity currentCombatant;
     private boolean isBattleCurrentlyDelayed = false;
+    private boolean isPlayerMidSelection;
+    private boolean endBattle;
 
     private NinePatch health;
     private NinePatch container;
@@ -66,9 +68,10 @@ public class BattleScreen extends TwilightEternalScreen implements Screen {
     private final Array<Enemy> enemies = new Array();
     private final Stack<Entity> orderedCombatants = new Stack<Entity>();
 
+    private final Map<String, BattleSelectionPath> battleSelectionPathMap = new HashMap<String, BattleSelectionPath>();
+
     private Skin skin;
     private BattleInterface battleInterface;
-    private BattleInterfaceData battleInterfaceData;
     private BattleStatus battleStatus;
     private BattleChoiceEnum currentChoice;
     private GameflowController gameflowController;
@@ -100,17 +103,16 @@ public class BattleScreen extends TwilightEternalScreen implements Screen {
         stage = new Stage();
         skin = new Skin(Gdx.files.internal("skins/james/plain-james-ui.json"));
 
-        battleStatus = new BattleStatus();
-        battleInterface = new BattleInterface(enemies, game.player);
-        battleInterfaceData = new BattleInterfaceData();
-        battleInterfaceData.battleSelectionsOptions.add(new BattleInterfaceSelection("Attack", BattleChoiceEnum.ATTACK));
-        battleInterfaceData.battleSelectionsOptions.add(new BattleInterfaceSelection("Run", BattleChoiceEnum.RUN));
-        battleInterfaceData.battleSelectionsOptions.add(new BattleInterfaceSelection("Pee Pants", BattleChoiceEnum.PEE_PANTS));
-        battleInterface.setInterface(battleInterfaceData);
-        stage.addActor(battleStatus);
-        stage.addActor(battleInterface);
-
-        Gdx.input.setInputProcessor(battleInterface.stage);
+//        battleStatus = new BattleStatus();
+//        battleInterface = new BattleInterface(enemies, game.player);
+////        battleInterfaceData = new BattleInterfaceData();
+////        battleInterfaceData.battleSelectionsOptions.add(new BattleInterfaceSelection("Attack", BattleChoiceEnum.ATTACK));
+////        battleInterfaceData.battleSelectionsOptions.add(new BattleInterfaceSelection("Run", BattleChoiceEnum.RUN));
+////        battleInterfaceData.battleSelectionsOptions.add(new BattleInterfaceSelection("Pee Pants", BattleChoiceEnum.PEE_PANTS));
+//        stage.addActor(battleStatus);
+//        stage.addActor(battleInterface);
+//
+//        Gdx.input.setInputProcessor(battleInterface.stage);
 //        final InputMultiplexer multiplexer = new InputMultiplexer();
 //        multiplexer.addProcessor(stage);
 //        multiplexer.addProcessor(this);
@@ -120,6 +122,25 @@ public class BattleScreen extends TwilightEternalScreen implements Screen {
         tiledMapRenderer.setView(camera);
         table = new Table(skin);
         table.setBounds(0, 0, Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
+
+        // Currently hardcoding battle flow logic into a Battle Selection Paths Hashmap. This will most likely change
+        // as more complicated battle logic is added.
+        final BattleInterfaceData battleInterfaceData = new BattleInterfaceData();
+        battleInterfaceData.battleSelectionsOptions.add(new BattleInterfaceSelection("Attack", BattleChoiceEnum.ATTACK));
+        battleInterfaceData.battleSelectionsOptions.add(new BattleInterfaceSelection("Run", RUN));
+        battleInterfaceData.battleSelectionsOptions.add(new BattleInterfaceSelection("Pee Pants", BattleChoiceEnum.PEE_PANTS));
+        battleSelectionPathMap.put("base", new BattleSelectionPath(battleInterfaceData, "", false, false));
+
+        battleSelectionPathMap.put("attack", new BattleSelectionPath(new BattleInterfaceData(), "base", false, true));
+        battleSelectionPathMap.put("run", new BattleSelectionPath(new BattleInterfaceData(), "base", false, false));
+        battleSelectionPathMap.put("pee_pants", new BattleSelectionPath(new BattleInterfaceData(), "base", false, false));
+
+        battleStatus = new BattleStatus();
+        battleInterface = new BattleInterface(enemies, game.player);
+        battleInterface.setInterface(battleSelectionPathMap.get("base").battleInterfaceData);
+        stage.addActor(battleStatus);
+        stage.addActor(battleInterface);
+        Gdx.input.setInputProcessor(battleInterface.stage);
 
     }
 
@@ -163,29 +184,30 @@ public class BattleScreen extends TwilightEternalScreen implements Screen {
             return;
         }
 
-                // Battle Action Logic
-        currentChoice = battleInterface.pollChoice();
-
-        if (currentCombatant instanceof Enemy) {
-            battleInterface.disableInterface();
-            doEnemyAction();
-        } else {
-            battleInterface.enableInterface();
-            doPlayerAction();
+        if (!endBattle) {
+            // Battle Action Logic
+            if (currentCombatant instanceof Enemy) {
+                isPlayerMidSelection = false;
+                battleInterface.disableInterface();
+                doEnemyAction();
+            } else {
+                battleInterface.enableInterface();
+                doPlayerAction();
+            }
         }
     }
 
     private void doEnemyAction() {
         delay = 1;
 
-        if (enemies.get(0).dead) {
-            return;
-        }
+//        if (enemies.get(0).dead) {
+//            return;
+//        }
 
         Timer.schedule(new Timer.Task() {
             @Override
             public void run() {
-                int damageTaken = DamageCalculator.calculatePhysicalDamage(currentCombatant, game.player);
+                final int damageTaken = DamageCalculator.calculatePhysicalDamage(currentCombatant, game.player);
                 updateBattleStatus("Enemy has attacked! \n You take " + damageTaken + " damage.\n ");
 //                Sounds.MONSTER.play();
                 game.player.takeDamage(damageTaken);
@@ -201,56 +223,94 @@ public class BattleScreen extends TwilightEternalScreen implements Screen {
     }
 
     private void doPlayerAction() {
-        switch (currentChoice) {
-            case ATTACK:
-                updateNextCombatant();
-                int damageDealt = DamageCalculator.calculatePhysicalDamage(game.player, enemies.get(0));
-                updateBattleStatus("You have attacked! \n Enemy takes " + damageDealt + " damage.\n ");
-                // TODO allow selection of enemy
-                delay = 2;
+
+        if (!isPlayerMidSelection) {
+            battleInterface.setInterface(battleSelectionPathMap.get("base").battleInterfaceData);
+        }
+
+        isPlayerMidSelection = true;
+
+        if (!battleInterface.isChoiceSelected()) {
+            return;
+        }
+
+        // TODO move away from enums
+        final BattleSelectionPath nextPath = battleSelectionPathMap.get(battleInterface.pollChoice().toString().toLowerCase());
+
+        if (nextPath.isEnd) {
+            final int enemyIndex = battleInterface.getCurrentChoiceIndex();
+            updateNextCombatant();
+            final int damageDealt = DamageCalculator.calculatePhysicalDamage(game.player, enemies.get(enemyIndex));
+            updateBattleStatus("You have attacked! \n Enemy takes " + damageDealt + " damage.\n ");
+            delay = 2;
 //                Sounds.SWORD_SWING.play();
 //                enemies.get(0).takesHit();
-                enemies.get(0).takeDamage(damageDealt);
+            enemies.get(enemyIndex).takeDamage(damageDealt);
 
-                if (enemies.get(0).dead) {
-                    final int goldWon = getRandomGold();
-                    updateBattleStatus("You have killed the enemy! \n You have found " + goldWon + " gold!");
-                    game.player.saveGold(goldWon);
-                }
+            if (enemiesAreDead()) {
+                final int goldWon = getRandomGold();
+                updateBattleStatus("You have killed the enemy! \n You have found " + goldWon + " gold!");
+                game.player.saveGold(goldWon);
+                endBattle = true;
+                battleInterface.disableInterface();
+            }
 
-                Timer.schedule(new Timer.Task() {
-                    @Override
-                    public void run() {
-                        if (enemies.get(0).dead) {
-                            endBattle();
-                        }
-                    }
-                }, delay);
-
-                battleInterface.resetChoice();
-                break;
-
-            case PEE_PANTS:
-                updateNextCombatant();
-                updateBattleStatus("Haha you have have peed your pants!\n");
-                battleInterface.resetChoice();
-                updateNextCombatant();
-                break;
-
-            case RUN:
-                updateBattleStatus("You have run away!\n");
-                battleInterface.resetChoice();
-                delay = 2;
-
-                Timer.schedule(new Timer.Task() {
-
-                    @Override
-                    public void run() {
+            Timer.schedule(new Timer.Task() {
+                @Override
+                public void run() {
+                    if (enemiesAreDead()) {
                         endBattle();
                     }
-                }, delay);
-                break;
+                }
+            }, delay);
+
+            battleInterface.resetChoice();
+            return;
         }
+
+        if (nextPath.isOffensive) {
+            // Select enemy
+            final BattleInterfaceData battleInterfaceData = new BattleInterfaceData();
+            for (int i = 0; i < enemies.size; i++) {
+                if (enemies.get(i).dead) {
+                    continue;
+                }
+
+                battleInterfaceData.battleSelectionsOptions.add(new BattleInterfaceSelection(enemies.get(i).name + String.valueOf(i), BattleChoiceEnum.END));
+            }
+
+            battleSelectionPathMap.put("end", new BattleSelectionPath(battleInterfaceData, "attack", true, false));
+            battleInterface.setInterface(battleInterfaceData);
+            return;
+        }
+
+        // TODO hardcoded selection now. Will update as battle logic is fleshed out
+        if (battleInterface.pollChoice() == RUN) {
+            updateBattleStatus("You have run away!\n");
+            endBattle = true;
+            battleInterface.resetChoice();
+            delay = 2;
+
+            Timer.schedule(new Timer.Task() {
+
+                @Override
+                public void run() {
+                    endBattle();
+                }
+            }, delay);
+
+            return;
+        }
+
+        if (battleInterface.pollChoice() == PEE_PANTS) {
+            updateNextCombatant();
+            updateBattleStatus("Haha you have have peed your pants!\n");
+            endBattle = true;
+            battleInterface.resetChoice();
+            updateNextCombatant();
+            return;
+        }
+
     }
 
     private void updateBattleStatus(final String text) {
@@ -273,7 +333,9 @@ public class BattleScreen extends TwilightEternalScreen implements Screen {
 
     private void buildOrderedCombatants() {
         for (final Entity enemy : enemies) {
-            orderedCombatants.add(enemy);
+            if (!enemy.dead) {
+                orderedCombatants.add(enemy);
+            }
         }
         orderedCombatants.add(game.player);
 
@@ -290,6 +352,24 @@ public class BattleScreen extends TwilightEternalScreen implements Screen {
         }
 
         currentCombatant = orderedCombatants.pop();
+
+        while (currentCombatant.dead) {
+            if (orderedCombatants.isEmpty()) {
+                buildOrderedCombatants();
+            }
+
+            currentCombatant = orderedCombatants.pop();
+        }
+    }
+
+    private boolean enemiesAreDead() {
+        for (final Enemy enemy : enemies) {
+            if (!enemy.dead) {
+                return false;
+            }
+        }
+
+        return true;
     }
 
     @Override

@@ -7,5 +7,6 @@ public enum BattleChoiceEnum {
     ATTACK,
     PEE_PANTS,
     RUN,
-    WAITING;
+    WAITING,
+    END;
 }

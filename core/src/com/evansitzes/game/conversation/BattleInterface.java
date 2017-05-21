@@ -25,6 +25,8 @@ public class BattleInterface extends Dialog {
     private BattleChoiceEnum currentChoice;
 //    private BattleStatusEnum status;
     public Stage stage;
+    private int currentChoiceIndex;
+    private boolean choiceSelected;
     private boolean canMove;
     private ScrollPane scrollPane;
     final Skin skin;
@@ -46,11 +48,13 @@ public class BattleInterface extends Dialog {
         final Array choiceItems = new Array();
 //        this.clear();
         choices.clear();
-//        stage.clear();
+        stage.clear();
+        choiceSelected = false;
 
         for (final BattleInterfaceSelection option : battleInterfaceData.battleSelectionsOptions) {
             choiceItems.add(option.name);
         }
+
         choices.setItems(choiceItems);
 
         scrollPane = new ScrollPane(choices);
@@ -93,7 +97,8 @@ public class BattleInterface extends Dialog {
                 }
 
                 if (keycode == Input.Keys.ENTER && canMove) {
-//                    disableInterface();
+                    currentChoiceIndex = buttonToggleState;
+                    choiceSelected = true;
                     currentChoice = battleInterfaceData.battleSelectionsOptions.get(buttonToggleState).choice;
                     System.out.println("You are: " + currentChoice);
                 }
@@ -121,14 +126,6 @@ public class BattleInterface extends Dialog {
         System.out.println(currentChoice);
     }
 
-    public void setText(final String text) {
-        this.text(text);
-    }
-
-//    public BattleStatusEnum pollStatus() {
-//        return status;
-//    }
-
     public void disableInterface() {
         scrollPane.setVisible(false);
         canMove = false;
@@ -144,7 +141,15 @@ public class BattleInterface extends Dialog {
     }
 
     public void resetChoice() {
+        choiceSelected = false;
         currentChoice = BattleChoiceEnum.WAITING;
     }
 
+    public boolean isChoiceSelected() {
+        return choiceSelected;
+    }
+
+    public int getCurrentChoiceIndex() {
+        return currentChoiceIndex;
+    }
 }
