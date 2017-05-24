@@ -40,14 +40,13 @@ public class BattleInterface extends Dialog {
         setPosition(600, 0);
         stage.addActor(this);
         currentChoice = BattleChoiceEnum.WAITING;
-        choices = new List<String>(skin);
 
     }
 
     public void setInterface(final BattleInterfaceData battleInterfaceData) {
         final Array choiceItems = new Array();
-//        this.clear();
-        choices.clear();
+        choices = new List<String>(skin);
+        this.clear();
         stage.clear();
         choiceSelected = false;
 
@@ -56,6 +55,7 @@ public class BattleInterface extends Dialog {
         }
 
         choices.setItems(choiceItems);
+        choices.setSelectedIndex(0);
 
         scrollPane = new ScrollPane(choices);
         scrollPane.setOverscroll(false, false);
@@ -64,7 +64,6 @@ public class BattleInterface extends Dialog {
         scrollPane.setForceScroll(true, false);
         scrollPane.setScrollBarPositions(false, true);
         scrollPane.setPosition(400, 0);
-        choices.setSelectedIndex(0);
         stage.addActor(scrollPane);
 
         this.defaults().expand().fill();
