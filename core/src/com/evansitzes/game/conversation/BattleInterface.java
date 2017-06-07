@@ -76,8 +76,10 @@ public class BattleInterface extends Dialog {
                 if (keycode == Input.Keys.DOWN && canMove) {
                     if (buttonToggleState == battleInterfaceData.battleSelectionsOptions.size() - 1) {
                         buttonToggleState = 0;
+                        currentChoiceIndex = buttonToggleState;
                     } else {
                         buttonToggleState++;
+                        currentChoiceIndex = buttonToggleState;
                     }
                     System.out.println("State: " + buttonToggleState);
                 }
@@ -85,8 +87,10 @@ public class BattleInterface extends Dialog {
                 if (keycode == Input.Keys.UP && canMove) {
                     if (buttonToggleState == 0) {
                         buttonToggleState = battleInterfaceData.battleSelectionsOptions.size() - 1;
+                        currentChoiceIndex = buttonToggleState;
                     } else {
                         buttonToggleState--;
+                        currentChoiceIndex = buttonToggleState;
                     }
                     System.out.println("State: " + buttonToggleState);
                 }

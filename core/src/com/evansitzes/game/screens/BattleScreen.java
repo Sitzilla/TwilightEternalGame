@@ -53,10 +53,12 @@ public class BattleScreen extends TwilightEternalScreen implements Screen {
     private Entity currentCombatant;
     private boolean isBattleCurrentlyDelayed = false;
     private boolean isPlayerMidSelection;
+    private boolean isEnemySelected;
     private boolean endBattle;
 
     private NinePatch health;
     private NinePatch container;
+    private NinePatch enemySelector;
     private float width;
     private int totalBarWidth;
     private TextureRegion gradient;
@@ -66,6 +68,8 @@ public class BattleScreen extends TwilightEternalScreen implements Screen {
     private TiledMapRenderer tiledMapRenderer;
 
     private final Array<Enemy> enemies = new Array();
+    private final Array<Enemy> liveEnemies = new Array();;
+
     private final Stack<Entity> orderedCombatants = new Stack<Entity>();
 
     private final Map<String, BattleSelectionPath> battleSelectionPathMap = new HashMap<String, BattleSelectionPath>();
@@ -82,6 +86,7 @@ public class BattleScreen extends TwilightEternalScreen implements Screen {
         configuration = new Configuration();
 
         this.level = BattleLevelLoader.load(Vector2.Zero, game, this, gameflowController.getCurrentGameZone() + "-battle");
+        liveEnemies.addAll(enemies);
         buildOrderedCombatants();
         currentCombatant = orderedCombatants.pop();
         delay = 2;
@@ -97,6 +102,10 @@ public class BattleScreen extends TwilightEternalScreen implements Screen {
         containerRegion = Textures.Life.LIFE_BAR_CONTAINER;
         health = new NinePatch(gradient, 0, 0, 0, 0);
         container = new NinePatch(containerRegion, 5, 5, 2, 2);
+
+        // TODO make this an arrow
+        enemySelector = new NinePatch(gradient, 0, 0, 0, 0);
+
         totalBarWidth = 100;
         font = new BitmapFont();
 
@@ -173,6 +182,11 @@ public class BattleScreen extends TwilightEternalScreen implements Screen {
         container.draw(game.batch, 505, 110, totalBarWidth + 10, 20);
         health.draw(game.batch, 510, 115, width, 10);
 
+        if (isEnemySelected) {
+            final Enemy enemy = liveEnemies.get(battleInterface.getCurrentChoiceIndex());
+            enemySelector.draw(game.batch, enemy.getX() + 60, enemy.getY() + 75, 10, 5);
+        }
+
         game.batch.end();
 
         gameTime += delta;
@@ -234,18 +248,20 @@ public class BattleScreen extends TwilightEternalScreen implements Screen {
             return;
         }
 
+        isEnemySelected = false;
+
         // TODO move away from enums
         final BattleSelectionPath nextPath = battleSelectionPathMap.get(battleInterface.pollChoice().toString().toLowerCase());
 
         if (nextPath.isEnd) {
             final int enemyIndex = battleInterface.getCurrentChoiceIndex();
             updateNextCombatant();
-            final int damageDealt = DamageCalculator.calculatePhysicalDamage(game.player, enemies.get(enemyIndex));
+            final int damageDealt = DamageCalculator.calculatePhysicalDamage(game.player, liveEnemies.get(enemyIndex));
             updateBattleStatus("You have attacked! \n Enemy takes " + damageDealt + " damage.\n ");
             delay = 2;
 //                Sounds.SWORD_SWING.play();
 //                enemies.get(0).takesHit();
-            enemies.get(enemyIndex).takeDamage(damageDealt);
+            liveEnemies.get(enemyIndex).takeDamage(damageDealt);
 
             if (enemiesAreDead()) {
                 final int goldWon = getRandomGold();
@@ -269,6 +285,8 @@ public class BattleScreen extends TwilightEternalScreen implements Screen {
         }
 
         if (nextPath.isOffensive) {
+            updateLiveEnemies();
+
             // Select enemy
             final BattleInterfaceData battleInterfaceData = new BattleInterfaceData();
             for (int i = 0; i < enemies.size; i++) {
@@ -281,6 +299,7 @@ public class BattleScreen extends TwilightEternalScreen implements Screen {
 
             battleSelectionPathMap.put("end", new BattleSelectionPath(battleInterfaceData, "attack", true, false));
             battleInterface.setInterface(battleInterfaceData);
+            isEnemySelected = true;
             return;
         }
 
@@ -360,6 +379,19 @@ public class BattleScreen extends TwilightEternalScreen implements Screen {
 
             currentCombatant = orderedCombatants.pop();
         }
+    }
+
+    private void updateLiveEnemies() {
+        final Iterator<Enemy> iterator = liveEnemies.iterator();
+
+        while (iterator.hasNext()) {
+            final Enemy enemy = iterator.next();
+
+            if (enemy.dead) {
+                iterator.remove();
+            }
+        }
+
     }
 
     private boolean enemiesAreDead() {
