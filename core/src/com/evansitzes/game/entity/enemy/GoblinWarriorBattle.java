@@ -19,6 +19,7 @@ public class GoblinWarriorBattle extends Enemy {
 
     public GoblinWarriorBattle(final TwilightEternal game) {
         super(game);
+        name = "Goblin Warrior";
         score = 25;
         dead = false;
         sprite = new Sprite(Textures.Enemies.GOBLIN_WARRIOR_BATTLE);

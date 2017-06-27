@@ -15,7 +15,7 @@ public class EnemyReader {
         final String clazz = "com.evansitzes.game.entity.enemy." + object.getName();
         try {
             final Enemy enemy = (Enemy) Class.forName(clazz).getConstructor(TwilightEternal.class).newInstance(game);
-            enemy.name = object.getName();
+//            enemy.name = object.getName();
             POSITION_READER.readEntityPosition(enemy, object);
             return enemy;
         }
