@@ -1,16 +1,16 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.0" orientation="orthogonal" renderorder="right-down" width="20" height="15" tilewidth="32" tileheight="32" nextobjectid="5">
+<map version="1.0" orientation="orthogonal" renderorder="right-down" width="20" height="15" tilewidth="32" tileheight="32" nextobjectid="6">
  <tileset firstgid="1" name="forest-battle" tilewidth="32" tileheight="32" tilecount="300" columns="20">
   <image source="snow-forest-battle.png" trans="000000" width="650" height="490"/>
  </tileset>
+ <objectgroup name="objects">
+  <object id="2" name="PlayerCharacterBattle" type="player" x="466" y="304"/>
+  <object id="3" name="GoblinWarriorBattle" type="enemy" x="131" y="211" width="23" height="23"/>
+  <object id="5" name="GoblinWarriorBattle" type="enemy" x="156" y="321" width="23" height="23"/>
+ </objectgroup>
  <layer name="Tile Layer 1" width="20" height="15">
   <data encoding="base64" compression="zlib">
    eJwNwwVwEAQAAMCNGowe22jYGAzGRomElEhIp3RLCIigdIeoNNLdqaJ0pwLSoTRIKo10N/zdf2BAQEA845vAhCYyyMQmMdikJjO5KUxpKlMbYhpDDTPctKYzvRnMaCYzm8WsRhhpNqPMbg6jzWkuY8xtrHHmMa/5zG8BP7CgH1rIwhaxqB9ZzOKWsKSl/NjSfmIZy1rO8n5qBStaycpWsarVrG4Na1rL2n5mHetaz/o2sKGNbGwTm9rM5rbwc1vayta28Qvb2s72fmkHv7Kjnfzab+xsF7vaze72sKe97G0f+9rP/g5woIP81sF+5/f+4BCHOszhjnCkoxztj45xrOMc7wQnOsnJTnGq05zuDGc6y9nOca7znO8CF7rIxf7kz/7iEn/1N5e6zOWucKWrXO0a17rO9W5wo5vc7Ba3us3f/cPt7nCnf7rL3e5xr/vc7wEPesjD/uXfHvGoxzzuCU96ytOe8R/Pes7zXvCil/zX/7zsFa96zeve8Ka3/N/b3vGu97zvAx/6yMc+8anPfO4LX/rK177xre8MCMR4xjeBCU1kkIlNYrBJTWZyU5jSVKY2xDSGGma4aU1nejOY0UxmNotZjTDSbEaZ3RxGm9NcxpjbWON8D2Eqg4w=
   </data>
  </layer>
- <objectgroup name="objects">
-  <object id="1" name="GoblinWarriorBattle" type="enemy" x="150" y="320"/>
-  <object id="2" name="PlayerCharacterBattle" type="player" x="466" y="304"/>
-  <object id="3" name="GoblinWarriorBattle" type="enemy" x="131" y="211" width="23" height="23"/>
- </objectgroup>
 </map>
