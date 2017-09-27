@@ -47,25 +47,25 @@ public class BattleScreen extends TwilightEternalScreen implements Screen {
     private final OrthographicCamera camera;
     private float gameTime;
     private final Configuration configuration;
-    private Level level;
+    private final Level level;
     private float delay;
-    private Table table;
+    private final Table table;
     private Entity currentCombatant;
     private boolean isBattleCurrentlyDelayed = false;
     private boolean isPlayerMidSelection;
     private boolean isEnemySelected;
     private boolean endBattle;
 
-    private NinePatch health;
-    private NinePatch container;
-    private NinePatch enemySelector;
+    private final NinePatch health;
+    private final NinePatch container;
+    private final NinePatch enemySelector;
     private float width;
-    private int totalBarWidth;
-    private TextureRegion gradient;
-    private TextureRegion containerRegion;
-    private BitmapFont font;
+    private final int totalBarWidth;
+    private final TextureRegion gradient;
+    private final TextureRegion containerRegion;
+    private final BitmapFont font;
 
-    private TiledMapRenderer tiledMapRenderer;
+    private final TiledMapRenderer tiledMapRenderer;
 
     private final Array<Enemy> enemies = new Array();
     private final Array<Enemy> liveEnemies = new Array();;
@@ -74,11 +74,11 @@ public class BattleScreen extends TwilightEternalScreen implements Screen {
 
     private final Map<String, BattleSelectionPath> battleSelectionPathMap = new HashMap<String, BattleSelectionPath>();
 
-    private Skin skin;
-    private BattleInterface battleInterface;
+    private final Skin skin;
+    private final BattleInterface battleInterface;
     private BattleStatus battleStatus;
     private BattleChoiceEnum currentChoice;
-    private GameflowController gameflowController;
+    private final GameflowController gameflowController;
 
     public BattleScreen(final TwilightEternal game, final GameflowController gameflowController) {
         this.game = game;
