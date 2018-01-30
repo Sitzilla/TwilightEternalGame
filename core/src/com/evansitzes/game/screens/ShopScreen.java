@@ -16,9 +16,11 @@ import com.evansitzes.game.TwilightEternal;
 import com.evansitzes.game.entity.sprites.InventorySprite;
 import com.evansitzes.game.helpers.Sounds;
 import com.evansitzes.game.helpers.Textures.Life;
+import com.evansitzes.game.helpers.YamlParser;
 import com.evansitzes.game.inventory.*;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 
 /**
  * Created by evan on 9/27/16.
@@ -29,6 +31,7 @@ public class ShopScreen extends TwilightEternalScreen implements Screen {
     private static final int SIZE_OF_INVENTORY = 25;
     private static final int SIZE_OF_EQUIPMENT = 5;
 
+    private HashMap<String, Integer> prices;
     private ShopInventoryActor shopInventoryActorActor;
     private CurrentInventory shopInventory;
     private InventoryActor inventoryActor;
@@ -48,6 +51,8 @@ public class ShopScreen extends TwilightEternalScreen implements Screen {
         this.game = game;
         this.gameflowController = gameflowController;
         this.inventorySprite = new InventorySprite(game);
+
+        prices = YamlParser.loadPrices();
 
         inventory = new CurrentInventory(SIZE_OF_INVENTORY);
         equipment = new CurrentEquipment(SIZE_OF_EQUIPMENT);
@@ -131,11 +136,11 @@ public class ShopScreen extends TwilightEternalScreen implements Screen {
     }
 
     @Override
-    public void wasClicked(SlotActor slotActor) {
+    public void wasClicked(final SlotActor slotActor) {
         // Add to CurrentInventory
         Sounds.COINS.play();
         inventory.store(slotActor.getSlot().getItem(), 1);
-        game.player.loseGold(20);
+        game.player.loseGold(prices.get(slotActor.getSlot().getItem().getName()));
         game.player.saveEquipment(equipment.getItems(), inventory.getItems());
     }
 
