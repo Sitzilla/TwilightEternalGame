@@ -39,6 +39,10 @@ public class Item {
         return description;
     }
 
+    public void setDescription(final String description) {
+        this.description = description;
+    }
+
     public InventoryTypeEnum getInventoryType() {
         return inventoryType;
     }
@@ -63,6 +67,26 @@ public class Item {
 
         if (name.equals("bronze_sword")) {
             return Textures.Items.BRONZE_SWORD;
+        }
+
+        if (name.equals("iron_helmet")) {
+            return Textures.Items.IRON_HELMET;
+        }
+
+        if (name.equals("iron_armor")) {
+            return Textures.Items.IRON_ARMOR;
+        }
+
+        if (name.equals("iron_pants")) {
+            return Textures.Items.IRON_PANTS;
+        }
+
+        if (name.equals("iron_boots")) {
+            return Textures.Items.IRON_BOOTS;
+        }
+
+        if (name.equals("iron_sword")) {
+            return Textures.Items.IRON_SWORD;
         }
 
         if (name.equals("Apple")) {

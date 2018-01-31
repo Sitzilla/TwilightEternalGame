@@ -98,6 +98,7 @@ public class Textures {
         public final TextureRegion VILLAGER = loadRandomVillager();
         public final TextureRegion GUARD = loadVillager()[4][1];
         public final TextureRegion MERCHANT = loadMerchant()[0][1];
+        public final TextureRegion BLACKSMITH = loadVillager()[7][4];
 
         // TODO this is pretty janky
         private TextureRegion loadRandomVillager() {
@@ -208,6 +209,11 @@ public class Textures {
         public static final TextureRegion BRONZE_PANTS = loadItems()[2][0];
         public static final TextureRegion BRONZE_ARMOR = loadItems()[1][0];
         public static final TextureRegion BRONZE_HELMET = loadItems()[0][0];
+        public static final TextureRegion IRON_SWORD = loadItems()[4][1];
+        public static final TextureRegion IRON_BOOTS = loadItems()[3][1];
+        public static final TextureRegion IRON_PANTS = loadItems()[2][1];
+        public static final TextureRegion IRON_ARMOR = loadItems()[1][1];
+        public static final TextureRegion IRON_HELMET = loadItems()[0][1];
         public static final TextureRegion APPLE = loadItems()[0][10];
         public static final TextureRegion BONE = loadItems()[1][12];
         public static final TextureRegion VEGGIES = loadItems()[0][9];

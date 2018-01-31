@@ -66,7 +66,8 @@ public class ShopScreen extends TwilightEternalScreen implements Screen {
 //        totalBarWidth = 100;
 
         shopInventory = new CurrentInventory(SIZE_OF_SHOP_INVENTORY);
-        shopInventory.populateInventory(getApples());
+        shopInventory.populateInventory(getInventory());
+        updateItemDescription(shopInventory);
 
         font = new BitmapFont();
 
@@ -137,10 +138,17 @@ public class ShopScreen extends TwilightEternalScreen implements Screen {
 
     @Override
     public void wasClicked(final SlotActor slotActor) {
+        final Item item = slotActor.getSlot().getItem();
+
+        if (item == null || prices.get(item.getName()) > game.player.gold) {
+            return;
+        }
+
         // Add to CurrentInventory
         Sounds.COINS.play();
-        inventory.store(slotActor.getSlot().getItem(), 1);
-        game.player.loseGold(prices.get(slotActor.getSlot().getItem().getName()));
+        //TODO remove gold from item description
+        inventory.store(item, 1);
+        game.player.loseGold(prices.get(item.getName()));
         game.player.saveEquipment(equipment.getItems(), inventory.getItems());
     }
 
@@ -170,17 +178,24 @@ public class ShopScreen extends TwilightEternalScreen implements Screen {
 
     }
 
-    private ArrayList<String> getApples() {
+    private static ArrayList<String> getInventory() {
+        final ArrayList<String> inventory = new ArrayList<String>();
+        inventory.add("Apple");
+        inventory.add("Bone");
+        inventory.add("Veggies");
 
-        final ArrayList<String> apples = new ArrayList<String>();
-        apples.add("Apple");
-        apples.add("Apple");
-        apples.add("Apple");
-        apples.add("Apple");
-        apples.add("Apple");
-        apples.add("Apple");
-        apples.add("Apple");
+        return inventory;
+    }
 
-        return apples;
+    private void updateItemDescription(final CurrentInventory inventory) {
+        for (final Slot slot : inventory.getSlots()) {
+            if (slot.isEmpty()) {
+                continue;
+            }
+
+            final Item item = slot.getItem();
+            item.setDescription(item.getDescription() + " - " + prices.get(item.getName()) + " Gold");
+        }
+
     }
 }

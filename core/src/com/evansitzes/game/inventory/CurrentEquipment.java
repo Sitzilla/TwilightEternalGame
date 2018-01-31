@@ -24,6 +24,7 @@ public class CurrentEquipment extends CurrentStuff {
         articlesEnvelope = new YamlParser().loadItemMap();
     }
 
+    //TODO bug here if you are not fully equipped
     public void populateEquipment(final ArrayList<String> equipment) {
         for (int i = 0; i < slots.size; i++) {
             if (equipment.get(i) != null) {
