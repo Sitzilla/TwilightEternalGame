@@ -65,10 +65,10 @@ public class GameScreen extends TwilightEternalScreen implements Screen, InputPr
 
     private State state = State.RUN;
 
-    private final float mapMinX = 0;
-    private final float mapMaxX;
-    private final float mapMinY = 0;
-    private final float mapMaxY;
+    private float mapMinX = 0;
+    private float mapMaxX;
+    private float mapMinY = 0;
+    private float mapMaxY;
 
     public GameScreen(final TwilightEternal game, final GameflowController gameflowController) {
         this.game = game;
@@ -137,6 +137,9 @@ public class GameScreen extends TwilightEternalScreen implements Screen, InputPr
 
                     resetObjects();
                     this.level = TmxLevelLoader.load(Vector2.Zero, game, this, destination);
+                    mapMaxX = level.mapWidth * level.tileWidth;
+                    mapMaxY = level.mapHeight * level.tileHeight;
+
                     gameflowController.setCurrentGameZone(destination);
 
                     for (final Landing landing : landings) {
@@ -147,7 +150,6 @@ public class GameScreen extends TwilightEternalScreen implements Screen, InputPr
 
                     playerSprite.setToLandingPage(currentLanding.rectangle.getX(), currentLanding.rectangle.getY());
                     this.tiledMapRenderer = new OrthogonalTiledMapRenderer(level.map);
-
                 }
 
                 camera.position.set(calculateCameraPositionX(), calculateCameraPositionY(), 0);

@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<map version="1.0" orientation="orthogonal" renderorder="right-down" width="41" height="27" tilewidth="32" tileheight="32" nextobjectid="1">
+ <tileset firstgid="1" name="Castle" tilewidth="32" tileheight="32" tilecount="256" columns="16">
+  <image source="Castle.png" trans="000000" width="512" height="512"/>
+ </tileset>
+ <layer name="GroundBottomLayer" width="41" height="27">
+  <data encoding="base64" compression="zlib">
+   eJztwwENAAAMw6D69zVft3ABkLBqqqqqqr4ew8VUDQ==
+  </data>
+ </layer>
+ <layer name="GroundMiddleLayer" width="41" height="27">
+  <data encoding="base64" compression="zlib">
+   eJztwYEAAAAAw6D5U1/hAFUBAAAA8BoRTAAB
+  </data>
+ </layer>
+ <layer name="GroundTopLayer" width="41" height="27">
+  <data encoding="base64" compression="zlib">
+   eJztwYEAAAAAw6D5U1/hAFUBAAAA8BoRTAAB
+  </data>
+ </layer>
+ <layer name="WallBottomLayer" width="41" height="27">
+  <data encoding="base64" compression="zlib">
+   eJztwYEAAAAAw6D5U1/hAFUBAAAA8BoRTAAB
+  </data>
+ </layer>
+ <layer name="WallMiddleLayer" width="41" height="27">
+  <data encoding="base64" compression="zlib">
+   eJztwYEAAAAAw6D5U1/hAFUBAAAA8BoRTAAB
+  </data>
+ </layer>
+ <layer name="WallTopLayer" width="41" height="27">
+  <data encoding="base64" compression="zlib">
+   eJztwYEAAAAAw6D5U1/hAFUBAAAA8BoRTAAB
+  </data>
+ </layer>
+ <layer name="ForegroundBottomLayer" width="41" height="27">
+  <data encoding="base64" compression="zlib">
+   eJztwYEAAAAAw6D5U1/hAFUBAAAA8BoRTAAB
+  </data>
+ </layer>
+ <layer name="ForegroundMiddleLayer" width="41" height="27">
+  <data encoding="base64" compression="zlib">
+   eJztwYEAAAAAw6D5U1/hAFUBAAAA8BoRTAAB
+  </data>
+ </layer>
+ <layer name="ForegroundTopLayer" width="41" height="27">
+  <data encoding="base64" compression="zlib">
+   eJztwYEAAAAAw6D5U1/hAFUBAAAA8BoRTAAB
+  </data>
+ </layer>
+</map>
