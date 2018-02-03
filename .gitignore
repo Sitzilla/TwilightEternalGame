@@ -5,6 +5,9 @@
 *.ear
 hs_err_pid*
 
+core/assets/environment/*/*.jpeg
+core/assets/environment/*/*.png
+
 ## Robovm
 robovm-build/
 

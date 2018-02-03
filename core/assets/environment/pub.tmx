@@ -1,85 +1,74 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.0" orientation="orthogonal" renderorder="right-down" width="27" height="18" tilewidth="32" tileheight="32" nextobjectid="7">
- <tileset firstgid="1" name="Castle" tilewidth="32" tileheight="32" tilecount="256" columns="16">
-  <image source="Castle.png" trans="000000" width="512" height="512"/>
- </tileset>
- <tileset firstgid="257" name="south_figaro" tilewidth="32" tileheight="32" tilecount="2304" columns="72">
-  <image source="south_figaro.png" trans="000000" width="2331" height="1024"/>
- </tileset>
- <tileset firstgid="2561" name="inside2" tilewidth="32" tileheight="32" tilecount="6" columns="3">
-  <image source="inside2.PNG" trans="000000" width="112" height="64"/>
- </tileset>
- <tileset firstgid="2567" name="inside3" tilewidth="32" tileheight="32" tilecount="18" columns="3">
-  <image source="inside3.png" trans="000000" width="112" height="192"/>
- </tileset>
- <tileset firstgid="2585" name="inside2-floor" tilewidth="32" tileheight="32" tilecount="1" columns="1">
-  <image source="inside2-floor.png" trans="000000" width="32" height="32"/>
+<map version="1.0" orientation="orthogonal" renderorder="right-down" width="27" height="18" tilewidth="32" tileheight="32" nextobjectid="13">
+ <tileset firstgid="1" name="Inq XP MI- Medieval Indoors" tilewidth="32" tileheight="32" tilecount="2176" columns="8">
+  <image source="indoors/Inq XP MI- Medieval Indoors.png" trans="000000" width="256" height="8704"/>
  </tileset>
  <layer name="GroundBottomLayer" width="27" height="18">
   <data encoding="base64" compression="zlib">
-   eJxjYKAfkOQaxaN4FI/iUTyKRzE+DACIcT7C
+   eJzrYmJg6BrFo3gUj+JRPIpH8aDAAHX5Cdg=
   </data>
  </layer>
  <layer name="GroundMiddleLayer" width="27" height="18">
   <data encoding="base64" compression="zlib">
-   eJyT5GJgkKQTHgWjYCiC7UC8A4h3jto1ateoXaN20cEuAIuEG2o=
+   eJxjYKAP0KOTPSBgRke77Oholxsd7aIleMfIwPCecfjaN5CAXn6llj30cC8xdiCrGUnphRgw0PmVXPtbGFExPjsoBfjswmcfLnEADAwfQw==
   </data>
  </layer>
  <layer name="GroundTopLayer" width="27" height="18">
   <data encoding="base64" compression="zlib">
-   eJxjYBgFo2AUjIJRMApGwWABAAeYAAE=
+   eJztUkkKgEAMmxFcLi7v93t605vrxSUeBBmMOuOCiIFcWtq0TYX48RXE1rv6srpECpFK83m2eqvIoJOf1Do6RwGdUvL8E1je1kRbxxt22yu8UedYu60OtupNfkTdcW/nOa/O8dR/VNCswQZsNXdlP8HiHWI9OEw5zf2YFyxuo78DuqBnHbsn82IGi/uoC8AQjG72bQTqxjEM
   </data>
  </layer>
  <layer name="WallBottomLayer" width="27" height="18">
   <data encoding="base64" compression="zlib">
-   eJxjYBgFwxFsxSK2bRDZNQWIp5Jp3xI0TAhQYhepgJ52jYJRMAqGJwAAc3gI4g==
+   eJzTYWBg0KUD1gNiEyA2pQM2A2IbILalA7YDYhcgdqUDdmMYBaNgFIyCUTDcAQDI0BgN
   </data>
  </layer>
  <layer name="WallMiddleLayer" width="27" height="18">
   <data encoding="base64" compression="zlib">
-   eJxjYBgFo2AUjIJRMApGwWABAAeYAAE=
+   eJxjYKA/CCNSXTgV1MURaUY8BeocGRkYnIA4DcqXZMJvRjqRdqGrUwXa4QnEXowIMUUCdpELdBkxxTRpZJcpFrsMibTLGKjOhAR3qWGxyxKo3wqIPQlgayC2IcEuWyx2jYJRMApGASEAAFpCCa8=
   </data>
  </layer>
  <layer name="WallTopLayer" width="27" height="18">
   <data encoding="base64" compression="zlib">
-   eJxjYBgFo2AUjIJRMApGwWABAAeYAAE=
+   eJzLYcAOcmggXoJDDa3FR8HQA2pMqHx1Juzq5HGIjwLaA/Q4IhUoDKK40xhEbhnJQG40HsAAACrnBWc=
   </data>
  </layer>
  <layer name="ForegroundBottomLayer" width="27" height="18">
   <data encoding="base64" compression="zlib">
-   eJxjYBgFo2AUjIJRMApGwWABAAeYAAE=
+   eJxjYBgFo4C6QJuJOuY4MhHGo2AUjIJRMNwAAI0QAok=
   </data>
  </layer>
  <layer name="ForegroundMiddleLayer" width="27" height="18">
   <data encoding="base64" compression="zlib">
-   eJxjYBgFo2AUjIJRMApGwWABAAeYAAE=
+   eJxjYBgFo2BwA3UmTLF8LGKjYBSMglEwHAAA+aYAmw==
   </data>
  </layer>
  <layer name="ForegroundTopLayer" width="27" height="18">
   <data encoding="base64" compression="zlib">
-   eJxjYBgFo2AUjIJRMApGwWABAAeYAAE=
+   eJxjYBgFo2AUjIJRMApIBynM9LMrh452DTQAAPhOANc=
   </data>
  </layer>
  <objectgroup name="objects">
-  <object id="3" name="south-landing" type="landing" x="360" y="492" width="125" height="19">
-   <properties>
-    <property name="position" value="south"/>
-   </properties>
-  </object>
-  <object id="4" name="portal" type="portal" x="364" y="541" width="116" height="15">
+  <object id="1" name="wall" type="wall" x="131" y="219" width="347" height="27"/>
+  <object id="2" name="wall" type="wall" x="129" y="107" width="30" height="110"/>
+  <object id="4" name="wall" type="wall" x="456" y="169" width="22" height="54"/>
+  <object id="5" name="wall" type="wall" x="4" y="101" width="858" height="27"/>
+  <object id="6" name="wall" type="wall" x="3" y="125" width="53" height="21"/>
+  <object id="7" name="wall" type="wall" x="833" y="127" width="27" height="111"/>
+  <object id="8" name="portal" type="portal" x="228" y="563" width="122" height="13">
    <properties>
     <property name="destination" value="town-inside"/>
     <property name="landing" value="north"/>
    </properties>
   </object>
-  <object id="5" name="Merchant" type="npc" x="404" y="156" width="23" height="19">
+  <object id="9" name="south-landing" type="landing" x="226" y="512" width="126" height="15">
    <properties>
-    <property name="tag" value="town_blacksmith"/>
+    <property name="position" value="south"/>
    </properties>
   </object>
-  <object id="6" name="conversation-zone" type="conversation" x="348" y="230" width="139" height="36">
+  <object id="12" name="Villager" type="npc" x="345" y="182" width="15" height="17">
    <properties>
-    <property name="text" value="Plenty of metal here. Care to see my wares?"/>
+    <property name="tag" value="pub_maid"/>
    </properties>
   </object>
  </objectgroup>

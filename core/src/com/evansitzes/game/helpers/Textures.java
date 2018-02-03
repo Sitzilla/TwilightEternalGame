@@ -20,6 +20,9 @@ public class Textures {
     public TextureRegion getMerchant() {
         return new Npcs().MERCHANT;
     }
+    public TextureRegion getBlacksmith() {
+        return new Npcs().BLACKSMITH;
+    }
 
     public static class TitleScreen {
         public static final Texture LOGO = new Texture("letterings/twilight_eternal.png");
@@ -94,15 +97,16 @@ public class Textures {
         }
     }
 
-    public class Npcs {
-        public final TextureRegion VILLAGER = loadRandomVillager();
-        public final TextureRegion GUARD = loadVillager()[4][1];
-        public final TextureRegion MERCHANT = loadMerchant()[0][1];
-        public final TextureRegion BLACKSMITH = loadVillager()[7][4];
+    public static class Npcs {
+        public static final TextureRegion VILLAGER = loadRandomVillager();
+        public static final TextureRegion GUARD = loadSpriteSheet(12, 8, "sprites/final_fantasy_characters.png")[4][1];
+        public static final TextureRegion MERCHANT = loadSpriteSheet(3, 4, "sprites/weird_purple_guy.png")[0][1];
+        public static final TextureRegion BLACKSMITH = loadSpriteSheet(12, 8, "sprites/final_fantasy_characters.png")[4][7];
+        public static final TextureRegion MAID = loadSpriteSheet(3, 4, "sprites/maid.png")[0][1];
 
         // TODO this is pretty janky
-        private TextureRegion loadRandomVillager() {
-            TextureRegion[][] sheet = loadVillager();
+        private static TextureRegion loadRandomVillager() {
+            TextureRegion[][] sheet = loadSpriteSheet(12, 8, "sprites/final_fantasy_characters.png");
             // valid numbers x = 0, 4, y = 4, 7, 10
             int x;
             int y;
@@ -127,19 +131,30 @@ public class Textures {
             return sheet[x][y];
         }
 
-        private TextureRegion[][] loadVillager() {
-            final int frameColumns = 12;
-            final int frameRows = 8;
-
-            return splitTextureRegion(frameColumns, frameRows, new Texture(Gdx.files.internal("sprites/final_fantasy_characters.png")));
+        private static TextureRegion[][] loadSpriteSheet(final int columns, final int rows, final String path) {
+            return splitTextureRegion(columns, rows, new Texture(Gdx.files.internal(path)));
         }
 
-        private TextureRegion[][] loadMerchant() {
-            final int frameColumns = 3;
-            final int frameRows = 4;
-
-            return splitTextureRegion(frameColumns, frameRows, new Texture(Gdx.files.internal("sprites/weird_purple_guy.png")));
-        }
+//        private static TextureRegion[][] loadVillager() {
+//            final int frameColumns = 12;
+//            final int frameRows = 8;
+//
+//            return splitTextureRegion(frameColumns, frameRows, new Texture(Gdx.files.internal("sprites/final_fantasy_characters.png")));
+//        }
+//
+//        private static TextureRegion[][] loadMaid() {
+//            final int frameColumns = 3;
+//            final int frameRows = 8;
+//
+//            return splitTextureRegion(frameColumns, frameRows, new Texture(Gdx.files.internal("sprites/final_fantasy_characters.png")));
+//        }
+//
+//        private static TextureRegion[][] loadMerchant() {
+//            final int frameColumns = 3;
+//            final int frameRows = 4;
+//
+//            return splitTextureRegion(frameColumns, frameRows, new Texture(Gdx.files.internal("sprites/weird_purple_guy.png")));
+//        }
 //
 //        private static TextureRegion[][] loadGuard() {
 //            final int frameColumns = 12;
