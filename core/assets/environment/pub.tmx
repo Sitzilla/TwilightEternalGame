@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.0" orientation="orthogonal" renderorder="right-down" width="27" height="18" tilewidth="32" tileheight="32" nextobjectid="13">
+<map version="1.0" orientation="orthogonal" renderorder="right-down" width="27" height="18" tilewidth="32" tileheight="32" nextobjectid="41">
  <tileset firstgid="1" name="Inq XP MI- Medieval Indoors" tilewidth="32" tileheight="32" tilecount="2176" columns="8">
   <image source="indoors/Inq XP MI- Medieval Indoors.png" trans="000000" width="256" height="8704"/>
  </tileset>
@@ -10,12 +10,12 @@
  </layer>
  <layer name="GroundMiddleLayer" width="27" height="18">
   <data encoding="base64" compression="zlib">
-   eJxjYKAP0KOTPSBgRke77Oholxsd7aIleMfIwPCecfjaN5CAXn6llj30cC8xdiCrGUnphRgw0PmVXPtbGFExPjsoBfjswmcfLnEADAwfQw==
+   eJxjYKAP0KOTPSBgRke77Oholxsd7aIleMfIwPCecfjaN5CAXn6llj2DJW6Q3TFY3DRYwEDnV3Ltb2FExbQEhOzC5Qdc4gDY+xuF
   </data>
  </layer>
  <layer name="GroundTopLayer" width="27" height="18">
   <data encoding="base64" compression="zlib">
-   eJztUkkKgEAMmxFcLi7v93t605vrxSUeBBmMOuOCiIFcWtq0TYX48RXE1rv6srpECpFK83m2eqvIoJOf1Do6RwGdUvL8E1je1kRbxxt22yu8UedYu60OtupNfkTdcW/nOa/O8dR/VNCswQZsNXdlP8HiHWI9OEw5zf2YFyxuo78DuqBnHbsn82IGi/uoC8AQjG72bQTqxjEM
+   eJxjYBgFwwXMYhpc5tLKPaSY/ZqRgeENI33c8RlozxdG3PL0BrS2G1fY0iJusIUtKQCffnLSCLofCfkZJo/uDnqlj69Idv6gYX4Agb9A8/8B8X+QPST6D1dc4BJnBZrPBsTsQMzBRFx44ooLGMAlzgvUxwfE/EAsQON4AwArJyRn
   </data>
  </layer>
  <layer name="WallBottomLayer" width="27" height="18">
@@ -35,7 +35,7 @@
  </layer>
  <layer name="ForegroundBottomLayer" width="27" height="18">
   <data encoding="base64" compression="zlib">
-   eJxjYBgFo4C6QJuJOuY4MhHGo2AUjIJRMNwAAI0QAok=
+   eJxjYBgFo4C6QJsJv/xjRgaGJ4yEzXFkIoxHASogNmxppZ9aYLC4YzgBcsMUl77ROKIdAAANgg8I
   </data>
  </layer>
  <layer name="ForegroundMiddleLayer" width="27" height="18">
@@ -71,5 +71,27 @@
     <property name="tag" value="pub_maid"/>
    </properties>
   </object>
+  <object id="15" name="wall" type="wall" x="38" y="321" width="56" height="41"/>
+  <object id="16" name="wall" type="wall" x="25" y="329" width="15" height="16"/>
+  <object id="19" name="wall" type="wall" x="34" y="483" width="59" height="41"/>
+  <object id="20" name="wall" type="wall" x="546" y="323" width="59" height="44"/>
+  <object id="21" name="wall" type="wall" x="483" y="483" width="58" height="42"/>
+  <object id="22" name="wall" type="wall" x="675" y="482" width="59" height="50"/>
+  <object id="23" name="wall" type="wall" x="770" y="354" width="59" height="45"/>
+  <object id="24" name="wall" type="wall" x="706" y="195" width="59" height="45"/>
+  <object id="26" name="wall" type="wall" x="727" y="168" width="17" height="15"/>
+  <object id="27" name="wall" type="wall" x="760" y="196" width="19" height="20"/>
+  <object id="28" name="wall" type="wall" x="824" y="358" width="16" height="17"/>
+  <object id="29" name="wall" type="wall" x="599" y="326" width="17" height="14"/>
+  <object id="30" name="wall" type="wall" x="696" y="554" width="16" height="11"/>
+  <object id="31" name="wall" type="wall" x="662" y="487" width="16" height="10"/>
+  <object id="32" name="wall" type="wall" x="535" y="484" width="19" height="15"/>
+  <object id="33" name="wall" type="wall" x="505" y="455" width="16" height="16"/>
+  <object id="34" name="wall" type="wall" x="502" y="550" width="21" height="15"/>
+  <object id="35" name="wall" type="wall" x="102" y="503" width="21" height="14"/>
+  <object id="37" name="wall" type="wall" x="56" y="532" width="19" height="20"/>
+  <object id="38" name="wall" type="wall" x="7" y="502" width="17" height="16"/>
+  <object id="39" name="wall" type="wall" x="55" y="388" width="21" height="16"/>
+  <object id="40" name="wall" type="wall" x="727" y="164" width="19" height="14"/>
  </objectgroup>
 </map>

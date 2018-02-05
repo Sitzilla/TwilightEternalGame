@@ -137,12 +137,12 @@ public class BattleScreen extends TwilightEternalScreen implements Screen {
         final BattleInterfaceData battleInterfaceData = new BattleInterfaceData();
         battleInterfaceData.battleSelectionsOptions.add(new BattleInterfaceSelection("Attack", BattleChoiceEnum.ATTACK));
         battleInterfaceData.battleSelectionsOptions.add(new BattleInterfaceSelection("Run", RUN));
-        battleInterfaceData.battleSelectionsOptions.add(new BattleInterfaceSelection("Pee Pants", BattleChoiceEnum.PEE_PANTS));
+//        battleInterfaceData.battleSelectionsOptions.add(new BattleInterfaceSelection("Pee Pants", BattleChoiceEnum.PEE_PANTS));
         battleSelectionPathMap.put("base", new BattleSelectionPath(battleInterfaceData, "", false, false));
 
         battleSelectionPathMap.put("attack", new BattleSelectionPath(new BattleInterfaceData(), "base", false, true));
         battleSelectionPathMap.put("run", new BattleSelectionPath(new BattleInterfaceData(), "base", false, false));
-        battleSelectionPathMap.put("pee_pants", new BattleSelectionPath(new BattleInterfaceData(), "base", false, false));
+//        battleSelectionPathMap.put("pee_pants", new BattleSelectionPath(new BattleInterfaceData(), "base", false, false));
 
         battleStatus = new BattleStatus();
         battleInterface = new BattleInterface(enemies, game.player);

@@ -1,0 +1,22 @@
+---
+npc_configurations:
+- tag: "town_guard"
+  text: "Don't make any trouble in the town."
+  sprite: "guard"
+- tag: "town_merchant"
+  text: "Care to take a look at my wares?"
+  sprite: "merchant"
+  inventory:
+  - "Apple"
+- tag: "town_blacksmith"
+  text: "I've got some pretty good pieces if you want to take a look."
+  sprite: "blacksmith"
+  inventory:
+    - "iron_sword"
+    - "iron_helmet"
+- tag: "town_villager"
+  text: "yeah yeah yeah"
+  sprite: "villager"
+- tag: "pub_maid"
+  text: "Welcome to the Twilight Pub"
+  sprite: "maid"

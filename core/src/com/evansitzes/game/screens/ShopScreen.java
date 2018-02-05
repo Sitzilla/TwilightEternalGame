@@ -19,7 +19,6 @@ import com.evansitzes.game.helpers.Textures.Life;
 import com.evansitzes.game.helpers.YamlParser;
 import com.evansitzes.game.inventory.*;
 
-import java.util.ArrayList;
 import java.util.HashMap;
 
 /**
@@ -47,7 +46,7 @@ public class ShopScreen extends TwilightEternalScreen implements Screen {
     private TextureRegion gradient;
     private BitmapFont font;
 
-    public ShopScreen(final TwilightEternal game, final GameflowController gameflowController) {
+    public ShopScreen(final String merchantName, final TwilightEternal game, final GameflowController gameflowController) {
         this.game = game;
         this.gameflowController = gameflowController;
         this.inventorySprite = new InventorySprite(game);
@@ -66,7 +65,7 @@ public class ShopScreen extends TwilightEternalScreen implements Screen {
 //        totalBarWidth = 100;
 
         shopInventory = new CurrentInventory(SIZE_OF_SHOP_INVENTORY);
-        shopInventory.populateInventory(getInventory());
+        shopInventory.populateInventory(YamlParser.loadNpcConfiguration(merchantName).getInventory());
         updateItemDescription(shopInventory);
 
         font = new BitmapFont();
@@ -178,14 +177,15 @@ public class ShopScreen extends TwilightEternalScreen implements Screen {
 
     }
 
-    private static ArrayList<String> getInventory() {
-        final ArrayList<String> inventory = new ArrayList<String>();
-        inventory.add("Apple");
-        inventory.add("Bone");
-        inventory.add("Veggies");
-
-        return inventory;
-    }
+//    private static ArrayList<String> getInventory(final String merchantName) {
+//        final ArrayList<String> inventory = new ArrayList<String>();
+//        YamlParser.loadNpcConfiguration(merchantName).getInventory();
+//        inventory.add("Apple");
+//        inventory.add("Bone");
+//        inventory.add("Veggies");
+//
+//        return inventory;
+//    }
 
     private void updateItemDescription(final CurrentInventory inventory) {
         for (final Slot slot : inventory.getSlots()) {

@@ -20,6 +20,19 @@ public class GenericObjectReader {
         try {
             final Entity entity = (Entity) Class.forName(clazz).getConstructor(TwilightEternal.class).newInstance(game);
 
+            // TODO should probably just loop through dynamically and set the keys
+            if (parameters.containsKey("conversationText")) {
+                entity.conversationText = parameters.get("conversationText");
+            }
+
+            if (parameters.containsKey("tag")) {
+                entity.name = parameters.get("tag");
+            }
+
+            if (parameters.containsKey("sprite")) {
+                entity.setSprite(parameters.get("sprite"));
+            }
+
             if (parameters.containsKey("destination")) {
                 entity.setDestination(parameters.get("destination"));
             }

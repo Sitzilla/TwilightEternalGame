@@ -72,7 +72,7 @@
   <object id="4" name="portal" type="portal" x="364" y="541" width="116" height="15">
    <properties>
     <property name="destination" value="town-inside"/>
-    <property name="landing" value="north"/>
+    <property name="landing" value="north-east"/>
    </properties>
   </object>
   <object id="5" name="Merchant" type="npc" x="404" y="156" width="23" height="19">

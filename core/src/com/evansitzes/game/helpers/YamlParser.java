@@ -1,9 +1,7 @@
 package com.evansitzes.game.helpers;
 
 import com.badlogic.gdx.Gdx;
-import com.evansitzes.game.model.ArticlesEnvelope;
-import com.evansitzes.game.model.CharactersEnvelope;
-import com.evansitzes.game.model.PricesEnvelope;
+import com.evansitzes.game.model.*;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.dataformat.yaml.YAMLFactory;
 import com.fasterxml.jackson.datatype.joda.JodaModule;
@@ -26,6 +24,21 @@ public class YamlParser {
         try {
             final File file = new File(String.valueOf(Gdx.files.local("resources/player.yml")));
             return mapper.readValue(file, CharactersEnvelope.class);
+        } catch (final IOException e) {
+            System.out.println(e);
+        }
+
+        return null;
+    }
+
+    public static NpcConfiguration loadNpcConfiguration(final String tag) {
+        final ObjectMapper mapper = new ObjectMapper(new YAMLFactory()); // jackson databind
+        mapper.registerModule(new JodaModule());
+
+        try {
+            final File file = new File(String.valueOf(Gdx.files.local("resources/npc-configuration.yml")));
+            final NpcConfigurationsEnvelope config = mapper.readValue(file, NpcConfigurationsEnvelope.class);
+            return config.getConfiguration(tag);
         } catch (final IOException e) {
             System.out.println(e);
         }

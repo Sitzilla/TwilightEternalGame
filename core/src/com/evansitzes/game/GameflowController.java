@@ -51,8 +51,8 @@ public class GameflowController implements ApplicationListener {
         game.setScreen(inventoryScreen);
     }
 
-    public void setShopScreen() {
-        shopScreen = new ShopScreen(game, this);
+    public void setShopScreen(final String merchantName) {
+        shopScreen = new ShopScreen(merchantName, game,  this);
         game.setScreen(shopScreen);
     }
 

@@ -11,7 +11,6 @@ import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.badlogic.gdx.utils.Array;
 import com.evansitzes.game.*;
 import com.evansitzes.game.conversation.Conversation;
-import com.evansitzes.game.conversation.ConversationChoice;
 import com.evansitzes.game.entity.Entity;
 import com.evansitzes.game.entity.enemy.Enemy;
 import com.evansitzes.game.entity.environment.ConversationZone;
@@ -118,7 +117,7 @@ public class GameScreen extends TwilightEternalScreen implements Screen, InputPr
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
 
         if (game.player.dead) {
-            final Conversation conversation = new Conversation(false, gameflowController);
+            final Conversation conversation = new Conversation("", false, gameflowController);
             conversation.setText("You have died. The world is forever fated \n to remain stuck between shadow and light.");
             conversation.show(stage);
             stage.act(delta);
@@ -345,19 +344,20 @@ public class GameScreen extends TwilightEternalScreen implements Screen, InputPr
                 System.out.println("Overlap npc: " + npc);
 
                 if (npc instanceof Villager) {
-                    final Conversation conversation = new Conversation(false, gameflowController);
-                    conversation.setText(new ConversationChoice().getRandomConversation());
+                    final Conversation conversation = new Conversation(npc.name, false, gameflowController);
+//                    conversation.setText(new ConversationChoice().getRandomConversation());
+                    conversation.setText(npc.conversationText);
                     conversation.show(stage);
                 }
 
                 if (npc instanceof Guard) {
-                    final Conversation conversation = new Conversation(false, gameflowController);
+                    final Conversation conversation = new Conversation(npc.name, false, gameflowController);
                     conversation.setText(npc.conversationText);
                     conversation.show(stage);
                 }
 
                 if (npc instanceof Merchant) {
-                    final Conversation conversation = new Conversation(true, gameflowController);
+                    final Conversation conversation = new Conversation(npc.name, true, gameflowController);
                     conversation.setText(npc.conversationText);
                     conversation.show(stage);
 
@@ -382,7 +382,7 @@ public class GameScreen extends TwilightEternalScreen implements Screen, InputPr
             if (conversationZone.overlapsConversationZone(playerSprite)) {
                 System.out.println("Overlap conversation zone: " + conversationZone);
 
-                final Conversation conversation = new Conversation(false, gameflowController);
+                final Conversation conversation = new Conversation("", false, gameflowController);
                 conversation.setText(conversationZone.getText());
                 conversation.show(stage);
 
@@ -426,7 +426,7 @@ public class GameScreen extends TwilightEternalScreen implements Screen, InputPr
     }
 
     public void setConversationWindow(final String text) {
-        final Conversation conversation = new Conversation(false, gameflowController);
+        final Conversation conversation = new Conversation("", false, gameflowController);
         conversation.setText(text);
         conversation.show(stage);
     }

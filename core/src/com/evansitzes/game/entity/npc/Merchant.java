@@ -1,6 +1,5 @@
 package com.evansitzes.game.entity.npc;
 
-import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.math.Rectangle;
 import com.evansitzes.game.TwilightEternal;
 import com.evansitzes.game.helpers.Textures;
@@ -18,9 +17,10 @@ public class Merchant extends Npc {
         dead = false;
         final Textures texture = new Textures();
         conversationRectangle = new Rectangle();
-        conversationText = "Greetings! Would you like to see my wares?";
+//        conversationText = "Greetings! Would you like to see my wares?";
 
-        sprite = new Sprite(texture.getMerchant());
+//        sprite = new Sprite(Textures.Npcs.MERCHANT);
+//        sprite = new Sprite(texture.getMerchant());
     }
 
 }

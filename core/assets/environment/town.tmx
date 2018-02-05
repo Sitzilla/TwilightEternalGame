@@ -17,7 +17,7 @@
  </tileset>
  <layer name="GroundBottomLayer" width="41" height="27">
   <data encoding="base64" compression="zlib">
-   eJzt1E0OQDAQgNHu2/tfASdoLS0EB3EEXTORhoh26qeMmMWLRCs+TdVIIQz7rZoY6n13Nab+Tm6k0wg0PK+EKLnx040x7+VGf6Ne3c8R0Odgc4+KbUSpdEJr3EzaANd3djzWlX0C6xzaf9j4E7jxvcZM7v+7BaFG31mRar3d+0Ln2tuN2NkEushntvPWerVcqbKTQc6soqlitxgBdtV9dQ==
+   eJztlF0OgyAMgHnHI5h4AA6+eQLd4542D7Q9j2YjMQbaQgo2GYmfGvn7qKWrNWbt/C3+UoV2PynH2vvsjnocgQXGD8bclDlOmY6uoeMoFMfYPKWOnHXP/teaHZfd9ysB+AWovrlwHUmGemAxfvjbEyH4lbZzSflNjDyBOGP5R7W3YO8Q2xPVLokTiGNqjiPcmlkSR277xcbP7ozM09oxVStq5W1YD6trZztStQnYLG/MsV+KnLMnndsx3O/59nX8Zb/Au0buHRE+hSehng==
   </data>
  </layer>
  <layer name="GroundMiddleLayer" width="41" height="27">

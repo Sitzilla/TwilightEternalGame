@@ -1,6 +1,5 @@
 package com.evansitzes.game.entity.npc;
 
-import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.math.Rectangle;
 import com.evansitzes.game.Configuration;
 import com.evansitzes.game.TwilightEternal;
@@ -13,8 +12,6 @@ public abstract class Npc extends Entity {
 
 //    public Movement movement;
 
-    public Sprite sprite;
-
     public int life = 1;
     public int score = 0;
     public boolean invincible;
@@ -22,7 +19,6 @@ public abstract class Npc extends Entity {
     public int hitDamage = 5;
     public long lastFired;
     public boolean dead = false;
-    public String conversationText;
 
     private Rectangle conversationRectangle;
 

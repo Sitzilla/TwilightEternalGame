@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<map version="1.0" orientation="orthogonal" renderorder="right-down" width="82" height="54" tilewidth="32" tileheight="32" nextobjectid="7">
+ <tileset firstgid="1" name="Castle" tilewidth="32" tileheight="32" tilecount="256" columns="16">
+  <image source="Castle.png" trans="000000" width="512" height="512"/>
+ </tileset>
+ <tileset firstgid="257" name="snowWIP" tilewidth="32" tileheight="32" tilecount="256" columns="16">
+  <image source="snowWIP.png" trans="000000" width="512" height="512"/>
+ </tileset>
+ <layer name="GroundBottomLayer" width="82" height="54">
+  <data encoding="base64" compression="zlib">
+   eJztwzEJAAAMA7Durn+/1TFIIL2kqqqqqqqqqqqqqqqqqqqqqqoPDtVlz5E=
+  </data>
+ </layer>
+ <layer name="GroundMiddleLayer" width="82" height="54">
+  <data encoding="base64" compression="zlib">
+   eJztwQENAAAAwqD3T20ON6AAAAAAAAAAAAAAAAAAAAAAAD4MRTAAAQ==
+  </data>
+ </layer>
+ <layer name="GroundTopLayer" width="82" height="54">
+  <data encoding="base64" compression="zlib">
+   eJztwQENAAAAwqD3T20ON6AAAAAAAAAAAAAAAAAAAAAAAD4MRTAAAQ==
+  </data>
+ </layer>
+ <layer name="WallBottomLayer" width="82" height="54">
+  <data encoding="base64" compression="zlib">
+   eJzt17ENg1AMRVE8Q8IEhAkSJiAbhA1g/xniJqUVSzQU50hft3+N9acYhke+qSg9z9zqFXXpWXOrd9Sl55NbbVGXnj23OqIuAJxxy1tyj7qjW9NS/WN+ne3Y8u8/s9gRAAAAAAAAAAAAAAAAgAv5AulzDpM=
+  </data>
+ </layer>
+ <layer name="WallMiddleLayer" width="82" height="54">
+  <data encoding="base64" compression="zlib">
+   eJztwQENAAAAwqD3T20ON6AAAAAAAAAAAAAAAAAAAAAAAD4MRTAAAQ==
+  </data>
+ </layer>
+ <layer name="WallTopLayer" width="82" height="54">
+  <data encoding="base64" compression="zlib">
+   eJztwQENAAAAwqD3T20ON6AAAAAAAAAAAAAAAAAAAAAAAD4MRTAAAQ==
+  </data>
+ </layer>
+ <layer name="ForegroundBottomLayer" width="82" height="54">
+  <data encoding="base64" compression="zlib">
+   eJzt0MEJgDAQRNFZjC1YgiWk/9JSQcDDgiLvXeY6/AQAAJ47Khm137Pefvgfl5Ytbh1bTB0BAAAAAAAAAAAAAAAA+IgFej0AoA==
+  </data>
+ </layer>
+ <layer name="ForegroundMiddleLayer" width="82" height="54">
+  <data encoding="base64" compression="zlib">
+   eJztwQENAAAAwqD3T20ON6AAAAAAAAAAAAAAAAAAAAAAAD4MRTAAAQ==
+  </data>
+ </layer>
+ <layer name="ForegroundTopLayer" width="82" height="54">
+  <data encoding="base64" compression="zlib">
+   eJztwQENAAAAwqD3T20ON6AAAAAAAAAAAAAAAAAAAAAAAD4MRTAAAQ==
+  </data>
+ </layer>
+ <objectgroup name="objects">
+  <object id="1" name="portal" type="portal" x="5" y="148" width="13" height="133">
+   <properties>
+    <property name="destination" value="woods"/>
+    <property name="landing" value="east"/>
+   </properties>
+  </object>
+  <object id="2" name="west-landing" type="landing" x="105" y="173" width="16" height="67">
+   <properties>
+    <property name="position" value="west"/>
+   </properties>
+  </object>
+  <object id="4" name="wall" type="wall" x="8" y="134" width="246" height="20"/>
+  <object id="5" name="wall" type="wall" x="5" y="290" width="281" height="22"/>
+  <object id="6" name="wall" type="wall" x="289" y="316" width="17" height="73"/>
+ </objectgroup>
+</map>

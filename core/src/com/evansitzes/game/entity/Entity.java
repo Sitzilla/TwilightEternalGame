@@ -1,9 +1,11 @@
 package com.evansitzes.game.entity;
 
+import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.math.Vector3;
 import com.evansitzes.game.TwilightEternal;
 import com.evansitzes.game.entity.sprites.PlayerSprite;
+import com.evansitzes.game.helpers.Textures.Npcs;
 
 /**
  * Created by evan on 6/8/16.
@@ -41,6 +43,8 @@ public abstract class Entity extends Rectangle {
     public int totalCharisma = 1;
     public int totalArmorClass = 1;
 
+    public Sprite sprite;
+    public String conversationText;
     public final Vector3 position = new Vector3();
     public Rectangle rectangle;
 
@@ -59,7 +63,7 @@ public abstract class Entity extends Rectangle {
         return rectangle.overlaps(entity.rectangle);
     }
 
-    public boolean wouldOverlap(final Entity entity, PlayerSprite.Facing direction) {
+    public boolean wouldOverlap(final Entity entity, final PlayerSprite.Facing direction) {
         if (rectangle == null) { return false; }
 
         return rectangle.overlaps(entity.rectangle);
@@ -78,7 +82,7 @@ public abstract class Entity extends Rectangle {
         return destination;
     }
 
-    public void setDestination(String destination) {
+    public void setDestination(final String destination) {
         this.destination = destination;
     }
 
@@ -86,15 +90,38 @@ public abstract class Entity extends Rectangle {
         return landing;
     }
 
-    public void setLanding(String landing) {
+    public void setLanding(final String landing) {
         this.landing = landing;
     }
 
-    public void setPosition(String position) {
+    public void setPosition(final String position) {
     }
 
     //TODO abstract?
-    public void setText(String text) {
+    public void setText(final String text) {
+    }
+
+    // TODO enums maybe?
+    public void setSprite(final String spriteName) {
+        if (spriteName.equals("blacksmith")) {
+            sprite = new Sprite(Npcs.BLACKSMITH);
+            return;
+        }
+
+            if (spriteName.equals("merchant")) {
+            sprite = new Sprite(Npcs.MERCHANT);
+            return;
+        }
+
+        if (spriteName.equals("guard")) {
+            sprite = new Sprite(Npcs.GUARD);
+            return;
+        }
+
+        if (spriteName.equals("maid")) {
+            sprite = new Sprite(Npcs.MAID);
+            return;
+        }
     }
 
     public void setSpritesPositions() {}

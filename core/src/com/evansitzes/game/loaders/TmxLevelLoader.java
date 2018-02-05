@@ -14,6 +14,8 @@ import com.evansitzes.game.Level;
 import com.evansitzes.game.TwilightEternal;
 import com.evansitzes.game.entity.Entity;
 import com.evansitzes.game.entity.events.Event;
+import com.evansitzes.game.helpers.YamlParser;
+import com.evansitzes.game.model.NpcConfiguration;
 import com.evansitzes.game.screens.GameScreen;
 
 import java.util.HashMap;
@@ -88,6 +90,12 @@ public class TmxLevelLoader {
             } else if (type.equals("npc")) {
                 entityParameters.put("name", object.getName());
                 entityParameters.put("path", NPC_ENTITY_PATH);
+
+                final NpcConfiguration configuration = YamlParser.loadNpcConfiguration((String) object.getProperties().get("tag"));
+
+                entityParameters.put("tag", configuration.getTag());
+                entityParameters.put("sprite", configuration.getSprite());
+                entityParameters.put("conversationText", configuration.getText());
 
                 final Entity npc = GenericObjectReader.readEntity(object, game, entityParameters);
                 npc.setSpritesPositions(); // TODO wtf should this be called from?
