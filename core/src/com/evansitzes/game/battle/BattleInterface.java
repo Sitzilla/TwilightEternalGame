@@ -1,4 +1,4 @@
-package com.evansitzes.game.conversation;
+package com.evansitzes.game.battle;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
@@ -10,12 +10,8 @@ import com.badlogic.gdx.scenes.scene2d.ui.List;
 import com.badlogic.gdx.scenes.scene2d.ui.ScrollPane;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.badlogic.gdx.utils.Array;
-import com.evansitzes.game.battle.BattleInterfaceData;
-import com.evansitzes.game.battle.BattleInterfaceSelection;
 import com.evansitzes.game.entity.enemy.Enemy;
 import com.evansitzes.game.entity.team.Player;
-import com.evansitzes.game.helpers.BattleChoiceEnum;
-
 /**
  * Created by evan on 9/23/16.
  */
@@ -23,6 +19,7 @@ public class BattleInterface extends Dialog {
 
     private List<String> choices;
     private BattleChoiceEnum currentChoice;
+    private BattleChoiceEnum currentHover;
 //    private BattleStatusEnum status;
     public Stage stage;
     private int currentChoiceIndex;
@@ -43,14 +40,14 @@ public class BattleInterface extends Dialog {
 
     }
 
-    public void setInterface(final BattleInterfaceData battleInterfaceData) {
+    public void setInterface(final java.util.List<BattleInterfaceSelection> battleInterfaceSelections) {
         final Array choiceItems = new Array();
         choices = new List<String>(skin);
         this.clear();
         stage.clear();
         choiceSelected = false;
 
-        for (final BattleInterfaceSelection option : battleInterfaceData.battleSelectionsOptions) {
+        for (final BattleInterfaceSelection option : battleInterfaceSelections) {
             choiceItems.add(option.name);
         }
 
@@ -66,6 +63,9 @@ public class BattleInterface extends Dialog {
         scrollPane.setPosition(400, 0);
         stage.addActor(scrollPane);
 
+        currentHover = battleInterfaceSelections.get(0).choice;
+        currentChoiceIndex = 0;
+
         this.defaults().expand().fill();
         this.add(scrollPane).pad(10, 10, 10, 10);
         this.pack();
@@ -74,7 +74,7 @@ public class BattleInterface extends Dialog {
             int buttonToggleState = 0;
             public boolean keyDown (final InputEvent event, final int keycode) {
                 if (keycode == Input.Keys.DOWN && canMove) {
-                    if (buttonToggleState == battleInterfaceData.battleSelectionsOptions.size() - 1) {
+                    if (buttonToggleState == battleInterfaceSelections.size() - 1) {
                         buttonToggleState = 0;
                         currentChoiceIndex = buttonToggleState;
                     } else {
@@ -82,17 +82,19 @@ public class BattleInterface extends Dialog {
                         currentChoiceIndex = buttonToggleState;
                     }
                     System.out.println("State: " + buttonToggleState);
+                    currentHover = battleInterfaceSelections.get(buttonToggleState).choice;
                 }
 
                 if (keycode == Input.Keys.UP && canMove) {
                     if (buttonToggleState == 0) {
-                        buttonToggleState = battleInterfaceData.battleSelectionsOptions.size() - 1;
+                        buttonToggleState = battleInterfaceSelections.size() - 1;
                         currentChoiceIndex = buttonToggleState;
                     } else {
                         buttonToggleState--;
                         currentChoiceIndex = buttonToggleState;
                     }
                     System.out.println("State: " + buttonToggleState);
+                    currentHover = battleInterfaceSelections.get(buttonToggleState).choice;
                 }
 
                 if (canMove) {
@@ -102,7 +104,7 @@ public class BattleInterface extends Dialog {
                 if (keycode == Input.Keys.ENTER && canMove) {
                     currentChoiceIndex = buttonToggleState;
                     choiceSelected = true;
-                    currentChoice = battleInterfaceData.battleSelectionsOptions.get(buttonToggleState).choice;
+                    currentChoice = battleInterfaceSelections.get(buttonToggleState).choice;
                     System.out.println("You are: " + currentChoice);
                 }
 
@@ -137,6 +139,10 @@ public class BattleInterface extends Dialog {
     public void enableInterface() {
         scrollPane.setVisible(true);
         canMove = true;
+    }
+
+    public BattleChoiceEnum pollHover() {
+        return currentHover;
     }
 
     public BattleChoiceEnum pollChoice() {
