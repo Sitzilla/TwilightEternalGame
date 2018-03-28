@@ -4,8 +4,10 @@ package com.evansitzes.game;
  * Created by evan on 6/9/16.
  */
 public class Configuration {
-    public static final int STARTING_POSITION_X = 600;
-    public static final int STARTING_POSITION_Y = 300;
+//    public static final int STARTING_POSITION_X = 600; // Woods
+//    public static final int STARTING_POSITION_Y = 300; // Woods
+    public static final int STARTING_POSITION_X = 500; // Town
+    public static final int STARTING_POSITION_Y = 300; // Town
 
     public static final int WIDTH = 1296;
     public static final int HEIGHT = 864;

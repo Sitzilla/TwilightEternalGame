@@ -1,7 +1,5 @@
 package com.evansitzes.game.battle;
 
-import com.evansitzes.game.helpers.BattleChoiceEnum;
-
 /**
  * Created by evan on 5/6/17.
  */

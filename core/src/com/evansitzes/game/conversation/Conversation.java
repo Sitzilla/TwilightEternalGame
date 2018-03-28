@@ -1,7 +1,7 @@
 package com.evansitzes.game.conversation;
 
 import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.Input;
+import com.badlogic.gdx.Input.Keys;
 import com.badlogic.gdx.scenes.scene2d.ui.Dialog;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.evansitzes.game.GameflowController;
@@ -12,10 +12,11 @@ import com.evansitzes.game.GameflowController;
 public class Conversation extends Dialog {
 
     private boolean seeWares;
+    private String npcName;
     private GameflowController gameflowController;
 
     //TODO move gameflow logic out of conversation
-    public Conversation(final boolean isInteractive, GameflowController gameflowController) {
+    public Conversation(final String npcName, final boolean isInteractive, final GameflowController gameflowController) {
         super("", new Skin(Gdx.files.internal("skins/james/plain-james-ui.json")));
 
         setMovable(false);
@@ -31,19 +32,19 @@ public class Conversation extends Dialog {
         getButtonTable().padTop(50);
         setHeight(100);
         setWidth(150);
-
+        this.npcName = npcName;
 //            TextButton dbutton = new TextButton("Yes", skin);
 
-        key(Input.Keys.SPACE, false);
-        key(Input.Keys.ENTER, false);
-        key(Input.Keys.RIGHT, false);
-        key(Input.Keys.UP, false);
-        key(Input.Keys.DOWN, false);
-        key(Input.Keys.LEFT, false);
+        key(Keys.SPACE, false);
+        key(Keys.ENTER, false);
+        key(Keys.RIGHT, false);
+        key(Keys.UP, false);
+        key(Keys.DOWN, false);
+        key(Keys.LEFT, false);
 
         if (isInteractive) {
             button("yes", true);
-            key(Input.Keys.ENTER, true);
+            key(Keys.ENTER, true);
             button("no", false);
         }
 //            invalidateHierarchy();
@@ -68,7 +69,7 @@ public class Conversation extends Dialog {
         seeWares = Boolean.parseBoolean(object.toString());
 
         if (seeWares) {
-            gameflowController.setShopScreen();
+            gameflowController.setShopScreen(npcName);
         }
 
     }
