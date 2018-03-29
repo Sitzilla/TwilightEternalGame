@@ -6,6 +6,7 @@ import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.maps.tiled.TiledMapRenderer;
 import com.badlogic.gdx.maps.tiled.renderers.OrthogonalTiledMapRenderer;
 import com.badlogic.gdx.math.Vector2;
+import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.badlogic.gdx.utils.Array;
@@ -22,8 +23,6 @@ import com.evansitzes.game.entity.npc.Merchant;
 import com.evansitzes.game.entity.npc.Npc;
 import com.evansitzes.game.entity.npc.Villager;
 import com.evansitzes.game.entity.sprites.PlayerSprite;
-import com.evansitzes.game.icons.Icon;
-import com.evansitzes.game.icons.IconActor;
 import com.evansitzes.game.loaders.TmxLevelLoader;
 
 import java.util.Iterator;
@@ -44,10 +43,7 @@ public class GameScreen extends TwilightEternalScreen implements Screen, InputPr
     private GameflowController gameflowController;
     private final PlayerSprite playerSprite;
 
-    private IconActor inventoryIconActor;
-    private Icon inventoryIcon;
-    private IconActor spellsIconActor;
-    private Icon spellsIcon;
+    final private ManagementDisplay managementDisplay;
 
     private Level level;
     private boolean battleMode;
@@ -85,7 +81,9 @@ public class GameScreen extends TwilightEternalScreen implements Screen, InputPr
         // Bottom of the screen icons
         skin = new Skin(Gdx.files.internal("skins/uiskin.json"));
 
-        createIcons();
+        managementDisplay = new ManagementDisplay(this, skin);
+        stage.addActor(managementDisplay);
+//        createIcons();
 
         playerSprite = new PlayerSprite(game, this);
         this.battleMode = false;
@@ -391,22 +389,6 @@ public class GameScreen extends TwilightEternalScreen implements Screen, InputPr
         }
     }
 
-    private void createIcons() {
-        inventoryIcon = new Icon(skin, "backpack");
-        inventoryIconActor = new IconActor(this, inventoryIcon, skin);
-        inventoryIconActor.setPosition(20, 20);
-        stage.addActor(inventoryIconActor);
-        inventoryIconActor.setVisible(true);
-        inventoryIconActor.setMovable(false);
-
-        spellsIcon = new Icon(skin, "spells");
-        spellsIconActor = new IconActor(this, spellsIcon, skin);
-        spellsIconActor.setPosition(140, 20);
-        stage.addActor(spellsIconActor);
-        spellsIconActor.setVisible(true);
-        spellsIconActor.setMovable(false);
-    }
-
     private void resetObjects() {
         enemies.clear();
         npcs.clear();
@@ -493,6 +475,20 @@ public class GameScreen extends TwilightEternalScreen implements Screen, InputPr
         if (keycode == Input.Keys.I) {
             System.out.println("Showing screen~");
             setInventoryScreen();
+        }
+
+        if (keycode == Input.Keys.C) {
+            final Array<Actor> stageActors = stage.getActors();
+                for (final Actor actor : stageActors) {
+                    if ("characterSheet".equals(actor.getName())) {
+                        actor.remove();
+                        return false;
+                    }
+                }
+            final CharacterSheet characterSheet = new CharacterSheet(game.player, skin);
+            characterSheet.setName("characterSheet");
+            stage.addActor(characterSheet);
+
         }
         return false;
     }

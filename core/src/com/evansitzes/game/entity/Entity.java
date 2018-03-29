@@ -43,6 +43,9 @@ public abstract class Entity extends Rectangle {
     public int totalCharisma = 1;
     public int totalArmorClass = 1;
 
+    public int experience = 0;
+    public int level = 1;
+
     public Sprite sprite;
     public String conversationText;
     public final Vector3 position = new Vector3();
