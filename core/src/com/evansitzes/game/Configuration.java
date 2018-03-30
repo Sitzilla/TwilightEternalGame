@@ -29,6 +29,4 @@ public class Configuration {
     public static final int NPC_CONVERSATION_RECTANGLE_WIDTH = 50;
     public static final int NPC_CONVERSATION_RECTANGLE_HEIGHT = 70;
 
-    // Player configs
-    public static final int PLAYER_BASE_LIFE = 10;
 }

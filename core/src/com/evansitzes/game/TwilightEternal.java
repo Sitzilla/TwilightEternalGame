@@ -8,8 +8,6 @@ import com.evansitzes.game.entity.team.Player;
 import com.evansitzes.game.helpers.PlayerStatsHelper;
 import com.evansitzes.game.helpers.YamlParser;
 
-import java.util.ArrayList;
-
 /**
  * Created by evan on 6/8/16.
  */
@@ -52,12 +50,7 @@ public class TwilightEternal extends Game {
         font.dispose();
     }
 
-    public void savePlayerState(final ArrayList<String> equipment, final ArrayList<String> inventory) {
-        new YamlParser().saveEquipment(equipment, inventory);
+    public void savePlayerState() {
+        YamlParser.savePlayer(player);
     }
-
-    public void savePlayerGold(final int gold) {
-        new YamlParser().saveGold(gold);
-    }
-
 }

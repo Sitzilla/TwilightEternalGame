@@ -147,8 +147,8 @@ public class ShopScreen extends TwilightEternalScreen implements Screen {
         Sounds.COINS.play();
         //TODO remove gold from item description
         inventory.store(item, 1);
-        game.player.loseGold(prices.get(item.getName()));
-        game.player.saveEquipment(equipment.getItems(), inventory.getItems());
+        game.player.gold -= prices.get(item.getName());
+//        game.player.saveEquipment(equipment.getItems(), inventory.getItems());
     }
 
     @Override

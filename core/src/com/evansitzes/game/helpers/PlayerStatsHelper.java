@@ -14,9 +14,12 @@ public class PlayerStatsHelper {
     private static ArticlesEnvelope articlesEnvelope = new YamlParser().loadItemMap();
 
     public static void buildPlayerStats(final Player player) {
-        for (final String item : player.equipment) {
-            add(player, item);
+        for (String key : player.equipment.keySet()) {
+            if (player.equipment.get(key) != null) {
+                add(player, player.equipment.get(key));
+            }
         }
+
 
         player.updateTotalAttributes();
     }
@@ -36,7 +39,7 @@ public class PlayerStatsHelper {
         player.updateTotalAttributes();
     }
 
-    private static void add(Player player, String item) {
+    private static void add(final Player player, final String item) {
         final HashMap<String, Integer> attributes = articlesEnvelope.getArticle(item).getAttributes();
 
         if (attributes == null) {
@@ -52,7 +55,7 @@ public class PlayerStatsHelper {
         player.charismaModifier += attributes.get("charisma");
     }
 
-    private static void remove(Player player, String item) {
+    private static void remove(final Player player, final String item) {
         final HashMap<String, Integer> attributes = articlesEnvelope.getArticle(item).getAttributes();
 
         if (attributes == null) {

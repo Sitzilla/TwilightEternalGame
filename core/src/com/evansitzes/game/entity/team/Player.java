@@ -5,9 +5,7 @@ import com.evansitzes.game.TwilightEternal;
 import com.evansitzes.game.helpers.Textures;
 import com.evansitzes.game.model.Character;
 
-import java.util.ArrayList;
-
-import static com.evansitzes.game.Configuration.PLAYER_BASE_LIFE;
+import java.util.HashMap;
 
 /**
  * Created by evan on 9/23/16.
@@ -27,19 +25,19 @@ public class Player extends TeamMember {
         battleSprite = new Sprite(Textures.People.BATTLE_PLAYER);
         battleSprite.setPosition(450, 140);
 
-        // TODO consider moving this to a configuration class
-        baseStrength = 8;
-        baseDexterity = 8;
-        baseConstitution = 8;
-        baseWisdom = 8;
-        baseIntelligence = 8;
-        baseCharisma = 8;
-        baseArmorClass = 1;
+        baseStrength = character.getBaseAttributes().get("strength");
+        baseDexterity = character.getBaseAttributes().get("dexterity");
+        baseConstitution = character.getBaseAttributes().get("constitution");
+        baseWisdom = character.getBaseAttributes().get("wisdom");
+        baseIntelligence = character.getBaseAttributes().get("intelligence");
+        baseCharisma = character.getBaseAttributes().get("charisma");
+        baseArmorClass = character.getBaseArmor();
 
         totalArmorClass = baseArmorClass + armorClassModifier;
 
-        maxHealth = PLAYER_BASE_LIFE + baseConstitution;
-        currentHealth = maxHealth;
+        currentHealth = character.getCurrentHealth();
+        baseHealth = character.getBaseHealth();
+        maxHealth = baseHealth + baseConstitution;
     }
 
     @Override
@@ -76,21 +74,21 @@ public class Player extends TeamMember {
         battleSprite.setRegion(Textures.Enemies.EXPLOSION);
     }
 
-    public void saveEquipment(final ArrayList<String> equipment, final ArrayList<String> inventory) {
-        this.equipment = equipment;
-        this.inventory = inventory;
-        game.savePlayerState(equipment, inventory);
-    }
+//    public void saveEquipment(final ArrayList<String> equipment, final ArrayList<String> inventory) {
+//        this.equipment = equipment;
+//        this.inventory = inventory;
+//        game.savePlayerState(equipment, inventory);
+//    }
 
-    public void saveGold(final int gold) {
-        this.gold += gold;
-        game.savePlayerGold(this.gold);
-    }
-
-    public void loseGold(int gold) {
-        this.gold -= gold;
-        game.savePlayerGold(this.gold);
-    }
+//    public void saveGold(final int gold) {
+//        this.gold += gold;
+//        game.savePlayerGold(this.gold);
+//    }
+//
+//    public void loseGold(int gold) {
+//        this.gold -= gold;
+//        game.savePlayerGold(this.gold);
+//    }
 
     public void updateTotalAttributes() {
         totalStrength = baseStrength + strengthModifier;
@@ -99,5 +97,19 @@ public class Player extends TeamMember {
         totalWisdom = baseWisdom + wisdomModifier;
         totalIntelligence = baseIntelligence + intelligenceModifier;
         totalCharisma = baseCharisma + charismaModifier;
+    }
+
+    public HashMap<String, Integer> getBaseAttributes() {
+        final HashMap<String, Integer> baseAttributes = new HashMap<String, Integer>();
+
+
+        baseAttributes.put("strength", baseStrength);
+        baseAttributes.put("dexterity", baseDexterity);
+        baseAttributes.put("constitution", baseConstitution);
+        baseAttributes.put("wisdom", baseWisdom);
+        baseAttributes.put("intelligence", baseIntelligence);
+        baseAttributes.put("charisma", baseCharisma);
+
+        return baseAttributes;
     }
 }

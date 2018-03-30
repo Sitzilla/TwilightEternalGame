@@ -217,7 +217,8 @@ public class InventoryScreen extends TwilightEternalScreen implements Screen {
     @Override
     public void hide() {
         // Save inventory to file
-        game.player.saveEquipment(equipment.getItems(), inventory.getItems());
+        game.player.equipment = equipment.getEquipment();
+        game.player.inventory = inventory.getItems();
 
         Gdx.input.setInputProcessor(null);
         dispose();

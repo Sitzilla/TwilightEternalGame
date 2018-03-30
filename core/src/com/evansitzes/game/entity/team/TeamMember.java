@@ -4,6 +4,7 @@ import com.evansitzes.game.TwilightEternal;
 import com.evansitzes.game.entity.Entity;
 
 import java.util.ArrayList;
+import java.util.Map;
 
 /**
  * Created by evan on 9/23/16.
@@ -13,12 +14,13 @@ public abstract class TeamMember extends Entity {
 //    public String name;
     public float maxHealth;
     public float currentHealth;
+    public float baseHealth;
     public int score;
 //    public int damage;
 //    public int speed;
     public int gold;
 //    public boolean dead;
-    public ArrayList<String> equipment;
+    public Map<String, String> equipment;
     public ArrayList<String> inventory;
 
     public TeamMember(final TwilightEternal game) {

@@ -236,6 +236,7 @@ public class Textures {
 
         public static final TextureRegion BACKPACK = loadInventory()[0][0];
         public static final TextureRegion SPELLS = loadInventory()[0][1];
+        public static final TextureRegion SAVE = loadInventory()[0][2];
 
         public static final TextureRegion BLANK = loadItems()[0][15];
 

@@ -17,7 +17,7 @@ public abstract class Entity extends Rectangle {
 //    public int damage;
 //    public int speed;
     public int life = 1;
-    public boolean dead = false;
+    public boolean dead;
 
     public int baseStrength = 1;
     public int baseDexterity = 1;
@@ -27,13 +27,13 @@ public abstract class Entity extends Rectangle {
     public int baseCharisma = 1;
     public int baseArmorClass = 1;
 
-    public int strengthModifier = 0;
-    public int dexterityModifier = 0;
-    public int constitutionModifier = 0;
-    public int wisdomModifier = 0;
-    public int intelligenceModifier = 0;
-    public int charismaModifier = 0;
-    public int armorClassModifier = 0;
+    public int strengthModifier;
+    public int dexterityModifier;
+    public int constitutionModifier;
+    public int wisdomModifier;
+    public int intelligenceModifier;
+    public int charismaModifier;
+    public int armorClassModifier;
 
     public int totalStrength = 1;
     public int totalDexterity = 1;
@@ -43,7 +43,7 @@ public abstract class Entity extends Rectangle {
     public int totalCharisma = 1;
     public int totalArmorClass = 1;
 
-    public int experience = 0;
+    public int experience;
     public int level = 1;
 
     public Sprite sprite;

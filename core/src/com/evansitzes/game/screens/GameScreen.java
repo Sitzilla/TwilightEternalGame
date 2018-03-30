@@ -490,6 +490,12 @@ public class GameScreen extends TwilightEternalScreen implements Screen, InputPr
             stage.addActor(characterSheet);
 
         }
+
+        if (keycode == Input.Keys.S) {
+            System.out.println("Showing screen~");
+            setConversationWindow("Game Saved");
+            game.savePlayerState();
+        }
         return false;
     }
 

@@ -4,9 +4,8 @@ import com.badlogic.gdx.utils.Array;
 import com.evansitzes.game.exceptions.ItemDoesntExistException;
 import com.evansitzes.game.helpers.ItemTypeParser;
 import com.evansitzes.game.helpers.YamlParser;
-import com.evansitzes.game.model.Article;
 
-import java.util.ArrayList;
+import java.util.Map;
 
 /**
  * Created by evan on 5/13/17.
@@ -24,16 +23,22 @@ public class CurrentEquipment extends CurrentStuff {
         articlesEnvelope = new YamlParser().loadItemMap();
     }
 
-    //TODO bug here if you are not fully equipped
-    public void populateEquipment(final ArrayList<String> equipment) {
-        for (int i = 0; i < slots.size; i++) {
-            if (equipment.get(i) != null) {
-                final Article article = articlesEnvelope.getArticle(equipment.get(i));
-                slots.get(i).add(new Item(article.getName(), ItemTypeParser.parse(article), article.getDescription()), 1);
-                continue;
-            }
+    public void populateEquipment(final Map<String, String> equipment) {
+        if (equipment.get("helmet") != null) {
+            slots.get(0).add(new Item(articlesEnvelope.getArticle(equipment.get("helmet")).getName(), ItemTypeParser.parse(articlesEnvelope.getArticle(equipment.get("helmet"))), articlesEnvelope.getArticle(equipment.get("helmet")).getDescription()), 1);
+        }
 
-//            slots.get(i).add(new Article("blank"), 1);
+        if (equipment.get("armor") != null) {
+            slots.get(1).add(new Item(articlesEnvelope.getArticle(equipment.get("armor")).getName(), ItemTypeParser.parse(articlesEnvelope.getArticle(equipment.get("armor"))), articlesEnvelope.getArticle(equipment.get("armor")).getDescription()), 1);
+        }
+        if (equipment.get("weapon") != null) {
+            slots.get(2).add(new Item(articlesEnvelope.getArticle(equipment.get("weapon")).getName(), ItemTypeParser.parse(articlesEnvelope.getArticle(equipment.get("weapon"))), articlesEnvelope.getArticle(equipment.get("weapon")).getDescription()), 1);
+        }
+        if (equipment.get("pants") != null) {
+            slots.get(3).add(new Item(articlesEnvelope.getArticle(equipment.get("pants")).getName(), ItemTypeParser.parse(articlesEnvelope.getArticle(equipment.get("pants"))), articlesEnvelope.getArticle(equipment.get("pants")).getDescription()), 1);
+        }
+        if (equipment.get("shoes") != null) {
+            slots.get(4).add(new Item(articlesEnvelope.getArticle(equipment.get("shoes")).getName(), ItemTypeParser.parse(articlesEnvelope.getArticle(equipment.get("shoes"))), articlesEnvelope.getArticle(equipment.get("shoes")).getDescription()), 1);
         }
     }
 

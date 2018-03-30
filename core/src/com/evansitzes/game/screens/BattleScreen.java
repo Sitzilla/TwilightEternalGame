@@ -234,7 +234,7 @@ public class BattleScreen extends TwilightEternalScreen implements Screen {
             if (enemiesAreDead()) {
                 final int goldWon = getRandomGold();
                 updateBattleStatus("You have killed the enemy! \n You have found " + goldWon + " gold!");
-                game.player.saveGold(goldWon);
+                game.player.gold += goldWon;
                 endBattle = true;
                 battleInterface.disableInterface();
             }
