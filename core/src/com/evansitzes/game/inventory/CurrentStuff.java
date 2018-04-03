@@ -19,10 +19,10 @@ public class CurrentStuff {
         Map<String, String> equipment = new HashMap<String, String>();
 
         equipment.put("helmet", (slots.get(0).getItem() != null) ? slots.get(0).getItem().getName() : null);
-        equipment.put("armor", (slots.get(1).getItem() != null) ? slots.get(0).getItem().getName() : null);
-        equipment.put("weapon", (slots.get(2).getItem() != null) ? slots.get(0).getItem().getName() : null);
-        equipment.put("pants", (slots.get(3).getItem() != null) ? slots.get(0).getItem().getName() : null);
-        equipment.put("shoes", (slots.get(4).getItem() != null) ? slots.get(0).getItem().getName() : null);
+        equipment.put("armor", (slots.get(1).getItem() != null) ? slots.get(1).getItem().getName() : null);
+        equipment.put("weapon", (slots.get(2).getItem() != null) ? slots.get(2).getItem().getName() : null);
+        equipment.put("pants", (slots.get(3).getItem() != null) ? slots.get(3).getItem().getName() : null);
+        equipment.put("shoes", (slots.get(4).getItem() != null) ? slots.get(4).getItem().getName() : null);
 
         return equipment;
     }

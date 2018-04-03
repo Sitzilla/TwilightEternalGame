@@ -8,7 +8,7 @@ import com.evansitzes.game.entity.Entity;
 public class DamageCalculator {
 
     public static int calculatePhysicalDamage(final Entity attacker, final Entity receiver) {
-        final int attackerDamage = attacker.baseStrength;
+        final int attackerDamage = attacker.totalStrength;
         final int receiverDefence = receiver.totalArmorClass;
 
         return attackerDamage - receiverDefence;

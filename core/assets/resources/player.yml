@@ -1,16 +1,28 @@
 ---
 characters:
 - name: "Toshiro"
-  gold: 81
+  gold: 39
   equipment:
-  - "bronze_helmet"
-  - "bronze_armor"
-  - "bronze_sword"
-  - "bronze_pants"
-  - "bronze_boots"
+    weapon: "iron_sword"
+    armor: "bronze_armor"
+    pants: "bronze_pants"
+    helmet: null
+    shoes: "bronze_boots"
   inventory:
   - "Veggies"
+  - "bronze_sword"
   - "Bone"
   - "Apple"
-  - "Apple"
-  - "Apple"
+  - "bronze_helmet"
+  experience: 0
+  level: 1
+  base_attributes:
+    dexterity: 8
+    constitution: 8
+    strength: 8
+    charisma: 8
+    wisdom: 8
+    intelligence: 8
+  base_armor: 1
+  current_health: 6.0
+  base_health: 10.0
