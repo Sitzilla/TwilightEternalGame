@@ -12,7 +12,6 @@ public abstract class Npc extends Entity {
 
 //    public Movement movement;
 
-    public int life = 1;
     public int score = 0;
     public boolean invincible;
     public long lastHitTime = -1;

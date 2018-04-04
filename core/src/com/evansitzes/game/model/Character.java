@@ -23,16 +23,14 @@ public class Character {
 //    private ArrayList<String> datasourceIds;
     @JsonProperty("base_attributes")
     private Map<String, Integer> baseAttributes;
-    @JsonProperty("base_armor")
-    private Integer baseArmor;
     @JsonProperty
     private Integer experience;
     @JsonProperty
     private Integer level;
-    @JsonProperty("current_health")
-    private Float currentHealth;
-    @JsonProperty("base_health")
-    private Float baseHealth;
+    @JsonProperty("current_hit_points")
+    private Float currentHitPoints;
+    @JsonProperty("current_magic_points")
+    private Float currentMagicPoints;
 
     public Character() {
     }
@@ -77,14 +75,6 @@ public class Character {
         this.baseAttributes = baseAttributes;
     }
 
-    public Integer getBaseArmor() {
-        return baseArmor;
-    }
-
-    public void setBaseArmor(final Integer baseArmor) {
-        this.baseArmor = baseArmor;
-    }
-
     public Integer getExperience() {
         return experience;
     }
@@ -101,20 +91,20 @@ public class Character {
         this.level = level;
     }
 
-    public Float getCurrentHealth() {
-        return currentHealth;
+    public Float getCurrentHitPoints() {
+        return currentHitPoints;
     }
 
-    public void setCurrentHealth(final Float currentHealth) {
-        this.currentHealth = currentHealth;
+    public void setCurrentHitPoints(final Float currentHitPoints) {
+        this.currentHitPoints = currentHitPoints;
     }
 
-    public Float getBaseHealth() {
-        return baseHealth;
+    public Float getCurrentMagicPoints() {
+        return currentMagicPoints;
     }
 
-    public void setBaseHealth(final Float baseHealth) {
-        this.baseHealth = baseHealth;
+    public void setCurrentMagicPoints(final Float currentMagicPoints) {
+        this.currentMagicPoints = currentMagicPoints;
     }
 
     @Override
@@ -125,11 +115,10 @@ public class Character {
                 ", equipment=" + equipment +
                 ", inventory=" + inventory +
                 ", baseAttributes=" + baseAttributes +
-                ", baseArmor=" + baseArmor +
                 ", experience=" + experience +
                 ", level=" + level +
-                ", currentHealth=" + currentHealth +
-                ", baseHealth=" + baseHealth +
+                ", currentHitPoints=" + currentHitPoints +
+                ", currentMagicPoints=" + currentMagicPoints +
                 '}';
     }
 }

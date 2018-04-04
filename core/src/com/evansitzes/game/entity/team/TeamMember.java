@@ -12,9 +12,11 @@ import java.util.Map;
 public abstract class TeamMember extends Entity {
 
 //    public String name;
-    public float maxHealth;
-    public float currentHealth;
-    public float baseHealth;
+    public float maxHitPoints;
+    public float maxMagicPoints;
+    public float currentHitPoints;
+    public float currentMagicPoints;
+//    public float baseHealth;
     public int score;
 //    public int damage;
 //    public int speed;

@@ -26,34 +26,33 @@ public class Player extends TeamMember {
         battleSprite.setPosition(450, 140);
 
         baseStrength = character.getBaseAttributes().get("strength");
-        baseDexterity = character.getBaseAttributes().get("dexterity");
-        baseConstitution = character.getBaseAttributes().get("constitution");
-        baseWisdom = character.getBaseAttributes().get("wisdom");
+        baseSpeed = character.getBaseAttributes().get("speed");
         baseIntelligence = character.getBaseAttributes().get("intelligence");
-        baseCharisma = character.getBaseAttributes().get("charisma");
-        baseArmorClass = character.getBaseArmor();
+        baseHitPoints = character.getBaseAttributes().get("hitPoints");
+        baseMagicPoints = character.getBaseAttributes().get("magicPoints");
+        baseArmor = character.getBaseAttributes().get("armor");
+        baseResistance = character.getBaseAttributes().get("resistance");
 
-        totalArmorClass = baseArmorClass + armorClassModifier;
-
-        currentHealth = character.getCurrentHealth();
-        baseHealth = character.getBaseHealth();
-        maxHealth = baseHealth + baseConstitution;
+        currentHitPoints = character.getCurrentHitPoints();
+        currentMagicPoints = character.getCurrentMagicPoints();
+        maxHitPoints = baseHitPoints + hitPointsModifier;
+        maxMagicPoints = baseMagicPoints + magicPointsModifier;
     }
 
     @Override
     public void takeDamage(final int rawDamage) {
-        currentHealth -= rawDamage;
+        currentHitPoints -= rawDamage;
 
-        if (currentHealth <= 0) {
+        if (currentHitPoints <= 0) {
             kill();
         }
     }
 
     public void restoreLife(final int life) {
-        currentHealth += life;
+        currentHitPoints += life;
 
-        if (currentHealth > maxHealth) {
-            currentHealth = maxHealth;
+        if (currentHitPoints > maxHitPoints) {
+            currentHitPoints = maxHitPoints;
         }
     }
 
@@ -69,7 +68,7 @@ public class Player extends TeamMember {
 
     @Override
     public void kill() {
-        currentHealth = 0;
+        currentHitPoints = 0;
         dead = true;
         battleSprite.setRegion(Textures.Enemies.EXPLOSION);
     }
@@ -92,23 +91,24 @@ public class Player extends TeamMember {
 
     public void updateTotalAttributes() {
         totalStrength = baseStrength + strengthModifier;
-        totalDexterity = baseDexterity + dexterityModifier;
-        totalConstitution = baseConstitution + constitutionModifier;
-        totalWisdom = baseWisdom + wisdomModifier;
+        totalSpeed = baseSpeed + speedModifier;
         totalIntelligence = baseIntelligence + intelligenceModifier;
-        totalCharisma = baseCharisma + charismaModifier;
+        totalHitPoints = baseHitPoints+ hitPointsModifier;
+        totalMagicPoints = baseMagicPoints+ magicPointsModifier;
+        totalArmor = baseArmor+ armorModifier;
+        totalResistance = baseResistance + resistanceModifier;
     }
 
     public HashMap<String, Integer> getBaseAttributes() {
         final HashMap<String, Integer> baseAttributes = new HashMap<String, Integer>();
 
-
         baseAttributes.put("strength", baseStrength);
-        baseAttributes.put("dexterity", baseDexterity);
-        baseAttributes.put("constitution", baseConstitution);
-        baseAttributes.put("wisdom", baseWisdom);
+        baseAttributes.put("speed", baseSpeed);
         baseAttributes.put("intelligence", baseIntelligence);
-        baseAttributes.put("charisma", baseCharisma);
+        baseAttributes.put("hitpoints", baseHitPoints);
+        baseAttributes.put("magicpoints", baseMagicPoints);
+        baseAttributes.put("armor", baseArmor);
+        baseAttributes.put("resistance", baseResistance);
 
         return baseAttributes;
     }

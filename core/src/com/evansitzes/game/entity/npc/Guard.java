@@ -12,7 +12,6 @@ public class Guard extends Npc {
 
     public Guard(final TwilightEternal game) {
         super(game);
-        life = 1;
         score = 25;
         dead = false;
         final Textures texture = new Textures();

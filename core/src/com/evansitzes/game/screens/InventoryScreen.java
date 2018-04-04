@@ -98,7 +98,7 @@ public class InventoryScreen extends TwilightEternalScreen implements Screen {
         Gdx.gl.glClearColor(0.2f, 0.2f, 0.2f, 0f);
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT | GL20.GL_DEPTH_BUFFER_BIT);
 
-        width = game.player.currentHealth / game.player.maxHealth * totalBarWidth;
+        width = game.player.currentHitPoints / game.player.maxHitPoints * totalBarWidth;
 
         // exit the inventory when spacebar key is pressed
         if (Gdx.input.isKeyPressed(Keys.SPACE)) {
@@ -123,18 +123,18 @@ public class InventoryScreen extends TwilightEternalScreen implements Screen {
         health.draw(game.batch, 400, 270, width, 10);
 
         // Draw Stats
-        font.draw(game.batch, "Strength:", 450, 220);
-        font.draw(game.batch, "Dexterity:", 450, 195);
-        font.draw(game.batch, "Constitution:", 450, 170);
-        font.draw(game.batch, "Wisdom:", 450, 145);
-        font.draw(game.batch, "Intelligence:", 450, 120);
-        font.draw(game.batch, "Charisma:", 450, 95);
-        font.draw(game.batch, String.valueOf(game.player.totalStrength), 535, 220);
-        font.draw(game.batch, String.valueOf(game.player.totalDexterity), 535, 195);
-        font.draw(game.batch, String.valueOf(game.player.totalConstitution), 535, 170);
-        font.draw(game.batch, String.valueOf(game.player.totalWisdom), 535, 145);
-        font.draw(game.batch, String.valueOf(game.player.totalIntelligence), 535, 120);
-        font.draw(game.batch, String.valueOf(game.player.totalCharisma), 535, 95);
+//        font.draw(game.batch, "Strength:", 450, 220);
+//        font.draw(game.batch, "Dexterity:", 450, 195);
+//        font.draw(game.batch, "Constitution:", 450, 170);
+//        font.draw(game.batch, "Wisdom:", 450, 145);
+//        font.draw(game.batch, "Intelligence:", 450, 120);
+//        font.draw(game.batch, "Charisma:", 450, 95);
+//        font.draw(game.batch, String.valueOf(game.player.totalStrength), 535, 220);
+//        font.draw(game.batch, String.valueOf(game.player.totalDexterity), 535, 195);
+//        font.draw(game.batch, String.valueOf(game.player.totalConstitution), 535, 170);
+//        font.draw(game.batch, String.valueOf(game.player.totalWisdom), 535, 145);
+//        font.draw(game.batch, String.valueOf(game.player.totalIntelligence), 535, 120);
+//        font.draw(game.batch, String.valueOf(game.player.totalCharisma), 535, 95);
 
 
         font.draw(game.batch, "Press spacebar to exit", 300, 0);

@@ -22,23 +22,19 @@ public class AttributesTable extends Table {
         this.add(new Label(Integer.toString(player.totalStrength), skin));
         this.row();
 
-        this.add(new Label("Dexterity:", skin)).left();
-        this.add(new Label(Integer.toString(player.totalDexterity), skin));
-        this.row();
-
-        this.add(new Label("Constitution:", skin)).left();
-        this.add(new Label(Integer.toString(player.totalConstitution), skin));
-        this.row();
-
-        this.add(new Label("Wisdom:", skin)).left();
-        this.add(new Label(Integer.toString(player.totalWisdom), skin));
+        this.add(new Label("Speed:", skin)).left();
+        this.add(new Label(Integer.toString(player.totalSpeed), skin));
         this.row();
 
         this.add(new Label("Intelligence:", skin)).left();
         this.add(new Label(Integer.toString(player.totalIntelligence), skin));
         this.row();
 
-        this.add(new Label("Charisma:", skin)).left();
-        this.add(new Label(Integer.toString(player.totalCharisma), skin));
+        this.add(new Label("Armor:", skin)).left();
+        this.add(new Label(Integer.toString(player.totalArmor), skin));
+        this.row();
+
+        this.add(new Label("Resistance:", skin)).left();
+        this.add(new Label(Integer.toString(player.totalResistance), skin));
     }
 }

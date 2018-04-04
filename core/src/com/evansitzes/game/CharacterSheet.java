@@ -32,10 +32,10 @@ public class CharacterSheet extends Table {
         this.add(attributesTable).size(150);
         this.row();
 
-        this.add(String.format("Armor:  %d", player.totalArmorClass));
+        this.add(String.format("Armor:  %d", player.totalArmor));
         this.add(String.format("Experience:  %d", player.experience));
         this.row();
-        this.add(String.format("HP %d/%d", (int) player.currentHealth, (int) player.maxHealth));
+        this.add(String.format("HP %d/%d", (int) player.currentHitPoints, (int) player.maxHitPoints));
         this.add("Next Level:  1000");
         this.row();
 

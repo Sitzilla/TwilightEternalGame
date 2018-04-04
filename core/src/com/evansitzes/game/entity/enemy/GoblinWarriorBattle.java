@@ -27,36 +27,30 @@ public class GoblinWarriorBattle extends Enemy {
 
         // TODO consider moving this to a configuration class
         baseStrength = 4;
-        baseDexterity = 4;
-        baseConstitution = 4;
-        baseWisdom = 4;
+        baseSpeed = 4;
         baseIntelligence = 4;
-        baseCharisma = 4;
-        baseArmorClass = 2;
+        baseArmor = 2;
+        baseResistance = 1;
 
         totalStrength = baseStrength + strengthModifier;
-        totalDexterity = baseDexterity + dexterityModifier;
-        totalConstitution = baseConstitution + constitutionModifier;
-        totalWisdom = baseWisdom + wisdomModifier;
-        totalConstitution = baseConstitution + constitutionModifier;
+        totalSpeed = baseSpeed + speedModifier;
         totalIntelligence = baseIntelligence + intelligenceModifier;
-        totalCharisma = baseCharisma + charismaModifier;
-        totalArmorClass = baseArmorClass + armorClassModifier;
+        totalArmor = baseArmor + armorModifier;
+        totalResistance = baseResistance + resistanceModifier;
 
-        life = 5 + baseConstitution;
+        totalHitPoints = 5 + baseHitPoints;
 
     }
 
     @Override
     public void takeDamage(final int rawDamage) {
-        life -= rawDamage;
+        baseHitPoints -= rawDamage;
 
-        if (life < 0) {
+        if (baseHitPoints < 0) {
             kill();
         }
     }
 
-    @Override
     public void takesHit() {
         stateTime = 20000;
         currentAnimation = new Animation(animationSpeed, Textures.Enemies.GOBLIN_WARRIOR_BATTLE);
@@ -81,7 +75,7 @@ public class GoblinWarriorBattle extends Enemy {
 
     @Override
     public void kill() {
-        life = 0;
+        baseHitPoints = 0;
         dead = true;
         sprite.setRegion(Textures.Enemies.EXPLOSION);
     }

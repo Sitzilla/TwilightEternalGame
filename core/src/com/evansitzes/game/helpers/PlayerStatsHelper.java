@@ -48,11 +48,12 @@ public class PlayerStatsHelper {
 
         // TODO how do we want to handle where these are stored/configured?
         player.strengthModifier += attributes.get("strength");
-        player.dexterityModifier += attributes.get("dexterity");
-        player.constitutionModifier += attributes.get("constitution");
-        player.wisdomModifier += attributes.get("wisdom");
+        player.speedModifier += attributes.get("speed");
         player.intelligenceModifier += attributes.get("intelligence");
-        player.charismaModifier += attributes.get("charisma");
+        player.hitPointsModifier += attributes.get("hitpoints");
+        player.magicPointsModifier += attributes.get("magicpoints");
+        player.armorModifier += attributes.get("armor");
+        player.resistanceModifier += attributes.get("resistance");
     }
 
     private static void remove(final Player player, final String item) {
@@ -63,10 +64,11 @@ public class PlayerStatsHelper {
         }
 
         player.strengthModifier -= attributes.get("strength");
-        player.dexterityModifier -= attributes.get("dexterity");
-        player.constitutionModifier -= attributes.get("constitution");
-        player.wisdomModifier -= attributes.get("wisdom");
+        player.speedModifier -= attributes.get("speed");
         player.intelligenceModifier -= attributes.get("intelligence");
-        player.charismaModifier -= attributes.get("charisma");
+        player.hitPointsModifier -= attributes.get("hitpoints");
+        player.magicPointsModifier -= attributes.get("magicpoints");
+        player.armorModifier -= attributes.get("armor");
+        player.resistanceModifier -= attributes.get("resistance");
     }
 }

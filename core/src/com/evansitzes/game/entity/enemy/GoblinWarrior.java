@@ -12,8 +12,10 @@ public class GoblinWarrior extends Enemy {
 
     public GoblinWarrior(TwilightEternal game) {
         super(game);
-        life = 1;
+        baseHitPoints = 1;
         score = 25;
+        level = 1;
+        difficultyClass = 1;
         dead = false;
         sprite = new Sprite(Textures.Enemies.GOBLIN_WARRIOR);
         sprite.setSize((float) (sprite.getWidth() * 0.4), (float) (sprite.getHeight() * 0.4));
@@ -21,11 +23,6 @@ public class GoblinWarrior extends Enemy {
 
     @Override
     public void takeDamage(final int rawDamage) {
-
-    }
-
-    @Override
-    public void takesHit() {
 
     }
 
@@ -48,7 +45,7 @@ public class GoblinWarrior extends Enemy {
 
     @Override
     public void kill() {
-        life = 0;
+        baseHitPoints = 0;
         dead = true;
     }
 }

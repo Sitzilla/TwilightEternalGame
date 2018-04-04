@@ -13,7 +13,6 @@ public class Villager extends Npc {
 
     public Villager(TwilightEternal game) {
         super(game);
-        life = 1;
         score = 25;
         dead = false;
         Textures texture = new Textures();

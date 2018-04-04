@@ -88,11 +88,10 @@ public class YamlParser {
             charactersEnvelope.getCharacters().get(0).setInventory(player.inventory);
             charactersEnvelope.getCharacters().get(0).setGold(player.gold);
             charactersEnvelope.getCharacters().get(0).setBaseAttributes(player.getBaseAttributes());
-            charactersEnvelope.getCharacters().get(0).setBaseArmor(player.baseArmorClass);
             charactersEnvelope.getCharacters().get(0).setExperience(player.experience);
             charactersEnvelope.getCharacters().get(0).setLevel(player.level);
-            charactersEnvelope.getCharacters().get(0).setCurrentHealth(player.currentHealth);
-            charactersEnvelope.getCharacters().get(0).setBaseHealth(player.baseHealth);
+            charactersEnvelope.getCharacters().get(0).setCurrentHitPoints(player.currentHitPoints);
+            charactersEnvelope.getCharacters().get(0).setCurrentMagicPoints(player.currentMagicPoints);
 
 
             mapper.writeValue(new FileOutputStream(file), charactersEnvelope);
