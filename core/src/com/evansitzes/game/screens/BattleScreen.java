@@ -13,7 +13,6 @@ import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
-import com.badlogic.gdx.utils.Array;
 import com.badlogic.gdx.utils.Timer;
 import com.evansitzes.game.Configuration;
 import com.evansitzes.game.GameflowController;
@@ -26,6 +25,7 @@ import com.evansitzes.game.battle.BattleStatus;
 import com.evansitzes.game.entity.Entity;
 import com.evansitzes.game.entity.enemy.Enemy;
 import com.evansitzes.game.helpers.DamageCalculator;
+import com.evansitzes.game.helpers.ExperienceCalculator;
 import com.evansitzes.game.helpers.Textures;
 import com.evansitzes.game.loaders.BattleLevelLoader;
 
@@ -62,8 +62,8 @@ public class BattleScreen extends TwilightEternalScreen implements Screen {
 
     private final TiledMapRenderer tiledMapRenderer;
 
-    private final Array<Enemy> enemies = new Array();
-    private final Array<Enemy> liveEnemies = new Array();;
+    private final List<Enemy> enemies = new ArrayList();
+    private final List<Enemy> liveEnemies = new ArrayList();;
 
     private final Stack<Entity> orderedCombatants = new Stack<Entity>();
 
@@ -233,8 +233,12 @@ public class BattleScreen extends TwilightEternalScreen implements Screen {
 
             if (enemiesAreDead()) {
                 final int goldWon = getRandomGold();
-                updateBattleStatus("You have killed the enemy! \n You have found " + goldWon + " gold!");
+                final int experienceWon = ExperienceCalculator.calculateExperience(game.player, enemies);
+
                 game.player.gold += goldWon;
+                game.player.experience += experienceWon;
+                updateBattleStatus("You have killed the enemy! \n You have found " + goldWon + " gold and " + experienceWon + " experience!");
+
                 endBattle = true;
                 battleInterface.disableInterface();
             }
@@ -261,7 +265,7 @@ public class BattleScreen extends TwilightEternalScreen implements Screen {
             final List<BattleInterfaceSelection> battleInterfaceSelections = new ArrayList<BattleInterfaceSelection>();
 
 //            final BattleInterfaceData battleInterfaceData = new BattleInterfaceData();
-            for (int i = 0; i < enemies.size; i++) {
+            for (int i = 0; i < enemies.size(); i++) {
                 if (enemies.get(i).dead) {
                     continue;
                 }
@@ -421,7 +425,7 @@ public class BattleScreen extends TwilightEternalScreen implements Screen {
 
     }
 
-    public Array<Enemy> getEnemies() {
+    public List<Enemy> getEnemies() {
         return enemies;
     }
 }

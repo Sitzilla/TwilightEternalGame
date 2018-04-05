@@ -10,7 +10,8 @@ public class DamageCalculator {
     public static int calculatePhysicalDamage(final Entity attacker, final Entity receiver) {
         final int attackerDamage = attacker.totalStrength;
         final int receiverDefence = receiver.totalArmor;
+        final int totalDamage = attackerDamage - receiverDefence;
 
-        return attackerDamage - receiverDefence;
+        return totalDamage < 0 ? 0 : totalDamage;
     }
 }

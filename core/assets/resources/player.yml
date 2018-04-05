@@ -1,27 +1,27 @@
 ---
 characters:
 - name: "Toshiro"
-  gold: 40
+  gold: 42
   equipment:
-    weapon: "iron_sword"
+    weapon: "bronze_sword"
     armor: "bronze_armor"
     pants: "bronze_pants"
     helmet: "bronze_helmet"
     shoes: "bronze_boots"
   inventory:
   - "Veggies"
-  - "bronze_sword"
+  - "iron_sword"
   - "Bone"
   - "bronze_helmet"
-  experience: 0
-  level: 0
+  experience: 1
+  level: 1
   base_attributes:
-    hitpoints: 10
+    hitPoints: 10
     armor: 1
     strength: 8
-    magicpoints: 2
+    magicPoints: 3
     speed: 6
     resistance: 1
     intelligence: 6
-  current_hit_points: 10.0
+  current_hit_points: 8.0
   current_magic_points: 2.0

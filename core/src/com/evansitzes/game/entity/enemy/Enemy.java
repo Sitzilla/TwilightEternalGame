@@ -11,7 +11,7 @@ public abstract class Enemy extends Entity {
 
     public int score;
     public int level;
-    public int difficultyClass;
+    public float difficultyClass;
 
     public Enemy(final TwilightEternal game) {
         super(game);

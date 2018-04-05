@@ -50,8 +50,8 @@ public class PlayerStatsHelper {
         player.strengthModifier += attributes.get("strength");
         player.speedModifier += attributes.get("speed");
         player.intelligenceModifier += attributes.get("intelligence");
-        player.hitPointsModifier += attributes.get("hitpoints");
-        player.magicPointsModifier += attributes.get("magicpoints");
+        player.hitPointsModifier += attributes.get("hitPoints");
+        player.magicPointsModifier += attributes.get("magicPoints");
         player.armorModifier += attributes.get("armor");
         player.resistanceModifier += attributes.get("resistance");
     }
@@ -66,8 +66,8 @@ public class PlayerStatsHelper {
         player.strengthModifier -= attributes.get("strength");
         player.speedModifier -= attributes.get("speed");
         player.intelligenceModifier -= attributes.get("intelligence");
-        player.hitPointsModifier -= attributes.get("hitpoints");
-        player.magicPointsModifier -= attributes.get("magicpoints");
+        player.hitPointsModifier -= attributes.get("hitPoints");
+        player.magicPointsModifier -= attributes.get("magicPoints");
         player.armorModifier -= attributes.get("armor");
         player.resistanceModifier -= attributes.get("resistance");
     }

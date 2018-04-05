@@ -24,6 +24,8 @@ import com.evansitzes.game.entity.npc.Npc;
 import com.evansitzes.game.entity.npc.Villager;
 import com.evansitzes.game.entity.sprites.PlayerSprite;
 import com.evansitzes.game.loaders.TmxLevelLoader;
+import com.evansitzes.game.popups.CharacterSheet;
+import com.evansitzes.game.popups.ManagementDisplay;
 
 import java.util.Iterator;
 

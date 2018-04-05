@@ -28,7 +28,7 @@ public class BattleInterface extends Dialog {
     private ScrollPane scrollPane;
     final Skin skin;
 
-    public BattleInterface(final Array<Enemy> enemies, final Player player) {
+    public BattleInterface(final java.util.List<Enemy> enemies, final Player player) {
         super("", new Skin(Gdx.files.internal("skins/james/plain-james-ui.json")));
         skin = new Skin(Gdx.files.internal("skins/james/plain-james-ui.json"));
         this.setMovable(false);

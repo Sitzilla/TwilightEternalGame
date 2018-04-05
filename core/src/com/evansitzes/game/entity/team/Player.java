@@ -37,6 +37,9 @@ public class Player extends TeamMember {
         currentMagicPoints = character.getCurrentMagicPoints();
         maxHitPoints = baseHitPoints + hitPointsModifier;
         maxMagicPoints = baseMagicPoints + magicPointsModifier;
+
+        level = character.getLevel();
+        experience = character.getExperience();
     }
 
     @Override
@@ -105,8 +108,8 @@ public class Player extends TeamMember {
         baseAttributes.put("strength", baseStrength);
         baseAttributes.put("speed", baseSpeed);
         baseAttributes.put("intelligence", baseIntelligence);
-        baseAttributes.put("hitpoints", baseHitPoints);
-        baseAttributes.put("magicpoints", baseMagicPoints);
+        baseAttributes.put("hitPoints", baseHitPoints);
+        baseAttributes.put("magicPoints", baseMagicPoints);
         baseAttributes.put("armor", baseArmor);
         baseAttributes.put("resistance", baseResistance);
 

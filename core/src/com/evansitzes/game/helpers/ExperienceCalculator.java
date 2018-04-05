@@ -3,21 +3,17 @@ package com.evansitzes.game.helpers;
 import com.evansitzes.game.entity.enemy.Enemy;
 import com.evansitzes.game.entity.team.TeamMember;
 
-import java.util.Random;
+import java.util.List;
 
 public class ExperienceCalculator {
 
-    public static int MINIMUM_EXPERIENCE = 5;
-    public static int MAXIMUM_EXPERIENCE = 10;
+    public static int calculateExperience(final TeamMember teamMember, final List<Enemy> enemies) {
+        float totalExperience = 0;
 
-    public static int calculateExperience(final TeamMember teamMember, final Enemy enemy) {
-        Random rand = new Random();
+        for (final Enemy enemy : enemies) {
+            totalExperience += enemy.difficultyClass + (float) enemy.level;
+        }
 
-        int baseExperience = rand.nextInt((MAXIMUM_EXPERIENCE - MINIMUM_EXPERIENCE) + 1) + MINIMUM_EXPERIENCE;
-        int modifiedExperience = baseExperience * enemy.difficultyClass;
-
-        // level-related modification logic
-
-        return 5;
+        return (int) totalExperience;
     }
 }

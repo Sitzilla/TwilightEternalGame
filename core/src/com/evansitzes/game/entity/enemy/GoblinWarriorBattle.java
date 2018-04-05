@@ -25,11 +25,14 @@ public class GoblinWarriorBattle extends Enemy {
         sprite = new Sprite(Textures.Enemies.GOBLIN_WARRIOR_BATTLE);
         sprite.setSize((float) (sprite.getWidth() * 0.4), (float) (sprite.getHeight() * 0.4));
 
+        level = 1;
+        difficultyClass = (float) 0.5;
+
         // TODO consider moving this to a configuration class
-        baseStrength = 4;
+        baseStrength = 6;
         baseSpeed = 4;
-        baseIntelligence = 4;
-        baseArmor = 2;
+        baseIntelligence = 1;
+        baseArmor = 3;
         baseResistance = 1;
 
         totalStrength = baseStrength + strengthModifier;
