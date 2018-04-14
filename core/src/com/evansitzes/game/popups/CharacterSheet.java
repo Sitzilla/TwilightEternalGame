@@ -9,7 +9,6 @@ import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable;
 import com.evansitzes.game.Configuration;
 import com.evansitzes.game.entity.team.Player;
-import com.evansitzes.game.helpers.AttributesTable;
 import com.evansitzes.game.helpers.LevelCalculator;
 import com.evansitzes.game.helpers.Textures;
 
@@ -23,6 +22,7 @@ public class CharacterSheet extends Table {
         this.setWidth((float) (Configuration.WIDTH / 3.5));
         this.setHeight((float) (Configuration.HEIGHT / 2.5));
         this.setVisible(true);
+//        this.setDebug(true);
 
         this.background(new TextureRegionDrawable(Textures.Colors.GREY));
 
@@ -30,9 +30,11 @@ public class CharacterSheet extends Table {
         profilePicture.setDrawable(new TextureRegionDrawable(Textures.People.PLAYER_PORTRAIT));
         this.add(profilePicture).maxSize(250);
 
-        final AttributesTable attributesTable = new AttributesTable(player, skin);
-
-        this.add(attributesTable).size(150);
+        Table summaryTable = new Table();
+        summaryTable.add(new PlayerSummaryTable(player, skin));
+        summaryTable.row();
+        summaryTable.add(new AttributesTable(player, skin));
+        this.add(summaryTable).size(150);
         this.row();
 
         this.add(String.format("HP %d/%d", (int) player.currentHitPoints, (int) player.maxHitPoints));
