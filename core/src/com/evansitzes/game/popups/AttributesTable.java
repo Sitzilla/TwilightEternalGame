@@ -1,4 +1,4 @@
-package com.evansitzes.game.helpers;
+package com.evansitzes.game.popups;
 
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
@@ -10,13 +10,6 @@ public class AttributesTable extends Table {
     public AttributesTable(final Player player, final Skin skin) {
         super(skin);
         this.setVisible(true);
-
-        this.add(new Label(player.name, skin)).center().colspan(2);
-        this.row();
-        this.add(new Label(String.format("Level:   %d", player.level), skin)).center().colspan(2);
-        this.row();
-        this.add("");
-        this.row();
 
         this.add(new Label("Strength:", skin)).left();
         this.add(new Label(Integer.toString(player.totalStrength), skin));

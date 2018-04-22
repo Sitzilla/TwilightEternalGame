@@ -25,6 +25,7 @@ import com.evansitzes.game.entity.npc.Villager;
 import com.evansitzes.game.entity.sprites.PlayerSprite;
 import com.evansitzes.game.loaders.TmxLevelLoader;
 import com.evansitzes.game.popups.CharacterSheet;
+import com.evansitzes.game.popups.LevelUpDisplay;
 import com.evansitzes.game.popups.ManagementDisplay;
 
 import java.util.Iterator;
@@ -327,6 +328,8 @@ public class GameScreen extends TwilightEternalScreen implements Screen, InputPr
             if (enemy.overlaps(playerSprite) && !enemy.dead) {
                 enemy.kill();
                 enemyIterator.remove();
+                removePopupActors();
+
                 gameflowController.setBattleScreen();
             }
         }
@@ -406,6 +409,8 @@ public class GameScreen extends TwilightEternalScreen implements Screen, InputPr
     }
 
     public void setInventoryScreen() {
+        removePopupActors();
+
         gameflowController.setInventoryScreen();
     }
 
@@ -435,6 +440,22 @@ public class GameScreen extends TwilightEternalScreen implements Screen, InputPr
             if (!areCollisions(PlayerSprite.Facing.DOWN)) {
                 playerSprite.state = PlayerSprite.State.WALKING;
                 playerSprite.direction = PlayerSprite.Facing.DOWN;
+            }
+        }
+    }
+
+    private void removePopupActors() {
+        final Array<Actor> stageActors = stage.getActors();
+
+        for (final Actor actor : stageActors) {
+            if ("characterSheet".equals(actor.getName())) {
+                actor.remove();
+//                return;
+            }
+
+            if ("levelUpDisplay".equals(actor.getName())) {
+                actor.remove();
+//                return;
             }
         }
     }
@@ -470,8 +491,13 @@ public class GameScreen extends TwilightEternalScreen implements Screen, InputPr
     public boolean keyDown(final int keycode) {
         System.out.println(keycode);
         if (keycode == Input.Keys.SPACE || keycode == Input.Keys.ENTER) {
+            removePopupActors();
             handleNpc();
             handleConversationZone();
+        }
+
+        if (keycode == Input.Keys.ESCAPE || keycode == Input.Keys.BACKSPACE) {
+            removePopupActors();
         }
 
         if (keycode == Input.Keys.I) {
@@ -480,16 +506,20 @@ public class GameScreen extends TwilightEternalScreen implements Screen, InputPr
         }
 
         if (keycode == Input.Keys.C) {
-            final Array<Actor> stageActors = stage.getActors();
-                for (final Actor actor : stageActors) {
-                    if ("characterSheet".equals(actor.getName())) {
-                        actor.remove();
-                        return false;
-                    }
-                }
+            removePopupActors();
+
             final CharacterSheet characterSheet = new CharacterSheet(game.player, skin);
             characterSheet.setName("characterSheet");
             stage.addActor(characterSheet);
+
+        }
+
+        if (keycode == Input.Keys.L) {
+            removePopupActors();
+
+            final LevelUpDisplay levelUpDisplay = new LevelUpDisplay(game.player, skin);
+            levelUpDisplay.setName("levelUpDisplay");
+            stage.addActor(levelUpDisplay);
 
         }
 

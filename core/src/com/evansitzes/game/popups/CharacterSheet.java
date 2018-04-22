@@ -15,7 +15,7 @@ import com.evansitzes.game.helpers.Textures;
 public class CharacterSheet extends Table {
 
 
-    public CharacterSheet(Player player, final Skin skin) {
+    public CharacterSheet(final Player player, final Skin skin) {
         super(skin);
 
         this.setPosition(0, (float) (Configuration.HEIGHT / 2.5));
@@ -30,7 +30,7 @@ public class CharacterSheet extends Table {
         profilePicture.setDrawable(new TextureRegionDrawable(Textures.People.PLAYER_PORTRAIT));
         this.add(profilePicture).maxSize(250);
 
-        Table summaryTable = new Table();
+        final Table summaryTable = new Table();
         summaryTable.add(new PlayerSummaryTable(player, skin));
         summaryTable.row();
         summaryTable.add(new AttributesTable(player, skin));
