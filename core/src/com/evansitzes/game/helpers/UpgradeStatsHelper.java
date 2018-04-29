@@ -15,6 +15,8 @@ public class UpgradeStatsHelper {
         stats.put("strength", calculateStrength());
         stats.put("speed", calculateSpeed());
         stats.put("intelligence", calculateIntelligence());
+//        stats.put("hitPoints", calculateHitPoints());
+//        stats.put("magicPoints", calculateMagicPoints());
 
         return stats;
     }

@@ -6,6 +6,7 @@ import com.evansitzes.game.helpers.Textures;
 import com.evansitzes.game.model.Character;
 
 import java.util.HashMap;
+import java.util.Map;
 
 /**
  * Created by evan on 9/23/16.
@@ -114,5 +115,16 @@ public class Player extends TeamMember {
         baseAttributes.put("resistance", baseResistance);
 
         return baseAttributes;
+    }
+
+    public void addStats(final Map<String, Integer> stats) {
+        baseStrength += stats.get("strength");
+        baseSpeed += stats.get("speed");
+        baseIntelligence += stats.get("intelligence");
+
+        baseHitPoints += stats.get("hitPoints");
+        baseMagicPoints += stats.get("magicPoints");
+
+        updateTotalAttributes();
     }
 }

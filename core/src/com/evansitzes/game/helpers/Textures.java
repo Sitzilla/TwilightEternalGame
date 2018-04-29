@@ -107,7 +107,7 @@ public class Textures {
     }
 
     public static class Npcs {
-        public static final TextureRegion VILLAGER = loadRandomVillager();
+        public final TextureRegion VILLAGER = loadRandomVillager();
         public static final TextureRegion GUARD = loadSpriteSheet(12, 8, "sprites/final_fantasy_characters.png")[4][1];
         public static final TextureRegion MERCHANT = loadSpriteSheet(3, 4, "sprites/weird_purple_guy.png")[0][1];
         public static final TextureRegion BLACKSMITH = loadSpriteSheet(12, 8, "sprites/final_fantasy_characters.png")[4][7];

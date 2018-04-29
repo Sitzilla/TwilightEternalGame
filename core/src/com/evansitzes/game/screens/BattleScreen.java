@@ -270,7 +270,7 @@ public class BattleScreen extends TwilightEternalScreen implements Screen {
                     continue;
                 }
 
-                battleInterfaceSelections.add(new BattleInterfaceSelection(enemies.get(i).name + String.valueOf(i), BattleChoiceEnum.ATTACK));
+                battleInterfaceSelections.add(new BattleInterfaceSelection(enemies.get(i).name + ' ' + (i + 1), BattleChoiceEnum.ATTACK));
             }
 
             battleInterfaceSelections.add(new BattleInterfaceSelection("Back", BattleChoiceEnum.BACK));

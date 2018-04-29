@@ -20,6 +20,16 @@ public class LevelUpDisplay extends Table {
     public LevelUpDisplay(final Player player, final Skin skin) {
         super(skin);
 
+        buildScreen(player, skin);
+
+//        this.add(new AttributesTable(player, skin)).size(150);
+//        this.add(new PlayerSummaryTable(player, skin)).size(300);
+
+    }
+
+    private void buildScreen(final Player player, final Skin skin) {
+        this.clear();
+
         final float width = (float) (Configuration.WIDTH / 1.5);
 
         this.setPosition((float) (Configuration.WIDTH / 6.0), (float) (Configuration.HEIGHT / 6.0));
@@ -41,28 +51,36 @@ public class LevelUpDisplay extends Table {
         rightsideTable.add(String.format("Next Level:  %d", LevelCalculator.nextLevel(player.level)));
         rightsideTable.row();
 
-        final TextButton levelUpButton = new TextButton("Level Up!", skin);
+        if (canUpgrade(player)) {
+            final TextButton levelUpButton = new TextButton("Level Up!", skin);
+            rightsideTable.add(levelUpButton);
 
-        rightsideTable.add(levelUpButton);
+            levelUpButton.addListener(new ClickListener() {
+                @Override
+                public void clicked(final InputEvent event, final float x, final float y) {
+                    if (canUpgrade(player)) {
+                        final Map<String, Integer> stats = calculateNextLevelStats(player);
+                        System.out.println("Leveling up");
+                        System.out.println(stats);
+
+                        player.addStats(stats);
+                        player.level += 1;
+                        buildScreen(player, skin);
+                    }
+                }
+
+            });
+        } else {
+            rightsideTable.add("");
+        }
+
         rightsideTable.row();
 
         this.add(rightsideTable).width((float) (width * 0.75));
-//        this.add(new AttributesTable(player, skin)).size(150);
-//        this.add(new PlayerSummaryTable(player, skin)).size(300);
-
-
-        levelUpButton.addListener(new ClickListener() {
-            @Override
-            public void clicked(final InputEvent event, final float x, final float y) {
-                if (player.experience > LevelCalculator.nextLevel(player.level)) {
-                    System.out.println("Leveling up");
-                    Map<String, Integer> stats = calculateNextLevelStats(player);
-                }
-            }
-
-        });
-
     }
 
+    private static boolean canUpgrade(final Player player) {
+        return player.experience >= LevelCalculator.nextLevel(player.level);
+    }
 
 }

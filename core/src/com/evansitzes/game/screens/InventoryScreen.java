@@ -101,7 +101,9 @@ public class InventoryScreen extends TwilightEternalScreen implements Screen {
         width = game.player.currentHitPoints / game.player.maxHitPoints * totalBarWidth;
 
         // exit the inventory when spacebar key is pressed
-        if (Gdx.input.isKeyPressed(Keys.SPACE)) {
+        if (Gdx.input.isKeyPressed(Keys.SPACE)
+                || Gdx.input.isKeyPressed(Keys.BACKSPACE)
+                || Gdx.input.isKeyPressed(Keys.ESCAPE)) {
             gameflowController.setGameScreen();
         }
 
