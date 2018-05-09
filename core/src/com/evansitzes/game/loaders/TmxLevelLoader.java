@@ -37,7 +37,23 @@ public class TmxLevelLoader {
         level.name = (String) map.getProperties().get("name");
         level.level.set(gridPosition.x, gridPosition.y);
 
-        final TiledMapTileLayer tiledMapTileLayer = (TiledMapTileLayer) map.getLayers().get("GroundBottomLayer");
+        final TiledMapTileLayer tiledMapTileLayer = (TiledMapTileLayer) map.getLayers().get("background1");
+
+        // Get collision tiles
+//        final TiledMapTileLayer collisionMapTileLayer = (TiledMapTileLayer) map.getLayers().get("collision");
+//        final Array<RectangleMapObject> collisionObjects = new Array<RectangleMapObject>();
+//
+//        for (int i = 0; i < collisionMapTileLayer.getWidth(); i++) {
+//            for (int j = 0; j < collisionMapTileLayer.getHeight(); j++) {
+//                final Cell mycell = collisionMapTileLayer.getCell(i, j);
+//
+//                if (mycell == null) {
+//                    continue;
+//                }
+//
+//                collisionObjects.add(new RectangleMapObject(i * 26, j * 26, 26, 26));
+//            }
+//        }
 
         final MapLayer objectLayer = map.getLayers().get("objects");
 
@@ -103,7 +119,7 @@ public class TmxLevelLoader {
                 level.events.add(npcEvent);
             } else if (type.equals("landing")) {
                 entityParameters.put("name", "Landing");
-                entityParameters.put("position", (String) object.getProperties().get("position"));
+                entityParameters.put("positioning", (String) object.getProperties().get("positioning"));
                 entityParameters.put("path", ENVIRONMENT_ENTITIES_PATH);
 
                 createEntityAndAddToLevel(game, level, entityParameters, object, gameScreen);

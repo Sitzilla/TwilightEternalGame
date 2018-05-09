@@ -65,8 +65,8 @@ public class GoblinWarriorBattle extends Enemy {
     @Override
     public void draw() {
 //        if (!dead) {
-        sprite.setPosition(this.x, this.y);
-        this.rectangle.set(this.x + 20, this.y + 20, 10, 10);
+        sprite.setPosition(this.position.x, this.position.y);
+        this.hitBox.set(this.position.x + 20, this.position.y + 20, 10, 10);
         sprite.draw(game.batch);
 //        }
     }

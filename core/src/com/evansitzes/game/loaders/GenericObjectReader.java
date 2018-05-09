@@ -41,8 +41,8 @@ public class GenericObjectReader {
                 entity.setLanding(parameters.get("landing"));
             }
 
-            if (parameters.containsKey("position")) {
-                entity.setPosition(parameters.get("position"));
+            if (parameters.containsKey("positioning")) {
+                entity.setPositioning(parameters.get("positioning"));
             }
 
             if (parameters.containsKey("text")) {
@@ -62,12 +62,12 @@ public class GenericObjectReader {
     }
 
     private static void readRectanglePosition(final Entity entity, final RectangleMapObject object) {
-        entity.x = (Float) object.getProperties().get("x");
-        entity.y = (Float) object.getProperties().get("y");
-        entity.rectangle.x = (Float) object.getProperties().get("x");
-        entity.rectangle.y = (Float) object.getProperties().get("y");
-        entity.rectangle.width = (Float) object.getProperties().get("width");
-        entity.rectangle.height = (Float) object.getProperties().get("height");
+        entity.position.x = (Float) object.getProperties().get("x");
+        entity.position.y = (Float) object.getProperties().get("y");
+        entity.hitBox.x = (Float) object.getProperties().get("x");
+        entity.hitBox.y = (Float) object.getProperties().get("y");
+        entity.hitBox.width = (Float) object.getProperties().get("width");
+        entity.hitBox.height = (Float) object.getProperties().get("height");
     }
 
 

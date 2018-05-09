@@ -11,7 +11,7 @@ public class ConversationZone extends Entity {
 
     public ConversationZone(final TwilightEternal game) {
         super(game);
-        this.rectangle.set(this.x, this.y, 20, 20);
+        this.hitBox.set(this.position.x, this.position.y, 20, 20);
     }
 
     @Override
@@ -20,9 +20,9 @@ public class ConversationZone extends Entity {
     }
 
     public boolean overlapsConversationZone(final Entity entity) {
-        if (rectangle == null) { return false; }
+        if (hitBox == null) { return false; }
 
-        return rectangle.overlaps(entity.rectangle);
+        return hitBox.overlaps(entity.hitBox);
     }
 
     public String getText() {

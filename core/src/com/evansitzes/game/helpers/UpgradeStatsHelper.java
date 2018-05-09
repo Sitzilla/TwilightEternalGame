@@ -15,8 +15,8 @@ public class UpgradeStatsHelper {
         stats.put("strength", calculateStrength());
         stats.put("speed", calculateSpeed());
         stats.put("intelligence", calculateIntelligence());
-//        stats.put("hitPoints", calculateHitPoints());
-//        stats.put("magicPoints", calculateMagicPoints());
+        stats.put("hitPoints", calculateHitPoints());
+        stats.put("magicPoints", calculateMagicPoints());
 
         return stats;
     }
@@ -32,6 +32,16 @@ public class UpgradeStatsHelper {
     }
 
     private static int calculateIntelligence() {
+        final Random rand = new Random();
+        return rand.nextInt(1) + 1;
+    }
+
+    private static int calculateHitPoints() {
+        final Random rand = new Random();
+        return rand.nextInt(3) + 1;
+    }
+
+    private static int calculateMagicPoints() {
         final Random rand = new Random();
         return rand.nextInt(1) + 1;
     }

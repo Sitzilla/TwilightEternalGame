@@ -9,55 +9,27 @@
  <tileset firstgid="2561" name="snowWIP" tilewidth="32" tileheight="32" tilecount="256" columns="16">
   <image source="snowWIP.png" trans="000000" width="512" height="512"/>
  </tileset>
- <layer name="GroundBottomLayer" width="41" height="27">
+ <layer name="background1" width="41" height="27">
   <data encoding="base64" compression="zlib">
-   eJyTZGBgkBzFo3gUk425uQYej7px6LhRfgDcSKmdgzEcScG8Q8CNQyEcR9046sbh6kZsZcRgc+NQCMeR6EZ8aWewuHEohCO13KhNY7fgak8Nt3CkBiYnLmjhRmqX7+huAgB57mFI
+   eJyTZGBgkBzFo3gUk425uQYej7px6LhRfgDcSKmdgzEcScG8Q8CNQyEc6e3G7UD9O4B4J4XmjLpx1I2E3IitjBhsbhwK4TgS3Ygv7QwWNw6FcKSWG7Vp7EZc7anhFo7UcCOpcUErN/LicSM1whEAo658Bg==
   </data>
  </layer>
- <layer name="GroundMiddleLayer" width="41" height="27">
+ <layer name="background2" width="41" height="27">
   <data encoding="base64" compression="zlib">
-   eJztzrENACAMBLHsvxCwHZmA6hEUtnT9VQEA/GV0s1uvRw48ZnjM8JjhMcNjhseMW48btGUeMQ==
+   eJztzgEJADAIAEEzLcIi2D+MIURQuCvwHwF0vAP9P37R7+f4xe4+AABwRwE9KAGN
   </data>
  </layer>
- <layer name="GroundTopLayer" width="41" height="27">
-  <data encoding="base64" compression="zlib">
-   eJztwYEAAAAAw6D5U1/hAFUBAAAA8BoRTAAB
-  </data>
- </layer>
- <layer name="WallBottomLayer" width="41" height="27">
-  <data encoding="base64" compression="zlib">
-   eJztz8EJACAMBMF8bccSLMH+i7EFIQQjzEDee4mA3sbDuzGT/2Xd9Ff5inx/l6/o3QcAAP5xAPW9AqQ=
-  </data>
- </layer>
- <layer name="WallMiddleLayer" width="41" height="27">
+ <layer name="collision" width="41" height="27">
   <data encoding="base64" compression="zlib">
    eJxjYBgFo2DwAnYgVhpAzEWEG6WA2GgAsTiRbnQaQEysG4MGEBPrxoEEo26kDqC1GzVYGBg0gViLhXwzaO3GAqDbCoG4aBC7ERcgJXwHyo2khO9gyDNTgHgqHvlRN1IHjLqROmDUjdQBo26kDhh1I3XAUHUjAEiEJn4=
   </data>
  </layer>
- <layer name="WallTopLayer" width="41" height="27">
-  <data encoding="base64" compression="zlib">
-   eJztwYEAAAAAw6D5U1/hAFUBAAAA8BoRTAAB
-  </data>
- </layer>
- <layer name="ForegroundBottomLayer" width="41" height="27">
-  <data encoding="base64" compression="zlib">
-   eJztwYEAAAAAw6D5U1/hAFUBAAAA8BoRTAAB
-  </data>
- </layer>
- <layer name="ForegroundMiddleLayer" width="41" height="27">
-  <data encoding="base64" compression="zlib">
-   eJztwYEAAAAAw6D5U1/hAFUBAAAA8BoRTAAB
-  </data>
- </layer>
- <layer name="ForegroundTopLayer" width="41" height="27">
+ <layer name="foreground" width="41" height="27">
   <data encoding="base64" compression="zlib">
    eJztwYEAAAAAw6D5U1/hAFUBAAAA8BoRTAAB
   </data>
  </layer>
  <objectgroup name="objects" offsetx="-1" offsety="0">
-  <object id="4" name="wall" type="wall" x="125" y="182" width="31" height="698"/>
-  <object id="7" name="wall" type="wall" x="1157" y="212" width="34" height="653"/>
-  <object id="9" name="wall" type="wall" x="146" y="215" width="1026" height="29"/>
   <object id="10" name="portal" type="portal" x="632" y="423" width="40" height="10">
    <properties>
     <property name="destination" value="pub"/>
@@ -70,14 +42,14 @@
     <property name="landing" value="north"/>
    </properties>
   </object>
-  <object id="13" name="south-landing" type="landing" x="610" y="814" width="89" height="15">
+  <object id="13" name="south-landing" type="landing" x="648" y="814" width="24" height="15">
    <properties>
-    <property name="position" value="south"/>
+    <property name="positioning" value="south"/>
    </properties>
   </object>
   <object id="15" name="north-landing" type="landing" x="615" y="456" width="85" height="15">
    <properties>
-    <property name="position" value="north"/>
+    <property name="positioning" value="north"/>
    </properties>
   </object>
   <object id="17" name="portal" type="portal" x="833" y="482" width="35" height="9">
@@ -88,7 +60,7 @@
   </object>
   <object id="18" name="north-east-landing" type="landing" x="804" y="519" width="92" height="14">
    <properties>
-    <property name="position" value="north-east"/>
+    <property name="positioning" value="north-east"/>
    </properties>
   </object>
  </objectgroup>

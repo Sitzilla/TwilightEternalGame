@@ -60,7 +60,7 @@
   </object>
   <object id="2" name="west-landing" type="landing" x="105" y="173" width="16" height="67">
    <properties>
-    <property name="position" value="west"/>
+    <property name="positioning" value="west"/>
    </properties>
   </object>
   <object id="4" name="wall" type="wall" x="8" y="134" width="246" height="20"/>

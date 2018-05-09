@@ -18,47 +18,22 @@
  <tileset firstgid="2586" name="hyptosis_tile-art-batch-1 (1)" tilewidth="32" tileheight="32" tilecount="900" columns="30">
   <image source="indoors/hyptosis_tile-art-batch-1 (1).png" trans="000000" width="960" height="960"/>
  </tileset>
- <layer name="GroundBottomLayer" width="27" height="18">
+ <layer name="background1" width="27" height="18">
   <data encoding="base64" compression="zlib">
    eJxjYKAfMOcZxaN4FI9i2mIe7lG7Ru0a2nYBAPPWdu4=
   </data>
  </layer>
- <layer name="GroundMiddleLayer" width="27" height="18">
+ <layer name="background2" width="27" height="18">
   <data encoding="base64" compression="zlib">
    eJyT5WJgkKUTHgWjYCgCHm4EHrVr1K5Ru0btorVdAFSqBxU=
   </data>
  </layer>
- <layer name="GroundTopLayer" width="27" height="18">
-  <data encoding="base64" compression="zlib">
-   eJxjYBgFo2AUjIJRMApGwWABAAeYAAE=
-  </data>
- </layer>
- <layer name="WallBottomLayer" width="27" height="18">
+ <layer name="collision" width="27" height="18">
   <data encoding="base64" compression="zlib">
    eJxjYBgFwxFsxSK2bRDZNQWIp5Jp3xI0TAhQYhepgJ52jYJRMAqGJwAAc3gI4g==
   </data>
  </layer>
- <layer name="WallMiddleLayer" width="27" height="18">
-  <data encoding="base64" compression="zlib">
-   eJxjYBgFo2AUjIJRMApGwWABAAeYAAE=
-  </data>
- </layer>
- <layer name="WallTopLayer" width="27" height="18">
-  <data encoding="base64" compression="zlib">
-   eJxjYBgFo2AUjIJRMApGwWABAAeYAAE=
-  </data>
- </layer>
- <layer name="ForegroundBottomLayer" width="27" height="18">
-  <data encoding="base64" compression="zlib">
-   eJxjYBgFo2AUjIJRMApGwWABAAeYAAE=
-  </data>
- </layer>
- <layer name="ForegroundMiddleLayer" width="27" height="18">
-  <data encoding="base64" compression="zlib">
-   eJxjYBgFo2AUjIJRMApGwWABAAeYAAE=
-  </data>
- </layer>
- <layer name="ForegroundTopLayer" width="27" height="18">
+ <layer name="foreground" width="27" height="18">
   <data encoding="base64" compression="zlib">
    eJxjYBgFo2AUjIJRMApGwWABAAeYAAE=
   </data>
@@ -66,7 +41,7 @@
  <objectgroup name="objects">
   <object id="3" name="south-landing" type="landing" x="360" y="492" width="125" height="19">
    <properties>
-    <property name="position" value="south"/>
+    <property name="positioning" value="south"/>
    </properties>
   </object>
   <object id="4" name="portal" type="portal" x="364" y="541" width="116" height="15">

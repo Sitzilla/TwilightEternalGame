@@ -3,6 +3,7 @@ package com.evansitzes.game.entity.sprites;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.math.Rectangle;
+import com.evansitzes.game.Configuration;
 import com.evansitzes.game.TwilightEternal;
 import com.evansitzes.game.entity.Entity;
 
@@ -16,10 +17,10 @@ public class SimpleSprite extends Entity {
     public SimpleSprite(final TwilightEternal game, final TextureRegion texture) {
         super(game);
         sprite = new Sprite(texture);
-        rectangle = new Rectangle();
-        rectangle.width = sprite.getWidth();
-        rectangle.height = sprite.getHeight();
-        sprite.setPosition(370, 600);
+        hitBox = new Rectangle();
+        hitBox.width = sprite.getWidth();
+        hitBox.height = sprite.getHeight();
+        sprite.setPosition(Configuration.STARTING_POSITION_X, Configuration.STARTING_POSITION_Y);
 
     }
 

@@ -1,6 +1,7 @@
 package com.evansitzes.game.popups;
 
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
+import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
@@ -40,7 +41,19 @@ public class LevelUpDisplay extends Table {
 
         this.background(new TextureRegionDrawable(Textures.Colors.GREY));
 
-        this.add(new AttributesTable(player, skin)).width(width / 4);
+        final Table leftsideTable = new Table(skin);
+        leftsideTable.add(new AttributesTable(player, skin));
+        leftsideTable.row();
+
+        leftsideTable.add(new Label("HP:", skin)).left();
+        leftsideTable.add(new Label(Integer.toString(player.totalHitPoints), skin));
+        leftsideTable.row();
+
+        leftsideTable.add(new Label("MP:", skin)).left();
+        leftsideTable.add(new Label(Integer.toString(player.totalMagicPoints), skin));
+        leftsideTable.row();
+
+        this.add(leftsideTable).width(width / 4);
 
         final Table rightsideTable = new Table(skin);
 

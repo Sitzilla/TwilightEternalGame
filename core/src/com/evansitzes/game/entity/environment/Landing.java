@@ -8,11 +8,11 @@ import com.evansitzes.game.entity.Entity;
  */
 public class Landing extends Entity {
 
-    private String position;
+    private String positioning;
 
     public Landing(final TwilightEternal game) {
         super(game);
-        this.rectangle.set(this.x, this.y, 20, 20);
+        this.hitBox.set(this.position.x, this.position.y, 20, 20);
     }
 
     @Override
@@ -20,12 +20,12 @@ public class Landing extends Entity {
 
     }
 
-    public String getPosition() {
-        return position;
+    public String getPositioning() {
+        return positioning;
     }
     @Override
 
-    public void setPosition(final String position) {
-        this.position = position;
+    public void setPositioning(final String positioning) {
+        this.positioning = positioning;
     }
 }

@@ -1,7 +1,9 @@
 package com.evansitzes.game.entity.enemy;
 
+import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.evansitzes.game.TwilightEternal;
+import com.evansitzes.game.helpers.DrawUtils;
 import com.evansitzes.game.helpers.Textures;
 
 /**
@@ -28,14 +30,14 @@ public class GoblinWarrior extends Enemy {
 
     @Override
     public void draw() {
-//        if (!dead) {
-        // TODO should I be setting position off the sprites position or the rectangles?
-            sprite.setPosition(this.x, this.y);
-            this.rectangle.set(this.x + 20, this.y + 20, 10, 10);
-//            sprite.setPosition(this.rectangle.x, this.rectangle.y);
-//            this.rectangle.set(this.rectangle.x + 20, this.rectangle.y + 20, 10, 10);
-            sprite.draw(game.batch);
-//        }
+        sprite.setPosition(this.position.x, this.position.y);
+        this.hitBox.set(this.position.x + 20, this.position.y + 20, 10, 10);
+
+        sprite.draw(game.batch);
+
+        if (game.debug) {
+            DrawUtils.draw(game, hitBox, Color.RED);
+        }
     }
 
     @Override

@@ -155,7 +155,7 @@ public class BattleScreen extends TwilightEternalScreen implements Screen {
 
         if (battleInterface.pollHover() == BattleChoiceEnum.ATTACK) {
             final Enemy enemy = liveEnemies.get(battleInterface.getCurrentChoiceIndex());
-            enemySelector.draw(game.batch, enemy.getX() + 60, enemy.getY() + 75, 10, 5);
+            enemySelector.draw(game.batch, enemy.position.x + 60, enemy.position.y + 75, 10, 5);
         }
 
         game.batch.end();

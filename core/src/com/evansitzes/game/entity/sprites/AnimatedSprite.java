@@ -2,9 +2,13 @@ package com.evansitzes.game.entity.sprites;
 
 import com.badlogic.gdx.graphics.g2d.Animation;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
+import com.evansitzes.game.Configuration;
 import com.evansitzes.game.TwilightEternal;
 import com.evansitzes.game.entity.Entity;
+import com.evansitzes.game.helpers.DirectionEnum;
 import com.evansitzes.game.helpers.Textures;
+
+import static com.evansitzes.game.helpers.DirectionEnum.*;
 
 /**
  * Created by evan on 6/8/16.
@@ -24,7 +28,7 @@ public class AnimatedSprite extends Entity {
     private boolean looping = true;
     private float animationSpeed = 1f/6f;
 
-    public AnimatedSprite(TwilightEternal game) {
+    public AnimatedSprite(final TwilightEternal game) {
         super(game);
 
         rightWalking = Textures.People.WALKING_RIGHT;
@@ -33,12 +37,12 @@ public class AnimatedSprite extends Entity {
         downWalking = Textures.People.WALKING_DOWN;
         currentAnimation = new Animation(animationSpeed, Textures.People.WALKING_RIGHT);
 
-        locate(370, 600);
-
+//        locate(370, 600);
+        this.position.set(Configuration.STARTING_POSITION_X, Configuration.STARTING_POSITION_Y);
     }
 
     @Override
-    public void handle(float delta) {
+    public void handle(final float delta) {
         stateTime += delta;
         currentAnimation = new Animation(animationSpeed, currentWalking);
         currentFrame = currentAnimation.getKeyFrame(stateTime, looping);
@@ -46,14 +50,14 @@ public class AnimatedSprite extends Entity {
         game.batch.draw(currentFrame, position.x, position.y);
     }
 
-    public void setCurrentDirection(PlayerSprite.Facing direction) {
-        if (direction == PlayerSprite.Facing.LEFT) {
+    public void setCurrentDirection(final DirectionEnum direction) {
+        if (direction == LEFT) {
             currentWalking = leftWalking;
-        } else if (direction == PlayerSprite.Facing.RIGHT) {
+        } else if (direction == RIGHT) {
             currentWalking = rightWalking;
-        } else if (direction == PlayerSprite.Facing.UP) {
+        } else if (direction == UP) {
             currentWalking = upWalking;
-        } else if (direction == PlayerSprite.Facing.DOWN) {
+        } else if (direction == DOWN) {
             currentWalking = downWalking;
         }
     }

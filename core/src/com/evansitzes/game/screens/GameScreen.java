@@ -1,10 +1,14 @@
 package com.evansitzes.game.screens;
 
 import com.badlogic.gdx.*;
+import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.OrthographicCamera;
+import com.badlogic.gdx.maps.tiled.TiledMap;
 import com.badlogic.gdx.maps.tiled.TiledMapRenderer;
+import com.badlogic.gdx.maps.tiled.TiledMapTileLayer;
 import com.badlogic.gdx.maps.tiled.renderers.OrthogonalTiledMapRenderer;
+import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.Stage;
@@ -22,15 +26,18 @@ import com.evansitzes.game.entity.npc.Guard;
 import com.evansitzes.game.entity.npc.Merchant;
 import com.evansitzes.game.entity.npc.Npc;
 import com.evansitzes.game.entity.npc.Villager;
-import com.evansitzes.game.entity.sprites.PlayerSprite;
+import com.evansitzes.game.helpers.DirectionEnum;
+import com.evansitzes.game.helpers.DrawUtils;
 import com.evansitzes.game.loaders.TmxLevelLoader;
+import com.evansitzes.game.physics.CollisionHelper;
 import com.evansitzes.game.popups.CharacterSheet;
 import com.evansitzes.game.popups.LevelUpDisplay;
 import com.evansitzes.game.popups.ManagementDisplay;
 
 import java.util.Iterator;
 
-import static com.evansitzes.game.entity.sprites.PlayerSprite.Facing.*;
+import static com.evansitzes.game.helpers.DirectionEnum.*;
+import static com.evansitzes.game.helpers.StateEnum.WALKING;
 
 /**
  * Created by evan on 6/8/16.
@@ -41,17 +48,17 @@ public class GameScreen extends TwilightEternalScreen implements Screen, InputPr
     final Skin skin;
 
     private TiledMapRenderer tiledMapRenderer;
-
+    private TiledMapTileLayer collisionLayer;
     private final TwilightEternal game;
     private GameflowController gameflowController;
-    private final PlayerSprite playerSprite;
+//    private final PlayerSprite playerSprite;
 
     final private ManagementDisplay managementDisplay;
 
     private Level level;
     private boolean battleMode;
-    private int[] layerBackground = {0, 1, 2, 3, 4, 5}; // Ground and Wall layers (behind player)
-    private int[] layerAfterBackground = {6, 7, 8}; // Foreground Layers (in front of player)
+    private int[] layerBackground = {0, 1, 2}; // Ground and Wall layers (behind player)
+    private int[] layerAfterBackground = {3}; // Foreground Layers (in front of player)
 
     private final Array<Entity> obstructables = new Array();
     private final Array<Enemy> enemies = new Array();
@@ -88,7 +95,6 @@ public class GameScreen extends TwilightEternalScreen implements Screen, InputPr
         stage.addActor(managementDisplay);
 //        createIcons();
 
-        playerSprite = new PlayerSprite(game, this);
         this.battleMode = false;
         this.level = TmxLevelLoader.load(Vector2.Zero, game, this, configuration.STARTING_LEVEL);
         gameflowController.setCurrentGameZone(configuration.STARTING_LEVEL);
@@ -96,6 +102,8 @@ public class GameScreen extends TwilightEternalScreen implements Screen, InputPr
         mapMaxY = level.mapHeight * level.tileHeight;
         this.tiledMapRenderer = new OrthogonalTiledMapRenderer(level.map);
         tiledMapRenderer.setView(camera);
+//        collisionLayer = ((TiledMap) ((OrthogonalTiledMapRenderer) tiledMapRenderer).map).layers.layers.items[2];
+        collisionLayer = (TiledMapTileLayer) ((TiledMap) level.map).getLayers().get(2);
 
         final InputMultiplexer multiplexer = new InputMultiplexer();
         multiplexer.addProcessor(stage);
@@ -143,12 +151,13 @@ public class GameScreen extends TwilightEternalScreen implements Screen, InputPr
                     gameflowController.setCurrentGameZone(destination);
 
                     for (final Landing landing : landings) {
-                        if (landingPosition.equals(landing.getPosition())) {
+                        if (landingPosition.equals(landing.getPositioning())) {
                             currentLanding = landing;
                         }
                     }
 
-                    playerSprite.setToLandingPage(currentLanding.rectangle.getX(), currentLanding.rectangle.getY());
+                    game.player.setToLandingPage(currentLanding.hitBox.getX(), currentLanding.hitBox.getY());
+                    collisionLayer = (TiledMapTileLayer) level.map.getLayers().get(2);
                     this.tiledMapRenderer = new OrthogonalTiledMapRenderer(level.map);
                 }
 
@@ -161,7 +170,8 @@ public class GameScreen extends TwilightEternalScreen implements Screen, InputPr
                 game.batch.begin();
 
                 setPlayerDirectionState();
-                playerSprite.handle(delta);
+
+                game.player.handle(delta);
 
                 for (final Enemy enemy : enemies) {
                     enemy.draw();
@@ -171,8 +181,19 @@ public class GameScreen extends TwilightEternalScreen implements Screen, InputPr
                     npc.draw();
                 }
 
+                drawCollisionLayer();
+
+//                game.player.handle(delta);
+
+
 //                inventoryIconActor.drawIcon();
                 game.batch.end();
+
+//                ShapeRenderer shapeRenderer = new ShapeRenderer();
+//                shapeRenderer.begin(ShapeRenderer.ShapeType.Line);
+//                shapeRenderer.setColor(Color.RED);
+//                shapeRenderer.rect(game.player.position.x, game.player.animatedSprite.position.y, 30, 30);
+//                shapeRenderer.end();
 
                 tiledMapRenderer.render(layerAfterBackground);
                 handleEnemies(delta);
@@ -196,26 +217,26 @@ public class GameScreen extends TwilightEternalScreen implements Screen, InputPr
     }
 
     private float calculateCameraPositionX() {
-        if (playerSprite.position.x - camera.viewportWidth / 2 < mapMinX) {
+        if (game.player.position.x - camera.viewportWidth / 2 < mapMinX) {
             return camera.viewportWidth / 2;
         }
 
-        if (playerSprite.position.x > (mapMaxX - (camera.viewportWidth / 2))) {
+        if (game.player.position.x > (mapMaxX - (camera.viewportWidth / 2))) {
             return mapMaxX - (camera.viewportWidth / 2);
         }
 
-        return playerSprite.position.x;
+        return game.player.position.x;
     }
 
     private float calculateCameraPositionY() {
-        if (playerSprite.position.y - camera.viewportHeight / 2 < mapMinY) {
+        if (game.player.position.y - camera.viewportHeight / 2 < mapMinY) {
             return camera.viewportHeight / 2;
         }
 
-        if (playerSprite.position.y > (mapMaxY - (camera.viewportHeight / 2))) {
+        if (game.player.position.y > (mapMaxY - (camera.viewportHeight / 2))) {
             return mapMaxY - (camera.viewportHeight / 2);
         }
-        return playerSprite.position.y;
+        return game.player.position.y;
     }
 
     //TODO combine portal methods
@@ -227,12 +248,28 @@ public class GameScreen extends TwilightEternalScreen implements Screen, InputPr
         while(portalIterator.hasNext()) {
             final Portal portal = portalIterator.next();
 
-            if (portal.overlaps(playerSprite)) {
+            if (portal.overlaps(game.player)) {
                 return true;
             }
 
         }
         return false;
+    }
+
+    private void drawCollisionLayer() {
+        for (int i = 0; i < collisionLayer.getWidth(); i++) {
+            for (int j = 0; j < collisionLayer.getHeight(); j++) {
+                final TiledMapTileLayer.Cell mycell = collisionLayer.getCell(i, j);
+
+                if (mycell == null) {
+                    continue;
+                }
+
+                if (game.debug) {
+                    DrawUtils.draw(game, new Rectangle(i * 32, j * 32, 32, 32), Color.YELLOW);
+                }
+            }
+        }
     }
 
     private Portal getCurrentPortal() {
@@ -241,7 +278,7 @@ public class GameScreen extends TwilightEternalScreen implements Screen, InputPr
         while(portalIterator.hasNext()) {
             final Portal portal = portalIterator.next();
 
-            if (portal.overlaps(playerSprite)) {
+            if (portal.overlaps(game.player)) {
                 return portal;
             }
 
@@ -249,67 +286,69 @@ public class GameScreen extends TwilightEternalScreen implements Screen, InputPr
         return null;
     }
 
-    private boolean areCollisions(final PlayerSprite.Facing direction) {
+    private boolean areCollisions(final DirectionEnum direction) {
         final int movementSpeed = 5;
 
         // Check for edge of map
-        if (direction == LEFT && playerSprite.position.x < mapMinX + 1) {
+        if (direction == LEFT && game.player.position.x < mapMinX + 1) {
             return true;
         }
         // TODO figure out this collision
-        if (direction == RIGHT && playerSprite.position.x > mapMaxX - 30) {
+        if (direction == RIGHT && game.player.position.x > mapMaxX - 30) {
             return true;
         }
 
-        if (direction == DOWN && playerSprite.position.y < mapMinY + 1) {
+        if (direction == DOWN && game.player.position.y < mapMinY + 1) {
             return true;
         }
         // TODO figure out this collision
-        if (direction == UP && playerSprite.position.y > mapMaxY - 30) {
+        if (direction == UP && game.player.position.y > mapMaxY - 30) {
             return true;
         }
 
-        // Check for Wall
-//        final Iterator<Wall> wallIterator = walls.iterator();
+        if (CollisionHelper.isCollision(game, direction, collisionLayer)) {
+            return true;
+        }
+
         final Iterator<Entity> obstructablesIterator = obstructables.iterator();
 
         while (obstructablesIterator.hasNext()) {
-            final Entity entity = obstructablesIterator.next();
+            final Entity obstructionEntity = obstructablesIterator.next();
 
             if (direction == RIGHT) {
-                playerSprite.rectangle.x += movementSpeed;
+                game.player.hitBox.x += movementSpeed;
             } else if (direction == LEFT) {
-                playerSprite.rectangle.x -= movementSpeed;
+                game.player.hitBox.x -= movementSpeed;
             }
             if (direction == UP) {
-                playerSprite.rectangle.y += movementSpeed;
+                game.player.hitBox.y += movementSpeed;
             } else if (direction == DOWN) {
-                playerSprite.rectangle.y -= movementSpeed;
+                game.player.hitBox.y -= movementSpeed;
             }
 
-            if (entity.overlaps(playerSprite)) {
+            if (obstructionEntity.overlaps(game.player)) {
                 if (direction == RIGHT) {
-                    playerSprite.rectangle.x -= movementSpeed;
+                    game.player.hitBox.x -= movementSpeed;
                 } else if (direction == LEFT) {
-                    playerSprite.rectangle.x += movementSpeed;
+                    game.player.hitBox.x += movementSpeed;
                 }
                 if (direction == UP) {
-                    playerSprite.rectangle.y -= movementSpeed;
+                    game.player.hitBox.y -= movementSpeed;
                 } else if (direction == DOWN) {
-                    playerSprite.rectangle.y += movementSpeed;
+                    game.player.hitBox.y += movementSpeed;
                 }
                 return true;
             }
 
             if (direction == RIGHT) {
-                playerSprite.rectangle.x -= movementSpeed;
+                game.player.hitBox.x -= movementSpeed;
             } else if (direction == LEFT) {
-                playerSprite.rectangle.x += movementSpeed;
+                game.player.hitBox.x += movementSpeed;
             }
             if (direction == UP) {
-                playerSprite.rectangle.y -= movementSpeed;
+                game.player.hitBox.y -= movementSpeed;
             } else if (direction == DOWN) {
-                playerSprite.rectangle.y += movementSpeed;
+                game.player.hitBox.y += movementSpeed;
             }
 
         }
@@ -325,7 +364,7 @@ public class GameScreen extends TwilightEternalScreen implements Screen, InputPr
         while(enemyIterator.hasNext()) {
             final Enemy enemy = enemyIterator.next();
 
-            if (enemy.overlaps(playerSprite) && !enemy.dead) {
+            if (enemy.overlaps(game.player) && !enemy.dead) {
                 enemy.kill();
                 enemyIterator.remove();
                 removePopupActors();
@@ -343,7 +382,7 @@ public class GameScreen extends TwilightEternalScreen implements Screen, InputPr
         while(npcIterator.hasNext()) {
             final Npc npc = npcIterator.next();
 
-            if (npc.overlapsConversationZone(playerSprite)) {
+            if (npc.overlapsConversationZone(game.player)) {
                 System.out.println("Overlap npc: " + npc);
 
                 if (npc instanceof Villager) {
@@ -382,7 +421,7 @@ public class GameScreen extends TwilightEternalScreen implements Screen, InputPr
         while(conversationZoneIterator.hasNext()) {
             final ConversationZone conversationZone = conversationZoneIterator.next();
 
-            if (conversationZone.overlapsConversationZone(playerSprite)) {
+            if (conversationZone.overlapsConversationZone(game.player)) {
                 System.out.println("Overlap conversation zone: " + conversationZone);
 
                 final Conversation conversation = new Conversation("", false, gameflowController);
@@ -422,24 +461,24 @@ public class GameScreen extends TwilightEternalScreen implements Screen, InputPr
 
     private void setPlayerDirectionState() {
         if (Gdx.input.isKeyPressed(Input.Keys.RIGHT)) {
-            if (!areCollisions(PlayerSprite.Facing.RIGHT)) {
-                playerSprite.state = PlayerSprite.State.WALKING;
-                playerSprite.direction = PlayerSprite.Facing.RIGHT;
+            if (!areCollisions(RIGHT)) {
+                game.player.state = WALKING;
+                game.player.direction = RIGHT;
             }
         } else if (Gdx.input.isKeyPressed(Input.Keys.LEFT)) {
-            if (!areCollisions(PlayerSprite.Facing.LEFT)) {
-                playerSprite.state = PlayerSprite.State.WALKING;
-                playerSprite.direction = PlayerSprite.Facing.LEFT;
+            if (!areCollisions(LEFT)) {
+                game.player.state = WALKING;
+                game.player.direction = LEFT;
             }
         } else if (Gdx.input.isKeyPressed(Input.Keys.UP)) {
-            if (!areCollisions(PlayerSprite.Facing.UP)) {
-                playerSprite.state = PlayerSprite.State.WALKING;
-                playerSprite.direction = PlayerSprite.Facing.UP;
+            if (!areCollisions(UP)) {
+                game.player.state = WALKING;
+                game.player.direction = UP;
             }
         } else if (Gdx.input.isKeyPressed(Input.Keys.DOWN)) {
-            if (!areCollisions(PlayerSprite.Facing.DOWN)) {
-                playerSprite.state = PlayerSprite.State.WALKING;
-                playerSprite.direction = PlayerSprite.Facing.DOWN;
+            if (!areCollisions(DOWN)) {
+                game.player.state = WALKING;
+                game.player.direction = DOWN;
             }
         }
     }
@@ -543,6 +582,8 @@ public class GameScreen extends TwilightEternalScreen implements Screen, InputPr
 
     @Override
     public boolean touchDown(final int screenX, final int screenY, final int pointer, final int button) {
+        System.out.println("clicked");
+        System.out.println("(" + screenX + "," + screenY + ")");
         return false;
     }
 
@@ -584,10 +625,6 @@ public class GameScreen extends TwilightEternalScreen implements Screen, InputPr
 
     public TwilightEternal getGame() {
         return game;
-    }
-
-    public PlayerSprite getPlayerSprite() {
-        return playerSprite;
     }
 
     public Level getLevel() {

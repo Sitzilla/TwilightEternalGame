@@ -103,7 +103,7 @@
     <property name="landing" value="south"/>
    </properties>
   </object>
-  <object id="77" name="north-landing" type="landing" x="613.665" y="293" width="22.5468" height="13">
+  <object id="77" name="north-landing" type="landing" x="587" y="293" width="74" height="13">
    <properties>
     <property name="positioning" value="north"/>
    </properties>

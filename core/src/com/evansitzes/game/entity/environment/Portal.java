@@ -13,7 +13,7 @@ public class Portal extends Entity {
 
     public Portal(final TwilightEternal game) {
         super(game);
-        this.rectangle.set(this.x, this.y, 20, 20);
+        this.hitBox.set(this.position.x, this.position.y, 20, 20);
     }
 
     @Override
