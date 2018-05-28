@@ -12,8 +12,8 @@ import java.util.Map;
 public abstract class TeamMember extends Entity {
 
 //    public String name;
-    public float maxHitPoints;
-    public float maxMagicPoints;
+//    public float maxHitPoints;
+//    public float maxMagicPoints;
     public float currentHitPoints;
     public float currentMagicPoints;
 //    public float baseHealth;

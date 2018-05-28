@@ -98,7 +98,7 @@ public class InventoryScreen extends TwilightEternalScreen implements Screen {
         Gdx.gl.glClearColor(0.2f, 0.2f, 0.2f, 0f);
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT | GL20.GL_DEPTH_BUFFER_BIT);
 
-        width = game.player.currentHitPoints / game.player.maxHitPoints * totalBarWidth;
+        width = game.player.currentHitPoints / game.player.totalHitPoints * totalBarWidth;
 
         // exit the inventory when spacebar key is pressed
         if (Gdx.input.isKeyPressed(Keys.SPACE)

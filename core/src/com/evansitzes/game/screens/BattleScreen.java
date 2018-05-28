@@ -140,7 +140,7 @@ public class BattleScreen extends TwilightEternalScreen implements Screen {
         tiledMapRenderer.setView(camera);
         tiledMapRenderer.render();
         game.batch.setProjectionMatrix(camera.combined);
-        width = game.player.currentHitPoints / game.player.maxHitPoints * totalBarWidth;
+        width = game.player.currentHitPoints / game.player.totalHitPoints * totalBarWidth;
 
         game.batch.begin();
 
@@ -149,7 +149,7 @@ public class BattleScreen extends TwilightEternalScreen implements Screen {
         }
         game.player.draw();
 
-        font.draw(game.batch, "Current life: " + game.player.currentHitPoints + "/" + game.player.maxHitPoints, 490, 145);
+        font.draw(game.batch, "Current life: " + game.player.currentHitPoints + "/" + game.player.totalHitPoints, 490, 145);
         container.draw(game.batch, 505, 110, totalBarWidth + 10, 20);
         health.draw(game.batch, 510, 115, width, 10);
 

@@ -53,8 +53,8 @@ public class Player extends TeamMember {
 
         currentHitPoints = character.getCurrentHitPoints();
         currentMagicPoints = character.getCurrentMagicPoints();
-        maxHitPoints = baseHitPoints + hitPointsModifier;
-        maxMagicPoints = baseMagicPoints + magicPointsModifier;
+//        maxHitPoints = baseHitPoints + hitPointsModifier;
+//        maxMagicPoints = baseMagicPoints + magicPointsModifier;
 
         level = character.getLevel();
         experience = character.getExperience();
@@ -131,8 +131,8 @@ public class Player extends TeamMember {
     public void restoreLife(final int life) {
         currentHitPoints += life;
 
-        if (currentHitPoints > maxHitPoints) {
-            currentHitPoints = maxHitPoints;
+        if (currentHitPoints > totalHitPoints) {
+            currentHitPoints = totalHitPoints;
         }
     }
 
@@ -148,7 +148,7 @@ public class Player extends TeamMember {
         battleSprite.setRegion(Textures.Enemies.EXPLOSION);
     }
 
-    public void updateTotalAttributes() {
+    public void updateTotalStats() {
         totalStrength = baseStrength + strengthModifier;
         totalSpeed = baseSpeed + speedModifier;
         totalIntelligence = baseIntelligence + intelligenceModifier;
@@ -180,12 +180,12 @@ public class Player extends TeamMember {
         baseHitPoints += stats.get("hitPoints");
         baseMagicPoints += stats.get("magicPoints");
 
+        updateTotalStats();
         restoreMaxPoints();
-        updateTotalAttributes();
     }
 
     private void restoreMaxPoints() {
-        currentHitPoints = maxHitPoints;
-        currentMagicPoints = maxMagicPoints;
+        currentHitPoints = totalHitPoints;
+        currentMagicPoints = totalMagicPoints;
     }
 }

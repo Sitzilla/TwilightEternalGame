@@ -21,7 +21,7 @@ public class PlayerStatsHelper {
         }
 
 
-        player.updateTotalAttributes();
+        player.updateTotalStats();
     }
 
     public static void switchPlayerEquipment(final Player player, final Item itemRemoved, final Item itemAdded) {
@@ -31,12 +31,12 @@ public class PlayerStatsHelper {
 
     public static void removePlayerEquipment(final Player player, final Item item) {
         remove(player, item.getName());
-        player.updateTotalAttributes();
+        player.updateTotalStats();
     }
 
     public static void addPlayerEquipment(final Player player, final Item item) {
         add(player, item.getName());
-        player.updateTotalAttributes();
+        player.updateTotalStats();
     }
 
     private static void add(final Player player, final String item) {

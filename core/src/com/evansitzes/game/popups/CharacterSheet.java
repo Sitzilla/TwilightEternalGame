@@ -37,10 +37,10 @@ public class CharacterSheet extends Table {
         this.add(summaryTable).size(150);
         this.row();
 
-        this.add(String.format("HP %d/%d", (int) player.currentHitPoints, (int) player.maxHitPoints));
+        this.add(String.format("HP %d/%d", (int) player.currentHitPoints, (int) player.totalHitPoints));
         this.add(String.format("Experience:  %d", player.experience));
         this.row();
-        this.add(String.format("MP %d/%d", (int) player.currentMagicPoints, (int) player.maxMagicPoints));
+        this.add(String.format("MP %d/%d", (int) player.currentMagicPoints, (int) player.totalMagicPoints));
         this.add(String.format("Next Level:  %d", LevelCalculator.nextLevel(player.level)));
         this.row();
 
