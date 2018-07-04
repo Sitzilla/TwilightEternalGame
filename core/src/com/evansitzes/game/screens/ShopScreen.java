@@ -38,7 +38,6 @@ public class ShopScreen extends TwilightEternalScreen implements Screen {
     private EquipmentActor equipmentActor;
     private CurrentEquipment equipment;
     private GameflowController gameflowController;
-    private TwilightEternal game;
     public InventorySprite inventorySprite;
     private final OrthographicCamera camera;
     private NinePatch divider;

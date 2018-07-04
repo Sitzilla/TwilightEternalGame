@@ -73,6 +73,7 @@ public class ManagementDisplay extends Table {
             @Override
             public void clicked(final InputEvent event, final float x, final float y) {
                 currentScreen.setConversationWindow("Game Saved");
+                currentScreen.game.savePlayerState();
             }
 
         });

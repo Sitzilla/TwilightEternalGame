@@ -39,7 +39,6 @@ public class BattleScreen extends TwilightEternalScreen implements Screen {
 
     private static final int MAXIMUM_GOLD_PER_KILL = 5;
 
-    private final TwilightEternal game;
     private final OrthographicCamera camera;
     private float gameTime;
     private final Configuration configuration;
@@ -247,6 +246,7 @@ public class BattleScreen extends TwilightEternalScreen implements Screen {
                 @Override
                 public void run() {
                     if (enemiesAreDead()) {
+                        isBattleCurrentlyDelayed = true;
                         endBattle();
                     }
                 }

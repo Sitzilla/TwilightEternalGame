@@ -20,8 +20,6 @@ import com.evansitzes.game.helpers.Textures;
 
 public class TitleScreen extends TwilightEternalScreen implements Screen, InputProcessor {
 
-    private final TwilightEternal game;
-
     private final OrthographicCamera openingCamera;
 
     private int currentStage;

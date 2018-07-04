@@ -49,7 +49,6 @@ public class GameScreen extends TwilightEternalScreen implements Screen, InputPr
 
     private TiledMapRenderer tiledMapRenderer;
     private TiledMapTileLayer collisionLayer;
-    private final TwilightEternal game;
     private GameflowController gameflowController;
 //    private final PlayerSprite playerSprite;
 
