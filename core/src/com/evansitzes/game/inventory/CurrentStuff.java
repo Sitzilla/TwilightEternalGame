@@ -16,13 +16,13 @@ public class CurrentStuff {
     protected ArticlesEnvelope articlesEnvelope;
 
     public Map<String, String> getEquipment() {
-        Map<String, String> equipment = new HashMap<String, String>();
+        final Map<String, String> equipment = new HashMap<String, String>();
 
-        equipment.put("helmet", (slots.get(0).getItem() != null) ? slots.get(0).getItem().getName() : null);
-        equipment.put("armor", (slots.get(1).getItem() != null) ? slots.get(1).getItem().getName() : null);
-        equipment.put("weapon", (slots.get(2).getItem() != null) ? slots.get(2).getItem().getName() : null);
-        equipment.put("pants", (slots.get(3).getItem() != null) ? slots.get(3).getItem().getName() : null);
-        equipment.put("shoes", (slots.get(4).getItem() != null) ? slots.get(4).getItem().getName() : null);
+        equipment.put("helmet", (slots.get(0).getItem() != null) ? slots.get(0).getItem().name : null);
+        equipment.put("armor", (slots.get(1).getItem() != null) ? slots.get(1).getItem().name : null);
+        equipment.put("weapon", (slots.get(2).getItem() != null) ? slots.get(2).getItem().name : null);
+        equipment.put("pants", (slots.get(3).getItem() != null) ? slots.get(3).getItem().name : null);
+        equipment.put("shoes", (slots.get(4).getItem() != null) ? slots.get(4).getItem().name : null);
 
         return equipment;
     }
@@ -34,7 +34,7 @@ public class CurrentStuff {
             if (slots.get(i).getItem() == null) {
                 continue;
             }
-            currentItems.add(slots.get(i).getItem().getName());
+            currentItems.add(slots.get(i).getItem().name);
         }
 
         return currentItems;
@@ -42,8 +42,8 @@ public class CurrentStuff {
 
     public void removeItem(final Item item) {
         for (final Slot slot : slots) {
-            if (slot.getItem() == item) {
-                slot.setItem(null, 0);
+            if (slot.getItem() != null && slot.getItem().name == item.name) {
+                slot.take(1);
             }
         }
     }

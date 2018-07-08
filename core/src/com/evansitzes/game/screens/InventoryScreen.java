@@ -156,7 +156,7 @@ public class InventoryScreen extends TwilightEternalScreen implements Screen {
         }
 
         //TODO wtf is this hardcoded?II
-        if (slotActor.getSlot().getItem().getName().equals("Apple")) {
+        if (slotActor.getSlot().getItem().name.equals("Apple")) {
             Sounds.BOTTLE.play();
             game.player.restoreLife(20);
             inventory.removeItem(slotActor.getSlot().getItem());
@@ -170,7 +170,7 @@ public class InventoryScreen extends TwilightEternalScreen implements Screen {
                 return;
             }
 
-            final Slot targetEquipmentSlot = equipment.getEquipmentSlotOfSpecificType(slotActor.getSlot().getItem().getInventoryType());
+            final Slot targetEquipmentSlot = equipment.getEquipmentSlotOfSpecificType(slotActor.getSlot().getItem().inventoryType);
 
             if (targetEquipmentSlot.getItem() == null) {
                 final Item item = slotActor.getSlot().getItem();
@@ -250,7 +250,7 @@ public class InventoryScreen extends TwilightEternalScreen implements Screen {
 
     // TODO consider abstract this out with an "isEquipment" method in the item
     private static boolean isEquipment(final SlotActor slotActor) {
-        final InventoryTypeEnum inventoryType = slotActor.getSlot().getItem().getInventoryType();
+        final InventoryTypeEnum inventoryType = slotActor.getSlot().getItem().inventoryType;
 
         return inventoryType == HELMET ||
                 inventoryType == ARMOR ||

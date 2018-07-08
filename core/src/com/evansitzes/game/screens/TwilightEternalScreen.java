@@ -20,6 +20,7 @@ public abstract class TwilightEternalScreen implements Screen {
     public void doubleClickItem(final SlotActor slotActor) {
     }
 
+
     public void switchItems(final Slot item, final Slot payloadSlotItem) {
 
     }

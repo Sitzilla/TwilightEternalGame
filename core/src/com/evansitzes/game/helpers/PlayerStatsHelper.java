@@ -30,12 +30,12 @@ public class PlayerStatsHelper {
     }
 
     public static void removePlayerEquipment(final Player player, final Item item) {
-        remove(player, item.getName());
+        remove(player, item.name);
         player.updateTotalStats();
     }
 
     public static void addPlayerEquipment(final Player player, final Item item) {
-        add(player, item.getName());
+        add(player, item.name);
         player.updateTotalStats();
     }
 

@@ -93,7 +93,6 @@ public class YamlParser {
             charactersEnvelope.getCharacters().get(0).setCurrentHitPoints(player.currentHitPoints);
             charactersEnvelope.getCharacters().get(0).setCurrentMagicPoints(player.currentMagicPoints);
 
-
             mapper.writeValue(new FileOutputStream(file), charactersEnvelope);
         } catch (final IOException e) {
             System.out.println(e);

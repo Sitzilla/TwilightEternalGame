@@ -20,6 +20,9 @@ public class Article {
     @JsonProperty
     private HashMap<String, Integer> attributes;
 
+    @JsonProperty
+    private boolean combinable;
+
     public Article() {
     }
 
@@ -43,7 +46,7 @@ public class Article {
         return itemType;
     }
 
-    public void setItemType(String itemType) {
+    public void setItemType(final String itemType) {
         this.itemType = itemType;
     }
 
@@ -55,6 +58,14 @@ public class Article {
         this.attributes = attributes;
     }
 
+    public boolean isCombinable() {
+        return combinable;
+    }
+
+    public void setCombinable(final boolean combinable) {
+        this.combinable = combinable;
+    }
+
     @Override
     public String toString() {
         return "Article{" +
@@ -62,6 +73,7 @@ public class Article {
                 ", description='" + description + '\'' +
                 ", itemType='" + itemType + '\'' +
                 ", attributes=" + attributes +
+                ", combinable=" + combinable +
                 '}';
     }
 }

@@ -4,6 +4,7 @@ import com.badlogic.gdx.utils.Array;
 import com.evansitzes.game.exceptions.ItemDoesntExistException;
 import com.evansitzes.game.helpers.ItemTypeParser;
 import com.evansitzes.game.helpers.YamlParser;
+import com.evansitzes.game.model.Article;
 
 import java.util.Map;
 
@@ -25,20 +26,25 @@ public class CurrentEquipment extends CurrentStuff {
 
     public void populateEquipment(final Map<String, String> equipment) {
         if (equipment.get("helmet") != null) {
-            slots.get(0).add(new Item(articlesEnvelope.getArticle(equipment.get("helmet")).getName(), ItemTypeParser.parse(articlesEnvelope.getArticle(equipment.get("helmet"))), articlesEnvelope.getArticle(equipment.get("helmet")).getDescription()), 1);
+            final Article article =  articlesEnvelope.getArticle(equipment.get("helmet"));
+            slots.get(0).add(new Item(article.getName(), ItemTypeParser.parse(article), article.getDescription(), article.isCombinable()), 1);
         }
 
         if (equipment.get("armor") != null) {
-            slots.get(1).add(new Item(articlesEnvelope.getArticle(equipment.get("armor")).getName(), ItemTypeParser.parse(articlesEnvelope.getArticle(equipment.get("armor"))), articlesEnvelope.getArticle(equipment.get("armor")).getDescription()), 1);
+            final Article article =  articlesEnvelope.getArticle(equipment.get("armor"));
+            slots.get(1).add(new Item(article.getName(), ItemTypeParser.parse(article), article.getDescription(), article.isCombinable()), 1);
         }
         if (equipment.get("weapon") != null) {
-            slots.get(2).add(new Item(articlesEnvelope.getArticle(equipment.get("weapon")).getName(), ItemTypeParser.parse(articlesEnvelope.getArticle(equipment.get("weapon"))), articlesEnvelope.getArticle(equipment.get("weapon")).getDescription()), 1);
+            final Article article =  articlesEnvelope.getArticle(equipment.get("weapon"));
+            slots.get(2).add(new Item(article.getName(), ItemTypeParser.parse(article), article.getDescription(), article.isCombinable()), 1);
         }
         if (equipment.get("pants") != null) {
-            slots.get(3).add(new Item(articlesEnvelope.getArticle(equipment.get("pants")).getName(), ItemTypeParser.parse(articlesEnvelope.getArticle(equipment.get("pants"))), articlesEnvelope.getArticle(equipment.get("pants")).getDescription()), 1);
+            final Article article =  articlesEnvelope.getArticle(equipment.get("pants"));
+            slots.get(3).add(new Item(article.getName(), ItemTypeParser.parse(article), article.getDescription(), article.isCombinable()), 1);
         }
         if (equipment.get("shoes") != null) {
-            slots.get(4).add(new Item(articlesEnvelope.getArticle(equipment.get("shoes")).getName(), ItemTypeParser.parse(articlesEnvelope.getArticle(equipment.get("shoes"))), articlesEnvelope.getArticle(equipment.get("shoes")).getDescription()), 1);
+            final Article article =  articlesEnvelope.getArticle(equipment.get("shoes"));
+            slots.get(4).add(new Item(article.getName(), ItemTypeParser.parse(article), article.getDescription(), article.isCombinable()), 1);
         }
     }
 
@@ -58,12 +64,12 @@ public class CurrentEquipment extends CurrentStuff {
 
     public void addItem(final Item item) {
         for (final Slot slot : slots) {
-            if (slot.getInventoryType() == item.getInventoryType()) {
+            if (slot.getInventoryType() == item.inventoryType) {
                 slot.add(item, 1);
                 return;
             }
         }
 
-        throw new ItemDoesntExistException("Slot of type <" + item.getInventoryType() + "> does not exist.");
+        throw new ItemDoesntExistException("Slot of type <" + item.inventoryType + "> does not exist.");
     }
 }

@@ -31,7 +31,7 @@ public class SlotSource extends Source {
         sourceSlot.take(sourceSlot.getAmount());
         payload.setObject(payloadSlot);
 
-        final TextureRegion icon = payloadSlot.getItem().getTextureRegion();
+        final TextureRegion icon = payloadSlot.getItem().texture;
 
         final Actor dragActor = new Image(icon);
         payload.setDragActor(dragActor);
@@ -87,13 +87,13 @@ public class SlotSource extends Source {
     // Check if the target slot itemtype is valid for the payload item and check if the
     // source slot itemtype is valid for the target item itemtype
     private boolean isValidExchange(final Slot payloadSlot, final Slot targetSlot) {
-        if (payloadSlot.getItem().getInventoryType() != targetSlot.getInventoryType() &&
+        if (payloadSlot.getItem().inventoryType != targetSlot.getInventoryType() &&
                 targetSlot.getInventoryType() != InventoryTypeEnum.GENERAL) {
             return false;
         }
 
         if (targetSlot.getItem() != null &&
-                payloadSlot.getInventoryType() != targetSlot.getItem().getInventoryType() &&
+                payloadSlot.getInventoryType() != targetSlot.getItem().inventoryType &&
                 payloadSlot.getInventoryType() != InventoryTypeEnum.GENERAL) {
             sourceSlot.add(payloadSlot.getItem(), payloadSlot.getAmount());
             return false;

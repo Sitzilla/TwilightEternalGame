@@ -2,105 +2,83 @@ package com.evansitzes.game.inventory;
 
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
-import com.evansitzes.game.helpers.Textures;
+import com.evansitzes.game.helpers.Textures.Items;
 
 /**
  * Created by evan on 9/27/16.
  */
 public class Item {
-    private TextureRegion texture;
-    private InventoryTypeEnum inventoryType;
-    private String name;
-    private String description;
+    public TextureRegion texture;
+    public InventoryTypeEnum inventoryType;
+    public String name;
+    public String description;
+    public boolean isCombinable;
     public Sprite sprite;
 
-    public Item(final String name, final InventoryTypeEnum inventoryType, final String description) {
+    public Item(final String name, final InventoryTypeEnum inventoryType, final String description, final boolean isCombinable) {
         this.name = name;
         this.inventoryType = inventoryType;
         this.description = description;
-        this.texture = new TextureRegion(getTexture(name));
+        this.texture = new TextureRegion(parseTexture(name));
+        this.isCombinable = isCombinable;
         this.sprite = new Sprite(texture);
 
     }
 
-    public TextureRegion getTextureRegion() {
-        return texture;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(final String name) {
-        this.name = name;
-    }
-
-    public String getDescription() {
-        return description;
-    }
-
-    public void setDescription(final String description) {
-        this.description = description;
-    }
-
-    public InventoryTypeEnum getInventoryType() {
-        return inventoryType;
-    }
-
-    //TODO replace this with DB lookup
-    private TextureRegion getTexture(final String name) {
+    //TODO replace with some kind of lookup
+    private TextureRegion parseTexture(final String name) {
         if (name.equals("bronze_helmet")) {
-            return Textures.Items.BRONZE_HELMET;
+            return Items.BRONZE_HELMET;
         }
 
         if (name.equals("bronze_armor")) {
-            return Textures.Items.BRONZE_ARMOR;
+            return Items.BRONZE_ARMOR;
         }
 
         if (name.equals("bronze_pants")) {
-            return Textures.Items.BRONZE_PANTS;
+            return Items.BRONZE_PANTS;
         }
 
         if (name.equals("bronze_boots")) {
-            return Textures.Items.BRONZE_BOOTS;
+            return Items.BRONZE_BOOTS;
         }
 
         if (name.equals("bronze_sword")) {
-            return Textures.Items.BRONZE_SWORD;
+            return Items.BRONZE_SWORD;
         }
 
         if (name.equals("iron_helmet")) {
-            return Textures.Items.IRON_HELMET;
+            return Items.IRON_HELMET;
         }
 
         if (name.equals("iron_armor")) {
-            return Textures.Items.IRON_ARMOR;
+            return Items.IRON_ARMOR;
         }
 
         if (name.equals("iron_pants")) {
-            return Textures.Items.IRON_PANTS;
+            return Items.IRON_PANTS;
         }
 
         if (name.equals("iron_boots")) {
-            return Textures.Items.IRON_BOOTS;
+            return Items.IRON_BOOTS;
         }
 
         if (name.equals("iron_sword")) {
-            return Textures.Items.IRON_SWORD;
+            return Items.IRON_SWORD;
         }
 
         if (name.equals("Apple")) {
-            return Textures.Items.APPLE;
+            return Items.APPLE;
         }
 
         if (name.equals("Bone")) {
-            return Textures.Items.BONE;
+            return Items.BONE;
         }
 
         if (name.equals("Veggies")) {
-            return Textures.Items.VEGGIES;
+            return Items.VEGGIES;
         }
 
-        return Textures.Items.BLANK;
+        return Items.BLANK;
     }
 }

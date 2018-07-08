@@ -1,7 +1,7 @@
 ---
 characters:
 - name: "Toshiro"
-  gold: 42
+  gold: 4700
   equipment:
     weapon: "bronze_sword"
     armor: "bronze_armor"
@@ -13,15 +13,17 @@ characters:
   - "iron_sword"
   - "Bone"
   - "bronze_helmet"
-  experience: 1
-  level: 1
+  - "Apple"
+  - "Apple"
+  experience: 7
+  level: 2
   base_attributes:
-    hitPoints: 10
+    magicPoints: 4
     armor: 1
-    strength: 8
-    magicPoints: 3
-    speed: 6
+    strength: 9
+    hitPoints: 11
+    speed: 7
     resistance: 1
-    intelligence: 6
-  current_hit_points: 8.0
-  current_magic_points: 2.0
+    intelligence: 7
+  current_hit_points: 11.0
+  current_magic_points: 4.0

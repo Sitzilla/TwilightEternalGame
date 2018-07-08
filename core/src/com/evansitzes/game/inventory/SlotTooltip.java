@@ -30,7 +30,7 @@ public class SlotTooltip extends Window implements SlotListener {
         }
 
         clear();
-        final Label label = new Label(slot.getItem().getName() + " \n" + slot.getItem().getDescription(), skin);
+        final Label label = new Label(slot.getItem().name + " \n" + slot.getItem().description, skin);
         add(label);
         pack();
     }

@@ -32,7 +32,7 @@ public class TwilightEternal extends Game {
         batch = new SpriteBatch();
         player = new Player(this, new YamlParser().loadData().getCharacters().get(0));
         shapeRenderer = new ShapeRenderer();
-        debug = true;
+        debug = Configuration.DEBUG;
 
         new PlayerStatsHelper().buildPlayerStats(player);
         //Use LibGDX's default Arial font.

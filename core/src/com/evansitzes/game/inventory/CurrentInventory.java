@@ -22,17 +22,24 @@ public class CurrentInventory extends CurrentStuff {
     }
 
     public void populateInventory(final ArrayList<String> equipment) {
-        for (int i = 0; i < slots.size; i++) {
-
-           try {
-               if (equipment.get(i) != null) {
-                   final Article article = articlesEnvelope.getArticle(equipment.get(i));
-                   slots.get(i).add(new Item(article.getName(), ItemTypeParser.parse(article), article.getDescription()), 1);
-               }
-
-           } catch (final IndexOutOfBoundsException e) {
-           }
+        for (String item : equipment) {
+            final Article article = articlesEnvelope.getArticle(item);
+            final Item singleItem = new Item(article.getName(), ItemTypeParser.parse(article), article.getDescription(), article.isCombinable());
+            store(singleItem, 1);
         }
+
+
+//        for (int i = 0; i < slots.size; i++) {
+//
+//           try {
+//               if (equipment.get(i) != null) {
+//                   final Article article = articlesEnvelope.getArticle(equipment.get(i));
+//                   slots.get(i).add(new Item(article.getName(), ItemTypeParser.parse(article), article.getDescription()), 1);
+//               }
+//
+//           } catch (final IndexOutOfBoundsException e) {
+//           }
+//        }
     }
 
     public int checkInventory(final Item item) {
@@ -49,15 +56,17 @@ public class CurrentInventory extends CurrentStuff {
 
     public boolean store(final Item item, final int amount) {
         // first check for a slot with the same item type
-        // TODO activate this when we have combination logic
-//        final Slot itemSlot = firstSlotWithItem(item);
-//        if (itemSlot != null) {
-//            itemSlot.add(item, amount);
-//            return true;
-//        }
+
+        if (item.isCombinable) {
+            final Slot itemSlot = firstSlotWithItem(item);
+            if (itemSlot != null) {
+                itemSlot.add(item, amount);
+                return true;
+            }
+        }
 
         // now check for an available empty slot
-        final Slot emptySlot = firstSlotWithItem(null);
+        final Slot emptySlot = firstEmptySlot();
         if (emptySlot != null) {
             emptySlot.add(item, amount);
             return true;
@@ -73,7 +82,18 @@ public class CurrentInventory extends CurrentStuff {
 
     private Slot firstSlotWithItem(final Item item) {
         for (final Slot slot : slots) {
-            if (slot.getItem() == item) {
+            if (slot.getItem() != null
+                    && slot.getItem().name.equals(item.name)) {
+                return slot;
+            }
+        }
+
+        return null;
+    }
+
+    private Slot firstEmptySlot() {
+        for (final Slot slot : slots) {
+            if (slot.getItem() == null) {
                 return slot;
             }
         }

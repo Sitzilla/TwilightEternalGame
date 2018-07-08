@@ -8,6 +8,9 @@ npc_configurations:
   sprite: "merchant"
   inventory:
   - "Apple"
+  - "Apple"
+  - "Apple"
+  - "Apple"
 - tag: "town_blacksmith"
   text: "I've got some pretty good pieces if you want to take a look."
   sprite: "blacksmith"

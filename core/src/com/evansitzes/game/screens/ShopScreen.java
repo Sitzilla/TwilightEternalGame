@@ -138,7 +138,7 @@ public class ShopScreen extends TwilightEternalScreen implements Screen {
     public void wasClicked(final SlotActor slotActor) {
         final Item item = slotActor.getSlot().getItem();
 
-        if (item == null || prices.get(item.getName()) > game.player.gold) {
+        if (item == null || prices.get(item.name) > game.player.gold) {
             return;
         }
 
@@ -146,7 +146,8 @@ public class ShopScreen extends TwilightEternalScreen implements Screen {
         Sounds.COINS.play();
         //TODO remove gold from item description
         inventory.store(item, 1);
-        game.player.gold -= prices.get(item.getName());
+        shopInventory.removeItem(item);
+        game.player.gold -= prices.get(item.name);
 //        game.player.saveEquipment(equipment.getItems(), inventory.getItems());
     }
 
@@ -193,7 +194,7 @@ public class ShopScreen extends TwilightEternalScreen implements Screen {
             }
 
             final Item item = slot.getItem();
-            item.setDescription(item.getDescription() + " - " + prices.get(item.getName()) + " Gold");
+            item.description = item.description + " - " + prices.get(item.name) + " Gold";
         }
 
     }
