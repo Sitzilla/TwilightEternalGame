@@ -10,7 +10,8 @@ import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable;
 import com.evansitzes.game.Configuration;
 import com.evansitzes.game.entity.team.Player;
 import com.evansitzes.game.helpers.LevelCalculator;
-import com.evansitzes.game.helpers.Textures;
+import com.evansitzes.game.helpers.Textures.Colors;
+import com.evansitzes.game.helpers.Textures.People;
 
 public class CharacterSheet extends Table {
 
@@ -24,10 +25,10 @@ public class CharacterSheet extends Table {
         this.setVisible(true);
 //        this.setDebug(true);
 
-        this.background(new TextureRegionDrawable(Textures.Colors.GREY));
+        this.background(new TextureRegionDrawable(Colors.GREY));
 
         final Image profilePicture = new Image();
-        profilePicture.setDrawable(new TextureRegionDrawable(Textures.People.PLAYER_PORTRAIT));
+        profilePicture.setDrawable(new TextureRegionDrawable(People.PLAYER_PORTRAIT));
         this.add(profilePicture).maxSize(250);
 
         final Table summaryTable = new Table();

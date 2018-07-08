@@ -34,7 +34,10 @@ public class CurrentStuff {
             if (slots.get(i).getItem() == null) {
                 continue;
             }
-            currentItems.add(slots.get(i).getItem().name);
+
+            for (int j = 0; j < slots.get(i).getAmount(); j++) {
+                currentItems.add(slots.get(i).getItem().name);
+            }
         }
 
         return currentItems;
@@ -42,7 +45,7 @@ public class CurrentStuff {
 
     public void removeItem(final Item item) {
         for (final Slot slot : slots) {
-            if (slot.getItem() != null && slot.getItem().name == item.name) {
+            if (slot.getItem() != null && slot.getItem().name.equals(item.name)) {
                 slot.take(1);
             }
         }

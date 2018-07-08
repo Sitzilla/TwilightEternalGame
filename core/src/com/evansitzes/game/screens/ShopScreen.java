@@ -64,7 +64,7 @@ public class ShopScreen extends TwilightEternalScreen implements Screen {
 //        totalBarWidth = 100;
 
         shopInventory = new CurrentInventory(SIZE_OF_SHOP_INVENTORY);
-        shopInventory.populateInventory(YamlParser.loadNpcConfiguration(merchantName).getInventory());
+        shopInventory.populateInventory(YamlParser.loadNpcConfiguration(merchantName).getCurrent_inventory());
         updateItemDescription(shopInventory);
 
         font = new BitmapFont();
@@ -114,6 +114,8 @@ public class ShopScreen extends TwilightEternalScreen implements Screen {
 
         // exit the inventory when spacebar key is pressed
         if (Gdx.input.isKeyPressed(Keys.SPACE)) {
+            game.player.inventory = inventory.getItems();
+//            game.player.equi = inventory.getItems();
             gameflowController.setGameScreen();
         }
 
@@ -177,9 +179,9 @@ public class ShopScreen extends TwilightEternalScreen implements Screen {
 
     }
 
-//    private static ArrayList<String> getInventory(final String merchantName) {
+//    private static ArrayList<String> getCurrent_inventory(final String merchantName) {
 //        final ArrayList<String> inventory = new ArrayList<String>();
-//        YamlParser.loadNpcConfiguration(merchantName).getInventory();
+//        YamlParser.loadNpcConfiguration(merchantName).getCurrent_inventory();
 //        inventory.add("Apple");
 //        inventory.add("Bone");
 //        inventory.add("Veggies");

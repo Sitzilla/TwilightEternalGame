@@ -22,7 +22,7 @@ public class CurrentInventory extends CurrentStuff {
     }
 
     public void populateInventory(final ArrayList<String> equipment) {
-        for (String item : equipment) {
+        for (final String item : equipment) {
             final Article article = articlesEnvelope.getArticle(item);
             final Item singleItem = new Item(article.getName(), ItemTypeParser.parse(article), article.getDescription(), article.isCombinable());
             store(singleItem, 1);

@@ -15,7 +15,10 @@ public class NpcConfiguration {
     private String sprite;
 
     @JsonProperty
-    private ArrayList<String> inventory;
+    private ArrayList<String> default_inventory;
+
+    @JsonProperty
+    private ArrayList<String> current_inventory;
 
     public String getTag() {
         return tag;
@@ -41,12 +44,20 @@ public class NpcConfiguration {
         this.sprite = sprite;
     }
 
-    public ArrayList<String> getInventory() {
-        return inventory;
+    public ArrayList<String> getDefault_inventory() {
+        return default_inventory;
     }
 
-    public void setInventory(final ArrayList<String> inventory) {
-        this.inventory = inventory;
+    public void setDefault_inventory(ArrayList<String> default_inventory) {
+        this.default_inventory = default_inventory;
+    }
+
+    public ArrayList<String> getCurrent_inventory() {
+        return current_inventory;
+    }
+
+    public void setCurrent_inventory(final ArrayList<String> current_inventory) {
+        this.current_inventory = current_inventory;
     }
 
     @Override
@@ -55,7 +66,8 @@ public class NpcConfiguration {
                 "tag='" + tag + '\'' +
                 ", text='" + text + '\'' +
                 ", sprite='" + sprite + '\'' +
-                ", inventory=" + inventory +
+                ", default_inventory=" + default_inventory +
+                ", current_inventory=" + current_inventory +
                 '}';
     }
 }

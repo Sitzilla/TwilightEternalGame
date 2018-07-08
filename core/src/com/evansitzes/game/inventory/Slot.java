@@ -26,7 +26,7 @@ public class Slot {
     }
 
     public boolean add(final Item item, final int amount) {
-        if (this.item == null || (this.item.name == item.name && item.isCombinable)) {
+        if (this.item == null || (this.item.name.equals(item.name) && item.isCombinable)) {
             this.item = item;
             this.amount += amount;
             notifyListeners();

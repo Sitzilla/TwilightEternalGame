@@ -6,15 +6,23 @@ npc_configurations:
 - tag: "town_merchant"
   text: "Care to take a look at my wares?"
   sprite: "merchant"
-  inventory:
-  - "Apple"
-  - "Apple"
-  - "Apple"
-  - "Apple"
+  default_inventory:
+    - "Apple"
+    - "Apple"
+    - "Apple"
+    - "Apple"
+  current_inventory:
+    - "Apple"
+    - "Apple"
+    - "Apple"
+    - "Apple"
 - tag: "town_blacksmith"
   text: "I've got some pretty good pieces if you want to take a look."
   sprite: "blacksmith"
-  inventory:
+  default_inventory:
+    - "iron_sword"
+    - "iron_helmet"
+  current_inventory:
     - "iron_sword"
     - "iron_helmet"
 - tag: "town_villager"

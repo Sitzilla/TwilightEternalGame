@@ -33,6 +33,6 @@ public class Configuration {
     public static final int NPC_CONVERSATION_RECTANGLE_HEIGHT = 70;
 
     // Debug
-    public static final boolean DEBUG = false;
+    public static final boolean DEBUG = true;
 
 }

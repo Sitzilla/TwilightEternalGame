@@ -124,18 +124,16 @@ public class InventoryScreen extends TwilightEternalScreen implements Screen {
         health.draw(game.batch, 400, 270, width, 10);
 
         // Draw Stats
-//        font.draw(game.batch, "Strength:", 450, 220);
-//        font.draw(game.batch, "Dexterity:", 450, 195);
-//        font.draw(game.batch, "Constitution:", 450, 170);
-//        font.draw(game.batch, "Wisdom:", 450, 145);
-//        font.draw(game.batch, "Intelligence:", 450, 120);
-//        font.draw(game.batch, "Charisma:", 450, 95);
-//        font.draw(game.batch, String.valueOf(game.player.totalStrength), 535, 220);
-//        font.draw(game.batch, String.valueOf(game.player.totalDexterity), 535, 195);
-//        font.draw(game.batch, String.valueOf(game.player.totalConstitution), 535, 170);
-//        font.draw(game.batch, String.valueOf(game.player.totalWisdom), 535, 145);
-//        font.draw(game.batch, String.valueOf(game.player.totalIntelligence), 535, 120);
-//        font.draw(game.batch, String.valueOf(game.player.totalCharisma), 535, 95);
+        font.draw(game.batch, "Strength:", 450, 220);
+        font.draw(game.batch, "Speed:", 450, 195);
+        font.draw(game.batch, "Intelligence:", 450, 170);
+        font.draw(game.batch, "Armor:", 450, 145);
+        font.draw(game.batch, "Resistance:", 450, 120);
+        font.draw(game.batch, String.valueOf(game.player.totalStrength), 535, 220);
+        font.draw(game.batch, String.valueOf(game.player.totalSpeed), 535, 195);
+        font.draw(game.batch, String.valueOf(game.player.totalIntelligence  ), 535, 170);
+        font.draw(game.batch, String.valueOf(game.player.totalArmor), 535, 145);
+        font.draw(game.batch, String.valueOf(game.player.totalResistance), 535, 120);
 
 
         font.draw(game.batch, "Press spacebar to exit", 300, 0);
