@@ -2,10 +2,7 @@ package com.evansitzes.game.entity.events;
 
 import com.evansitzes.game.entity.Entity;
 import com.evansitzes.game.entity.enemy.Enemy;
-import com.evansitzes.game.entity.environment.ConversationZone;
-import com.evansitzes.game.entity.environment.Landing;
-import com.evansitzes.game.entity.environment.Portal;
-import com.evansitzes.game.entity.environment.Wall;
+import com.evansitzes.game.entity.environment.*;
 import com.evansitzes.game.entity.npc.Npc;
 import com.evansitzes.game.screens.GameScreen;
 
@@ -47,6 +44,9 @@ public class EntityCreationEvent extends Event {
             gameScreen.getLandings().add((Landing) entity);
         } else if (entity instanceof ConversationZone) {
             gameScreen.getConversationZones().add((ConversationZone) entity);
+        } else if (entity instanceof EnvironmentItem) {
+            gameScreen.getObstructables().add(entity);
+            gameScreen.getEnvironmentItems().add((EnvironmentItem) entity);
         }
     }
 }

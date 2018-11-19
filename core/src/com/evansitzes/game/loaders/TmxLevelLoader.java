@@ -129,7 +129,13 @@ public class TmxLevelLoader {
                 entityParameters.put("path", ENVIRONMENT_ENTITIES_PATH);
 
                 createEntityAndAddToLevel(game, level, entityParameters, object, gameScreen);
+            } else if (type.equals("environment-item")) {
+                entityParameters.put("name", "EnvironmentItem");
+                entityParameters.put("path", ENVIRONMENT_ENTITIES_PATH);
+
+                createEntityAndAddToLevel(game, level, entityParameters, object, gameScreen);
             }
+
         }
 
         return level;

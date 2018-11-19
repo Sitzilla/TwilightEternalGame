@@ -79,6 +79,10 @@ public class Item {
             return Items.VEGGIES;
         }
 
+        if (name.equals("red-potion")) {
+            return Items.RED_POTION;
+        }
+
         return Items.BLANK;
     }
 }

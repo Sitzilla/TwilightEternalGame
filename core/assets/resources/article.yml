@@ -63,3 +63,7 @@ articles:
   item_type: "weapon"
   combinable: false
   attributes: {"strength": 1, "speed": 0, "intelligence": 0, "hitPoints": 0, "magicPoints": 0, "armor": 0, "resistance": 0}
+- name: "red-potion"
+  description: "Life healing elixer"
+  item_type: "general"
+  combinable: true

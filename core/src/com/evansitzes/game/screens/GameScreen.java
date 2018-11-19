@@ -18,16 +18,16 @@ import com.evansitzes.game.*;
 import com.evansitzes.game.conversation.Conversation;
 import com.evansitzes.game.entity.Entity;
 import com.evansitzes.game.entity.enemy.Enemy;
-import com.evansitzes.game.entity.environment.ConversationZone;
-import com.evansitzes.game.entity.environment.Landing;
-import com.evansitzes.game.entity.environment.Portal;
-import com.evansitzes.game.entity.environment.Wall;
+import com.evansitzes.game.entity.environment.*;
 import com.evansitzes.game.entity.npc.Guard;
 import com.evansitzes.game.entity.npc.Merchant;
 import com.evansitzes.game.entity.npc.Npc;
 import com.evansitzes.game.entity.npc.Villager;
 import com.evansitzes.game.helpers.DirectionEnum;
 import com.evansitzes.game.helpers.DrawUtils;
+import com.evansitzes.game.inventory.CurrentInventory;
+import com.evansitzes.game.inventory.InventoryTypeEnum;
+import com.evansitzes.game.inventory.Item;
 import com.evansitzes.game.loaders.TmxLevelLoader;
 import com.evansitzes.game.physics.CollisionHelper;
 import com.evansitzes.game.popups.CharacterSheet;
@@ -62,6 +62,7 @@ public class GameScreen extends TwilightEternalScreen implements Screen, InputPr
     private final Array<Entity> obstructables = new Array();
     private final Array<Enemy> enemies = new Array();
     private final Array<Npc> npcs = new Array();
+    private final Array<EnvironmentItem> environmentItems = new Array();
     private final Array<Wall> walls = new Array();
     private final Array<Portal> portals = new Array();
     private final Array<Landing> landings = new Array();
@@ -179,6 +180,11 @@ public class GameScreen extends TwilightEternalScreen implements Screen, InputPr
                 for (final Npc npc : npcs) {
                     npc.draw();
                 }
+
+                for (final EnvironmentItem item : environmentItems) {
+                    item.draw();
+                }
+
 
                 drawCollisionLayer();
 
@@ -412,6 +418,41 @@ public class GameScreen extends TwilightEternalScreen implements Screen, InputPr
         }
     }
 
+    private void handleEnvironementItems() {
+        if (environmentItems.size == 0) {
+            return;
+        }
+
+        final Iterator<EnvironmentItem> itemIterator = environmentItems.iterator();
+
+        while(itemIterator.hasNext()) {
+            final EnvironmentItem item = itemIterator.next();
+
+            if (item.overlapsPickupZone(game.player)) {
+                System.out.println("PICKUP ITEM");
+                final CurrentInventory inventory = new CurrentInventory(25);;
+                inventory.populateInventory(game.player.inventory);
+
+                final Item newItem = new Item("red-potion", InventoryTypeEnum.GENERAL, "Healing potion", true);
+                inventory.store(newItem, 1);
+                game.player.inventory = inventory.getItems();
+
+                itemIterator.remove();
+
+                final Iterator<Entity> obstructableIterator = obstructables.iterator();
+                    while(obstructableIterator.hasNext()) {
+                        final Entity obstructable = obstructableIterator.next();
+
+                        if (obstructable == item) {
+                            obstructableIterator.remove();
+                            return;
+                        }
+                }
+                return;
+            }
+        }
+    }
+
     private void handleConversationZone() {
         if(conversationZones.size == 0) { return; }
 
@@ -531,6 +572,7 @@ public class GameScreen extends TwilightEternalScreen implements Screen, InputPr
         if (keycode == Input.Keys.SPACE || keycode == Input.Keys.ENTER) {
             removePopupActors();
             handleNpc();
+            handleEnvironementItems();
             handleConversationZone();
         }
 
@@ -668,5 +710,9 @@ public class GameScreen extends TwilightEternalScreen implements Screen, InputPr
 
     public Array<ConversationZone> getConversationZones() {
         return conversationZones;
+    }
+
+    public Array<EnvironmentItem> getEnvironmentItems() {
+        return environmentItems;
     }
 }
