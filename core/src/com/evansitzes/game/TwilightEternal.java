@@ -40,8 +40,8 @@ public class TwilightEternal extends Game {
 
         gameflowController = new GameflowController(this);
 //        gameflowController.setBattleScreen();
-        gameflowController.setGameScreen();
-//        gameflowController.setInventoryScreen();
+//        gameflowController.setGameScreen();
+        gameflowController.setInventoryScreen();
 //        gameflowController.setTitleScreen();
 //        gameflowController.setShopScreen();
     }

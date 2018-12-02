@@ -253,13 +253,20 @@ public class Textures {
         public static final TextureRegion APPLE = loadItems()[0][10];
         public static final TextureRegion BONE = loadItems()[1][12];
         public static final TextureRegion VEGGIES = loadItems()[0][9];
-        public static final TextureRegion RED_POTION = loadItems()[10][11];
+        public static final TextureRegion RED_POTION = loadRetroItems("retro_items_pack/potions/red_potion.png")[0][0];
 
         private static TextureRegion[][] loadItems() {
             final int frameColumns = 16;
             final int frameRows = 16;
 
             return splitTextureRegion(frameColumns, frameRows, new Texture(Gdx.files.internal("icons/items.jpg")));
+        }
+
+        private static TextureRegion[][] loadRetroItems(final String filepath) {
+            final int frameColumns = 1;
+            final int frameRows = 1;
+
+            return splitTextureRegion(frameColumns, frameRows, new Texture(Gdx.files.internal(filepath)));
         }
 
         private static TextureRegion[][] loadPotions() {
