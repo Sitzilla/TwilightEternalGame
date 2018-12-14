@@ -25,10 +25,12 @@ import com.evansitzes.game.entity.npc.Npc;
 import com.evansitzes.game.entity.npc.Villager;
 import com.evansitzes.game.helpers.DirectionEnum;
 import com.evansitzes.game.helpers.DrawUtils;
+import com.evansitzes.game.helpers.YamlParser;
 import com.evansitzes.game.inventory.CurrentInventory;
-import com.evansitzes.game.inventory.InventoryTypeEnum;
 import com.evansitzes.game.inventory.Item;
 import com.evansitzes.game.loaders.TmxLevelLoader;
+import com.evansitzes.game.model.Article;
+import com.evansitzes.game.model.ArticlesEnvelope;
 import com.evansitzes.game.physics.CollisionHelper;
 import com.evansitzes.game.popups.CharacterSheet;
 import com.evansitzes.game.popups.LevelUpDisplay;
@@ -433,7 +435,12 @@ public class GameScreen extends TwilightEternalScreen implements Screen, InputPr
                 final CurrentInventory inventory = new CurrentInventory(25);;
                 inventory.populateInventory(game.player.inventory);
 
-                final Item newItem = new Item("red-potion", InventoryTypeEnum.GENERAL, "Healing potion", true);
+                //TODO this should be a static lookup
+                final ArticlesEnvelope articlesEnvelope = new YamlParser().loadItemMap();
+                final Article article = articlesEnvelope.getArticle(item.name);
+
+                final Item newItem = new Item(article);
+//                final Item newItem = new Item("red-potion", InventoryTypeEnum.GENERAL, "Healing potion", true, new HashMap<String, Integer>());
                 inventory.store(newItem, 1);
                 game.player.inventory = inventory.getItems();
 

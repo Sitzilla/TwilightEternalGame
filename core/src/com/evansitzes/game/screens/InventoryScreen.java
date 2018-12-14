@@ -149,15 +149,15 @@ public class InventoryScreen extends TwilightEternalScreen implements Screen {
 
     @Override
     public void doubleClickItem(final SlotActor slotActor) {
-        if (slotActor.getSlot().getItem() == null) {
+        final Item clickedItem = slotActor.getSlot().getItem();
+        if (clickedItem == null) {
             return;
         }
 
-        //TODO wtf is this hardcoded?II
-        if (slotActor.getSlot().getItem().name.equals("Apple")) {
+        if (clickedItem.consumable != null) {
             Sounds.BOTTLE.play();
-            game.player.restoreLife(20);
-            inventory.removeItem(slotActor.getSlot().getItem());
+            game.player.restoreLife(clickedItem.consumable.get("heal"));
+            inventory.removeItem(clickedItem);
             return;
         }
 
@@ -168,20 +168,18 @@ public class InventoryScreen extends TwilightEternalScreen implements Screen {
                 return;
             }
 
-            final Slot targetEquipmentSlot = equipment.getEquipmentSlotOfSpecificType(slotActor.getSlot().getItem().inventoryType);
+            final Slot targetEquipmentSlot = equipment.getEquipmentSlotOfSpecificType(clickedItem.inventoryType);
 
             if (targetEquipmentSlot.getItem() == null) {
-                final Item item = slotActor.getSlot().getItem();
-                PlayerStatsHelper.addPlayerEquipment(game.player, item);
-                inventory.removeItem(item);
-                equipment.addItem(item);
+                PlayerStatsHelper.addPlayerEquipment(game.player, clickedItem);
+                inventory.removeItem(clickedItem);
+                equipment.addItem(clickedItem);
             } else {
-                final Item item = slotActor.getSlot().getItem();
-                PlayerStatsHelper.switchPlayerEquipment(game.player, targetEquipmentSlot.getItem(), item);
-                inventory.removeItem(item);
+                PlayerStatsHelper.switchPlayerEquipment(game.player, targetEquipmentSlot.getItem(), clickedItem);
+                inventory.removeItem(clickedItem);
                 inventory.store(targetEquipmentSlot.getItem(), 1);
                 equipment.removeItem(targetEquipmentSlot.getItem());
-                equipment.addItem(item);
+                equipment.addItem(clickedItem);
             }
 
         }

@@ -2,7 +2,6 @@ package com.evansitzes.game.inventory;
 
 import com.badlogic.gdx.utils.Array;
 import com.evansitzes.game.exceptions.ItemDoesntExistException;
-import com.evansitzes.game.helpers.ItemTypeParser;
 import com.evansitzes.game.helpers.YamlParser;
 import com.evansitzes.game.model.Article;
 
@@ -27,24 +26,24 @@ public class CurrentEquipment extends CurrentStuff {
     public void populateEquipment(final Map<String, String> equipment) {
         if (equipment.get("helmet") != null) {
             final Article article =  articlesEnvelope.getArticle(equipment.get("helmet"));
-            slots.get(0).add(new Item(article.getName(), ItemTypeParser.parse(article), article.getDescription(), article.isCombinable()), 1);
+            slots.get(0).add(new Item(article), 1);
         }
 
         if (equipment.get("armor") != null) {
             final Article article =  articlesEnvelope.getArticle(equipment.get("armor"));
-            slots.get(1).add(new Item(article.getName(), ItemTypeParser.parse(article), article.getDescription(), article.isCombinable()), 1);
+            slots.get(1).add(new Item(article), 1);
         }
         if (equipment.get("weapon") != null) {
             final Article article =  articlesEnvelope.getArticle(equipment.get("weapon"));
-            slots.get(2).add(new Item(article.getName(), ItemTypeParser.parse(article), article.getDescription(), article.isCombinable()), 1);
+            slots.get(2).add(new Item(article), 1);
         }
         if (equipment.get("pants") != null) {
             final Article article =  articlesEnvelope.getArticle(equipment.get("pants"));
-            slots.get(3).add(new Item(article.getName(), ItemTypeParser.parse(article), article.getDescription(), article.isCombinable()), 1);
+            slots.get(3).add(new Item(article), 1);
         }
         if (equipment.get("shoes") != null) {
             final Article article =  articlesEnvelope.getArticle(equipment.get("shoes"));
-            slots.get(4).add(new Item(article.getName(), ItemTypeParser.parse(article), article.getDescription(), article.isCombinable()), 1);
+            slots.get(4).add(new Item(article), 1);
         }
     }
 

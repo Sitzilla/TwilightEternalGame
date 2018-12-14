@@ -14,6 +14,9 @@ public class Article {
     @JsonProperty
     private String description;
 
+    @JsonProperty
+    private HashMap<String, Integer> consumable;
+
     @JsonProperty("item_type")
     private String itemType;
 
@@ -40,6 +43,14 @@ public class Article {
 
     public void setDescription(final String description) {
         this.description = description;
+    }
+
+    public HashMap<String, Integer> getConsumable() {
+        return consumable;
+    }
+
+    public void setConsumable(HashMap<String, Integer> consumable) {
+        this.consumable = consumable;
     }
 
     public String getItemType() {
@@ -71,6 +82,7 @@ public class Article {
         return "Article{" +
                 "name='" + name + '\'' +
                 ", description='" + description + '\'' +
+                ", consumable=" + consumable +
                 ", itemType='" + itemType + '\'' +
                 ", attributes=" + attributes +
                 ", combinable=" + combinable +

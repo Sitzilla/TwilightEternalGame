@@ -1,7 +1,6 @@
 package com.evansitzes.game.inventory;
 
 import com.badlogic.gdx.utils.Array;
-import com.evansitzes.game.helpers.ItemTypeParser;
 import com.evansitzes.game.helpers.YamlParser;
 import com.evansitzes.game.model.Article;
 
@@ -24,7 +23,7 @@ public class CurrentInventory extends CurrentStuff {
     public void populateInventory(final ArrayList<String> equipment) {
         for (final String item : equipment) {
             final Article article = articlesEnvelope.getArticle(item);
-            final Item singleItem = new Item(article.getName(), ItemTypeParser.parse(article), article.getDescription(), article.isCombinable());
+            final Item singleItem = new Item(article);
             store(singleItem, 1);
         }
 

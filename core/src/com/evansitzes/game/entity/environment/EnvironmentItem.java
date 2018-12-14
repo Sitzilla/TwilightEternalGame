@@ -1,25 +1,21 @@
 package com.evansitzes.game.entity.environment;
 
 import com.badlogic.gdx.graphics.Color;
-import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.math.Rectangle;
 import com.evansitzes.game.Configuration;
 import com.evansitzes.game.TwilightEternal;
 import com.evansitzes.game.entity.Entity;
 import com.evansitzes.game.helpers.DrawUtils;
-import com.evansitzes.game.helpers.Textures.Items;
 
 import static com.evansitzes.game.Configuration.ITEM_CAMPAIGN_SIZE;
 
 public class EnvironmentItem extends Entity {
 
     public final TwilightEternal game;
-    public final Sprite sprite;
     public final Rectangle pickupZoneRectangle;
 
     public EnvironmentItem(final TwilightEternal game) {
         super(game);
-        this.sprite = new Sprite(Items.RED_POTION);
         this.game = game;
         this.pickupZoneRectangle = new Rectangle();
     }

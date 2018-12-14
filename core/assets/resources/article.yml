@@ -52,10 +52,12 @@ articles:
   attributes: {"strength": 3, "speed": 0, "intelligence": 0, "hitPoints": 0, "magicPoints": 0, "armor": 0, "resistance": 0}
 - name: "Apple"
   description: "Tasty treat (restore 20 HP) \n *Double-click to consume*"
+  consumable: {"heal": 35}
   item_type: "food"
   combinable: true
 - name: "Veggies"
   description: "Cooking Ingredients"
+  consumable: {"heal": 3}
   item_type: "general"
   combinable: true
 - name: "Bone"
@@ -65,5 +67,6 @@ articles:
   attributes: {"strength": 1, "speed": 0, "intelligence": 0, "hitPoints": 0, "magicPoints": 0, "armor": 0, "resistance": 0}
 - name: "red-potion"
   description: "Life healing elixer"
+  consumable: {"heal": 35}
   item_type: "general"
   combinable: true
