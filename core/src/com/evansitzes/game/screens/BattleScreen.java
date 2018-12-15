@@ -6,7 +6,6 @@ import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.NinePatch;
-import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.maps.tiled.TiledMapRenderer;
 import com.badlogic.gdx.maps.tiled.renderers.OrthogonalTiledMapRenderer;
 import com.badlogic.gdx.math.Vector2;
@@ -22,11 +21,12 @@ import com.evansitzes.game.battle.BattleChoiceEnum;
 import com.evansitzes.game.battle.BattleInterface;
 import com.evansitzes.game.battle.BattleInterfaceSelection;
 import com.evansitzes.game.battle.BattleStatus;
+import com.evansitzes.game.component.StatsBar;
 import com.evansitzes.game.entity.Entity;
 import com.evansitzes.game.entity.enemy.Enemy;
 import com.evansitzes.game.helpers.DamageCalculator;
 import com.evansitzes.game.helpers.ExperienceCalculator;
-import com.evansitzes.game.helpers.Textures;
+import com.evansitzes.game.helpers.Textures.Stats;
 import com.evansitzes.game.loaders.BattleLevelLoader;
 
 import java.util.*;
@@ -50,14 +50,11 @@ public class BattleScreen extends TwilightEternalScreen implements Screen {
     private boolean isPlayerMidSelection;
     private boolean endBattle;
 
-    private final NinePatch health;
-    private final NinePatch container;
     private final NinePatch enemySelector;
-    private float width;
-    private final int totalBarWidth;
-    private final TextureRegion gradient;
-    private final TextureRegion containerRegion;
     private final BitmapFont font;
+
+    private final StatsBar lifeBar;
+    private final StatsBar manaBar;
 
     private final TiledMapRenderer tiledMapRenderer;
 
@@ -92,16 +89,12 @@ public class BattleScreen extends TwilightEternalScreen implements Screen {
         camera.position.set(320, 240, 0);
         camera.update();
 
-        // TODO abstract out healthbar
-        gradient = Textures.Life.LIFE_BAR;
-        containerRegion = Textures.Life.LIFE_BAR_CONTAINER;
-        health = new NinePatch(gradient, 0, 0, 0, 0);
-        container = new NinePatch(containerRegion, 5, 5, 2, 2);
+        this.lifeBar = new StatsBar(Stats.LIFE_BAR, 100, "life");
+        this.manaBar = new StatsBar(Stats.MANA_BAR, 100, "mana");
 
         // TODO make this an arrow
-        enemySelector = new NinePatch(gradient, 0, 0, 0, 0);
+        enemySelector = new NinePatch(Stats.LIFE_BAR, 0, 0, 0, 0);
 
-        totalBarWidth = 100;
         font = new BitmapFont();
 
         stage = new Stage();
@@ -139,7 +132,9 @@ public class BattleScreen extends TwilightEternalScreen implements Screen {
         tiledMapRenderer.setView(camera);
         tiledMapRenderer.render();
         game.batch.setProjectionMatrix(camera.combined);
-        width = game.player.currentHitPoints / game.player.totalHitPoints * totalBarWidth;
+
+        lifeBar.setWidth(game.player.currentHitPoints, game.player.totalHitPoints);
+        manaBar.setWidth(game.player.currentMagicPoints, game.player.totalMagicPoints);
 
         game.batch.begin();
 
@@ -148,9 +143,12 @@ public class BattleScreen extends TwilightEternalScreen implements Screen {
         }
         game.player.draw();
 
-        font.draw(game.batch, "Current life: " + game.player.currentHitPoints + "/" + game.player.totalHitPoints, 490, 145);
-        container.draw(game.batch, 505, 110, totalBarWidth + 10, 20);
-        health.draw(game.batch, 510, 115, width, 10);
+//        font.draw(game.batch, "Current life: " + game.player.currentHitPoints + "/" + game.player.totalHitPoints, 490, 145);
+//        container.draw(game.batch, 505, 110, totalBarWidth + 10, 20);
+//        health.draw(game.batch, 510, 115, width, 10);
+
+        lifeBar.draw(game, 530, 190);
+        manaBar.draw(game, 530, 150);
 
         if (battleInterface.pollHover() == BattleChoiceEnum.ATTACK) {
             final Enemy enemy = liveEnemies.get(battleInterface.getCurrentChoiceIndex());
@@ -282,6 +280,10 @@ public class BattleScreen extends TwilightEternalScreen implements Screen {
 
         if (nextChoice == BattleChoiceEnum.SELECT_MAGIC) {
             final List<BattleInterfaceSelection> battleInterfaceSelections = new ArrayList<BattleInterfaceSelection>();
+
+            //TODO implement magik
+            updateBattleStatus("Preparing to cast spell.\n");
+            game.player.currentMagicPoints--;
 
             battleInterfaceSelections.add(new BattleInterfaceSelection("Fire", BattleChoiceEnum.SELECT_TARGET));
             battleInterfaceSelections.add(new BattleInterfaceSelection("Ice", BattleChoiceEnum.SELECT_TARGET));

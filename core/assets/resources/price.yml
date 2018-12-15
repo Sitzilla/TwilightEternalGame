@@ -1,27 +1,31 @@
 ---
 prices:
 - name: "bronze_helmet"
-  cost: 20
+  cost: 40
 - name: "bronze_armor"
-  cost: 40
+  cost: 80
 - name: "bronze_pants"
-  cost: 30
+  cost: 60
 - name: "bronze_boots"
-  cost: 15
-- name: "bronze_sword"
-  cost: 25
-- name: "iron_helmet"
   cost: 30
-- name: "iron_armor"
+- name: "bronze_sword"
   cost: 50
+- name: "iron_helmet"
+  cost: 60
+- name: "iron_armor"
+  cost: 100
 - name: "iron_pants"
-  cost: 40
+  cost: 80
 - name: "iron_boots"
-  cost: 25
+  cost: 50
 - name: "iron_sword"
-  cost: 35
+  cost: 70
+- name: "red-potion"
+  cost: 40
+- name: "blue-potion"
+  cost: 50
 - name: "Apple"
-  cost: 15
+  cost: 20
 - name: "Veggies"
   cost: 5
 - name: "Bone"

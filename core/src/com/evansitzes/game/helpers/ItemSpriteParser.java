@@ -1,66 +1,71 @@
 package com.evansitzes.game.helpers;
 
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
+import com.evansitzes.game.helpers.Textures.Items;
 
 public class ItemSpriteParser {
 
     public static TextureRegion parse(final String name) {
         if (name.equals("bronze_helmet")) {
-            return Textures.Items.BRONZE_HELMET;
+            return Items.BRONZE_HELMET;
         }
 
         if (name.equals("bronze_armor")) {
-            return Textures.Items.BRONZE_ARMOR;
+            return Items.BRONZE_ARMOR;
         }
 
         if (name.equals("bronze_pants")) {
-            return Textures.Items.BRONZE_PANTS;
+            return Items.BRONZE_PANTS;
         }
 
         if (name.equals("bronze_boots")) {
-            return Textures.Items.BRONZE_BOOTS;
+            return Items.BRONZE_BOOTS;
         }
 
         if (name.equals("bronze_sword")) {
-            return Textures.Items.BRONZE_SWORD;
+            return Items.BRONZE_SWORD;
         }
 
         if (name.equals("iron_helmet")) {
-            return Textures.Items.IRON_HELMET;
+            return Items.IRON_HELMET;
         }
 
         if (name.equals("iron_armor")) {
-            return Textures.Items.IRON_ARMOR;
+            return Items.IRON_ARMOR;
         }
 
         if (name.equals("iron_pants")) {
-            return Textures.Items.IRON_PANTS;
+            return Items.IRON_PANTS;
         }
 
         if (name.equals("iron_boots")) {
-            return Textures.Items.IRON_BOOTS;
+            return Items.IRON_BOOTS;
         }
 
         if (name.equals("iron_sword")) {
-            return Textures.Items.IRON_SWORD;
+            return Items.IRON_SWORD;
         }
 
         if (name.equals("Apple")) {
-            return Textures.Items.APPLE;
+            return Items.APPLE;
         }
 
         if (name.equals("Bone")) {
-            return Textures.Items.BONE;
+            return Items.BONE;
         }
 
         if (name.equals("Veggies")) {
-            return Textures.Items.VEGGIES;
+            return Items.VEGGIES;
         }
 
         if (name.equals("red-potion")) {
-            return Textures.Items.RED_POTION;
+            return Items.RED_POTION;
         }
 
-        return Textures.Items.BLANK;
+        if (name.equals("blue-potion")) {
+            return Items.BLUE_POTION;
+        }
+
+        return Items.BLANK;
     }
 }

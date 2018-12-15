@@ -201,15 +201,23 @@ public class Textures {
         }
     }
 
-    public static class Life {
+    public static class Stats {
         public static final TextureRegion LIFE_BAR = loadLife()[0][0];
-        public static final TextureRegion LIFE_BAR_CONTAINER = loadLifeContainer()[0][0];
+        public static final TextureRegion MANA_BAR = loadMana()[0][0];
+        public static final TextureRegion STATS_BAR_CONTAINER = loadLifeContainer()[0][0];
 
         private static TextureRegion[][] loadLife() {
             final int frameColumns = 1;
             final int frameRows = 1;
 
             return splitTextureRegion(frameColumns, frameRows, new Texture(Gdx.files.internal("colors/red.png")));
+        }
+
+        private static TextureRegion[][] loadMana() {
+            final int frameColumns = 1;
+            final int frameRows = 1;
+
+            return splitTextureRegion(frameColumns, frameRows, new Texture(Gdx.files.internal("colors/blue.png")));
         }
 
         private static TextureRegion[][] loadLifeContainer() {
@@ -254,6 +262,7 @@ public class Textures {
         public static final TextureRegion BONE = loadItems()[1][12];
         public static final TextureRegion VEGGIES = loadItems()[0][9];
         public static final TextureRegion RED_POTION = loadRetroItems("retro_items_pack/potions/red_potion.png")[0][0];
+        public static final TextureRegion BLUE_POTION = loadRetroItems("retro_items_pack/potions/blue_potion.png")[0][0];
 
         private static TextureRegion[][] loadItems() {
             final int frameColumns = 16;

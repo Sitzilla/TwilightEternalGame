@@ -15,7 +15,7 @@ import com.evansitzes.game.GameflowController;
 import com.evansitzes.game.TwilightEternal;
 import com.evansitzes.game.entity.sprites.InventorySprite;
 import com.evansitzes.game.helpers.Sounds;
-import com.evansitzes.game.helpers.Textures.Life;
+import com.evansitzes.game.helpers.Textures.Stats;
 import com.evansitzes.game.helpers.YamlParser;
 import com.evansitzes.game.inventory.*;
 
@@ -57,11 +57,9 @@ public class ShopScreen extends TwilightEternalScreen implements Screen {
         inventory.populateInventory(game.player.inventory);
         equipment.populateEquipment(game.player.equipment);
 
-        gradient = Life.LIFE_BAR_CONTAINER;
+        gradient = Stats.STATS_BAR_CONTAINER;
 
         divider = new NinePatch(gradient, 0, 0, 0, 0);
-//        container = new NinePatch(containerRegion, 5, 5, 2, 2);
-//        totalBarWidth = 100;
 
         shopInventory = new CurrentInventory(SIZE_OF_SHOP_INVENTORY);
         shopInventory.populateInventory(YamlParser.loadNpcConfiguration(merchantName).getCurrent_inventory());

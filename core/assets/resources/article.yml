@@ -70,3 +70,8 @@ articles:
   consumable: {"heal": 35}
   item_type: "general"
   combinable: true
+- name: "blue-potion"
+  description: "Magic restoring potion"
+  consumable: {"magic-restore": 2}
+  item_type: "general"
+  combinable: true

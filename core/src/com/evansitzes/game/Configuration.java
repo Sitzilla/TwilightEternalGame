@@ -40,6 +40,6 @@ public class Configuration {
     public static final int ITEM_CONVERSATION_RECTANGLE_HEIGHT = 70;
 
     // Debug
-    public static final boolean DEBUG = true;
+    public static final boolean DEBUG = false;
 
 }

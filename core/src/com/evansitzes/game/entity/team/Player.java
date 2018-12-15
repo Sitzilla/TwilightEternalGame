@@ -136,6 +136,14 @@ public class Player extends TeamMember {
         }
     }
 
+    public void restoreMana(final int mana) {
+        currentMagicPoints += mana;
+
+        if (currentMagicPoints > totalMagicPoints) {
+            currentMagicPoints = totalMagicPoints;
+        }
+    }
+
     @Override
     public void draw() {
         battleSprite.draw(game.batch);

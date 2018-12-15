@@ -6,17 +6,16 @@ import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
-import com.badlogic.gdx.graphics.g2d.NinePatch;
-import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.badlogic.gdx.scenes.scene2d.utils.DragAndDrop;
 import com.evansitzes.game.GameflowController;
 import com.evansitzes.game.TwilightEternal;
+import com.evansitzes.game.component.StatsBar;
 import com.evansitzes.game.entity.sprites.InventorySprite;
 import com.evansitzes.game.helpers.PlayerStatsHelper;
 import com.evansitzes.game.helpers.Sounds;
-import com.evansitzes.game.helpers.Textures.Life;
+import com.evansitzes.game.helpers.Textures.Stats;
 import com.evansitzes.game.inventory.*;
 
 import static com.evansitzes.game.inventory.InventoryTypeEnum.*;
@@ -30,31 +29,25 @@ public class InventoryScreen extends TwilightEternalScreen implements Screen {
     private static final int SIZE_OF_EQUIPMENT = 5;
 
     private InventoryActor inventoryActor;
-    private CurrentInventory inventory;
+    private final CurrentInventory inventory;
     private EquipmentActor equipmentActor;
-    private CurrentEquipment equipment;
-    private GameflowController gameflowController;
+    private final CurrentEquipment equipment;
+    private final GameflowController gameflowController;
     public InventorySprite inventorySprite;
     private final OrthographicCamera camera;
-    private NinePatch health;
-    private NinePatch container;
-    private float width;
-    private int totalBarWidth;
-    private TextureRegion gradient;
-    private TextureRegion containerRegion;
-    private BitmapFont font;
+    private final BitmapFont font;
+
+    private final StatsBar lifeBar;
+    private final StatsBar manaBar;
 
     public InventoryScreen(final TwilightEternal game, final GameflowController gameflowController) {
         this.game = game;
         this.gameflowController = gameflowController;
         this.inventorySprite = new InventorySprite(game);
 
-        gradient = Life.LIFE_BAR;
-        containerRegion = Life.LIFE_BAR_CONTAINER;
 
-        health = new NinePatch(gradient, 0, 0, 0, 0);
-        container = new NinePatch(containerRegion, 5, 5, 2, 2);
-        totalBarWidth = 100;
+        this.lifeBar = new StatsBar(Stats.LIFE_BAR, 100, "life");
+        this.manaBar = new StatsBar(Stats.MANA_BAR, 100, "mana");
 
         inventory = new CurrentInventory(SIZE_OF_INVENTORY);
         equipment = new CurrentEquipment(SIZE_OF_EQUIPMENT);
@@ -97,7 +90,8 @@ public class InventoryScreen extends TwilightEternalScreen implements Screen {
         Gdx.gl.glClearColor(0.2f, 0.2f, 0.2f, 0f);
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT | GL20.GL_DEPTH_BUFFER_BIT);
 
-        width = game.player.currentHitPoints / game.player.totalHitPoints * totalBarWidth;
+        lifeBar.setWidth(game.player.currentHitPoints, game.player.totalHitPoints);
+        manaBar.setWidth(game.player.currentMagicPoints, game.player.totalMagicPoints);
 
         // exit the inventory when spacebar key is pressed
         if (Gdx.input.isKeyPressed(Keys.SPACE)
@@ -118,10 +112,9 @@ public class InventoryScreen extends TwilightEternalScreen implements Screen {
         font.draw(game.batch, "Pants:", 50, 360);
         font.draw(game.batch, "Shoes:", 50, 310);
 
-        // Draw life
-        font.draw(game.batch, "Current life:", 400, 300);
-        container.draw(game.batch, 395, 265, totalBarWidth + 10, 20);
-        health.draw(game.batch, 400, 270, width, 10);
+        // Draw stats
+        lifeBar.draw(game, 400, 300);
+        manaBar.draw(game, 400, 260);
 
         // Draw Stats
         font.draw(game.batch, "Strength:", 450, 220);
@@ -156,7 +149,15 @@ public class InventoryScreen extends TwilightEternalScreen implements Screen {
 
         if (clickedItem.consumable != null) {
             Sounds.BOTTLE.play();
-            game.player.restoreLife(clickedItem.consumable.get("heal"));
+
+            if (clickedItem.consumable.get("heal") != null) {
+                game.player.restoreLife(clickedItem.consumable.get("heal"));
+            }
+
+            if (clickedItem.consumable.get("magic-restore") != null) {
+                game.player.restoreMana(clickedItem.consumable.get("magic-restore"));
+            }
+
             inventory.removeItem(clickedItem);
             return;
         }

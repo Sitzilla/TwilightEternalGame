@@ -488,6 +488,7 @@ public class GameScreen extends TwilightEternalScreen implements Screen, InputPr
         obstructables.clear();
         landings.clear();
         conversationZones.clear();
+        environmentItems.clear();
     }
 
     public void setGameState(final State s){
