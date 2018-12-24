@@ -109,6 +109,11 @@ public class TmxLevelLoader {
 
                 final NpcConfiguration configuration = YamlParser.loadNpcConfiguration((String) object.getProperties().get("tag"));
 
+                if (configuration.isWalking()) {
+                    entityParameters.put("walking", (String) object.getProperties().get("walking-state"));
+                    entityParameters.put("walking-width", (String) object.getProperties().get("walking-width"));
+                }
+
                 entityParameters.put("tag", configuration.getTag());
                 entityParameters.put("sprite", configuration.getSprite());
                 entityParameters.put("conversationText", configuration.getText());

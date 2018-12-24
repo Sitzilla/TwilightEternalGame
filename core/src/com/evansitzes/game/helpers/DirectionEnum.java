@@ -1,5 +1,5 @@
 package com.evansitzes.game.helpers;
 
 public enum DirectionEnum {
-    LEFT, RIGHT, UP, DOWN
+    LEFT, RIGHT, UP, DOWN, STANDING
 }

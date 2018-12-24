@@ -6,8 +6,10 @@ import com.evansitzes.game.TwilightEternal;
 import com.evansitzes.game.entity.Entity;
 import com.evansitzes.game.entity.events.EntityCreationEvent;
 import com.evansitzes.game.entity.events.Event;
+import com.evansitzes.game.entity.npc.WalkingNpc;
 import com.evansitzes.game.exceptions.ErrorCreatingEntityException;
 import com.evansitzes.game.helpers.ItemSpriteParser;
+import com.evansitzes.game.helpers.WalkingStateEnum;
 import com.evansitzes.game.screens.GameScreen;
 
 import java.util.HashMap;
@@ -20,7 +22,9 @@ public class GenericObjectReader {
     public static Entity readEntity(final RectangleMapObject object, final TwilightEternal game, final HashMap<String, String> parameters) {
         final String clazz = parameters.get("path") + "." + parameters.get("name");
         try {
-            final Entity entity = (Entity) Class.forName(clazz).getConstructor(TwilightEternal.class).newInstance(game);
+            Entity entity;
+
+            entity = (Entity) Class.forName(clazz).getConstructor(TwilightEternal.class).newInstance(game);
 
             // TODO should probably just loop through dynamically and set the keys
             if (parameters.containsKey("conversationText")) {
@@ -56,6 +60,21 @@ public class GenericObjectReader {
             }
 
             readRectanglePosition(entity, object);
+
+            if (parameters.containsKey("walking")) {
+                final String walkingConfig = parameters.get("walking");
+                final WalkingNpc walkingNpc = (WalkingNpc) entity;
+
+                if ("left-and-right".equals(walkingConfig)) {
+                    walkingNpc.setWalkingState(WalkingStateEnum.WALKING_LEFT_AND_RIGHT);
+                } else if ("up-and-down".equals(walkingConfig)) {
+                    walkingNpc.setWalkingState(WalkingStateEnum.WALKING_UP_AND_DOWN);
+                }
+                walkingNpc.setWalkingWidth(Float.parseFloat(parameters.get("walking-width")));
+
+                return walkingNpc;
+            }
+
             return entity;
         }
         catch (final Exception e) {

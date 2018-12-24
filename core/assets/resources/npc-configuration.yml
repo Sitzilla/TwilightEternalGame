@@ -37,3 +37,7 @@ npc_configurations:
 - tag: "pub_maid"
   text: "Welcome to the Twilight Pub"
   sprite: "maid"
+- tag: "walking-dog"
+  text: "woof woof!"
+  sprite: "walking-dog"
+  walking: true

@@ -112,6 +112,42 @@ public class Textures {
         public static final TextureRegion MERCHANT = loadSpriteSheet(3, 4, "sprites/weird_purple_guy.png")[0][1];
         public static final TextureRegion BLACKSMITH = loadSpriteSheet(12, 8, "sprites/final_fantasy_characters.png")[4][7];
         public static final TextureRegion MAID = loadSpriteSheet(3, 4, "sprites/maid.png")[0][1];
+        public static final TextureRegion DOG = loadSpriteSheet(12, 8, "sprites/animals_dogs.png")[0][1];
+
+        public static final TextureRegion[] WALKING_RIGHT = loadWalkingRight();
+        public static final TextureRegion[] WALKING_LEFT = loadWalkingLeft();
+        public static final TextureRegion[] WALKING_UP = loadWalkingUp();
+        public static final TextureRegion[] WALKING_DOWN = loadWalkingDown();
+
+        private static TextureRegion[] loadWalkingLeft() {
+            return loadWalking(1);
+        }
+        private static TextureRegion[] loadWalkingRight() {
+            return loadWalking(2);
+        }
+        private static TextureRegion[] loadWalkingUp() {
+            return loadWalking(3);
+        }
+        private static TextureRegion[] loadWalkingDown() {
+            return loadWalking(0);
+        }
+
+        private static TextureRegion[] loadWalking(final int index) {
+            TextureRegion[] walkingFrames = new TextureRegion[3];
+            TextureRegion[][] tmp = loadSprite();
+
+            for (int i = 0; i < 3; i++) {
+                walkingFrames[i] = tmp[index][i];
+            }
+            return walkingFrames;
+        }
+
+        private static TextureRegion[][] loadSprite() {
+            final int frameColumns = 12;
+            final int frameRows = 8;
+
+            return splitTextureRegion(frameColumns, frameRows, new Texture(Gdx.files.internal("sprites/animals_dogs.png")));
+        }
 
         // TODO this is pretty janky
         private static TextureRegion loadRandomVillager() {

@@ -4,6 +4,7 @@ import com.evansitzes.game.entity.Entity;
 import com.evansitzes.game.entity.enemy.Enemy;
 import com.evansitzes.game.entity.environment.*;
 import com.evansitzes.game.entity.npc.Npc;
+import com.evansitzes.game.entity.npc.WalkingNpc;
 import com.evansitzes.game.screens.GameScreen;
 
 /**
@@ -32,7 +33,12 @@ public class EntityCreationEvent extends Event {
             gameScreen.getEnemies().add((Enemy) entity);
         } else if (entity instanceof Npc) {
             gameScreen.getObstructables().add(entity);
-            gameScreen.getNpcs().add((Npc) entity);
+
+            if (entity instanceof WalkingNpc) {
+                gameScreen.getWalkingNpcs().add((WalkingNpc) entity);
+            } else {
+                gameScreen.getNpcs().add((Npc) entity);
+            }
         } else if (entity instanceof Wall) {
             gameScreen.getObstructables().add(entity);
             gameScreen.getWalls().add((Wall) entity);

@@ -15,6 +15,9 @@ public class NpcConfiguration {
     private String sprite;
 
     @JsonProperty
+    private boolean walking;
+
+    @JsonProperty
     private ArrayList<String> default_inventory;
 
     @JsonProperty
@@ -44,6 +47,14 @@ public class NpcConfiguration {
         this.sprite = sprite;
     }
 
+    public boolean isWalking() {
+        return walking;
+    }
+
+    public void setWalking(boolean walking) {
+        this.walking = walking;
+    }
+
     public ArrayList<String> getDefault_inventory() {
         return default_inventory;
     }
@@ -66,6 +77,7 @@ public class NpcConfiguration {
                 "tag='" + tag + '\'' +
                 ", text='" + text + '\'' +
                 ", sprite='" + sprite + '\'' +
+                ", walking=" + walking +
                 ", default_inventory=" + default_inventory +
                 ", current_inventory=" + current_inventory +
                 '}';

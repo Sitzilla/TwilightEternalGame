@@ -19,10 +19,7 @@ import com.evansitzes.game.conversation.Conversation;
 import com.evansitzes.game.entity.Entity;
 import com.evansitzes.game.entity.enemy.Enemy;
 import com.evansitzes.game.entity.environment.*;
-import com.evansitzes.game.entity.npc.Guard;
-import com.evansitzes.game.entity.npc.Merchant;
-import com.evansitzes.game.entity.npc.Npc;
-import com.evansitzes.game.entity.npc.Villager;
+import com.evansitzes.game.entity.npc.*;
 import com.evansitzes.game.helpers.DirectionEnum;
 import com.evansitzes.game.helpers.DrawUtils;
 import com.evansitzes.game.helpers.YamlParser;
@@ -64,6 +61,7 @@ public class GameScreen extends TwilightEternalScreen implements Screen, InputPr
     private final Array<Entity> obstructables = new Array();
     private final Array<Enemy> enemies = new Array();
     private final Array<Npc> npcs = new Array();
+    private final Array<WalkingNpc> walkingNpcs = new Array();
     private final Array<EnvironmentItem> environmentItems = new Array();
     private final Array<Wall> walls = new Array();
     private final Array<Portal> portals = new Array();
@@ -181,6 +179,10 @@ public class GameScreen extends TwilightEternalScreen implements Screen, InputPr
 
                 for (final Npc npc : npcs) {
                     npc.draw();
+                }
+
+                for (final WalkingNpc npc : walkingNpcs) {
+                    npc.draw(delta);
                 }
 
                 for (final EnvironmentItem item : environmentItems) {
@@ -702,6 +704,10 @@ public class GameScreen extends TwilightEternalScreen implements Screen, InputPr
 
     public Array<Npc> getNpcs() {
         return npcs;
+    }
+
+    public Array<WalkingNpc> getWalkingNpcs() {
+        return walkingNpcs;
     }
 
     public Array<Wall> getWalls() {
