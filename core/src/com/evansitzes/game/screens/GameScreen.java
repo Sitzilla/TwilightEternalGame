@@ -16,6 +16,7 @@ import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.badlogic.gdx.utils.Array;
 import com.evansitzes.game.*;
 import com.evansitzes.game.conversation.Conversation;
+import com.evansitzes.game.conversation.Notification;
 import com.evansitzes.game.entity.Entity;
 import com.evansitzes.game.entity.enemy.Enemy;
 import com.evansitzes.game.entity.environment.*;
@@ -45,6 +46,7 @@ public class GameScreen extends TwilightEternalScreen implements Screen, InputPr
     private final Configuration configuration;
     private final OrthographicCamera camera; // playerSprite Camera
     final Skin skin;
+    final Notification notification;
 
     private TiledMapRenderer tiledMapRenderer;
     private TiledMapTileLayer collisionLayer;
@@ -93,6 +95,8 @@ public class GameScreen extends TwilightEternalScreen implements Screen, InputPr
 
         managementDisplay = new ManagementDisplay(this, skin);
         stage.addActor(managementDisplay);
+
+         notification = new Notification("");
 //        createIcons();
 
         this.battleMode = false;
@@ -446,6 +450,8 @@ public class GameScreen extends TwilightEternalScreen implements Screen, InputPr
                 inventory.store(newItem, 1);
                 game.player.inventory = inventory.getItems();
 
+                showNotification("You have found a " + newItem.name);
+
                 itemIterator.remove();
 
                 final Iterator<Entity> obstructableIterator = obstructables.iterator();
@@ -485,6 +491,7 @@ public class GameScreen extends TwilightEternalScreen implements Screen, InputPr
     private void resetObjects() {
         enemies.clear();
         npcs.clear();
+        walkingNpcs.clear();
         walls.clear();
         portals.clear();
         obstructables.clear();
@@ -549,6 +556,12 @@ public class GameScreen extends TwilightEternalScreen implements Screen, InputPr
         }
     }
 
+    private void showNotification(final String text) {
+        notification.setLabel(text);
+        notification.show();
+        stage.addActor(notification);
+    }
+
     @Override
     public void resize(final int width, final int height) {
 
@@ -579,11 +592,12 @@ public class GameScreen extends TwilightEternalScreen implements Screen, InputPr
     @Override
     public boolean keyDown(final int keycode) {
         System.out.println(keycode);
+
         if (keycode == Input.Keys.SPACE || keycode == Input.Keys.ENTER) {
             removePopupActors();
             handleNpc();
             handleEnvironementItems();
-            handleConversationZone();
+//            handleConversationZone();
         }
 
         if (keycode == Input.Keys.ESCAPE || keycode == Input.Keys.BACKSPACE) {
