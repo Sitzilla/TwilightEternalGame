@@ -19,6 +19,8 @@ public class Character {
     private Map<String, String> equipment;
     @JsonProperty
     private ArrayList<String> inventory;
+    @JsonProperty
+    private ArrayList<String> quests;
 //    @JsonProperty("datasource_ids")
 //    private ArrayList<String> datasourceIds;
     @JsonProperty("base_attributes")
@@ -107,6 +109,14 @@ public class Character {
         this.currentMagicPoints = currentMagicPoints;
     }
 
+    public ArrayList<String> getQuests() {
+        return quests;
+    }
+
+    public void setQuests(ArrayList<String> quests) {
+        this.quests = quests;
+    }
+
     @Override
     public String toString() {
         return "Character{" +
@@ -114,6 +124,7 @@ public class Character {
                 ", gold=" + gold +
                 ", equipment=" + equipment +
                 ", inventory=" + inventory +
+                ", quests=" + quests +
                 ", baseAttributes=" + baseAttributes +
                 ", experience=" + experience +
                 ", level=" + level +

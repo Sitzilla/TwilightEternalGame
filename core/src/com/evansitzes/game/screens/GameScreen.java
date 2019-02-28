@@ -33,6 +33,7 @@ import com.evansitzes.game.physics.CollisionHelper;
 import com.evansitzes.game.popups.CharacterSheet;
 import com.evansitzes.game.popups.LevelUpDisplay;
 import com.evansitzes.game.popups.ManagementDisplay;
+import com.evansitzes.game.popups.QuestsDisplay;
 
 import java.util.Iterator;
 
@@ -607,6 +608,14 @@ public class GameScreen extends TwilightEternalScreen implements Screen, InputPr
         if (keycode == Input.Keys.I) {
             System.out.println("Showing screen~");
             setInventoryScreen();
+        }
+
+        if (keycode == Input.Keys.Q) {
+            removePopupActors();
+
+            final QuestsDisplay questsDisplay = new QuestsDisplay(game.player, skin);
+            questsDisplay.setName("questsDisplay");
+            stage.addActor(questsDisplay);
         }
 
         if (keycode == Input.Keys.C) {

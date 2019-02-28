@@ -58,6 +58,7 @@ public class Player extends TeamMember {
 
         level = character.getLevel();
         experience = character.getExperience();
+        quests = character.getQuests();
 
         battleSprite = new Sprite(Textures.People.BATTLE_PLAYER);
         battleSprite.setPosition(450, 140);

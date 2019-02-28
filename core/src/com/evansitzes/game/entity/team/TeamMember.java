@@ -24,6 +24,7 @@ public abstract class TeamMember extends Entity {
 //    public boolean dead;
     public Map<String, String> equipment;
     public ArrayList<String> inventory;
+    public ArrayList<String> quests;
 
     public TeamMember(final TwilightEternal game) {
         super(game);

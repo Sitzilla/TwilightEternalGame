@@ -76,6 +76,20 @@ public class YamlParser {
         return null;
     }
 
+    public static QuestsEnvelope loadQuestsEnvelope() {
+        final ObjectMapper mapper = new ObjectMapper(new YAMLFactory()); // jackson databind
+        mapper.registerModule(new JodaModule());
+
+        try {
+            final File file = new File(String.valueOf(Gdx.files.local("resources/quest.yml")));
+            return mapper.readValue(file, QuestsEnvelope.class);
+        } catch (final IOException e) {
+            System.out.println(e);
+        }
+
+        return null;
+    }
+
     public static void savePlayer(final Player player) {
         final ObjectMapper mapper = new ObjectMapper(new YAMLFactory()); // jackson databind
         mapper.registerModule(new JodaModule());

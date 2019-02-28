@@ -27,3 +27,7 @@ characters:
     intelligence: 7
   current_hit_points: 11.0
   current_magic_points: 2.0
+  quests:
+    - "fight-goblin"
+    - "save-princess"
+    - "collect-mushrooms"

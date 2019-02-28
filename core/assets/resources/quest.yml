@@ -1,0 +1,14 @@
+---
+quests:
+- name: "fight-goblin"
+  title: "Slay the Goblin"
+  description: "The goblin in the woods has been terrorizing the villagers recently. Help them out by putting an end to this menace."
+  completed: false
+- name: "save-princess"
+  title: "Save the Princess"
+  description: "The beautiful princess has been kidnapped by an ogre. Save her and return her safely to the castle."
+  completed: false
+- name: "collect-mushrooms"
+  title: "Collect Mushrooms"
+  description: "Collect 50 mushrooms and return to the merchant."
+  completed: false
