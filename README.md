@@ -1,8 +1,6 @@
 # TwilightEternalGame
 A single player RPG that uses the LibGDX framework.
 
-*Note: currently a WIP project
-
 ## Plot
 This land has been ravaged by a war between the forces of good and evil, the neverending combat between the armies of light and the servants of darkness has thrown the world into an Eternal Twilight. Young hero... your destiny awaits!
 
